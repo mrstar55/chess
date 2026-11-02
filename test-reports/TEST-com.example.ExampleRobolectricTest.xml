@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.ExampleRobolectricTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-11-02T18:50:47.722Z" hostname="localhost" time="17.431">
+  <properties/>
+  <testcase name="test 6 - detect DiagramBlock with invalid diagramId" classname="com.example.ExampleRobolectricTest" time="9.132"/>
+  <testcase name="verify BD032 Compose UI does not reveal Qh8 or Qh2 or target squares before solving and shows success after solving" classname="com.example.ExampleRobolectricTest" time="2.935"/>
+  <testcase name="test 3 - render paragraph after diagram" classname="com.example.ExampleRobolectricTest" time="0.641"/>
+  <testcase name="test 5 - detect duplicate blockIds across blocks" classname="com.example.ExampleRobolectricTest" time="0.076"/>
+  <testcase name="verify ChessBoardView composable renders files a to h LTR and ranks 8 to 1 top to bottom inside RTL layout" classname="com.example.ExampleRobolectricTest" time="0.207"/>
+  <testcase name="verify chapter repository loads 10 diagrams and 6 sections with fixed ids" classname="com.example.ExampleRobolectricTest" time="0.078"/>
+  <testcase name="test 9 - empty block does not affect other blocks" classname="com.example.ExampleRobolectricTest" time="0.178"/>
+  <testcase name="verify BD032 does not reveal solutions before solving and supports retry without reset" classname="com.example.ExampleRobolectricTest" time="0.085"/>
+  <testcase name="test 11 - ExternalReferenceBlock translation updates via Translation Map without changing orderedContentBlocks" classname="com.example.ExampleRobolectricTest" time="0.136"/>
+  <testcase name="verify all PGN and exercise references in repository are valid with no dangling refs" classname="com.example.ExampleRobolectricTest" time="0.591"/>
+  <testcase name="test 10 - single placeholder per section with 3 empty paragraphs 2 diagrams and 1 translated paragraph shifts and disappears" classname="com.example.ExampleRobolectricTest" time="0.395"/>
+  <testcase name="capture real UI screenshots of main screens and BD032 exercise" classname="com.example.ExampleRobolectricTest" time="1.49"/>
+  <testcase name="test 4 - render multiple diagrams in a section in exact registered order" classname="com.example.ExampleRobolectricTest" time="0.379"/>
+  <testcase name="verify BD032 reset clears persisted solved status across app restart" classname="com.example.ExampleRobolectricTest" time="0.08"/>
+  <testcase name="read string from context" classname="com.example.ExampleRobolectricTest" time="0.072"/>
+  <testcase name="test 7 - preserve the 6 primary TranslationSlot sectionIds" classname="com.example.ExampleRobolectricTest" time="0.062"/>
+  <testcase name="test 8 - placeholder notice is not repeated under diagrams" classname="com.example.ExampleRobolectricTest" time="0.167"/>
+  <testcase name="test 1 - preserve interleaved block order during rendering" classname="com.example.ExampleRobolectricTest" time="0.131"/>
+  <testcase name="test 2 - render paragraph before diagram" classname="com.example.ExampleRobolectricTest" time="0.165"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

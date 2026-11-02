@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.ChessChapterOneTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2026-11-02T18:51:05.160Z" hostname="localhost" time="0.477">
+  <properties/>
+  <testcase name="testEnPassantAndCapturedPawnRemoval" classname="com.example.ChessChapterOneTest" time="0.004"/>
+  <testcase name="testCastlingWithoutRookRejected" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testChessEngine_Bd032DynamicMateAndNonMate" classname="com.example.ChessChapterOneTest" time="0.01"/>
+  <testcase name="testStandardPieceCapture" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testCheckmateAndStalemate" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testPgnReplayer_NavigationAndBoundaries" classname="com.example.ChessChapterOneTest" time="0.027"/>
+  <testcase name="testNormalPieceMoves" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testPromotionToAllFourPieces" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testIllegalMovesRejected" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testPerft_ComplexPositions_KiwipeteAndEnPassantAndPromotions" classname="com.example.ChessChapterOneTest" time="0.247"/>
+  <testcase name="testPinnedPieceCannotExposeKing" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testCastlingRightsRemovedWhenRookCapturedOnHomeSquare" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testPromotionWithoutPieceSelectionRejected" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testDoubleCheckOnlyKingMovesAllowed" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testPerft_StandardInitialPositionDepths1To4" classname="com.example.ChessChapterOneTest" time="0.17"/>
+  <testcase name="testChessEngine_StandardStartPosition" classname="com.example.ChessChapterOneTest" time="0.002"/>
+  <testcase name="testCastlingWithRookPresent" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testChessboardCoordinates_NoMirroringInRTL" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testChessEngine_Bd027BlockedVerification" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testSanDisambiguation_FileRankAndBoth" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <testcase name="testStrictFenValidation_RejectsInvalidFen" classname="com.example.ChessChapterOneTest" time="0.006"/>
+  <testcase name="testAllChapterOneDiagrams_Bd025ToBd034_FenAndEngineValidation" classname="com.example.ChessChapterOneTest" time="0.001"/>
+  <testcase name="testFenValidation_ActiveVsInactiveKingInCheckAndDiagrams" classname="com.example.ChessChapterOneTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

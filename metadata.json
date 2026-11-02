@@ -1,0 +1,6 @@
+{
+  "name": "آموزش شطرنج",
+  "description": "نمونه تعاملی فصل اول کتاب شطرنج با رندر FEN، بازپخش حرکات PGN، تمرین مات در یک حرکت و ممیزی کامل اطلاعات شطرنج.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

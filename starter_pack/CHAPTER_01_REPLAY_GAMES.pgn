@@ -1,0 +1,56 @@
+[Event "Scholar's Mate - candidate teaching line matching BD-029"]
+[Site "BD-029"]
+[Date "????.??.??"]
+[White "White"]
+[Black "Black"]
+[Result "*"]
+1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7# *
+
+
+[Event "Fool's Mate - candidate teaching line matching BD-030"]
+[Site "BD-030"]
+[Date "????.??.??"]
+[White "White"]
+[Black "Black"]
+[Result "*"]
+1. f3 e5 2. g4 Qh4# *
+
+
+[Event "How to Win at Chess - Chapter One"]
+[Site "BD-032"]
+[Round "Exercise"]
+[White "White"]
+[Black "Black"]
+[Result "*"]
+[SetUp "1"]
+[FEN "8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1"]
+1... Qh8# *
+
+
+[Event "How to Win at Chess - Chapter One"]
+[Site "BD-032"]
+[Round "Exercise"]
+[White "White"]
+[Black "Black"]
+[Result "*"]
+[SetUp "1"]
+[FEN "8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1"]
+1... Qh2# *
+
+
+[Event "World Championship Match 2014, Game 11 - ends after 45.Kc3"]
+[Site "Sochi, Russia"]
+[Date "2014.11.23"]
+[White "Magnus Carlsen"]
+[Black "Viswanathan Anand"]
+[Result "1-0"]
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 5. d4 Nd6 6. Bxc6 dxc6 7. dxe5 Nf5 8. Qxd8+ Kxd8 9. h3 Bd7 10. Nc3 h6 11. b3 Kc8 12. Bb2 c5 13. Rad1 b6 14. Rfe1 Be6 15. Nd5 g5 16. c4 Kb7 17. Kh2 a5 18. a4 Ne7 19. g4 Ng6 20. Kg3 Be7 21. Nd2 Rhd8 22. Ne4 Bf8 23. Nef6 b5 24. Bc3 bxa4 25. bxa4 Kc6 26. Kf3 Rdb8 27. Ke4 Rb4 28. Bxb4 cxb4 29. Nh5 Kb7 30. f4 gxf4 31. Nhxf4 Nxf4 32. Nxf4 Bxc4 33. Rd7 Ra6 34. Nd5 Rc6 35. Rxf7 Bc5 36. Rxc7+ Rxc7 37. Nxc7 Kc6 38. Nb5 Bxb5 39. axb5+ Kxb5 40. e6 b3 41. Kd3 Be7 42. h4 a4 43. g5 hxg5 44. hxg5 a3 45. Kc3 1-0
+
+
+[Event "Hastings 1895 - played score through 25.Rxh7+"]
+[Site "Hastings"]
+[Date "1895.??.??"]
+[White "Wilhelm Steinitz"]
+[Black "Curt von Bardeleben"]
+[Result "1-0"]
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 d5 8. exd5 Nxd5 9. O-O Be6 10. Bg5 Be7 11. Bxd5 Bxd5 12. Nxd5 Qxd5 13. Bxe7 Nxe7 14. Re1 f6 15. Qe2 Qd7 16. Rac1 c6 17. d5 cxd5 18. Nd4 Kf7 19. Ne6 Rhc8 20. Qg4 g6 21. Ng5+ Ke8 22. Rxe7+ Kf8 23. Rf7+ Kg8 24. Rg7+ Kh8 25. Rxh7+ 1-0

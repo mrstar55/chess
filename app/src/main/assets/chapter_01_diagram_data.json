@@ -1,0 +1,353 @@
+{
+  "schema_version": "1.0",
+  "source_file": "how-to-win-at-chess-by-levy-rozman-NB-003957.pdf",
+  "source_pdf_pages": 591,
+  "page_numbering": "Physical PDF page numbers, 1-based",
+  "chapter": {
+    "number": 1,
+    "title_en": "How to (Literally) Win at Chess",
+    "title_fa": "چگونه واقعاً در شطرنج برنده شویم",
+    "pdf_start_page": 39,
+    "pdf_end_page": 50,
+    "diagram_pages": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "sections": [
+      {
+        "title_en": "Chapter opening",
+        "pdf_pages": [
+          40
+        ],
+        "diagram_ids": [
+          "BD-025"
+        ]
+      },
+      {
+        "title_en": "Checkmate",
+        "pdf_pages": [
+          41,
+          42,
+          43,
+          44,
+          45
+        ],
+        "diagram_ids": [
+          "BD-026",
+          "BD-027",
+          "BD-028",
+          "BD-029",
+          "BD-030"
+        ]
+      },
+      {
+        "title_en": "Resignation",
+        "pdf_pages": [
+          45,
+          46
+        ],
+        "diagram_ids": [
+          "BD-031"
+        ]
+      },
+      {
+        "title_en": "Timing Out",
+        "pdf_pages": [
+          47,
+          48
+        ],
+        "diagram_ids": [
+          "BD-032",
+          "BD-033"
+        ]
+      },
+      {
+        "title_en": "Abandonment",
+        "pdf_pages": [
+          48,
+          49
+        ],
+        "diagram_ids": [
+          "BD-034"
+        ]
+      },
+      {
+        "title_en": "Summary and additional lesson link",
+        "pdf_pages": [
+          50
+        ],
+        "diagram_ids": []
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "diagram_id": "BD-025",
+      "pdf_page": 40,
+      "image_xref": 1097,
+      "section": "Chapter opening / starting position",
+      "book_context": "The chapter recalls the standard initial chess position before explaining how games are won.",
+      "diagram_kind": "starting_position",
+      "recommended_interaction": "static_position_with_optional_free_explore",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "fen_status": "reconstructed_standard_start_position",
+      "side_to_move": "white",
+      "move_history": "not applicable; standard initial position",
+      "pgn_ref": null,
+      "highlight_squares": [],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "This exact image asset is reused on PDF page 55 (Chapter Two). In the app render the board from FEN; do not ship the source bitmap as the board UI."
+    },
+    {
+      "diagram_id": "BD-026",
+      "pdf_page": 41,
+      "image_xref": 1101,
+      "section": "Checkmate",
+      "book_context": "The simplest checkmate example: Black king e8, White queen e7, White king e6.",
+      "diagram_kind": "checkmate_example_3_pieces",
+      "recommended_interaction": "static_explanatory_position",
+      "fen": "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
+      "fen_status": "reconstructed_from_board_image_and_caption",
+      "side_to_move": "black",
+      "move_history": "not provided in this chapter",
+      "pgn_ref": null,
+      "highlight_squares": [],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "Position is shown as a checkmate example. No move sequence is printed for reaching it. Use as a static teaching position unless a separate move sequence is authored and reviewed."
+    },
+    {
+      "diagram_id": "BD-027",
+      "pdf_page": 42,
+      "image_xref": 1103,
+      "section": "Checkmate",
+      "book_context": "Four-piece checkmate: White bishop g7, White king g6, White knight h6; Black king h8.",
+      "diagram_kind": "checkmate_example_4_pieces",
+      "recommended_interaction": "static_explanatory_position",
+      "fen": "7k/6B1/6K1/7N/8/8/8/8 b - - 0 1",
+      "fen_status": "reconstructed_from_board_image_and_caption",
+      "side_to_move": "black",
+      "move_history": "not provided in this chapter",
+      "pgn_ref": null,
+      "highlight_squares": [
+        "h8"
+      ],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "Black king square h8 is highlighted in red in the source diagram. The caption explains the White bishop attack and king/knight coverage."
+    },
+    {
+      "diagram_id": "BD-028",
+      "pdf_page": 43,
+      "image_xref": 1105,
+      "section": "Checkmate",
+      "book_context": "A fully populated-board checkmate example; Black king is on d4 and is attacked by White's pieces.",
+      "diagram_kind": "full_board_checkmate_example",
+      "recommended_interaction": "static_explanatory_position",
+      "fen": "r1bq3r/pppp2pp/2n2n2/2b2Q2/3kP3/2NPB3/PPP1BPPP/R3K2R b - - 0 1",
+      "fen_status": "reconstructed_from_board_image_and_caption",
+      "side_to_move": "black",
+      "move_history": "not provided in this chapter; castling rights are not inferable from a single position",
+      "pgn_ref": null,
+      "highlight_squares": [
+        "d4",
+        "e3"
+      ],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "FEN castling rights deliberately set to '-' because the diagram does not provide the prior move history needed to prove whether White retained castling rights. Do not infer castling rights from piece placement alone."
+    },
+    {
+      "diagram_id": "BD-029",
+      "pdf_page": 44,
+      "image_xref": 1107,
+      "section": "Checkmate / Scholar's Mate",
+      "book_context": "The final Scholar's Mate position after White checkmates Black in four moves.",
+      "diagram_kind": "named_mate_pattern",
+      "recommended_interaction": "step_by_step_replay_then_static_mate",
+      "fen": "r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
+      "fen_status": "reconstructed_from_board_image_and_matching_canonical_line",
+      "side_to_move": "black",
+      "move_history": "candidate canonical line; the chapter shows the final position and says mate occurs in four moves, but does not print this full line",
+      "pgn_ref": "SCHOLARS_MATE_CANDIDATE",
+      "highlight_squares": [
+        "e8",
+        "f7"
+      ],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "The PGN line is an added instructional reconstruction, not quoted from this chapter. Validate the replay in a chess rules engine before release."
+    },
+    {
+      "diagram_id": "BD-030",
+      "pdf_page": 45,
+      "image_xref": 1109,
+      "section": "Checkmate / Fool's Mate",
+      "book_context": "Fool's Mate: Black queen on h4 has checkmated the White king in two moves.",
+      "diagram_kind": "named_mate_pattern",
+      "recommended_interaction": "step_by_step_replay_then_static_mate",
+      "fen": "rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3",
+      "fen_status": "reconstructed_from_board_image_and_matching_canonical_line",
+      "side_to_move": "white",
+      "move_history": "candidate canonical line; the chapter says two moves and shows the final position, but does not print the full move list",
+      "pgn_ref": "FOOLS_MATE_CANDIDATE",
+      "highlight_squares": [
+        "e1",
+        "h4"
+      ],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "The PGN line is an added instructional reconstruction, not quoted from this chapter. Validate the replay in a chess rules engine before release."
+    },
+    {
+      "diagram_id": "BD-031",
+      "pdf_page": 46,
+      "image_xref": 1113,
+      "section": "Resignation",
+      "book_context": "The resignation position from Game 11 of the 2014 World Chess Championship, Carlsen (White) vs Anand (Black).",
+      "diagram_kind": "historical_game_position",
+      "recommended_interaction": "full_game_replay_to_resignation_position",
+      "fen": "8/4b3/4P3/1k4P1/8/ppK5/8/4R3 b - - 1 45",
+      "fen_status": "reconstructed_from_board_image_and_matched_to_external_game_score",
+      "side_to_move": "black",
+      "move_history": "position after 45.Kc3; Anand resigned",
+      "pgn_ref": "CARLSEN_ANAND_2014_GAME_11",
+      "highlight_squares": [],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "The full game PGN is sourced externally because the chapter itself only shows the final position. External source: https://www.schakers.info/?p=5864. The game ended 1-0 after 45.Kc3."
+    },
+    {
+      "diagram_id": "BD-032",
+      "pdf_page": 47,
+      "image_xref": 1115,
+      "section": "Timing Out",
+      "book_context": "Black has a large material advantage; the text asks the reader to find either of two checkmates if it were Black to move.",
+      "diagram_kind": "mate_in_one_exercise_two_solutions",
+      "recommended_interaction": "interactive_mate_in_one_exercise",
+      "fen": "8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1",
+      "fen_status": "reconstructed_from_board_image_and_confirmed_by_book_footnote",
+      "side_to_move": "black",
+      "move_history": "two solutions printed in the book's footnote: Qh8# or Qh2#",
+      "pgn_ref": null,
+      "solution_pgn_refs": [
+        "BD032_MATE_QH8",
+        "BD032_MATE_QH2"
+      ],
+      "highlight_squares": [],
+      "related_diagram_ids": [
+        "BD-033"
+      ],
+      "visual_confidence": "high",
+      "implementation_notes": "Exercise prompt and both solutions are source-supported. Accept either move as correct. Add feedback only after the move is made."
+    },
+    {
+      "diagram_id": "BD-033",
+      "pdf_page": 48,
+      "image_xref": 1118,
+      "section": "Timing Out / Insufficient Checkmating Material",
+      "book_context": "Almost the same position as the preceding diagram, except White no longer has the pawn on g5; the text explains a draw if Black flags.",
+      "diagram_kind": "insufficient_mating_material_comparison",
+      "recommended_interaction": "static_comparison_with_BD032",
+      "fen": "8/8/1p6/1k2q3/7K/8/8/6r1 b - - 0 1",
+      "fen_status": "reconstructed_from_board_image_and_explicit_comparison_text",
+      "side_to_move": "black (illustrative snapshot)",
+      "move_history": "not provided in this chapter",
+      "pgn_ref": null,
+      "highlight_squares": [],
+      "related_diagram_ids": [
+        "BD-032"
+      ],
+      "visual_confidence": "high",
+      "implementation_notes": "The difference from BD-032 is exactly the missing White pawn on g5. No playable sequence is needed; present as a visual comparison."
+    },
+    {
+      "diagram_id": "BD-034",
+      "pdf_page": 49,
+      "image_xref": 1121,
+      "section": "Abandonment",
+      "book_context": "The Steinitz–von Bardeleben position from Hastings 1895, after White's rook move to h7+; von Bardeleben left the playing hall.",
+      "diagram_kind": "historical_game_position",
+      "recommended_interaction": "full_game_replay_to_abandonment_position",
+      "fen": "r1r4k/pp1q3R/5pp1/3p2N1/6Q1/8/PP3PPP/2R3K1 b - - 0 25",
+      "fen_status": "reconstructed_from_board_image_and_matched_to_external_game_score",
+      "side_to_move": "black",
+      "move_history": "position after 25.Rxh7+; Black to move",
+      "pgn_ref": "STEINITZ_VON_BARDELEBEN_HASTINGS_1895",
+      "highlight_squares": [],
+      "related_diagram_ids": [],
+      "visual_confidence": "high",
+      "implementation_notes": "External FIDE Museum material confirms Black to move for the famous position; an external historical PGN gives the played score through 25.Rxh7+. External sources: https://museum.fide.com/champions/wilhelm-steinitz and https://www.devonjuniorchess.co.uk/content/hastings-1895. Do not append the post-game demonstration variation as if it were played."
+    }
+  ],
+  "pgn_games": [
+    {
+      "id": "SCHOLARS_MATE_CANDIDATE",
+      "description": "Scholar's Mate - candidate teaching line matching BD-029",
+      "result": "*",
+      "moves": "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7# *"
+    },
+    {
+      "id": "FOOLS_MATE_CANDIDATE",
+      "description": "Fool's Mate - candidate teaching line matching BD-030",
+      "result": "*",
+      "moves": "1. f3 e5 2. g4 Qh4# *"
+    },
+    {
+      "id": "BD032_MATE_QH8",
+      "description": "BD-032 exercise solution 1",
+      "result": "*",
+      "moves": "[SetUp \"1\"]\n[FEN \"8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1\"]\n1... Qh8# *"
+    },
+    {
+      "id": "BD032_MATE_QH2",
+      "description": "BD-032 exercise solution 2",
+      "result": "*",
+      "moves": "[SetUp \"1\"]\n[FEN \"8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1\"]\n1... Qh2# *"
+    },
+    {
+      "id": "CARLSEN_ANAND_2014_GAME_11",
+      "description": "World Championship Match 2014, Game 11 - ends after 45.Kc3",
+      "result": "1-0",
+      "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 5. d4 Nd6 6. Bxc6 dxc6 7. dxe5 Nf5 8. Qxd8+ Kxd8 9. h3 Bd7 10. Nc3 h6 11. b3 Kc8 12. Bb2 c5 13. Rad1 b6 14. Rfe1 Be6 15. Nd5 g5 16. c4 Kb7 17. Kh2 a5 18. a4 Ne7 19. g4 Ng6 20. Kg3 Be7 21. Nd2 Rhd8 22. Ne4 Bf8 23. Nef6 b5 24. Bc3 bxa4 25. bxa4 Kc6 26. Kf3 Rdb8 27. Ke4 Rb4 28. Bxb4 cxb4 29. Nh5 Kb7 30. f4 gxf4 31. Nhxf4 Nxf4 32. Nxf4 Bxc4 33. Rd7 Ra6 34. Nd5 Rc6 35. Rxf7 Bc5 36. Rxc7+ Rxc7 37. Nxc7 Kc6 38. Nb5 Bxb5 39. axb5+ Kxb5 40. e6 b3 41. Kd3 Be7 42. h4 a4 43. g5 hxg5 44. hxg5 a3 45. Kc3 1-0"
+    },
+    {
+      "id": "STEINITZ_VON_BARDELEBEN_HASTINGS_1895",
+      "description": "Hastings 1895 - played score through 25.Rxh7+",
+      "result": "1-0",
+      "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 d5 8. exd5 Nxd5 9. O-O Be6 10. Bg5 Be7 11. Bxd5 Bxd5 12. Nxd5 Qxd5 13. Bxe7 Nxe7 14. Re1 f6 15. Qe2 Qd7 16. Rac1 c6 17. d5 cxd5 18. Nd4 Kf7 19. Ne6 Rhc8 20. Qg4 g6 21. Ng5+ Ke8 22. Rxe7+ Kf8 23. Rf7+ Kg8 24. Rg7+ Kh8 25. Rxh7+ 1-0"
+    }
+  ],
+  "external_references": [
+    {
+      "use": "Carlsen-Anand 2014 game 11 complete score and final 45.Kc3 position",
+      "url": "https://www.schakers.info/?p=5864",
+      "note": "External reference, not printed as a full score in Chapter One."
+    },
+    {
+      "use": "Steinitz-von Bardeleben Hastings 1895 game score through 25.Rxh7+",
+      "url": "https://www.devonjuniorchess.co.uk/content/hastings-1895",
+      "note": "External reference for the played historical game score."
+    },
+    {
+      "use": "Steinitz historical position; Black to move",
+      "url": "https://museum.fide.com/champions/wilhelm-steinitz",
+      "note": "FIDE Museum reference; used to confirm the side to move for BD-034."
+    }
+  ],
+  "quality_gate": {
+    "fen_board_placement": "manually reconstructed from original board images at PDF pages 40-49; all board rows and king counts structurally checked",
+    "pgn_validation": "not run through a chess rules engine in this environment; candidate Scholar's Mate/Fool's Mate lines must be replay-validated before release",
+    "not_a_legal_clearance": "this manifest is a technical extraction aid, not authorization to reproduce copyrighted text or artwork",
+    "important": "Do not place the original PDF images, text or third-party Chessly lesson content into the app unless separately cleared. Render chessboards from FEN in the app and treat this file as a data mapping."
+  }
+}
