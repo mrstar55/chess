@@ -271,6 +271,24 @@ object AppIcons {
         }.build()
     }
 
+    val ChevronRight: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "ChevronRight",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(10f, 6f)
+            lineTo(8.59f, 7.41f)
+            lineTo(13.17f, 12f)
+            lineToRelative(-4.58f, 4.59f)
+            lineTo(10f, 18f)
+            lineToRelative(6f, -6f)
+            close()
+        }.build()
+    }
+
     val CheckCircle: ImageVector by lazy {
         ImageVector.Builder(
             name = "CheckCircle",
@@ -494,4 +512,168 @@ object AppIcons {
             close()
         }.build()
     }
+
+    val VolumeUp: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "VolumeUp",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(3f, 9f)
+            verticalLineToRelative(6f)
+            horizontalLineToRelative(4f)
+            lineToRelative(5f, 5f)
+            verticalLineTo(4f)
+            lineTo(7f, 9f)
+            horizontalLineTo(3f)
+            close()
+            moveTo(16.5f, 12f)
+            curveToRelative(0f, -1.77f, -1.02f, -3.29f, -2.5f, -4.03f)
+            verticalLineToRelative(8.05f)
+            curveToRelative(1.48f, -0.73f, 2.5f, -2.25f, 2.5f, -4.02f)
+            close()
+            moveTo(14f, 3.23f)
+            verticalLineToRelative(2.06f)
+            curveToRelative(2.89f, 0.86f, 5f, 3.54f, 5f, 6.71f)
+            reflectiveCurveToRelative(-2.11f, 5.85f, -5f, 6.71f)
+            verticalLineToRelative(2.06f)
+            curveToRelative(4.01f, -0.91f, 7f, -4.49f, 7f, -8.77f)
+            reflectiveCurveToRelative(-2.99f, -7.86f, -7f, -8.77f)
+            close()
+        }.build()
+    }
+
+    val VolumeOff: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "VolumeOff",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(16.5f, 12f)
+            curveToRelative(0f, -1.77f, -1.02f, -3.29f, -2.5f, -4.03f)
+            verticalLineToRelative(2.21f)
+            lineToRelative(2.45f, 2.45f)
+            curveToRelative(0.03f, -0.2f, 0.05f, -0.41f, 0.05f, -0.63f)
+            close()
+            moveTo(19f, 12f)
+            curveToRelative(0f, 0.94f, -0.2f, 1.82f, -0.54f, 2.64f)
+            lineToRelative(1.51f, 1.51f)
+            curveTo(20.63f, 14.91f, 21f, 13.5f, 21f, 12f)
+            curveToRelative(0f, -4.28f, -2.99f, -7.86f, -7f, -8.77f)
+            verticalLineToRelative(2.06f)
+            curveToRelative(2.89f, 0.86f, 5f, 3.54f, 5f, 6.71f)
+            close()
+            moveTo(4.27f, 3f)
+            lineTo(3f, 4.27f)
+            lineTo(7.73f, 9f)
+            horizontalLineTo(3f)
+            verticalLineToRelative(6f)
+            horizontalLineToRelative(4f)
+            lineToRelative(5f, 5f)
+            verticalLineToRelative(-6.73f)
+            lineToRelative(4.25f, 4.25f)
+            curveToRelative(-0.67f, 0.52f, -1.42f, 0.93f, -2.25f, 1.18f)
+            verticalLineToRelative(2.06f)
+            curveToRelative(1.38f, -0.31f, 2.63f, -0.95f, 3.69f, -1.81f)
+            lineTo(19.73f, 21f)
+            lineTo(21f, 19.73f)
+            lineToRelative(-9f, -9f)
+            lineTo(4.27f, 3f)
+            close()
+            moveTo(12f, 4f)
+            lineTo(9.91f, 6.09f)
+            lineTo(12f, 8.18f)
+            verticalLineTo(4f)
+            close()
+        }.build()
+    }
+
+    val Visibility: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "Visibility",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(12f, 4.5f)
+            curveTo(7f, 4.5f, 2.73f, 7.61f, 1f, 12f)
+            curveToRelative(1.73f, 4.39f, 6f, 7.5f, 11f, 7.5f)
+            reflectiveCurveToRelative(9.27f, -3.11f, 11f, -7.5f)
+            curveToRelative(-1.73f, -4.39f, -6f, -7.5f, -11f, -7.5f)
+            close()
+            moveTo(12f, 17f)
+            curveToRelative(-2.76f, 0f, -5f, -2.24f, -5f, -5f)
+            reflectiveCurveToRelative(2.24f, -5f, 5f, -5f)
+            reflectiveCurveToRelative(5f, 2.24f, 5f, 5f)
+            reflectiveCurveToRelative(-2.24f, 5f, -5f, 5f)
+            close()
+            moveTo(12f, 9f)
+            curveToRelative(-1.66f, 0f, -3f, 1.34f, -3f, 3f)
+            reflectiveCurveToRelative(1.34f, 3f, 3f, 3f)
+            reflectiveCurveToRelative(3f, -1.34f, 3f, -3f)
+            reflectiveCurveToRelative(-1.34f, -3f, -3f, -3f)
+            close()
+        }.build()
+    }
+
+    val PlayArrow: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "PlayArrow",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(8f, 5f)
+            verticalLineToRelative(14f)
+            lineToRelative(11f, -7f)
+            close()
+        }.build()
+    }
+
+    val Pause: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "Pause",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(6f, 19f)
+            horizontalLineToRelative(4f)
+            verticalLineTo(5f)
+            horizontalLineTo(6f)
+            verticalLineToRelative(14f)
+            close()
+            moveTo(14f, 5f)
+            verticalLineToRelative(14f)
+            horizontalLineToRelative(4f)
+            verticalLineTo(5f)
+            horizontalLineToRelative(-4f)
+            close()
+        }.build()
+    }
+
+    val Stop: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "Stop",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).path(fill = SolidColor(Color.Black)) {
+            moveTo(6f, 6f)
+            horizontalLineToRelative(12f)
+            verticalLineToRelative(12f)
+            horizontalLineTo(6f)
+            verticalLineTo(6f)
+            close()
+        }.build()
+    }
 }
+

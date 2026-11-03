@@ -2,13 +2,10 @@ Reusing configuration cache.
 > Task :app:preBuild UP-TO-DATE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:preDebugBuild UP-TO-DATE
-> Task :app:preDebugUnitTestBuild UP-TO-DATE
-
 > Task :app:processDebugGoogleServices
 File google-services.json is missing.
 The Google Services Plugin cannot function without it.
 Searched locations: /app/applet/app/src/debug/google-services.json, /app/applet/app/src/debug/google-services.json, /app/applet/app/src/google-services.json, /app/applet/app/src/debug/google-services.json, /app/applet/app/src/Debug/google-services.json, /app/applet/app/google-services.json
-
 > Task :app:generateDebugResources
 > Task :app:generateDebugBuildConfig
 > Task :app:kspDebugKotlin SKIPPED
@@ -18,9 +15,10 @@ Searched locations: /app/applet/app/src/debug/google-services.json, /app/applet/
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:checkDebugAarMetadata
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
 > Task :app:javaPreCompileDebugUnitTest
-> Task :app:mergeDebugAssets
 > Task :app:processDebugNavigationResources
+> Task :app:mergeDebugAssets
 > Task :app:compileDebugNavigationResources
 > Task :app:processDebugMainManifest
 > Task :app:parseDebugLocalResources
@@ -43,6 +41,6 @@ Searched locations: /app/applet/app/src/debug/google-services.json, /app/applet/
 > Task :app:processDebugUnitTestJavaRes
 > Task :app:testDebugUnitTest
 
-BUILD SUCCESSFUL in 48s
+BUILD SUCCESSFUL in 1m 3s
 31 actionable tasks: 31 executed
 Configuration cache entry reused.

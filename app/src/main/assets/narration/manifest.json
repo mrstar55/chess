@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "chapters": [
+    {
+      "chapterId": "CH01",
+      "sections": [
+        {
+          "sectionId": "SEC_CH01_01_OPENING",
+          "blocks": []
+        },
+        {
+          "sectionId": "SEC_CH01_02_CHECKMATE",
+          "blocks": []
+        },
+        {
+          "sectionId": "SEC_CH01_03_RESIGNATION",
+          "blocks": []
+        },
+        {
+          "sectionId": "SEC_CH01_04_TIMING_OUT",
+          "blocks": []
+        },
+        {
+          "sectionId": "SEC_CH01_05_ABANDONMENT",
+          "blocks": []
+        },
+        {
+          "sectionId": "SEC_CH01_06_SUMMARY",
+          "blocks": []
+        }
+      ]
+    }
+  ]
+}

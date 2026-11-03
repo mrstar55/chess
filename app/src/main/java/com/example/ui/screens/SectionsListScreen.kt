@@ -24,6 +24,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
@@ -46,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import com.example.ui.AppTab
 import com.example.ui.ChapterUiState
 import com.example.ui.ChapterViewModel
+import com.example.ui.components.AudioSettingsDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,6 +57,21 @@ fun SectionsListScreen(
     modifier: Modifier = Modifier
 ) {
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        if (state.showAudioSettingsDialog) {
+            AudioSettingsDialog(
+                settings = state.audioSettings,
+                onMasterToggled = { viewModel.setMasterSoundEnabled(it) },
+                onVolumeChanged = { viewModel.setSoundVolumePercent(it) },
+                onMoveSoundToggled = { viewModel.setMoveSoundEnabled(it) },
+                onCaptureSoundToggled = { viewModel.setCaptureSoundEnabled(it) },
+                onSpecialMoveSoundToggled = { viewModel.setSpecialMoveSoundEnabled(it) },
+                onCheckMateSoundToggled = { viewModel.setCheckMateSoundEnabled(it) },
+                onExerciseFeedbackSoundToggled = { viewModel.setExerciseFeedbackSoundEnabled(it) },
+                onPlayTestSound = { viewModel.playTestSound() },
+                onDismiss = { viewModel.closeAudioSettings() }
+            )
+        }
+
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -65,42 +82,54 @@ fun SectionsListScreen(
                             fontWeight = FontWeight.Bold
                         )
                     },
+                    actions = {
+                        IconButton(
+                            onClick = { viewModel.openAudioSettings() },
+                            modifier = Modifier.testTag("nav_audio_settings_btn")
+                        ) {
+                            Icon(
+                                imageVector = if (state.audioSettings.soundEnabled) AppIcons.VolumeUp else AppIcons.VolumeOff,
+                                contentDescription = "تنظیمات صدا"
+                            )
+                        }
+                    },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 )
             },
-            modifier = modifier
+            modifier = modifier.testTag("sections_list_screen")
         ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp)
+                    .padding(horizontal = 14.dp, vertical = 10.dp)
+                    .testTag("sections_lazy_column"),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 // Book Info Header Card
                 item {
                     ElevatedCard(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(14.dp),
                         colors = CardDefaults.elevatedCardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceVariant
                         )
                     ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
+                        Column(modifier = Modifier.padding(12.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Surface(
                                     shape = CircleShape,
                                     color = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(42.dp)
+                                    modifier = Modifier.size(38.dp)
                                 ) {
                                     Box(contentAlignment = Alignment.Center) {
-                                        Text("♔", fontSize = 24.sp, color = Color.White)
+                                        Text("♔", fontSize = 22.sp, color = Color.White)
                                     }
                                 }
-                                Spacer(modifier = Modifier.width(12.dp))
+                                Spacer(modifier = Modifier.width(10.dp))
                                 Column {
                                     Text(
                                         text = "کتاب تعاملی آموزش شطرنج — فصل اول",
@@ -115,7 +144,7 @@ fun SectionsListScreen(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(12.dp))
+                            Spacer(modifier = Modifier.height(8.dp))
 
                             // Stats row
                             Row(
@@ -126,7 +155,7 @@ fun SectionsListScreen(
                                 Text("۹ تأیید | ۱ نیازمند بازبینی", style = MaterialTheme.typography.labelMedium, color = Color(0xFFD97706), fontWeight = FontWeight.Bold)
                             }
 
-                            Spacer(modifier = Modifier.height(14.dp))
+                            Spacer(modifier = Modifier.height(10.dp))
 
                             // Action buttons
                             Row(
@@ -134,7 +163,7 @@ fun SectionsListScreen(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Button(
-                                    onClick = { viewModel.selectSection(state.currentSectionIndex) },
+                                    onClick = { viewModel.resumeReading() },
                                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                                     modifier = Modifier
                                         .weight(1f)
@@ -167,7 +196,7 @@ fun SectionsListScreen(
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(top = 8.dp)
+                        modifier = Modifier.padding(top = 4.dp)
                     )
                 }
 
@@ -187,13 +216,13 @@ fun SectionsListScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(14.dp),
+                                .padding(horizontal = 12.dp, vertical = 10.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Surface(
                                 shape = CircleShape,
                                 color = if (isCurrent) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
-                                modifier = Modifier.size(36.dp)
+                                modifier = Modifier.size(34.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Text(
@@ -204,7 +233,7 @@ fun SectionsListScreen(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.width(14.dp))
+                            Spacer(modifier = Modifier.width(12.dp))
 
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(

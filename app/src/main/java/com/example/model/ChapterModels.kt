@@ -39,7 +39,8 @@ sealed class SectionContentBlock {
     data class ParagraphBlock(
         override val blockId: String,
         val textFa: String? = null,
-        val showPlaceholderWhenEmpty: Boolean = true
+        val showPlaceholderWhenEmpty: Boolean = true,
+        val isPaginatedSlice: Boolean = false
     ) : SectionContentBlock()
 
     data class HeadingBlock(
@@ -103,11 +104,13 @@ data class TranslationSlot(
      * Unified text/title resolution for any textual [SectionContentBlock]
      * ([SectionContentBlock.ParagraphBlock], [SectionContentBlock.HeadingBlock],
      * [SectionContentBlock.FootnoteBlock], and [SectionContentBlock.ExternalReferenceBlock]),
-     * prioritizing [translationsByBlockId] over inline properties.
+     * prioritizing [translationsByBlockId] over inline properties (except when a paragraph
+     * has already been split into a paginated slice).
      */
     fun resolveBlockText(block: SectionContentBlock): String? {
         return when (block) {
-            is SectionContentBlock.ParagraphBlock -> resolveBlockText(block.blockId, block.textFa)
+            is SectionContentBlock.ParagraphBlock ->
+                if (block.isPaginatedSlice) block.textFa else resolveBlockText(block.blockId, block.textFa)
             is SectionContentBlock.HeadingBlock -> resolveBlockText(block.blockId, block.textFa)
             is SectionContentBlock.FootnoteBlock -> resolveBlockText(block.blockId, block.textFa)
             is SectionContentBlock.ExternalReferenceBlock -> resolveBlockText(block.blockId, block.titleFa)
