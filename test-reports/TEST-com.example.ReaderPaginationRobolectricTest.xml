@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.ReaderPaginationRobolectricTest" tests="32" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:37:50.183Z" hostname="localhost" time="70.791">
+<testsuite name="com.example.ReaderPaginationRobolectricTest" tests="32" skipped="0" failures="0" errors="0" timestamp="2026-11-04T17:26:51.721Z" hostname="localhost" time="31.496">
   <properties/>
-  <testcase name="reader test 29 - SplashScreen and IntroductionScreen render all texts and preserve background in small width 310dp" classname="com.example.ReaderPaginationRobolectricTest" time="14.318"/>
-  <testcase name="reader test 28 - static diagrams use full available card width and BD-032 is not artificially capped at 200dp" classname="com.example.ReaderPaginationRobolectricTest" time="1.25"/>
-  <testcase name="reader test 13 - semantic badge displays correct color title and icon for all 6 content categories in light and dark themes" classname="com.example.ReaderPaginationRobolectricTest" time="9.051"/>
-  <testcase name="reader test 8 - diagram is placed on the same page alongside its related explanatory paragraph" classname="com.example.ReaderPaginationRobolectricTest" time="0.102"/>
-  <testcase name="reader test 7 - long paragraphs split across pages without losing any text or paragraphs" classname="com.example.ReaderPaginationRobolectricTest" time="0.541"/>
-  <testcase name="reader test 31 - SplashScreen and IntroductionScreen render all texts and preserve background in large width 411dp" classname="com.example.ReaderPaginationRobolectricTest" time="3.511"/>
-  <testcase name="reader test 19 - ReaderScreen measures real full-window small phone viewport and recalculates pagination compared to large screen" classname="com.example.ReaderPaginationRobolectricTest" time="0.363"/>
-  <testcase name="reader test 4 - Reader has no vertical scroll container or nested vertical scroll" classname="com.example.ReaderPaginationRobolectricTest" time="0.217"/>
-  <testcase name="reader test 20 - FontSizeScale LARGE paginates without text clipping or overlapping the footer" classname="com.example.ReaderPaginationRobolectricTest" time="4.821"/>
-  <testcase name="reader test 22 - reading position anchor block is preserved when viewport dimensions or font scale change" classname="com.example.ReaderPaginationRobolectricTest" time="0.119"/>
-  <testcase name="reader test 10 - reading position section and page are persisted across app restart and reset to page 1 on new section" classname="com.example.ReaderPaginationRobolectricTest" time="0.096"/>
-  <testcase name="reader test 1 - swipe right from left to right advances to next page in Persian RTL" classname="com.example.ReaderPaginationRobolectricTest" time="4.188"/>
-  <testcase name="reader test 23 - initial app launch flows Splash to Introduction to SectionsListScreen with all 6 selectable sections and TOC returns to list" classname="com.example.ReaderPaginationRobolectricTest" time="2.112"/>
-  <testcase name="reader test 11 - changing font scale deterministically recalculates pagination and moves excess text to subsequent pages" classname="com.example.ReaderPaginationRobolectricTest" time="0.157"/>
-  <testcase name="reader test 32 - SplashScreen and IntroductionScreen support Landscape without clipping and verify unmodified 01 and 02 assets" classname="com.example.ReaderPaginationRobolectricTest" time="0.479"/>
-  <testcase name="reader test 12 - chessboard light and dark square colors remain constant ECDBBA and C5A076 across all pageTypes" classname="com.example.ReaderPaginationRobolectricTest" time="0.095"/>
-  <testcase name="reader test 30 - SplashScreen and IntroductionScreen render all texts and preserve background in normal width 370dp" classname="com.example.ReaderPaginationRobolectricTest" time="2.901"/>
-  <testcase name="reader test 15 - BD-032 interactive exercise functions properly inside paginated ReaderPage" classname="com.example.ReaderPaginationRobolectricTest" time="0.36"/>
-  <testcase name="reader test 9 - pageNumber and totalPages are accurate and displayed in UI" classname="com.example.ReaderPaginationRobolectricTest" time="4.231"/>
-  <testcase name="reader test 18 - paragraph with char count below maxCharsPerTextPage but line count above maxLinesPerTextPage splits across pages" classname="com.example.ReaderPaginationRobolectricTest" time="0.103"/>
-  <testcase name="reader test 26 - chessboard and all 32 pieces render unclipped in normal screen width 370dp" classname="com.example.ReaderPaginationRobolectricTest" time="0.73"/>
-  <testcase name="reader test 5 - every ReaderPage across all sections has at most one diagram or exercise block" classname="com.example.ReaderPaginationRobolectricTest" time="0.115"/>
-  <testcase name="reader test 24 - continue reading button in SectionsListScreen opens last saved section and page without resetting to page 1" classname="com.example.ReaderPaginationRobolectricTest" time="5.158"/>
-  <testcase name="reader test 16 - chessboard files a to h LTR and ranks 8 to 1 top to bottom are preserved inside paginated RTL ReaderPage" classname="com.example.ReaderPaginationRobolectricTest" time="0.208"/>
-  <testcase name="reader test 14 - piece movement animation and reverse animation are preserved after turning pages and returning" classname="com.example.ReaderPaginationRobolectricTest" time="4.719"/>
-  <testcase name="reader test 21 - diagram page with companion explanation and controls fits completely inside visible page bounds" classname="com.example.ReaderPaginationRobolectricTest" time="0.172"/>
-  <testcase name="reader test 3 - left arrow button advances to next page and right arrow button returns to previous page" classname="com.example.ReaderPaginationRobolectricTest" time="4.27"/>
-  <testcase name="reader test 17 - splitLongParagraphText preserves every character including spaces ZWNJ consecutive spaces punctuation and newlines" classname="com.example.ReaderPaginationRobolectricTest" time="0.099"/>
-  <testcase name="reader test 6 - pagination preserves exact sequence of all orderedContentBlocks" classname="com.example.ReaderPaginationRobolectricTest" time="0.086"/>
-  <testcase name="reader test 27 - chessboard and all 32 pieces render unclipped in large width 411dp and piece symbols scale proportionally with board width" classname="com.example.ReaderPaginationRobolectricTest" time="0.872"/>
-  <testcase name="reader test 25 - chessboard and all 32 pieces render unclipped in small screen width 310dp" classname="com.example.ReaderPaginationRobolectricTest" time="0.59"/>
-  <testcase name="reader test 2 - swipe left from right to left returns to previous page in Persian RTL" classname="com.example.ReaderPaginationRobolectricTest" time="4.158"/>
+  <testcase name="reader test 29 - SplashScreen and IntroductionScreen render all texts and preserve background in small width 310dp" classname="com.example.ReaderPaginationRobolectricTest" time="2.003"/>
+  <testcase name="reader test 28 - static diagrams use full available card width and BD-032 is not artificially capped at 200dp" classname="com.example.ReaderPaginationRobolectricTest" time="0.142"/>
+  <testcase name="reader test 13 - semantic badge displays correct color title and icon for all 6 content categories in light and dark themes" classname="com.example.ReaderPaginationRobolectricTest" time="3.731"/>
+  <testcase name="reader test 8 - diagram is placed on the same page alongside its related explanatory paragraph" classname="com.example.ReaderPaginationRobolectricTest" time="0.098"/>
+  <testcase name="reader test 7 - long paragraphs split across pages without losing any text or paragraphs" classname="com.example.ReaderPaginationRobolectricTest" time="0.396"/>
+  <testcase name="reader test 31 - SplashScreen and IntroductionScreen render all texts and preserve background in large width 411dp" classname="com.example.ReaderPaginationRobolectricTest" time="3.234"/>
+  <testcase name="reader test 19 - ReaderScreen measures real full-window small phone viewport and recalculates pagination compared to large screen" classname="com.example.ReaderPaginationRobolectricTest" time="0.237"/>
+  <testcase name="reader test 4 - Reader has no vertical scroll container or nested vertical scroll" classname="com.example.ReaderPaginationRobolectricTest" time="0.116"/>
+  <testcase name="reader test 20 - FontSizeScale LARGE paginates without text clipping or overlapping the footer" classname="com.example.ReaderPaginationRobolectricTest" time="2.272"/>
+  <testcase name="reader test 22 - reading position anchor block is preserved when viewport dimensions or font scale change" classname="com.example.ReaderPaginationRobolectricTest" time="0.089"/>
+  <testcase name="reader test 10 - reading position section and page are persisted across app restart and reset to page 1 on new section" classname="com.example.ReaderPaginationRobolectricTest" time="0.078"/>
+  <testcase name="reader test 1 - swipe right from left to right advances to next page in Persian RTL" classname="com.example.ReaderPaginationRobolectricTest" time="2.144"/>
+  <testcase name="reader test 23 - initial app launch flows Splash to Introduction to SectionsListScreen with all 6 selectable sections and TOC returns to list" classname="com.example.ReaderPaginationRobolectricTest" time="0.975"/>
+  <testcase name="reader test 11 - changing font scale deterministically recalculates pagination and moves excess text to subsequent pages" classname="com.example.ReaderPaginationRobolectricTest" time="0.086"/>
+  <testcase name="reader test 32 - SplashScreen and IntroductionScreen support Landscape without clipping and verify unmodified 01 and 02 assets" classname="com.example.ReaderPaginationRobolectricTest" time="0.252"/>
+  <testcase name="reader test 12 - chessboard light and dark square colors remain constant ECDBBA and C5A076 across all pageTypes" classname="com.example.ReaderPaginationRobolectricTest" time="0.047"/>
+  <testcase name="reader test 30 - SplashScreen and IntroductionScreen render all texts and preserve background in normal width 370dp" classname="com.example.ReaderPaginationRobolectricTest" time="2.648"/>
+  <testcase name="reader test 15 - BD-032 interactive exercise functions properly inside paginated ReaderPage" classname="com.example.ReaderPaginationRobolectricTest" time="0.151"/>
+  <testcase name="reader test 9 - pageNumber and totalPages are accurate and displayed in UI" classname="com.example.ReaderPaginationRobolectricTest" time="2.112"/>
+  <testcase name="reader test 18 - paragraph with char count below maxCharsPerTextPage but line count above maxLinesPerTextPage splits across pages" classname="com.example.ReaderPaginationRobolectricTest" time="0.083"/>
+  <testcase name="reader test 26 - chessboard and all 32 pieces render unclipped in normal screen width 370dp" classname="com.example.ReaderPaginationRobolectricTest" time="0.515"/>
+  <testcase name="reader test 5 - every ReaderPage across all sections has at most one diagram or exercise block" classname="com.example.ReaderPaginationRobolectricTest" time="0.071"/>
+  <testcase name="reader test 24 - continue reading button in SectionsListScreen opens last saved section and page without resetting to page 1" classname="com.example.ReaderPaginationRobolectricTest" time="2.25"/>
+  <testcase name="reader test 16 - chessboard files a to h LTR and ranks 8 to 1 top to bottom are preserved inside paginated RTL ReaderPage" classname="com.example.ReaderPaginationRobolectricTest" time="0.119"/>
+  <testcase name="reader test 14 - piece movement animation and reverse animation are preserved after turning pages and returning" classname="com.example.ReaderPaginationRobolectricTest" time="2.23"/>
+  <testcase name="reader test 21 - diagram page with companion explanation and controls fits completely inside visible page bounds" classname="com.example.ReaderPaginationRobolectricTest" time="0.177"/>
+  <testcase name="reader test 3 - left arrow button advances to next page and right arrow button returns to previous page" classname="com.example.ReaderPaginationRobolectricTest" time="2.152"/>
+  <testcase name="reader test 17 - splitLongParagraphText preserves every character including spaces ZWNJ consecutive spaces punctuation and newlines" classname="com.example.ReaderPaginationRobolectricTest" time="0.065"/>
+  <testcase name="reader test 6 - pagination preserves exact sequence of all orderedContentBlocks" classname="com.example.ReaderPaginationRobolectricTest" time="0.057"/>
+  <testcase name="reader test 27 - chessboard and all 32 pieces render unclipped in large width 411dp and piece symbols scale proportionally with board width" classname="com.example.ReaderPaginationRobolectricTest" time="0.505"/>
+  <testcase name="reader test 25 - chessboard and all 32 pieces render unclipped in small screen width 310dp" classname="com.example.ReaderPaginationRobolectricTest" time="0.344"/>
+  <testcase name="reader test 2 - swipe left from right to left returns to previous page in Persian RTL" classname="com.example.ReaderPaginationRobolectricTest" time="2.103"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

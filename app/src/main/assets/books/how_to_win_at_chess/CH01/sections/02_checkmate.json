@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "sectionId": "SEC_CH01_02_CHECKMATE",
+  "placeholderNoticeFa": "محتوای این بخش در حال آماده‌سازی است.",
+  "translationStatus": "PENDING_TRANSLATION",
+  "orderedContentBlocks": [
+    {
+      "type": "paragraph",
+      "blockId": "SEC_CH01_02_CHECKMATE_P001",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": true
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_02_CHECKMATE_D026",
+      "diagramId": "BD-026"
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_02_CHECKMATE_D027",
+      "diagramId": "BD-027"
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_02_CHECKMATE_D028",
+      "diagramId": "BD-028"
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_02_CHECKMATE_D029",
+      "diagramId": "BD-029"
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_02_CHECKMATE_D030",
+      "diagramId": "BD-030"
+    }
+  ]
+}

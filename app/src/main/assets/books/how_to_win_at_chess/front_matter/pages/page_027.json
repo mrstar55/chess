@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 27,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "محدودیت حرکت شاه به خانه تحت حمله",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P027_I001",
+      "assetId": "PDFOBJ_050",
+      "descriptionFa": "تصویر اصلی خانه‌های مجاز و غیرمجاز حرکت شاه.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 27
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P027_B001",
+      "textFa": "شاه نمی‌تواند خودش را در معرض خطر قرار دهد؛ یعنی اجازه ندارد به خانه‌ای برود که مهره حریف بتواند آن را بگیرد. چنین حرکتی غیرقانونی است. سایر مهره‌ها ممکن است به خانه‌ای خطرناک بروند و سپس مهره حریف آن‌ها را بگیرد؛ اما شاه هرگز اجازه چنین حرکتی را ندارد. هیچ وب‌سایت شطرنجی نیز اجازه نمی‌دهد شاه را به خانه‌ای ببرید که در معرض گرفتن باشد. چنین حرکتی باعث باخت نمی‌شود؛ بلکه اساساً طبق قوانین شطرنج مجاز نیست.",
+      "sourcePdfPage": 27
+    }
+  ],
+  "notesFa": "تصویر اصلی شاه و فلش‌ها/نشانه‌های حمله حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_050"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 27,
+      "pdfImageObjectIndex": 50,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_050",
+      "file": "assets/pdf_embedded_objects/pdf_p027_obj050.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار امنیت حرکت شاه"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 19,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "معرفی پیاده و پنج قاعده آن",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P019_I001",
+      "assetId": "PDFOBJ_033",
+      "descriptionFa": "تصویر اصلی چیدمان صفحه و موقعیت نمایشی مهره‌ها.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 19
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P019_I002",
+      "assetId": "PDFOBJ_032",
+      "descriptionFa": "تصویر خطی اصلی مهره پیاده.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 19
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P019_B001",
+      "textFa": "پیاده ۱ امتیاز ارزش دارد و هر بازیکن بازی را با هشت پیاده آغاز می‌کند. درباره پیاده‌ها پنج قاعده وجود دارد که باید آن‌ها را بدانید.",
+      "sourcePdfPage": 19
+    }
+  ],
+  "notesFa": "تصویر اصلی و شکل خطی پیاده حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_032",
+    "PDFOBJ_033"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 19,
+      "pdfImageObjectIndex": 32,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 176,
+      "height": 235,
+      "assetId": "PDFOBJ_032",
+      "file": "assets/pdf_embedded_objects/pdf_p019_obj032.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار آموزشی پیاده و شکل خطی پیاده"
+    },
+    {
+      "sourcePdfPage": 19,
+      "pdfImageObjectIndex": 33,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_033",
+      "file": "assets/pdf_embedded_objects/pdf_p019_obj033.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار آموزشی پیاده و شکل خطی پیاده"
+    }
+  ]
+}

@@ -1,33 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    <!-- Chess King / Knight Crown Emblem (Centered in 66dp safe zone) -->
-    <!-- Base pedestal -->
-    <path
-        android:fillColor="#F59E0B"
-        android:pathData="M28,82 L80,82 L75,74 L33,74 Z" />
-    <path
-        android:fillColor="#FBBF24"
-        android:pathData="M31,73 L77,73 L72,64 L36,64 Z" />
-    <!-- Crown Body -->
-    <path
-        android:fillColor="#F59E0B"
-        android:pathData="M36,63 L72,63 L80,44 L66,52 L54,34 L42,52 L28,44 Z" />
-    <!-- Crown jewels / cross -->
-    <path
-        android:fillColor="#FDE68A"
-        android:pathData="M52,24 L56,24 L56,33 L52,33 Z" />
-    <path
-        android:fillColor="#FDE68A"
-        android:pathData="M49,27 L59,27 L59,30 L49,30 Z" />
-    <!-- Left and right accent spheres -->
-    <path
-        android:fillColor="#FDE68A"
-        android:pathData="M28,42 A3,3 0 1,1 28,42.01" />
-    <path
-        android:fillColor="#FDE68A"
-        android:pathData="M80,42 A3,3 0 1,1 80,42.01" />
-</vector>
+<!-- Official Chess Knight Adaptive Foreground (Bitmap-based directly from branding/chess_knight_app_icon_source.png) -->
+<!-- Preserves 100% original knight artwork and proportions (#4E1E0A / #501B00 dark brown, #EC5328 / #E8572C eye, #FEF0D2 / #FCF2D9 cream) -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_launcher_foreground_bitmap"
+    android:insetLeft="14%"
+    android:insetTop="14%"
+    android:insetRight="14%"
+    android:insetBottom="14%" />

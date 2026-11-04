@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 32,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "نمادهای مهره‌ها در ثبت جبری",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "table",
+      "blockId": "FM_P032_T001",
+      "titleFa": "نام مهره و نماد آن در ثبت جبری",
+      "rows": [
+        [
+          "نام مهره",
+          "نماد/کاربرد"
+        ],
+        [
+          "پیاده",
+          "برای پیاده فقط خانه مقصد نوشته می‌شود؛ مثلاً e6 یعنی پیاده به خانه e6 رفته است. اگر پیاده مهره‌ای را بگیرد، ستون مبدأ هم نوشته می‌شود؛ مانند exd5."
+        ],
+        [
+          "فیل",
+          "B"
+        ],
+        [
+          "اسب",
+          "N"
+        ],
+        [
+          "رخ",
+          "R"
+        ],
+        [
+          "وزیر",
+          "Q"
+        ],
+        [
+          "شاه",
+          "K"
+        ]
+      ],
+      "sourcePdfPage": 32
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P032_B001",
+      "textFa": "در نمادگذاری شطرنج، حرکت پیاده تنها حرکتی است که در آن حرفِ نشان‌دهنده نوع مهره نوشته نمی‌شود. می‌بینید که برای اسب از حرف N استفاده می‌شود تا با حرف K، که نماد شاه است، اشتباه نشود.",
+      "sourcePdfPage": 32
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P032_B002",
+      "textFa": "برای اینکه کاربرد نمادگذاری را در عمل ببینید، به یک مثال نگاه کنیم:",
+      "sourcePdfPage": 32
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P032_I001",
+      "assetId": "PDFOBJ_059",
+      "descriptionFa": "تصویر اصلی چیدمان آغازین و حرکت دوخانه‌ای پیاده ستون d.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 32
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P032_B003",
+      "textFa": "سفید پیاده ستون d را دو خانه به جلو، تا d4، حرکت داده است. در نمادگذاری شطرنج این حرکت به‌صورت «1. d4» ثبت می‌شود. عدد «۱» نشان می‌دهد این نخستین حرکت بازی است و «d4»، چون حرفی برای نوع مهره در ابتدای آن نیامده، مشخص می‌کند که حرکت با پیاده انجام شده است.",
+      "sourcePdfPage": 32
+    }
+  ],
+  "notesFa": "نمادهای لاتین B/N/R/Q/K و رشته‌های حرکتی انگلیسی باید دقیقاً حفظ شوند؛ این حروف در ثبت استاندارد حرکات جایگزین فارسی ندارند.",
+  "sourceAssetIds": [
+    "PDFOBJ_059",
+    "PDFOBJ_060"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 32,
+      "pdfImageObjectIndex": 59,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_059",
+      "file": "assets/pdf_embedded_objects/pdf_p032_obj059.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار نمونه حرکت پیاده در نمادگذاری"
+    },
+    {
+      "sourcePdfPage": 32,
+      "pdfImageObjectIndex": 60,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_060",
+      "file": "assets/pdf_embedded_objects/pdf_p032_obj060.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار نمونه حرکت پیاده در نمادگذاری"
+    }
+  ]
+}

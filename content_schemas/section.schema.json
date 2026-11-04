@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chessbook.aistudio.com/schemas/section.schema.json",
+  "title": "Section Content Pack",
+  "type": "object",
+  "required": ["schemaVersion", "sectionId", "placeholderNoticeFa", "translationStatus", "orderedContentBlocks"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "sectionId": { "type": "string", "minLength": 1 },
+    "placeholderNoticeFa": { "type": "string", "minLength": 1 },
+    "translationStatus": {
+      "type": "string",
+      "enum": ["PENDING_TRANSLATION", "IN_PROGRESS", "READY"]
+    },
+    "orderedContentBlocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "blockId"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["paragraph", "heading", "diagram", "exercise", "footnote", "externalReference"]
+          },
+          "blockId": { "type": "string", "minLength": 1 },
+          "textFa": { "type": ["string", "null"] },
+          "titleFa": { "type": ["string", "null"] },
+          "diagramId": { "type": "string", "minLength": 1 },
+          "exerciseId": { "type": "string", "minLength": 1 },
+          "showPlaceholderWhenEmpty": { "type": "boolean" },
+          "isAuthorizedAndEnabled": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

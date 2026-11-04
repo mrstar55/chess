@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chessbook.aistudio.com/schemas/chapter.schema.json",
+  "title": "Chapter Manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "bookId",
+    "chapterId",
+    "chapterNumber",
+    "titleEn",
+    "titleFa",
+    "diagramsFile",
+    "pgnFile",
+    "exercisesFile",
+    "narrationManifest",
+    "sections"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "bookId": { "type": "string", "minLength": 1 },
+    "chapterId": { "type": "string", "minLength": 1 },
+    "chapterNumber": { "type": "integer", "minimum": 1 },
+    "titleEn": { "type": "string", "minLength": 1 },
+    "titleFa": { "type": "string", "minLength": 1 },
+    "diagramsFile": { "type": "string", "minLength": 1 },
+    "pgnFile": { "type": "string", "minLength": 1 },
+    "exercisesFile": { "type": "string", "minLength": 1 },
+    "narrationManifest": { "type": "string", "minLength": 1 },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sectionId", "order", "sectionKind", "titleEn", "titleFa", "pdfPages", "contentFile"],
+        "properties": {
+          "sectionId": { "type": "string", "minLength": 1 },
+          "order": { "type": "integer", "minimum": 1 },
+          "sectionKind": {
+            "type": "string",
+            "enum": ["OPENING", "CONTENT", "SUMMARY", "REVIEW", "CUSTOM"]
+          },
+          "titleEn": { "type": "string", "minLength": 1 },
+          "titleFa": { "type": "string", "minLength": 1 },
+          "pdfPages": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "integer", "minimum": 1 }
+          },
+          "contentFile": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

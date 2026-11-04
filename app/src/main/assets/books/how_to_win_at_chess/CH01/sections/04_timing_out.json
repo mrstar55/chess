@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "sectionId": "SEC_CH01_04_TIMING_OUT",
+  "placeholderNoticeFa": "محتوای این بخش در حال آماده‌سازی است.",
+  "translationStatus": "PENDING_TRANSLATION",
+  "orderedContentBlocks": [
+    {
+      "type": "paragraph",
+      "blockId": "SEC_CH01_04_TIMING_OUT_P001",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": true
+    },
+    {
+      "type": "exercise",
+      "blockId": "SEC_CH01_04_TIMING_OUT_E032",
+      "exerciseId": "EX_CH01_BD032",
+      "diagramId": "BD-032"
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_04_TIMING_OUT_D033",
+      "diagramId": "BD-033"
+    }
+  ]
+}

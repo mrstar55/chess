@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 25,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "قاعده آن‌پاسان: فرصت گرفتن پیاده",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P025_I001",
+      "assetId": "PDFOBJ_045",
+      "descriptionFa": "تصویر اصلی پس از حرکت دوخانه‌ای پیاده سیاه و قرارگرفتن آن کنار پیاده سفید.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 25
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P025_B001",
+      "textFa": "پس از آنکه پیاده سیاه دو خانه به جلو حرکت کرد، کنار پیاده سفید (که روی e5 قرار دارد) می‌ایستد. در این وضعیت، فقط در همان نوبت بلافاصله پس از حرکت سیاه، سفید این اختیار را دارد که پیاده سیاه را بگیرد؛ با اینکه پیاده سیاه کنار پیاده سفید قرار گرفته است، نه به‌صورت مورب نسبت به آن.",
+      "sourcePdfPage": 25
+    }
+  ],
+  "notesFa": "تصویر اصلی و فلش نشان‌دهنده حرکت دوخانه‌ای پیاده سیاه حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_045",
+    "PDFOBJ_046"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 25,
+      "pdfImageObjectIndex": 45,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_045",
+      "file": "assets/pdf_embedded_objects/pdf_p025_obj045.jpg",
+      "format": "jpg",
+      "descriptionFa": "موقعیت گرفتن آن‌پاسان"
+    },
+    {
+      "sourcePdfPage": 25,
+      "pdfImageObjectIndex": 46,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_046",
+      "file": "assets/pdf_embedded_objects/pdf_p025_obj046.jpg",
+      "format": "jpg",
+      "descriptionFa": "موقعیت گرفتن آن‌پاسان"
+    }
+  ]
+}

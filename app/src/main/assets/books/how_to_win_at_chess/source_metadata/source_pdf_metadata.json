@@ -1,0 +1,19 @@
+{
+  "bookTitle": "How to Win at Chess: The Ultimate Guide for Beginners and Beyond",
+  "author": "Levy Rozman",
+  "sourcePdfFile": "how-to-win-at-chess-by-levy-rozman-NB-003957.pdf",
+  "sourcePdfSha256": "461b30a603b6b1477ca36d8072eb8e463c4c23816686b34717bf8b6af1982ec0",
+  "sourcePdfBytes": 29111735,
+  "totalPdfPages": 591,
+  "phaseIncludedPages": [
+    1,
+    39
+  ],
+  "physicalPdfPageIndexIsCanonical": true,
+  "pages39And40Note": "PDF page 39 contains a small rook image and is preserved as an image-only transition page; Chapter One begins on PDF page 40.",
+  "sourceAssetCount": 70,
+  "sourceLinkCount": 126,
+  "sourcePagesIncluded": 39,
+  "textPagesTranslated": 38,
+  "translationDisclaimer": "Translated draft for project content preparation; editorial and rights review required before commercial publication."
+}

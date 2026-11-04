@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 2,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "IMAGE_ONLY",
+  "pageTitleFa": "تصویر تزئینی آغازین",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "IMAGE_ONLY_SOURCE_PAGE",
+  "orderedContentBlocks": [],
+  "notesFa": "صفحه تصویری بدون متن قابل ترجمه؛ تصویر اصلی دو اسب و سیلوئت مهره‌ها باید عیناً حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_001"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 2,
+      "pdfImageObjectIndex": 1,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1750,
+      "height": 2000,
+      "assetId": "PDFOBJ_001",
+      "file": "assets/pdf_embedded_objects/pdf_p002_obj001.jpg",
+      "format": "jpg",
+      "descriptionFa": "تصویر تزئینی دو اسب و سیلوئت مهره‌ها"
+    }
+  ]
+}

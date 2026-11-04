@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "chapterId": "CH01",
+  "exercises": [
+    {
+      "exerciseId": "EX_CH01_BD032",
+      "diagramId": "BD-032",
+      "exerciseType": "MATE_IN_ONE",
+      "handlerType": "MATE_IN_ONE",
+      "initialFen": "8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1",
+      "sideToMove": "black",
+      "titleFa": "تمرین تعاملی: مات در یک حرکت برای سیاه",
+      "promptFa": "نوبت سیاه است. با لمس مهره مورد نظر روی صفحه شطرنج و سپس لمس خانه مقصد، شاه سفید را در یک حرکت مات کنید:",
+      "acceptedSolutionIds": [
+        "BD032_MATE_QH8",
+        "BD032_MATE_QH2"
+      ],
+      "acceptedSolutionPgnRefs": [
+        "BD032_MATE_QH8",
+        "BD032_MATE_QH2"
+      ],
+      "successFeedbackFa": "پاسخ صحیح! حرکت {move} توسط موتور قوانین بررسی شد و شاه سفید مات شد.",
+      "wrongMoveFeedbackFa": "این حرکت قانونی است، اما مسئله را حل نمی‌کند. دوباره تلاش کنید.",
+      "illegalMoveFeedbackFa": "این حرکت طبق قوانین شطرنج مجاز نیست.",
+      "hintFa": "وزیر سیاه در e5 یا رخ سیاه در g1 را بررسی کنید؛ کدام حرکت راه فرار شاه سفید در h4 را کاملاً می‌بندد؟",
+      "allowLegalMoveHints": true,
+      "showLegalMovesHint": true
+    }
+  ]
+}

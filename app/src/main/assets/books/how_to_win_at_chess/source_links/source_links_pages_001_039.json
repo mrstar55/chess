@@ -1,0 +1,887 @@
+{
+  "sourcePdfSha256": "461b30a603b6b1477ca36d8072eb8e463c4c23816686b34717bf8b6af1982ec0",
+  "links": [
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "TenSpeed.com",
+      "linkKind": 2,
+      "targetUri": "https://crownpublishing.com/archives/imprint/ten-speed-press"
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "cover",
+      "linkKind": 2,
+      "targetUri": "clbr://internal.invalid/book/OEBPS/xhtml/cover.xhtml"
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 2
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 5
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "ns on cover by KurArt, this page and this page by Максим Лебедик, and this page, this page, and this page by Olga; courtesy of Adobestock.",
+      "linkKind": 1,
+      "targetSourcePdfPage": 10
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 37
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 261
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "INTRODUCTION",
+      "linkKind": 1,
+      "targetSourcePdfPage": 11
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "The Basics of Chess",
+      "linkKind": 1,
+      "targetSourcePdfPage": 11
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "Chess Notation",
+      "linkKind": 1,
+      "targetSourcePdfPage": 31
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Scoring",
+      "linkKind": 1,
+      "targetSourcePdfPage": 35
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "Practicing Chess",
+      "linkKind": 1,
+      "targetSourcePdfPage": 36
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "Additional Learning Material",
+      "linkKind": 1,
+      "targetSourcePdfPage": 36
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "PART ONE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 37
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "CHAPTER ONE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 39
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 9,
+      "sourceLabel": "HOW TO (LITERALLY) WIN AT CHESS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 40
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 10,
+      "sourceLabel": "Checkmate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 40
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 11,
+      "sourceLabel": "Resignation",
+      "linkKind": 1,
+      "targetSourcePdfPage": 45
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 12,
+      "sourceLabel": "Timing Out",
+      "linkKind": 1,
+      "targetSourcePdfPage": 46
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 13,
+      "sourceLabel": "Abandonment",
+      "linkKind": 1,
+      "targetSourcePdfPage": 48
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 14,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 50
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 15,
+      "sourceLabel": "CHAPTER TWO",
+      "linkKind": 1,
+      "targetSourcePdfPage": 51
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 16,
+      "sourceLabel": "HOW TO START THE GAME WITH THE WHITE PIECES",
+      "linkKind": 1,
+      "targetSourcePdfPage": 52
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 17,
+      "sourceLabel": "Why Learn Openings?",
+      "linkKind": 1,
+      "targetSourcePdfPage": 52
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 18,
+      "sourceLabel": "Three Principles of the Opening: Center, Develop, Castle",
+      "linkKind": 1,
+      "targetSourcePdfPage": 55
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 19,
+      "sourceLabel": "e4 Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 60
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 20,
+      "sourceLabel": "d4 Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 70
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 21,
+      "sourceLabel": "Scholar’s Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 76
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 22,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 85
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 23,
+      "sourceLabel": "CHAPTER THREE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 86
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 24,
+      "sourceLabel": "HOW TO START THE GAME WITH THE BLACK PIECES",
+      "linkKind": 1,
+      "targetSourcePdfPage": 87
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 25,
+      "sourceLabel": "Traditional Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 88
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 26,
+      "sourceLabel": "Setup-Based Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 96
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 27,
+      "sourceLabel": "Building-Block Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 99
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 28,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 105
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 29,
+      "sourceLabel": "CHAPTER FOUR",
+      "linkKind": 1,
+      "targetSourcePdfPage": 106
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 30,
+      "sourceLabel": "ENDGAMES I",
+      "linkKind": 1,
+      "targetSourcePdfPage": 107
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 31,
+      "sourceLabel": "Ladder Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 107
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 32,
+      "sourceLabel": "King and Queen Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 115
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 33,
+      "sourceLabel": "King and Rook Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 123
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 133
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "CHAPTER FIVE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 135
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "ENDGAMES II",
+      "linkKind": 1,
+      "targetSourcePdfPage": 136
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Solo Acts",
+      "linkKind": 1,
+      "targetSourcePdfPage": 136
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "Two-Piece Checkmate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 141
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "Taking Checkmates to the Next Level",
+      "linkKind": 1,
+      "targetSourcePdfPage": 156
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 164
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "CHAPTER SIX",
+      "linkKind": 1,
+      "targetSourcePdfPage": 165
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 9,
+      "sourceLabel": "ENDGAMES III",
+      "linkKind": 1,
+      "targetSourcePdfPage": 166
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 10,
+      "sourceLabel": "Draw by Agreement",
+      "linkKind": 1,
+      "targetSourcePdfPage": 166
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 11,
+      "sourceLabel": "Draw by Repetition",
+      "linkKind": 1,
+      "targetSourcePdfPage": 168
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 12,
+      "sourceLabel": "Draw by Stalemate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 176
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 13,
+      "sourceLabel": "50-Move Rule",
+      "linkKind": 1,
+      "targetSourcePdfPage": 179
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 14,
+      "sourceLabel": "Draw by Insufficient Checkmating Material",
+      "linkKind": 1,
+      "targetSourcePdfPage": 180
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 15,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 184
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 16,
+      "sourceLabel": "CHAPTER SEVEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 185
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 17,
+      "sourceLabel": "ATTACKING, DEFENDING, AND CAPTURING",
+      "linkKind": 1,
+      "targetSourcePdfPage": 186
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 18,
+      "sourceLabel": "Piece Vision",
+      "linkKind": 1,
+      "targetSourcePdfPage": 186
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 19,
+      "sourceLabel": "Attacking and Defending",
+      "linkKind": 1,
+      "targetSourcePdfPage": 193
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 20,
+      "sourceLabel": "Tactics",
+      "linkKind": 1,
+      "targetSourcePdfPage": 209
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 21,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 231
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 22,
+      "sourceLabel": "CHAPTER EIGHT",
+      "linkKind": 1,
+      "targetSourcePdfPage": 232
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 23,
+      "sourceLabel": "BEGINNER STRATEGY",
+      "linkKind": 1,
+      "targetSourcePdfPage": 233
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 24,
+      "sourceLabel": "Weaknesses",
+      "linkKind": 1,
+      "targetSourcePdfPage": 233
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 25,
+      "sourceLabel": "Space",
+      "linkKind": 1,
+      "targetSourcePdfPage": 248
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 26,
+      "sourceLabel": "Closed vs. Open Positions",
+      "linkKind": 1,
+      "targetSourcePdfPage": 254
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 27,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 260
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 28,
+      "sourceLabel": "PART TWO",
+      "linkKind": 1,
+      "targetSourcePdfPage": 261
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 29,
+      "sourceLabel": "CHAPTER NINE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 263
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 30,
+      "sourceLabel": "INTERMEDIATE OPENINGS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 264
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 31,
+      "sourceLabel": "Learning Openings with White",
+      "linkKind": 1,
+      "targetSourcePdfPage": 264
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 32,
+      "sourceLabel": "Learning Openings with Black",
+      "linkKind": 1,
+      "targetSourcePdfPage": 269
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 33,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 277
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 34,
+      "sourceLabel": "CHAPTER TEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 278
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 35,
+      "sourceLabel": "INTERMEDIATE OPENINGS FOR WHITE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 279
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 36,
+      "sourceLabel": "London System",
+      "linkKind": 1,
+      "targetSourcePdfPage": 279
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 37,
+      "sourceLabel": "Vienna System",
+      "linkKind": 1,
+      "targetSourcePdfPage": 286
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 38,
+      "sourceLabel": "Alapin Sicilian Variation",
+      "linkKind": 1,
+      "targetSourcePdfPage": 296
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 302
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "CHAPTER ELEVEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 303
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "INTERMEDIATE OPENINGS FOR BLACK",
+      "linkKind": 1,
+      "targetSourcePdfPage": 304
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Scandinavian Defense",
+      "linkKind": 1,
+      "targetSourcePdfPage": 304
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "Caro-Kann Defense",
+      "linkKind": 1,
+      "targetSourcePdfPage": 309
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "Queen’s Gambit Declined",
+      "linkKind": 1,
+      "targetSourcePdfPage": 319
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "Setup-Based Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 325
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 330
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 9,
+      "sourceLabel": "CHAPTER TWELVE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 331
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 10,
+      "sourceLabel": "GAMBITS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 332
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 11,
+      "sourceLabel": "Gambits for White",
+      "linkKind": 1,
+      "targetSourcePdfPage": 332
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 12,
+      "sourceLabel": "Gambits for Black",
+      "linkKind": 1,
+      "targetSourcePdfPage": 354
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 13,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 376
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 14,
+      "sourceLabel": "CHAPTER THIRTEEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 377
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 15,
+      "sourceLabel": "INTERMEDIATE ENDGAMES",
+      "linkKind": 1,
+      "targetSourcePdfPage": 378
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 16,
+      "sourceLabel": "King and Pawn Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 378
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 17,
+      "sourceLabel": "Knight Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 394
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 18,
+      "sourceLabel": "Knight vs. Bishop Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 399
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 19,
+      "sourceLabel": "Bishop Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 403
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 20,
+      "sourceLabel": "Rook Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 411
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 21,
+      "sourceLabel": "Queen Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 419
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 22,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 433
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 23,
+      "sourceLabel": "CHAPTER FOURTEEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 434
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 24,
+      "sourceLabel": "INTERMEDIATE TACTICS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 435
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 25,
+      "sourceLabel": "Beginning to Use CCA",
+      "linkKind": 1,
+      "targetSourcePdfPage": 435
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 26,
+      "sourceLabel": "CCA: The Next Level",
+      "linkKind": 1,
+      "targetSourcePdfPage": 439
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 27,
+      "sourceLabel": "CCA: Checkmate in Three",
+      "linkKind": 1,
+      "targetSourcePdfPage": 443
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 28,
+      "sourceLabel": "CCA: Winning Material",
+      "linkKind": 1,
+      "targetSourcePdfPage": 449
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 29,
+      "sourceLabel": "Removing the Defender",
+      "linkKind": 1,
+      "targetSourcePdfPage": 453
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 30,
+      "sourceLabel": "Zwischenzug",
+      "linkKind": 1,
+      "targetSourcePdfPage": 455
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 31,
+      "sourceLabel": "Discovered Attacks",
+      "linkKind": 1,
+      "targetSourcePdfPage": 459
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 32,
+      "sourceLabel": "Sacrifices, Deflection, and Attraction",
+      "linkKind": 1,
+      "targetSourcePdfPage": 463
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 33,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 474
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 34,
+      "sourceLabel": "CHAPTER FIFTEEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 475
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 35,
+      "sourceLabel": "INTERMEDIATE STRATEGY",
+      "linkKind": 1,
+      "targetSourcePdfPage": 476
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 36,
+      "sourceLabel": "Pawns",
+      "linkKind": 1,
+      "targetSourcePdfPage": 476
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 37,
+      "sourceLabel": "Bishops and Knights",
+      "linkKind": 1,
+      "targetSourcePdfPage": 491
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 38,
+      "sourceLabel": "Rooks",
+      "linkKind": 1,
+      "targetSourcePdfPage": 500
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "The Queen",
+      "linkKind": 1,
+      "targetSourcePdfPage": 518
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "Trading Pieces",
+      "linkKind": 1,
+      "targetSourcePdfPage": 524
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "Checklist",
+      "linkKind": 1,
+      "targetSourcePdfPage": 548
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 570
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "KEY TERMS AND CONCEPTS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 571
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "ACKNOWLEDGMENTS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 575
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "ABOUT THE AUTHOR",
+      "linkKind": 1,
+      "targetSourcePdfPage": 576
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "INDEX",
+      "linkKind": 1,
+      "targetSourcePdfPage": 577
+    },
+    {
+      "sourcePdfPage": 21,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "(this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 52
+    },
+    {
+      "sourcePdfPage": 21,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "this page)",
+      "linkKind": 1,
+      "targetSourcePdfPage": 86
+    }
+  ]
+}

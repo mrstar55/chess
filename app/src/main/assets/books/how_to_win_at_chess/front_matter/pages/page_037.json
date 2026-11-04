@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 37,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "PART_DIVIDER",
+  "pageTitleFa": "صفحه جداکننده بخش اول",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P037_H001",
+      "textFa": "بخش اول",
+      "level": 1,
+      "sourceVisibleText": "PART ONE",
+      "sourcePdfPage": 37
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P037_B001",
+      "textFa": "درجه اِلو: ۰ تا ۸۰۰",
+      "sourceVisibleText": "0–800 ELO",
+      "sourcePdfPage": 37
+    }
+  ],
+  "notesFa": "صفحه به‌صورت تصویر کامل طراحی شده است؛ تصویر اصلی دو نیمه کرم و قهوه‌ای و نشان شاه بدون تغییر حفظ شود و ترجمه‌ها به‌صورت لایه متنی مستقل باشند.",
+  "sourceAssetIds": [
+    "PDFOBJ_067"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 37,
+      "pdfImageObjectIndex": 67,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1750,
+      "height": 2000,
+      "assetId": "PDFOBJ_067",
+      "file": "assets/pdf_embedded_objects/pdf_p037_obj067.jpg",
+      "format": "jpg",
+      "descriptionFa": "تصویر جداکننده بخش اول با نشان شاه و برچسب 0–800 Elo"
+    }
+  ]
+}

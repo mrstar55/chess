@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 17,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "حرکت اسب",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P017_I001",
+      "assetId": "PDFOBJ_028",
+      "descriptionFa": "تصویر اصلی خانه‌های قابل دسترس اسب از مرکز صفحه.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 17
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P017_I002",
+      "assetId": "PDFOBJ_027",
+      "descriptionFa": "تصویر خطی اصلی مهره اسب.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 17
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P017_B001",
+      "textFa": "اسب نیز ۳ امتیاز ارزش دارد و هر بازیکن بازی را با دو اسب آغاز می‌کند. حرکت اسب از همه مهره‌های دیگر منحصربه‌فردتر است؛ همچنین اسب تنها مهره‌ای است که می‌تواند از روی مهره‌های دیگر، چه مهره‌های خودی و چه مهره‌های حریف، بپرد. اسب به شکل حرف L حرکت می‌کند: ابتدا دو خانه در یک جهت عمودی یا افقی و سپس یک خانه به سمت کناری. این نمودار تمام خانه‌هایی را نشان می‌دهد که یک اسب در مرکز صفحه‌ای خالی می‌تواند به آن‌ها بپرد.",
+      "sourcePdfPage": 17
+    }
+  ],
+  "notesFa": "نمودار L شکل اسب باید عیناً حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_027",
+    "PDFOBJ_028",
+    "PDFOBJ_029"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 17,
+      "pdfImageObjectIndex": 27,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 210,
+      "height": 253,
+      "assetId": "PDFOBJ_027",
+      "file": "assets/pdf_embedded_objects/pdf_p017_obj027.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت اسب و شکل خطی اسب"
+    },
+    {
+      "sourcePdfPage": 17,
+      "pdfImageObjectIndex": 28,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_028",
+      "file": "assets/pdf_embedded_objects/pdf_p017_obj028.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت اسب و شکل خطی اسب"
+    },
+    {
+      "sourcePdfPage": 17,
+      "pdfImageObjectIndex": 29,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_029",
+      "file": "assets/pdf_embedded_objects/pdf_p017_obj029.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت اسب و شکل خطی اسب"
+    }
+  ]
+}

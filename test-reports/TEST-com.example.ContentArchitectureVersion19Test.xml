@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.ContentArchitectureVersion19Test" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T17:26:24.171Z" hostname="localhost" time="1.207">
+  <properties/>
+  <testcase name="v19 exercise 3 - ContentBlockValidator rejects ExerciseDefinition with initialFen mismatching diagram initialFen" classname="com.example.ContentArchitectureVersion19Test" time="0.123"/>
+  <testcase name="v19 exercise 1 - ExerciseUiState and ExercisePhase are real model classes and ExerciseEngine has zero UI or BD-032 dependencies" classname="com.example.ContentArchitectureVersion19Test" time="0.093"/>
+  <testcase name="v19_2 narration 3 - all 18 mandatory fixtures verify structural JSON Schema evaluation and Kotlin runtime semantic validation" classname="com.example.ContentArchitectureVersion19Test" time="0.11"/>
+  <testcase name="v19_1 narration 2 - recursive narration manifest validation covers all 9 required scenarios and unified contract" classname="com.example.ContentArchitectureVersion19Test" time="0.095"/>
+  <testcase name="v19 exercise 2 - two simultaneous MATE_IN_ONE exercises have isolated state, rules adapters, hint, retry, reset, and UI tags without BD-032" classname="com.example.ContentArchitectureVersion19Test" time="0.508"/>
+  <testcase name="v19 narration 1 - BookNarrationManager has no CH01 default, handles 3-section chapter, stops on chapter switch, and isolates saved position per chapter" classname="com.example.ContentArchitectureVersion19Test" time="0.093"/>
+  <testcase name="v19 icon - official chess knight master icon, adaptive bitmap foreground, extracted monochrome silhouette, and all 5 mipmap densities exist and are valid" classname="com.example.ContentArchitectureVersion19Test" time="0.172"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

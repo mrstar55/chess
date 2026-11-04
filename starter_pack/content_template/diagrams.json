@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "chapter_id": "CH02",
+  "diagrams": [
+    {
+      "diagram_id": "BD-101",
+      "pdf_page": 51,
+      "section": "Chapter opening",
+      "book_context": "Template static or replay diagram.",
+      "diagram_kind": "starting_position",
+      "recommended_interaction": "static_explanatory_position",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "side_to_move": "white",
+      "pgn_ref": null,
+      "solution_pgn_refs": [],
+      "highlight_squares": [],
+      "audit_status": "VALID",
+      "audit_warning_fa": null,
+      "implementation_notes": "Template diagram entry."
+    },
+    {
+      "diagram_id": "BD-102",
+      "pdf_page": 52,
+      "section": "Chapter opening",
+      "book_context": "Template mate-in-one exercise diagram.",
+      "diagram_kind": "mate_in_one_exercise",
+      "recommended_interaction": "interactive_mate_in_one_exercise",
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+      "side_to_move": "white",
+      "pgn_ref": null,
+      "solution_pgn_refs": [
+        "EX_CH02_BD102_SOL1"
+      ],
+      "highlight_squares": [],
+      "audit_status": "VALID",
+      "audit_warning_fa": null,
+      "implementation_notes": "Template mate-in-one diagram."
+    }
+  ]
+}

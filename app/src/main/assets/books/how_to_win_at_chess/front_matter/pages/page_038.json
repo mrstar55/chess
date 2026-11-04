@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 38,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "PART_INTRODUCTION",
+  "pageTitleFa": "خوش‌آمدگویی به بخش اول",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P038_H001",
+      "textFa": "به بخش اول خوش آمدید!",
+      "level": 1,
+      "sourcePdfPage": 38
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P038_B001",
+      "textFa": "در این بخش از کتاب، موضوعات زیر را یاد خواهید گرفت:",
+      "sourcePdfPage": 38
+    },
+    {
+      "type": "orderedList",
+      "blockId": "FM_P038_L001",
+      "titleFa": "موضوعات آموزشی بخش اول",
+      "items": [
+        "اینکه بازی‌های شطرنج در عمل چگونه برده، باخته یا مساوی می‌شوند؛",
+        "بهترین روش آغاز بازی با مهره‌های سفید و سیاه؛",
+        "کیش‌ومات‌های پایه در آخر بازی؛",
+        "ترکیب‌های کیش‌ومات در میانه‌بازی؛",
+        "نحوه تعامل مهره‌های شطرنج با یکدیگر: حمله، دفاع و تاکتیک‌های گوناگون؛",
+        "راهبردهای بنیادی شطرنج، از جمله ضعف‌ها، فضا و موارد دیگر."
+      ],
+      "sourcePdfPage": 38
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P038_B002",
+      "textFa": "در شطرنج ــ به‌ویژه در بازی‌های آنلاین ــ اصطلاح اِلو سطح مهارت یک بازیکن را نشان می‌دهد. من بخش اول را به بازیکنانی با درجه اِلو ۰ تا ۸۰۰ توصیه می‌کنم؛ همچنین بازیکنان پیشرفته‌تری که گاهی لازم است مفاهیم پایه را مرور کنند، می‌توانند از آن بهره ببرند. اگر رقابت را کنار بگذاریم، بخش اول برای افرادی از کاملاً تازه‌کار تا مبتدیانی است که تجربه نسبتاً بیشتری دارند.",
+      "sourcePdfPage": 38
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P038_B003",
+      "textFa": "ممکن است بعضی از مطالب فصل‌های پیش رو را از قبل بدانید؛ با این حال امیدوارم بخش بزرگی از متن برایتان آموزنده و لذت‌بخش باشد. از خواندن آن لذت ببرید!",
+      "sourcePdfPage": 38
+    }
+  ],
+  "notesFa": "این صفحه معرفی آموزشی بخش اول است. فهرست شش هدف یادگیری و محدوده پیشنهادی ۰ تا ۸۰۰ اِلو باید کامل حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_068"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 38,
+      "pdfImageObjectIndex": 68,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 89,
+      "height": 94,
+      "assetId": "PDFOBJ_068",
+      "file": "assets/pdf_embedded_objects/pdf_p038_obj068.jpg",
+      "format": "jpg",
+      "descriptionFa": "نشان/لوگوی کوچک صفحه معرفی بخش اول"
+    }
+  ]
+}

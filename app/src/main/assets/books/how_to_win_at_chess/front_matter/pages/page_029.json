@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 29,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "قلعه‌رفتن کوتاه و بلند",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P029_I001",
+      "assetId": "PDFOBJ_054",
+      "descriptionFa": "تصویر اصلی قلعه‌رفتن بلند در جناح وزیر.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 29
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P029_B001",
+      "textFa": "می‌توانید «قلعه‌رفتن کوتاه» (در جناح شاه) را انجام دهید که شاه و رخ را در موقعیتی مانند تصویر قبلی قرار می‌دهد؛ یا می‌توانید «قلعه‌رفتن بلند» (در جناح وزیر) را انجام دهید که شکل آن در این تصویر آمده است.",
+      "sourcePdfPage": 29
+    }
+  ],
+  "notesFa": "تصویر اصلی قلعه‌رفتن بلند حفظ شود؛ اصطلاحات جناح شاه و جناح وزیر در ادامه کتاب نیز یکسان به‌کار روند.",
+  "sourceAssetIds": [
+    "PDFOBJ_054",
+    "PDFOBJ_055"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 29,
+      "pdfImageObjectIndex": 54,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_054",
+      "file": "assets/pdf_embedded_objects/pdf_p029_obj054.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار قلعه‌رفتن بلند"
+    },
+    {
+      "sourcePdfPage": 29,
+      "pdfImageObjectIndex": 55,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_055",
+      "file": "assets/pdf_embedded_objects/pdf_p029_obj055.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار قلعه‌رفتن بلند"
+    }
+  ]
+}

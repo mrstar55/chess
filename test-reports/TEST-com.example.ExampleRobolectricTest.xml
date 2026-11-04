@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.ExampleRobolectricTest" tests="60" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:39:01.672Z" hostname="localhost" time="29.508">
+<testsuite name="com.example.ExampleRobolectricTest" tests="60" skipped="0" failures="0" errors="0" timestamp="2026-11-04T17:26:25.440Z" hostname="localhost" time="19.992">
   <properties/>
-  <testcase name="v15 test 1 - verify outer jump button icons are swapped for RTL while callbacks and inner Prev-Next buttons remain intact" classname="com.example.ExampleRobolectricTest" time="0.152"/>
-  <testcase name="anim test 2 - smooth movement of a Black piece" classname="com.example.ExampleRobolectricTest" time="0.129"/>
-  <testcase name="v13 audio test 4 - verify distinct sound types for Normal, Capture, Castling, EnPassant, Promotion, Check, Checkmate, and PGN step changes" classname="com.example.ExampleRobolectricTest" time="0.137"/>
-  <testcase name="test 6 - detect DiagramBlock with invalid diagramId" classname="com.example.ExampleRobolectricTest" time="0.103"/>
-  <testcase name="anim test 12 - preserve RTL board direction, coordinates, and square colors during and after animation" classname="com.example.ExampleRobolectricTest" time="0.127"/>
-  <testcase name="v14 move trail test 4 - new forward move replaces previous trail, Undo clears trail immediately, initial load has no trail, and page or section change clears trail" classname="com.example.ExampleRobolectricTest" time="0.081"/>
-  <testcase name="v14 move trail test 2 - forward educational move displays ghost piece at origin, directional arrow, glow, and single full-opacity piece at destination" classname="com.example.ExampleRobolectricTest" time="0.486"/>
-  <testcase name="verify BD032 Compose UI does not reveal Qh8 or Qh2 or target squares before solving and shows success after solving" classname="com.example.ExampleRobolectricTest" time="1.163"/>
-  <testcase name="test 3 - render paragraph after diagram" classname="com.example.ExampleRobolectricTest" time="0.151"/>
-  <testcase name="anim test 3 - reverse movement in Previous PGN step" classname="com.example.ExampleRobolectricTest" time="0.138"/>
-  <testcase name="anim test 5 - Capture animation and smooth fade-out of captured piece" classname="com.example.ExampleRobolectricTest" time="0.148"/>
-  <testcase name="test 5 - detect duplicate blockIds across blocks" classname="com.example.ExampleRobolectricTest" time="0.082"/>
-  <testcase name="v16 test A - verify Persistent Move Description appears outside and below board, persists after trail fade, updates on next move, clears on Undo-Reset-PageChange, and works with showMoveTrail false" classname="com.example.ExampleRobolectricTest" time="0.717"/>
-  <testcase name="verify ChessBoardView composable renders files a to h LTR and ranks 8 to 1 top to bottom inside RTL layout" classname="com.example.ExampleRobolectricTest" time="0.105"/>
-  <testcase name="v16 test C - verify 4-phase Red Capture Pulse radial expansion, contraction, fade-out, and En Passant d5 square accuracy" classname="com.example.ExampleRobolectricTest" time="0.509"/>
-  <testcase name="verify chapter repository loads 10 diagrams and 6 sections with fixed ids" classname="com.example.ExampleRobolectricTest" time="0.101"/>
-  <testcase name="test 9 - empty block does not affect other blocks" classname="com.example.ExampleRobolectricTest" time="0.12"/>
-  <testcase name="anim test 15 - Reverse Promotion for all 4 pieces (Q, R, B, N) moves promoted piece in flight and restores Pawn on arrival" classname="com.example.ExampleRobolectricTest" time="0.535"/>
-  <testcase name="anim test 17 - Animation cancellation does NOT record completion or invoke onTransitionFinished" classname="com.example.ExampleRobolectricTest" time="0.14"/>
-  <testcase name="v13 audio settings ui test 7 - verify AudioSettingsDialog opens from both SectionsListScreen and ReaderScreen" classname="com.example.ExampleRobolectricTest" time="1.015"/>
-  <testcase name="v13 audio test 2 - verify audio settings persistence in UserPreferencesManager and ViewModel" classname="com.example.ExampleRobolectricTest" time="0.113"/>
-  <testcase name="test 11 - ExternalReferenceBlock translation updates via Translation Map without changing orderedContentBlocks" classname="com.example.ExampleRobolectricTest" time="0.139"/>
-  <testcase name="v15 test 3 - verify Capture radial pulse on normal capture and En Passant and absence on non-capture moves" classname="com.example.ExampleRobolectricTest" time="0.206"/>
-  <testcase name="v16 test D - verify BD-032 chessboard_container size remains 100 percent constant across all interactive states and screen widths" classname="com.example.ExampleRobolectricTest" time="1.981"/>
-  <testcase name="v16 test B - verify Move Trail redesign with teal ghost piece (#438F8A), single alpha application, simultaneous fade, and zero square markers" classname="com.example.ExampleRobolectricTest" time="0.25"/>
-  <testcase name="anim test 16 - Reverse Capture and Reverse En Passant gradually fade in captured piece without duplicates" classname="com.example.ExampleRobolectricTest" time="0.61"/>
-  <testcase name="anim test 11 - no duplicate piece displayed during transition" classname="com.example.ExampleRobolectricTest" time="0.135"/>
-  <testcase name="v13 bd032 test 5 - verify complete BD-032 interactive exercise flow in Compose UI including legal hint toggle, illegal move red flash, wrong capture move, and retry" classname="com.example.ExampleRobolectricTest" time="0.867"/>
-  <testcase name="anim test 18 - Full 6-field FEN matching rejects transitions with mismatched castling, enPassant, halfMove, or fullMove" classname="com.example.ExampleRobolectricTest" time="0.107"/>
-  <testcase name="verify all PGN and exercise references in repository are valid with no dangling refs" classname="com.example.ExampleRobolectricTest" time="0.492"/>
-  <testcase name="anim test 4 - simultaneous King and Rook movement in Kingside and Queenside Castling" classname="com.example.ExampleRobolectricTest" time="0.181"/>
-  <testcase name="anim test 6 - En Passant capture removes adjacent pawn on capturedSquare distinct from toSquare" classname="com.example.ExampleRobolectricTest" time="0.211"/>
-  <testcase name="anim test 10 - JumpToEnd jumps directly to final position without sequential animations" classname="com.example.ExampleRobolectricTest" time="0.107"/>
-  <testcase name="test 10 - single placeholder per section with 3 empty paragraphs 2 diagrams and 1 translated paragraph shifts and disappears" classname="com.example.ExampleRobolectricTest" time="0.226"/>
-  <testcase name="capture real UI screenshots of main screens and BD032 exercise" classname="com.example.ExampleRobolectricTest" time="1.64"/>
-  <testcase name="v13 audio test 1 - verify all 11 local raw sound files exist are non-empty valid WAVs and preloaded in ChessSoundManager" classname="com.example.ExampleRobolectricTest" time="0.17"/>
-  <testcase name="v14 audio upgrade test 1 - verify all 11 WAV files are 44100Hz 16-bit PCM mono with zero clipping, distinct acoustic envelopes, and double-tap castling" classname="com.example.ExampleRobolectricTest" time="0.158"/>
-  <testcase name="verify BD032 does not reveal solutions before solving and supports retry after wrong legal move" classname="com.example.ExampleRobolectricTest" time="0.095"/>
-  <testcase name="test 4 - render multiple diagrams in a section in exact registered order" classname="com.example.ExampleRobolectricTest" time="0.315"/>
-  <testcase name="verify BD032 reset clears persisted solved status across app restart" classname="com.example.ExampleRobolectricTest" time="0.13"/>
-  <testcase name="read string from context" classname="com.example.ExampleRobolectricTest" time="0.098"/>
-  <testcase name="test 7 - preserve the 6 primary TranslationSlot sectionIds" classname="com.example.ExampleRobolectricTest" time="0.102"/>
-  <testcase name="test 8 - placeholder notice is not repeated under diagrams" classname="com.example.ExampleRobolectricTest" time="0.193"/>
-  <testcase name="v15 test 2 - verify custom Staunton vector piece rendering for all 12 piece types and warm wood-cream board tokens" classname="com.example.ExampleRobolectricTest" time="0.179"/>
-  <testcase name="v14 replay controls test 7 - verify AudioSettingsDialog MoveTrail switch and speed selector UI and independent book page navigation" classname="com.example.ExampleRobolectricTest" time="7.494"/>
-  <testcase name="v16 test E2 - verify BookNarrationManager queue ordering, pagination __part_2 deduplication, partial missing skip, controls, persistence, lifecycle release, and active block highlight" classname="com.example.ExampleRobolectricTest" time="0.295"/>
-  <testcase name="anim test 1 - smooth movement of a White piece and mid-animation position verification" classname="com.example.ExampleRobolectricTest" time="0.651"/>
-  <testcase name="anim test 14 - exact FEN integrity and piece placement after animation finishes" classname="com.example.ExampleRobolectricTest" time="0.21"/>
-  <testcase name="v13 audio test 3 - verify master mute, category mute, and eventId deduplication in ChessSoundManager" classname="com.example.ExampleRobolectricTest" time="0.092"/>
-  <testcase name="anim test 9 - Reset jumps directly to initial position without false visual animation" classname="com.example.ExampleRobolectricTest" time="0.085"/>
-  <testcase name="anim test 8 - no animation executed on initial FEN render or diagram switch" classname="com.example.ExampleRobolectricTest" time="0.163"/>
-  <testcase name="anim test 13 - BD-032 exercise piece selection has no animation, illegal move has no animation, legal wrong and winning mate animate smoothly" classname="com.example.ExampleRobolectricTest" time="0.13"/>
-  <testcase name="v14 move trail test 5 - verify showMoveTrail toggle, EducationalPlaybackSpeed persistence (600ms, 450ms, 300ms), viewport scaling, and non-blocking clicks" classname="com.example.ExampleRobolectricTest" time="0.29"/>
-  <testcase name="v16 test E1 - verify BookNarrationManager manifest validation, path security, missing asset handling, and independence from ChessSoundManager" classname="com.example.ExampleRobolectricTest" time="0.803"/>
-  <testcase name="test 1 - preserve interleaved block order during rendering" classname="com.example.ExampleRobolectricTest" time="0.268"/>
-  <testcase name="test 2 - render paragraph before diagram" classname="com.example.ExampleRobolectricTest" time="0.206"/>
-  <testcase name="v14 replay controls test 6 - verify static diagrams have no PGN controls or reserved space, and PGN diagrams have RTL-correct Previous and Next buttons" classname="com.example.ExampleRobolectricTest" time="1.889"/>
-  <testcase name="v14 move trail test 3 - Knight move renders 3-square L-shaped path and specialized special moves (Castling, En Passant, Promotion)" classname="com.example.ExampleRobolectricTest" time="1.537"/>
-  <testcase name="anim test 7 - Promotion animation moves Pawn during flight and reveals promoted piece (Q, R, B, N) on arrival" classname="com.example.ExampleRobolectricTest" time="0.216"/>
-  <testcase name="v13 capture anim test 6 - verify 340ms capture exit animation with alpha fade, scale shrink, impact highlight, and zero ghost pieces" classname="com.example.ExampleRobolectricTest" time="0.292"/>
+  <testcase name="v15 test 1 - verify outer jump button icons are swapped for RTL while callbacks and inner Prev-Next buttons remain intact" classname="com.example.ExampleRobolectricTest" time="0.437"/>
+  <testcase name="anim test 2 - smooth movement of a Black piece" classname="com.example.ExampleRobolectricTest" time="0.242"/>
+  <testcase name="v13 audio test 4 - verify distinct sound types for Normal, Capture, Castling, EnPassant, Promotion, Check, Checkmate, and PGN step changes" classname="com.example.ExampleRobolectricTest" time="0.123"/>
+  <testcase name="test 6 - detect DiagramBlock with invalid diagramId" classname="com.example.ExampleRobolectricTest" time="0.068"/>
+  <testcase name="anim test 12 - preserve RTL board direction, coordinates, and square colors during and after animation" classname="com.example.ExampleRobolectricTest" time="0.192"/>
+  <testcase name="v14 move trail test 4 - new forward move replaces previous trail, Undo clears trail immediately, initial load has no trail, and page or section change clears trail" classname="com.example.ExampleRobolectricTest" time="0.096"/>
+  <testcase name="v14 move trail test 2 - forward educational move displays ghost piece at origin, directional arrow, glow, and single full-opacity piece at destination" classname="com.example.ExampleRobolectricTest" time="0.635"/>
+  <testcase name="verify BD032 Compose UI does not reveal Qh8 or Qh2 or target squares before solving and shows success after solving" classname="com.example.ExampleRobolectricTest" time="1.271"/>
+  <testcase name="test 3 - render paragraph after diagram" classname="com.example.ExampleRobolectricTest" time="0.326"/>
+  <testcase name="anim test 3 - reverse movement in Previous PGN step" classname="com.example.ExampleRobolectricTest" time="0.183"/>
+  <testcase name="anim test 5 - Capture animation and smooth fade-out of captured piece" classname="com.example.ExampleRobolectricTest" time="0.144"/>
+  <testcase name="test 5 - detect duplicate blockIds across blocks" classname="com.example.ExampleRobolectricTest" time="0.065"/>
+  <testcase name="v16 test A - verify Persistent Move Description appears outside and below board, persists after trail fade, updates on next move, clears on Undo-Reset-PageChange, and works with showMoveTrail false" classname="com.example.ExampleRobolectricTest" time="0.843"/>
+  <testcase name="verify ChessBoardView composable renders files a to h LTR and ranks 8 to 1 top to bottom inside RTL layout" classname="com.example.ExampleRobolectricTest" time="0.131"/>
+  <testcase name="v16 test C - verify 4-phase Red Capture Pulse radial expansion, contraction, fade-out, and En Passant d5 square accuracy" classname="com.example.ExampleRobolectricTest" time="0.41"/>
+  <testcase name="verify chapter repository loads 10 diagrams and 6 sections with fixed ids" classname="com.example.ExampleRobolectricTest" time="0.067"/>
+  <testcase name="test 9 - empty block does not affect other blocks" classname="com.example.ExampleRobolectricTest" time="0.137"/>
+  <testcase name="anim test 15 - Reverse Promotion for all 4 pieces (Q, R, B, N) moves promoted piece in flight and restores Pawn on arrival" classname="com.example.ExampleRobolectricTest" time="0.467"/>
+  <testcase name="anim test 17 - Animation cancellation does NOT record completion or invoke onTransitionFinished" classname="com.example.ExampleRobolectricTest" time="0.136"/>
+  <testcase name="v13 audio settings ui test 7 - verify AudioSettingsDialog opens from both SectionsListScreen and ReaderScreen" classname="com.example.ExampleRobolectricTest" time="1.107"/>
+  <testcase name="v13 audio test 2 - verify audio settings persistence in UserPreferencesManager and ViewModel" classname="com.example.ExampleRobolectricTest" time="0.126"/>
+  <testcase name="test 11 - ExternalReferenceBlock translation updates via Translation Map without changing orderedContentBlocks" classname="com.example.ExampleRobolectricTest" time="0.132"/>
+  <testcase name="v15 test 3 - verify Capture radial pulse on normal capture and En Passant and absence on non-capture moves" classname="com.example.ExampleRobolectricTest" time="0.176"/>
+  <testcase name="v16 test D - verify BD-032 chessboard_container size remains 100 percent constant across all interactive states and screen widths" classname="com.example.ExampleRobolectricTest" time="1.319"/>
+  <testcase name="v16 test B - verify Move Trail redesign with teal ghost piece (#438F8A), single alpha application, simultaneous fade, and zero square markers" classname="com.example.ExampleRobolectricTest" time="0.141"/>
+  <testcase name="anim test 16 - Reverse Capture and Reverse En Passant gradually fade in captured piece without duplicates" classname="com.example.ExampleRobolectricTest" time="0.344"/>
+  <testcase name="anim test 11 - no duplicate piece displayed during transition" classname="com.example.ExampleRobolectricTest" time="0.113"/>
+  <testcase name="v13 bd032 test 5 - verify complete BD-032 interactive exercise flow in Compose UI including legal hint toggle, illegal move red flash, wrong capture move, and retry" classname="com.example.ExampleRobolectricTest" time="0.635"/>
+  <testcase name="anim test 18 - Full 6-field FEN matching rejects transitions with mismatched castling, enPassant, halfMove, or fullMove" classname="com.example.ExampleRobolectricTest" time="0.072"/>
+  <testcase name="verify all PGN and exercise references in repository are valid with no dangling refs" classname="com.example.ExampleRobolectricTest" time="0.231"/>
+  <testcase name="anim test 4 - simultaneous King and Rook movement in Kingside and Queenside Castling" classname="com.example.ExampleRobolectricTest" time="0.173"/>
+  <testcase name="anim test 6 - En Passant capture removes adjacent pawn on capturedSquare distinct from toSquare" classname="com.example.ExampleRobolectricTest" time="0.119"/>
+  <testcase name="anim test 10 - JumpToEnd jumps directly to final position without sequential animations" classname="com.example.ExampleRobolectricTest" time="0.069"/>
+  <testcase name="test 10 - single placeholder per section with 3 empty paragraphs 2 diagrams and 1 translated paragraph shifts and disappears" classname="com.example.ExampleRobolectricTest" time="0.217"/>
+  <testcase name="capture real UI screenshots of main screens and BD032 exercise" classname="com.example.ExampleRobolectricTest" time="1.18"/>
+  <testcase name="v13 audio test 1 - verify all 11 local raw sound files exist are non-empty valid WAVs and preloaded in ChessSoundManager" classname="com.example.ExampleRobolectricTest" time="0.073"/>
+  <testcase name="v14 audio upgrade test 1 - verify all 11 WAV files are 44100Hz 16-bit PCM mono with zero clipping, distinct acoustic envelopes, and double-tap castling" classname="com.example.ExampleRobolectricTest" time="0.081"/>
+  <testcase name="verify BD032 does not reveal solutions before solving and supports retry after wrong legal move" classname="com.example.ExampleRobolectricTest" time="0.073"/>
+  <testcase name="test 4 - render multiple diagrams in a section in exact registered order" classname="com.example.ExampleRobolectricTest" time="0.192"/>
+  <testcase name="verify BD032 reset clears persisted solved status across app restart" classname="com.example.ExampleRobolectricTest" time="0.139"/>
+  <testcase name="read string from context" classname="com.example.ExampleRobolectricTest" time="0.102"/>
+  <testcase name="test 7 - preserve the 6 primary TranslationSlot sectionIds" classname="com.example.ExampleRobolectricTest" time="0.065"/>
+  <testcase name="test 8 - placeholder notice is not repeated under diagrams" classname="com.example.ExampleRobolectricTest" time="0.158"/>
+  <testcase name="v15 test 2 - verify custom Staunton vector piece rendering for all 12 piece types and warm wood-cream board tokens" classname="com.example.ExampleRobolectricTest" time="0.088"/>
+  <testcase name="v14 replay controls test 7 - verify AudioSettingsDialog MoveTrail switch and speed selector UI and independent book page navigation" classname="com.example.ExampleRobolectricTest" time="3.283"/>
+  <testcase name="v16 test E2 - verify BookNarrationManager queue ordering, pagination __part_2 deduplication, partial missing skip, controls, persistence, lifecycle release, and active block highlight" classname="com.example.ExampleRobolectricTest" time="0.211"/>
+  <testcase name="anim test 1 - smooth movement of a White piece and mid-animation position verification" classname="com.example.ExampleRobolectricTest" time="0.339"/>
+  <testcase name="anim test 14 - exact FEN integrity and piece placement after animation finishes" classname="com.example.ExampleRobolectricTest" time="0.12"/>
+  <testcase name="v13 audio test 3 - verify master mute, category mute, and eventId deduplication in ChessSoundManager" classname="com.example.ExampleRobolectricTest" time="0.068"/>
+  <testcase name="anim test 9 - Reset jumps directly to initial position without false visual animation" classname="com.example.ExampleRobolectricTest" time="0.065"/>
+  <testcase name="anim test 8 - no animation executed on initial FEN render or diagram switch" classname="com.example.ExampleRobolectricTest" time="0.093"/>
+  <testcase name="anim test 13 - BD-032 exercise piece selection has no animation, illegal move has no animation, legal wrong and winning mate animate smoothly" classname="com.example.ExampleRobolectricTest" time="0.077"/>
+  <testcase name="v14 move trail test 5 - verify showMoveTrail toggle, EducationalPlaybackSpeed persistence (600ms, 450ms, 300ms), viewport scaling, and non-blocking clicks" classname="com.example.ExampleRobolectricTest" time="0.231"/>
+  <testcase name="v16 test E1 - verify BookNarrationManager manifest validation, path security, missing asset handling, and independence from ChessSoundManager" classname="com.example.ExampleRobolectricTest" time="0.435"/>
+  <testcase name="test 1 - preserve interleaved block order during rendering" classname="com.example.ExampleRobolectricTest" time="0.116"/>
+  <testcase name="test 2 - render paragraph before diagram" classname="com.example.ExampleRobolectricTest" time="0.112"/>
+  <testcase name="v14 replay controls test 6 - verify static diagrams have no PGN controls or reserved space, and PGN diagrams have RTL-correct Previous and Next buttons" classname="com.example.ExampleRobolectricTest" time="0.902"/>
+  <testcase name="v14 move trail test 3 - Knight move renders 3-square L-shaped path and specialized special moves (Castling, En Passant, Promotion)" classname="com.example.ExampleRobolectricTest" time="0.633"/>
+  <testcase name="anim test 7 - Promotion animation moves Pawn during flight and reveals promoted piece (Q, R, B, N) on arrival" classname="com.example.ExampleRobolectricTest" time="0.082"/>
+  <testcase name="v13 capture anim test 6 - verify 340ms capture exit animation with alpha fade, scale shrink, impact highlight, and zero ghost pieces" classname="com.example.ExampleRobolectricTest" time="0.097"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

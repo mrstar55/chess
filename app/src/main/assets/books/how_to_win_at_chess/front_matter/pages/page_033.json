@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 33,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "ثبت پاسخ سیاه در حرکت نخست",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P033_I001",
+      "assetId": "PDFOBJ_061",
+      "descriptionFa": "تصویر اصلی موقعیت پس از حرکت پیاده d سفید و حرکت پاسخ پیاده d سیاه.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 33
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P033_B001",
+      "textFa": "اگر سیاه در پاسخ، پیاده ستون d خود را نیز دو خانه به جلو حرکت دهد، ثبت حرکت نخست کامل می‌شود و به شکل «1. d4 d5» نوشته خواهد شد.",
+      "sourcePdfPage": 33
+    }
+  ],
+  "notesFa": "رشته PGN/SAN `1. d4 d5` و تصویر اصلی حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_061",
+    "PDFOBJ_062"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 33,
+      "pdfImageObjectIndex": 61,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_061",
+      "file": "assets/pdf_embedded_objects/pdf_p033_obj061.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار ثبت حرکت‌های d4 و d5"
+    },
+    {
+      "sourcePdfPage": 33,
+      "pdfImageObjectIndex": 62,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_062",
+      "file": "assets/pdf_embedded_objects/pdf_p033_obj062.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار ثبت حرکت‌های d4 و d5"
+    }
+  ]
+}

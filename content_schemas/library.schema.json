@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chessbook.aistudio.com/schemas/library.schema.json",
+  "title": "Book Library Catalog",
+  "type": "object",
+  "required": ["schemaVersion", "defaultBookId", "books"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "defaultBookId": { "type": "string", "minLength": 1 },
+    "books": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["bookId", "titleEn", "titleFa", "authorEn", "authorFa", "chapters"],
+        "properties": {
+          "bookId": { "type": "string", "minLength": 1 },
+          "titleEn": { "type": "string", "minLength": 1 },
+          "titleFa": { "type": "string", "minLength": 1 },
+          "authorEn": { "type": "string", "minLength": 1 },
+          "authorFa": { "type": "string", "minLength": 1 },
+          "frontMatter": {
+            "type": "object",
+            "required": ["contentRegionId", "titleFa", "navigationTitleFa", "manifestPath", "sourcePdfPageStart", "sourcePdfPageEnd", "enabled"],
+            "properties": {
+              "contentRegionId": { "type": "string", "const": "FRONT_MATTER" },
+              "titleFa": { "type": "string", "minLength": 1 },
+              "navigationTitleFa": { "type": "string", "minLength": 1 },
+              "manifestPath": { "type": "string", "minLength": 1 },
+              "sourcePdfPageStart": { "type": "integer", "minimum": 1 },
+              "sourcePdfPageEnd": { "type": "integer", "minimum": 1 },
+              "enabled": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          },
+          "chapters": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["chapterId", "chapterNumber", "titleEn", "titleFa", "manifestPath", "enabled"],
+              "properties": {
+                "chapterId": { "type": "string", "minLength": 1 },
+                "chapterNumber": { "type": "integer", "minimum": 1 },
+                "titleEn": { "type": "string", "minLength": 1 },
+                "titleFa": { "type": "string", "minLength": 1 },
+                "manifestPath": { "type": "string", "minLength": 1 },
+                "enabled": { "type": "boolean" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

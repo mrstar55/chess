@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 34,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "گرفتن مهره، کیش، مات، ترفیع و قلعه در نمادگذاری",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P034_I001",
+      "assetId": "PDFOBJ_063",
+      "descriptionFa": "تصویر اصلی نمونه حرکت فیل و اسب و ابهام در ثبت حرکت.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 34
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P034_B001",
+      "textFa": "فرض کنید سفید در حرکت دوم فیل خود را وارد بازی کند و سیاه اسبش را به c6 ببرد. ثبت حرکت دوم به شکل «2. Bf4 Nc6» خواهد بود. در اینجا B نشان‌دهنده فیل سفید و N نشان‌دهنده اسب سیاه است.",
+      "sourcePdfPage": 34
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P034_B002",
+      "textFa": "ثبت حرکات بازی به همین شیوه ادامه پیدا می‌کند، اما چند نکته ظریف نیز وجود دارد که باید بدانید. وقتی مهره‌ای مهره دیگری را می‌گیرد، علامت «x» را میان نماد مهره و مختصات خانه مقصد قرار می‌دهیم. برای نمونه، اگر وزیر سفید مهره‌ای از سیاه را در خانه d2 بگیرد، آن را به‌صورت «Qxd2» می‌نویسیم.",
+      "sourcePdfPage": 34
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P034_B003",
+      "textFa": "اگر حرکتی به شاه حریف کیش بدهد، علامت «+» در پایان نماد حرکت قرار می‌گیرد. برای مثال، اگر رخ به h8 برود و به شاه حریف کیش بدهد، حرکت به‌صورت «Rh8+» نوشته می‌شود. برای کیش‌ومات علامت دیگری وجود دارد: اگر همان حرکت به‌جای کیش، کیش‌ومات باشد، آن را به شکل «Rh8#» ثبت می‌کنیم.",
+      "sourcePdfPage": 34
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P034_B004",
+      "textFa": "هنگام ترفیع پیاده، علامت «=» میان خانه مقصد پیاده و نماد مهره‌ای که پیاده به آن تبدیل می‌شود قرار می‌گیرد. برای نمونه، فرض کنید پیاده‌ای روی g7 دارید و آن را به g8 می‌برید. می‌توانید آن را به فیل، اسب، رخ یا وزیر تبدیل کنید. اگر وزیر را انتخاب کنید ــ که معمول‌ترین انتخاب است، چون قدرتمندترین مهره است ــ حرکت به‌صورت «g8=Q» نوشته می‌شود. انتخاب فیل «g8=B»، انتخاب اسب «g8=N» و انتخاب رخ «g8=R» خواهد بود.",
+      "sourcePdfPage": 34
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P034_B005",
+      "textFa": "قلعه‌رفتن کوتاه یا در جناح شاه با «O-O» و قلعه‌رفتن بلند یا در جناح وزیر با «O-O-O» ثبت می‌شود.",
+      "sourcePdfPage": 34
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P034_B006",
+      "textFa": "یک نکته پایانی درباره نمادگذاری باقی مانده است. به موقعیت زیر نگاه کنید:",
+      "sourcePdfPage": 34
+    }
+  ],
+  "notesFa": "رشته‌های ثبت استاندارد مانند `Bf4`, `Nc6`, `Qxd2`, `Rh8+`, `Rh8#`, `g8=Q` و `O-O-O` باید عیناً حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_063",
+    "PDFOBJ_064"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 34,
+      "pdfImageObjectIndex": 63,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_063",
+      "file": "assets/pdf_embedded_objects/pdf_p034_obj063.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار مثال نمادگذاری حرکت اسب و فیل"
+    },
+    {
+      "sourcePdfPage": 34,
+      "pdfImageObjectIndex": 64,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_064",
+      "file": "assets/pdf_embedded_objects/pdf_p034_obj064.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار مثال نمادگذاری حرکت اسب و فیل"
+    }
+  ]
+}

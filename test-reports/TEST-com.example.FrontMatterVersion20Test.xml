@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.FrontMatterVersion20Test" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-04T17:26:45.463Z" hostname="localhost" time="6.224">
+  <properties/>
+  <testcase name="test 11 - page 38 has 6 learning objectives with middlegame translated as میانه‌بازی and never وسط‌بازی" classname="com.example.FrontMatterVersion20Test" time="0.092"/>
+  <testcase name="test 04 - reader paginator never merges blocks from two different sourcePdfPages into one slice" classname="com.example.FrontMatterVersion20Test" time="0.114"/>
+  <testcase name="test 10 - page 6 TOC links target 39 for CHAPTER ONE and 40 for HOW TO LITERALLY WIN AT CHESS" classname="com.example.FrontMatterVersion20Test" time="0.086"/>
+  <testcase name="test 14 - render and capture 8 required screenshots for PDF pages 11 14 21 36 37 38 39 and 40" classname="com.example.FrontMatterVersion20Test" time="5.021"/>
+  <testcase name="test 05 - multi-slice source pages retain the exact same sourcePdfPage and sequential slice labels" classname="com.example.FrontMatterVersion20Test" time="0.076"/>
+  <testcase name="test 06 - changing font scale from SMALL to NORMAL to LARGE never alters sourcePdfPage" classname="com.example.FrontMatterVersion20Test" time="0.128"/>
+  <testcase name="test 08 - all sourceImage blocks across pages 1 to 39 resolve to real image files" classname="com.example.FrontMatterVersion20Test" time="0.06"/>
+  <testcase name="test 01 - successfully loads all 39 front matter pages page_001 to page_039" classname="com.example.FrontMatterVersion20Test" time="0.061"/>
+  <testcase name="test 09 - all 126 source links in source_links_pages_001_039 json load and validate" classname="com.example.FrontMatterVersion20Test" time="0.06"/>
+  <testcase name="test 12 - page 39 is preserved as INTERSTITIAL_IMAGE with rook icon PDFOBJ_069" classname="com.example.FrontMatterVersion20Test" time="0.077"/>
+  <testcase name="test 03 - all blocks inside each front matter page have sourcePdfPage equal to that page" classname="com.example.FrontMatterVersion20Test" time="0.065"/>
+  <testcase name="test 02 - each page JSON file has exactly one top-level sourcePdfPage matching its file index" classname="com.example.FrontMatterVersion20Test" time="0.069"/>
+  <testcase name="test 07 - all 70 embedded PDF image objects exist in assets and match placement CSV" classname="com.example.FrontMatterVersion20Test" time="0.06"/>
+  <testcase name="test 13 - chapter 1 CH01 diagrams PGN replay exercise BD-032 and blocked BD-027 remain intact" classname="com.example.FrontMatterVersion20Test" time="0.243"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

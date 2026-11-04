@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 4,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "COPYRIGHT_AND_CREDITS",
+  "pageTitleFa": "حقوق نشر و عوامل تولید",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B001",
+      "textFa": "حق نشر متن © ۲۰۲۳ متعلق به لِوی روزمن است.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B002",
+      "textFa": "حق نشر تصویرسازی‌های صفحه شطرنج © ۲۰۲۳ متعلق به نیکول ساری است.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B003",
+      "textFa": "تمام حقوق محفوظ است.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B004",
+      "textFa": "این کتاب در ایالات متحده، توسط انتشارات Ten Speed Press، از زیرمجموعه‌های Random House و بخشی از گروه انتشارات Crown در نیویورک منتشر شده است.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B005",
+      "textFa": "وب‌سایت ناشر: TenSpeed.com",
+      "sourceUrl": "https://crownpublishing.com/archives/imprint/ten-speed-press",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B006",
+      "textFa": "نام Ten Speed Press و نشان انتشاراتی آن، علائم تجاری ثبت‌شدهٔ Penguin Random House LLC هستند.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B007",
+      "textFa": "تصویرسازی روی جلد را KurArt انجام داده است. تصویرسازی‌های صفحه‌های PDF ۲ و ۵ اثر ماکسیم لِبِدیک (Максим Лебедик) هستند و تصویرسازی‌های صفحه‌های PDF ۱۰، ۳۷ و ۲۶۱ اثر اُلگا (Olga)؛ این تصاویر با مجوز Adobe Stock استفاده شده‌اند.",
+      "sourcePageReferences": [
+        2,
+        5,
+        10,
+        37,
+        261
+      ],
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B008",
+      "textFa": "قلم‌های به‌کاررفته در نسخه چاپی: Bauziet اثر Doni Sukma،‏ Madera اثر Malou Verlomme و TTFors اثر TypeType Team.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B009",
+      "textFa": "اطلاعات فهرست‌نویسی کتابخانه کنگره برای این اثر نزد ناشر ثبت شده است.",
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "table",
+      "blockId": "FM_P004_T001",
+      "titleFa": "شناسه‌های نشر",
+      "rows": [
+        [
+          "نسخه چاپی جلدسخت",
+          "ISBN 9781984862075"
+        ],
+        [
+          "نسخه الکترونیکی",
+          "ISBN 9781984862082"
+        ]
+      ],
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "table",
+      "blockId": "FM_P004_T002",
+      "titleFa": "عوامل تولید",
+      "rows": [
+        [
+          "ویراستار",
+          "Kaitlin Ketchum"
+        ],
+        [
+          "ویراستار تولید",
+          "Serena Wang"
+        ],
+        [
+          "دستیار ویراستار",
+          "Kausaur Fahimuddin"
+        ],
+        [
+          "طراح چاپ",
+          "Emma Campion"
+        ],
+        [
+          "طراح تولید چاپ",
+          "Mari Gill"
+        ],
+        [
+          "مدیر تولید چاپ",
+          "Dan Myers"
+        ],
+        [
+          "ویراستار زبانی",
+          "Tom Pitoniak"
+        ],
+        [
+          "نمونه‌خوان",
+          "Rita Madrigal"
+        ],
+        [
+          "نمایه‌ساز",
+          "Jay Kreider"
+        ],
+        [
+          "مسئول روابط عمومی",
+          "Kristin Casemore"
+        ],
+        [
+          "بازاریاب",
+          "Brianne Sperber"
+        ],
+        [
+          "مدیر تولید کتاب الکترونیکی",
+          "Jessica Arnold"
+        ]
+      ],
+      "sourcePdfPage": 4
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P004_B010",
+      "textFa": "شناسه تولید ناشر: rhid_prh_6.1_145164751_c0_r1",
+      "sourcePdfPage": 4
+    }
+  ],
+  "notesFa": "نام اشخاص، شرکت‌ها، نشانی وب، ISBN و شناسه‌های نشر عمداً به شکل اصلی حفظ شده‌اند. متن حقوق نشر باید کامل بماند؛ ترجمه آن به معنی انتقال یا حذف حقوق صاحب اثر نیست.",
+  "sourceAssetIds": [
+    "PDFOBJ_003",
+    "PDFOBJ_004",
+    "PDFOBJ_005"
+  ],
+  "sourceLinks": [
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "TenSpeed.com",
+      "linkKind": 2,
+      "targetUri": "https://crownpublishing.com/archives/imprint/ten-speed-press"
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "cover",
+      "linkKind": 2,
+      "targetUri": "clbr://internal.invalid/book/OEBPS/xhtml/cover.xhtml"
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 2
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 5
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "ns on cover by KurArt, this page and this page by Максим Лебедик, and this page, this page, and this page by Olga; courtesy of Adobestock.",
+      "linkKind": 1,
+      "targetSourcePdfPage": 10
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 37
+    },
+    {
+      "sourcePdfPage": 4,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 261
+    }
+  ],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 4,
+      "pdfImageObjectIndex": 3,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 89,
+      "height": 94,
+      "assetId": "PDFOBJ_003",
+      "file": "assets/pdf_embedded_objects/pdf_p004_obj003.jpg",
+      "format": "jpg",
+      "descriptionFa": "نشان/لوگوی صفحه حقوق نشر و لایه‌های تصویری آن"
+    },
+    {
+      "sourcePdfPage": 4,
+      "pdfImageObjectIndex": 4,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 841,
+      "height": 841,
+      "assetId": "PDFOBJ_004",
+      "file": "assets/pdf_embedded_objects/pdf_p004_obj004.png",
+      "format": "png",
+      "descriptionFa": "نشان/لوگوی صفحه حقوق نشر و لایه‌های تصویری آن"
+    },
+    {
+      "sourcePdfPage": 4,
+      "pdfImageObjectIndex": 5,
+      "pdfImageType": "smask",
+      "pdfObjectId": "no",
+      "width": 841,
+      "height": 841,
+      "assetId": "PDFOBJ_005",
+      "file": "assets/pdf_embedded_objects/pdf_p004_obj005.png",
+      "format": "png",
+      "descriptionFa": "نشان/لوگوی صفحه حقوق نشر و لایه‌های تصویری آن"
+    }
+  ]
+}

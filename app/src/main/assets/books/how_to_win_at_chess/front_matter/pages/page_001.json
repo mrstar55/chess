@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 1,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "COVER",
+  "pageTitleFa": "جلد کتاب",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P001_H001",
+      "textFa": "لِوی روزمن",
+      "level": 1,
+      "sourceVisibleText": "LEVY ROZMAN",
+      "sourcePdfPage": 1
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P001_B001",
+      "textFa": "با نام هنری GothamChess (گاتهام‌چس)",
+      "sourceVisibleText": "AKA GOTHAMCHESS",
+      "sourcePdfPage": 1
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P001_H002",
+      "textFa": "چگونه در شطرنج برنده شویم",
+      "level": 1,
+      "sourceVisibleText": "HOW TO WIN AT CHESS",
+      "sourcePdfPage": 1
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P001_B002",
+      "textFa": "راهنمای جامع برای مبتدیان و فراتر از آن",
+      "sourceVisibleText": "THE ULTIMATE GUIDE FOR BEGINNERS AND BEYOND",
+      "sourcePdfPage": 1
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P001_B003",
+      "textFa": "مدرس شمارهٔ ۱ شطرنج در یوتیوب",
+      "sourceVisibleText": "THE #1 CHESS TEACHER ON YOUTUBE",
+      "sourcePdfPage": 1
+    }
+  ],
+  "notesFa": "تصویر اصلی جلد باید بدون تغییر حفظ شود؛ ترجمه‌ها به‌صورت متن مستقل اپلیکیشن/لایه متنی ارائه شوند و نباید روی فایل Master تصویر نوشته یا نقاشی شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_000"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 1,
+      "pdfImageObjectIndex": 0,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1650,
+      "height": 1883,
+      "assetId": "PDFOBJ_000",
+      "file": "assets/pdf_embedded_objects/pdf_p001_obj000.jpg",
+      "format": "jpg",
+      "descriptionFa": "تصویر کامل جلد کتاب (تصویر اصلی دارای عنوان انگلیسی)"
+    }
+  ]
+}

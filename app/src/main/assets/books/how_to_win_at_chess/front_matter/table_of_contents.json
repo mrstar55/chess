@@ -1,0 +1,1065 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "sourcePages": [
+    6,
+    7,
+    8,
+    9
+  ],
+  "entries": [
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "INTRODUCTION",
+      "labelFa": "مقدمه",
+      "targetSourcePdfPage": 11,
+      "depth": 0,
+      "entryKind": "frontMatter",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "The Basics of Chess",
+      "labelFa": "مبانی شطرنج",
+      "targetSourcePdfPage": 11,
+      "depth": 1,
+      "entryKind": "topic",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Chess Notation",
+      "labelFa": "نمادگذاری شطرنج",
+      "targetSourcePdfPage": 31,
+      "depth": 1,
+      "entryKind": "topic",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Scoring",
+      "labelFa": "امتیازدهی",
+      "targetSourcePdfPage": 35,
+      "depth": 1,
+      "entryKind": "topic",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Practicing Chess",
+      "labelFa": "تمرین شطرنج",
+      "targetSourcePdfPage": 36,
+      "depth": 1,
+      "entryKind": "topic",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Additional Learning Material",
+      "labelFa": "مطالب تکمیلی برای یادگیری",
+      "targetSourcePdfPage": 36,
+      "depth": 1,
+      "entryKind": "topic",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "PART ONE",
+      "labelFa": "بخش اول",
+      "targetSourcePdfPage": 37,
+      "depth": 0,
+      "entryKind": "part",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "CHAPTER ONE",
+      "labelFa": "فصل اول",
+      "targetSourcePdfPage": 39,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "HOW TO (LITERALLY) WIN AT CHESS",
+      "labelFa": "چگونه واقعاً در شطرنج برنده شویم",
+      "targetSourcePdfPage": 40,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Checkmate",
+      "labelFa": "کیش‌ومات",
+      "targetSourcePdfPage": 40,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Resignation",
+      "labelFa": "تسلیم",
+      "targetSourcePdfPage": 45,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Timing Out",
+      "labelFa": "باخت بر اثر اتمام زمان",
+      "targetSourcePdfPage": 46,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Abandonment",
+      "labelFa": "ترک بازی",
+      "targetSourcePdfPage": 48,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 50,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH01"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "CHAPTER TWO",
+      "labelFa": "فصل دوم",
+      "targetSourcePdfPage": 51,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "HOW TO START THE GAME WITH THE WHITE PIECES",
+      "labelFa": "چگونه بازی را با مهره‌های سفید آغاز کنیم",
+      "targetSourcePdfPage": 52,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Why Learn Openings?",
+      "labelFa": "چرا گشایش‌ها را یاد بگیریم؟",
+      "targetSourcePdfPage": 52,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Three Principles of the Opening: Center, Develop, Castle",
+      "labelFa": "سه اصل گشایش: کنترل مرکز، گسترش مهره‌ها و قلعه‌رفتن",
+      "targetSourcePdfPage": 55,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "e4 Openings",
+      "labelFa": "گشایش‌های ۱.e4",
+      "targetSourcePdfPage": 60,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "d4 Openings",
+      "labelFa": "گشایش‌های ۱.d4",
+      "targetSourcePdfPage": 70,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Scholar’s Mate",
+      "labelFa": "مات اسکالر (Scholar’s Mate)",
+      "targetSourcePdfPage": 76,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 85,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH02"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "CHAPTER THREE",
+      "labelFa": "فصل سوم",
+      "targetSourcePdfPage": 86,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH03"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "HOW TO START THE GAME WITH THE BLACK PIECES",
+      "labelFa": "چگونه بازی را با مهره‌های سیاه آغاز کنیم",
+      "targetSourcePdfPage": 87,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH03"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Traditional Openings",
+      "labelFa": "گشایش‌های سنتی",
+      "targetSourcePdfPage": 88,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH03"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Setup-Based Openings",
+      "labelFa": "گشایش‌های مبتنی بر چیدمان",
+      "targetSourcePdfPage": 96,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH03"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Building-Block Openings",
+      "labelFa": "گشایش‌های پایه‌ای و سازنده",
+      "targetSourcePdfPage": 99,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH03"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 105,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH03"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "CHAPTER FOUR",
+      "labelFa": "فصل چهارم",
+      "targetSourcePdfPage": 106,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH04"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "ENDGAMES I",
+      "labelFa": "آخر بازی‌ها ۱",
+      "targetSourcePdfPage": 107,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH04"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "Ladder Mate",
+      "labelFa": "مات نردبانی",
+      "targetSourcePdfPage": 107,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH04"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "King and Queen Mate",
+      "labelFa": "مات با شاه و وزیر",
+      "targetSourcePdfPage": 115,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH04"
+    },
+    {
+      "tocSourcePdfPage": 6,
+      "sourceLabel": "King and Rook Mate",
+      "labelFa": "مات با شاه و رخ",
+      "targetSourcePdfPage": 123,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH04"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 133,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH04"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "CHAPTER FIVE",
+      "labelFa": "فصل پنجم",
+      "targetSourcePdfPage": 135,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH05"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "ENDGAMES II",
+      "labelFa": "آخر بازی‌ها ۲",
+      "targetSourcePdfPage": 136,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH05"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Solo Acts",
+      "labelFa": "مات‌های تک‌مهره‌ای (Solo Acts)",
+      "targetSourcePdfPage": 136,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH05"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Two-Piece Checkmate",
+      "labelFa": "مات با دو مهره",
+      "targetSourcePdfPage": 141,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH05"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Taking Checkmates to the Next Level",
+      "labelFa": "ارتقای الگوهای کیش‌ومات به سطح بالاتر",
+      "targetSourcePdfPage": 156,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH05"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 164,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH05"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "CHAPTER SIX",
+      "labelFa": "فصل ششم",
+      "targetSourcePdfPage": 165,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "ENDGAMES III",
+      "labelFa": "آخر بازی‌ها ۳",
+      "targetSourcePdfPage": 166,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Draw by Agreement",
+      "labelFa": "تساوی با توافق",
+      "targetSourcePdfPage": 166,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Draw by Repetition",
+      "labelFa": "تساوی بر اثر تکرار وضعیت",
+      "targetSourcePdfPage": 168,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Draw by Stalemate",
+      "labelFa": "تساوی بر اثر پات",
+      "targetSourcePdfPage": 176,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "50-Move Rule",
+      "labelFa": "قانون ۵۰ حرکت",
+      "targetSourcePdfPage": 179,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Draw by Insufficient Checkmating Material",
+      "labelFa": "تساوی به‌دلیل ناکافی‌بودن مهره‌های مات‌کننده",
+      "targetSourcePdfPage": 180,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 184,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH06"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "CHAPTER SEVEN",
+      "labelFa": "فصل هفتم",
+      "targetSourcePdfPage": 185,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH07"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "ATTACKING, DEFENDING, AND CAPTURING",
+      "labelFa": "حمله، دفاع و گرفتن مهره",
+      "targetSourcePdfPage": 186,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH07"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Piece Vision",
+      "labelFa": "میدان دید و خانه‌های تحت پوشش مهره‌ها",
+      "targetSourcePdfPage": 186,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH07"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Attacking and Defending",
+      "labelFa": "حمله و دفاع",
+      "targetSourcePdfPage": 193,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH07"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Tactics",
+      "labelFa": "تاکتیک‌ها",
+      "targetSourcePdfPage": 209,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH07"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 231,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH07"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "CHAPTER EIGHT",
+      "labelFa": "فصل هشتم",
+      "targetSourcePdfPage": 232,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH08"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "BEGINNER STRATEGY",
+      "labelFa": "راهبرد مقدماتی",
+      "targetSourcePdfPage": 233,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH08"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Weaknesses",
+      "labelFa": "ضعف‌ها",
+      "targetSourcePdfPage": 233,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH08"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Space",
+      "labelFa": "فضا",
+      "targetSourcePdfPage": 248,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH08"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Closed vs. Open Positions",
+      "labelFa": "وضعیت‌های بسته در برابر وضعیت‌های باز",
+      "targetSourcePdfPage": 254,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH08"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 260,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH08"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "PART TWO",
+      "labelFa": "بخش دوم",
+      "targetSourcePdfPage": 261,
+      "depth": 0,
+      "entryKind": "part",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "CHAPTER NINE",
+      "labelFa": "فصل نهم",
+      "targetSourcePdfPage": 263,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH09"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "INTERMEDIATE OPENINGS",
+      "labelFa": "گشایش‌های سطح متوسط",
+      "targetSourcePdfPage": 264,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH09"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Learning Openings with White",
+      "labelFa": "یادگیری گشایش‌ها با مهره‌های سفید",
+      "targetSourcePdfPage": 264,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH09"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Learning Openings with Black",
+      "labelFa": "یادگیری گشایش‌ها با مهره‌های سیاه",
+      "targetSourcePdfPage": 269,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH09"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 277,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH09"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "CHAPTER TEN",
+      "labelFa": "فصل دهم",
+      "targetSourcePdfPage": 278,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH10"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "INTERMEDIATE OPENINGS FOR WHITE",
+      "labelFa": "گشایش‌های سطح متوسط برای سفید",
+      "targetSourcePdfPage": 279,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH10"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "London System",
+      "labelFa": "سیستم لندن",
+      "targetSourcePdfPage": 279,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH10"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Vienna System",
+      "labelFa": "سیستم وین",
+      "targetSourcePdfPage": 286,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH10"
+    },
+    {
+      "tocSourcePdfPage": 7,
+      "sourceLabel": "Alapin Sicilian Variation",
+      "labelFa": "واریانت آلپین در دفاع سیسیلی",
+      "targetSourcePdfPage": 296,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH10"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 302,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH10"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CHAPTER ELEVEN",
+      "labelFa": "فصل یازدهم",
+      "targetSourcePdfPage": 303,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "INTERMEDIATE OPENINGS FOR BLACK",
+      "labelFa": "گشایش‌های سطح متوسط برای سیاه",
+      "targetSourcePdfPage": 304,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Scandinavian Defense",
+      "labelFa": "دفاع اسکاندیناوی",
+      "targetSourcePdfPage": 304,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Caro-Kann Defense",
+      "labelFa": "دفاع کارو-کان",
+      "targetSourcePdfPage": 309,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Queen’s Gambit Declined",
+      "labelFa": "گامبی وزیر ردشده",
+      "targetSourcePdfPage": 319,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Setup-Based Openings",
+      "labelFa": "گشایش‌های مبتنی بر چیدمان",
+      "targetSourcePdfPage": 325,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 330,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH11"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CHAPTER TWELVE",
+      "labelFa": "فصل دوازدهم",
+      "targetSourcePdfPage": 331,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH12"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "GAMBITS",
+      "labelFa": "گامبی‌ها",
+      "targetSourcePdfPage": 332,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH12"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Gambits for White",
+      "labelFa": "گامبی‌های سفید",
+      "targetSourcePdfPage": 332,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH12"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Gambits for Black",
+      "labelFa": "گامبی‌های سیاه",
+      "targetSourcePdfPage": 354,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH12"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 376,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH12"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CHAPTER THIRTEEN",
+      "labelFa": "فصل سیزدهم",
+      "targetSourcePdfPage": 377,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "INTERMEDIATE ENDGAMES",
+      "labelFa": "آخر بازی‌های سطح متوسط",
+      "targetSourcePdfPage": 378,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "King and Pawn Endgames",
+      "labelFa": "آخر بازی شاه و پیاده",
+      "targetSourcePdfPage": 378,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Knight Endgames",
+      "labelFa": "آخر بازی اسب",
+      "targetSourcePdfPage": 394,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Knight vs. Bishop Endgames",
+      "labelFa": "آخر بازی اسب در برابر فیل",
+      "targetSourcePdfPage": 399,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Bishop Endgames",
+      "labelFa": "آخر بازی فیل",
+      "targetSourcePdfPage": 403,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Rook Endgames",
+      "labelFa": "آخر بازی رخ",
+      "targetSourcePdfPage": 411,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Queen Endgames",
+      "labelFa": "آخر بازی وزیر",
+      "targetSourcePdfPage": 419,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 433,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH13"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CHAPTER FOURTEEN",
+      "labelFa": "فصل چهاردهم",
+      "targetSourcePdfPage": 434,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "INTERMEDIATE TACTICS",
+      "labelFa": "تاکتیک‌های سطح متوسط",
+      "targetSourcePdfPage": 435,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Beginning to Use CCA",
+      "labelFa": "آغاز به‌کارگیری CCA",
+      "targetSourcePdfPage": 435,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CCA: The Next Level",
+      "labelFa": "CCA: سطح بعدی",
+      "targetSourcePdfPage": 439,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CCA: Checkmate in Three",
+      "labelFa": "CCA: مات در سه حرکت",
+      "targetSourcePdfPage": 443,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CCA: Winning Material",
+      "labelFa": "CCA: کسب برتری مادی",
+      "targetSourcePdfPage": 449,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Removing the Defender",
+      "labelFa": "حذف مدافع",
+      "targetSourcePdfPage": 453,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Zwischenzug",
+      "labelFa": "حرکت بینابینی (Zwischenzug)",
+      "targetSourcePdfPage": 455,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Discovered Attacks",
+      "labelFa": "حمله‌های کشف‌شده",
+      "targetSourcePdfPage": 459,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Sacrifices, Deflection, and Attraction",
+      "labelFa": "قربانی‌ها، منحرف‌سازی و کشاندن مهره",
+      "targetSourcePdfPage": 463,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 474,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH14"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "CHAPTER FIFTEEN",
+      "labelFa": "فصل پانزدهم",
+      "targetSourcePdfPage": 475,
+      "depth": 0,
+      "entryKind": "chapter",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "INTERMEDIATE STRATEGY",
+      "labelFa": "راهبرد سطح متوسط",
+      "targetSourcePdfPage": 476,
+      "depth": 1,
+      "entryKind": "chapterTitle",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Pawns",
+      "labelFa": "پیاده‌ها",
+      "targetSourcePdfPage": 476,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Bishops and Knights",
+      "labelFa": "فیل‌ها و اسب‌ها",
+      "targetSourcePdfPage": 491,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 8,
+      "sourceLabel": "Rooks",
+      "labelFa": "رخ‌ها",
+      "targetSourcePdfPage": 500,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "The Queen",
+      "labelFa": "وزیر",
+      "targetSourcePdfPage": 518,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "Trading Pieces",
+      "labelFa": "تعویض مهره‌ها",
+      "targetSourcePdfPage": 524,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "Checklist",
+      "labelFa": "فهرست بازبینی",
+      "targetSourcePdfPage": 548,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "Summary",
+      "labelFa": "خلاصه",
+      "targetSourcePdfPage": 570,
+      "depth": 2,
+      "entryKind": "topic",
+      "chapterId": "CH15"
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "KEY TERMS AND CONCEPTS",
+      "labelFa": "اصطلاحات و مفاهیم کلیدی",
+      "targetSourcePdfPage": 571,
+      "depth": 0,
+      "entryKind": "backMatter",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "ACKNOWLEDGMENTS",
+      "labelFa": "سپاسگزاری",
+      "targetSourcePdfPage": 575,
+      "depth": 0,
+      "entryKind": "backMatter",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "ABOUT THE AUTHOR",
+      "labelFa": "درباره نویسنده",
+      "targetSourcePdfPage": 576,
+      "depth": 0,
+      "entryKind": "backMatter",
+      "chapterId": null
+    },
+    {
+      "tocSourcePdfPage": 9,
+      "sourceLabel": "INDEX",
+      "labelFa": "نمایه",
+      "targetSourcePdfPage": 577,
+      "depth": 0,
+      "entryKind": "backMatter",
+      "chapterId": null
+    }
+  ]
+}

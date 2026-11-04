@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 16,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "حرکت فیل",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P016_I001",
+      "assetId": "PDFOBJ_025",
+      "descriptionFa": "تصویر اصلی حرکت مورب فیل.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 16
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P016_I002",
+      "assetId": "PDFOBJ_024",
+      "descriptionFa": "تصویر خطی اصلی مهره فیل.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 16
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P016_B001",
+      "textFa": "فیل ۳ امتیاز ارزش دارد. هر بازیکن بازی را با دو فیل آغاز می‌کند؛ یکی روی خانه روشن و دیگری روی خانه تیره. فیل می‌تواند به هر تعداد خانه حرکت کند (به شرط آنکه مهره دیگری مسیرش را مسدود نکرده باشد)، اما حرکت آن فقط مورب است. بنابراین فیلِ خانه‌روشن شما همیشه روی خانه‌های روشن حرکت می‌کند و فیلِ خانه‌تیره نیز همیشه روی خانه‌های تیره می‌ماند.",
+      "sourcePdfPage": 16
+    }
+  ],
+  "notesFa": "تصویر حرکت مورب و تصویر خطی فیل هر دو حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_024",
+    "PDFOBJ_025",
+    "PDFOBJ_026"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 16,
+      "pdfImageObjectIndex": 24,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 181,
+      "height": 262,
+      "assetId": "PDFOBJ_024",
+      "file": "assets/pdf_embedded_objects/pdf_p016_obj024.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت فیل و شکل خطی فیل"
+    },
+    {
+      "sourcePdfPage": 16,
+      "pdfImageObjectIndex": 25,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_025",
+      "file": "assets/pdf_embedded_objects/pdf_p016_obj025.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت فیل و شکل خطی فیل"
+    },
+    {
+      "sourcePdfPage": 16,
+      "pdfImageObjectIndex": 26,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_026",
+      "file": "assets/pdf_embedded_objects/pdf_p016_obj026.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت فیل و شکل خطی فیل"
+    }
+  ]
+}

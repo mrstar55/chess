@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 18,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "ویژگی ویژه حرکت اسب",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P018_I001",
+      "assetId": "PDFOBJ_030",
+      "descriptionFa": "تصویر اصلی حرکت اسب از ردیف عقب و مسیرهای پرش آن.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 18
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P018_B001",
+      "textFa": "از آنجا که اسب می‌تواند از روی مهره‌ها بپرد، تنها مهره‌ای است که از ردیف آخر می‌تواند بلافاصله و از همان آغاز بازی وارد میدان شود. سایر مهره‌ها برای حرکت به مسیر باز نیاز دارند و این مسیر با حرکت‌دادن پیاده‌ها ایجاد می‌شود.",
+      "sourcePdfPage": 18
+    }
+  ],
+  "notesFa": "تصویر مسیرهای حرکت اسب و نشانگرهای آن حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_030",
+    "PDFOBJ_031"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 18,
+      "pdfImageObjectIndex": 30,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_030",
+      "file": "assets/pdf_embedded_objects/pdf_p018_obj030.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار مسیر پرش اسب"
+    },
+    {
+      "sourcePdfPage": 18,
+      "pdfImageObjectIndex": 31,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_031",
+      "file": "assets/pdf_embedded_objects/pdf_p018_obj031.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار مسیر پرش اسب"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "chapterId": "CH01",
+  "chapterNumber": 1,
+  "titleEn": "How to (Literally) Win at Chess",
+  "titleFa": "فصل اول: چگونه واقعاً در شطرنج برنده شویم",
+  "diagramsFile": "diagrams.json",
+  "pgnSequencesFile": "pgn_sequences.json",
+  "exercisesFile": "exercises.json",
+  "narrationManifestFile": "narration/manifest.json",
+  "sections": [
+    {
+      "sectionId": "SEC_CH01_01_OPENING",
+      "order": 1,
+      "sectionKind": "OPENING",
+      "titleEn": "Chapter opening",
+      "titleFa": "شروع فصل",
+      "pdfPages": [40],
+      "file": "sections/01_opening.json"
+    },
+    {
+      "sectionId": "SEC_CH01_02_CHECKMATE",
+      "order": 2,
+      "sectionKind": "CONTENT",
+      "titleEn": "Checkmate",
+      "titleFa": "مات",
+      "pdfPages": [41, 42, 43, 44, 45],
+      "file": "sections/02_checkmate.json"
+    },
+    {
+      "sectionId": "SEC_CH01_03_RESIGNATION",
+      "order": 3,
+      "sectionKind": "CONTENT",
+      "titleEn": "Resignation",
+      "titleFa": "تسلیم",
+      "pdfPages": [45, 46],
+      "file": "sections/03_resignation.json"
+    },
+    {
+      "sectionId": "SEC_CH01_04_TIMING_OUT",
+      "order": 4,
+      "sectionKind": "CONTENT",
+      "titleEn": "Timing Out",
+      "titleFa": "اتمام زمان",
+      "pdfPages": [47, 48],
+      "file": "sections/04_timing_out.json"
+    },
+    {
+      "sectionId": "SEC_CH01_05_ABANDONMENT",
+      "order": 5,
+      "sectionKind": "CONTENT",
+      "titleEn": "Abandonment",
+      "titleFa": "ترک بازی",
+      "pdfPages": [48, 49],
+      "file": "sections/05_abandonment.json"
+    },
+    {
+      "sectionId": "SEC_CH01_06_SUMMARY",
+      "order": 6,
+      "sectionKind": "SUMMARY",
+      "titleEn": "Summary and additional lesson link",
+      "titleFa": "خلاصه",
+      "pdfPages": [50],
+      "file": "sections/06_summary.json"
+    }
+  ]
+}

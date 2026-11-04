@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 22,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "گرفتن مهره با پیاده",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P022_I001",
+      "assetId": "PDFOBJ_038",
+      "descriptionFa": "تصویر اصلی گرفتن مورب مهره با پیاده.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 22
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P022_B001",
+      "textFa": "اما هنگامی که پیاده مهره‌ای را می‌گیرد ــ یعنی روی خانه‌ای می‌رود که مهره حریف در آن قرار دارد و آن مهره را از بازی خارج می‌کند ــ حرکتش مورب است. پیاده نمی‌تواند به‌صورت مورب وارد خانه‌ای خالی شود؛ همان‌طور که نمی‌تواند مهره‌ای را در امتداد مستقیم و عمودی بگیرد. پیاده فقط می‌تواند مستقیم به جلو و در خانه خالی حرکت کند و فقط به‌صورت مورب مهره بگیرد. هنوز همراه من هستید؟",
+      "sourcePdfPage": 22
+    }
+  ],
+  "notesFa": "تصویر اصلی گرفتن مورب پیاده و فلش آن حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_038",
+    "PDFOBJ_039"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 22,
+      "pdfImageObjectIndex": 38,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_038",
+      "file": "assets/pdf_embedded_objects/pdf_p022_obj038.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار گرفتن مورب پیاده"
+    },
+    {
+      "sourcePdfPage": 22,
+      "pdfImageObjectIndex": 39,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_039",
+      "file": "assets/pdf_embedded_objects/pdf_p022_obj039.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار گرفتن مورب پیاده"
+    }
+  ]
+}

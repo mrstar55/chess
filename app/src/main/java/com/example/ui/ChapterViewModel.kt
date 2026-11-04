@@ -1,6 +1,8 @@
 package com.example.ui
 
 import android.app.Application
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import com.example.audio.AudioSettingsState
 import com.example.audio.BookNarrationManager
@@ -10,16 +12,23 @@ import com.example.audio.ChessSoundType
 import com.example.audio.NarrationPlaybackSpeed
 import com.example.audio.NarrationUiState
 import com.example.chess.ChessRulesAdapter
-import com.example.chess.KotlinChessRulesAdapter
-import com.example.chess.Move
+import com.example.chess.ExerciseHandlerRegistry
 import com.example.chess.PgnReplayer
+import com.example.chess.PgnSequence
 import com.example.data.ChapterRepository
 import com.example.data.EducationalPlaybackSpeed
 import com.example.data.FontSizeScale
 import com.example.data.UserPreferencesManager
 import com.example.model.BoardTransition
 import com.example.model.BoardTransitionResolver
+import com.example.model.ChapterCatalogEntry
 import com.example.model.DiagramItem
+import com.example.model.ExerciseDefinition
+import com.example.model.ExercisePhase
+import com.example.model.ExerciseUiState
+import com.example.model.FrontMatterCatalogEntry
+import com.example.model.FrontMatterContentPack
+import com.example.model.FrontMatterSourceLink
 import com.example.model.MoveTrailState
 import com.example.model.ReaderPage
 import com.example.model.ReaderPaginator
@@ -34,49 +43,34 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-enum class Bd032ExercisePhase {
-    IDLE,
-    PIECE_SELECTED,
-    ANIMATING_CORRECT,
-    SOLVED,
-    ANIMATING_WRONG,
-    WRONG_LEGAL_MOVE
-}
+@Deprecated(
+    message = "Use ExercisePhase from com.example.model instead.",
+    replaceWith = ReplaceWith("ExercisePhase", "com.example.model.ExercisePhase")
+)
+typealias Bd032ExercisePhase = ExercisePhase
 
-data class Bd032UiState(
-    val currentFen: String = "8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1",
-    val selectedSquare: String? = null,
-    val selectedFile: Int = -1,
-    val selectedRank: Int = -1,
-    val legalTargetSquares: List<String> = emptyList(),
-    val showLegalMovesHint: Boolean = false,
-    val illegalFlashSquares: List<String> = emptyList(),
-    val isSolved: Boolean = false,
-    val phase: Bd032ExercisePhase = if (isSolved) Bd032ExercisePhase.SOLVED else Bd032ExercisePhase.IDLE,
-    val canRetry: Boolean = false,
-    val feedbackMessage: String? = null,
-    val feedbackIsSuccess: Boolean = false,
-    val solutionPlayed: String? = null,
-    val activeTransition: BoardTransition? = null,
-    val activeMoveTrail: MoveTrailState? = null,
-    val lastMoveDescriptionFa: String? = null
-) {
-    /**
-     * By default (showLegalMovesHint == false), legal destination squares are hidden
-     * so the puzzle solution is never given away upon selecting a piece.
-     */
-    val visibleTargetSquares: List<String>
-        get() = if (showLegalMovesHint) legalTargetSquares else emptyList()
-
-    val isBoardLocked: Boolean
-        get() = isSolved ||
-            phase == Bd032ExercisePhase.SOLVED ||
-            phase == Bd032ExercisePhase.ANIMATING_CORRECT ||
-            phase == Bd032ExercisePhase.ANIMATING_WRONG ||
-            phase == Bd032ExercisePhase.WRONG_LEGAL_MOVE
-}
+@Deprecated(
+    message = "Use ExerciseUiState from com.example.model instead.",
+    replaceWith = ReplaceWith("ExerciseUiState", "com.example.model.ExerciseUiState")
+)
+typealias Bd032UiState = ExerciseUiState
 
 data class ChapterUiState(
+    val activeBookId: String = "",
+    val activeBookTitleFa: String = "",
+    val activeContentRegionId: String = ChapterRepository.DEFAULT_CHAPTER_ID,
+    val activeChapterId: String = "",
+    val activeChapterNumber: Int = 1,
+    val activeChapterTitleFa: String = "",
+    val activeChapterTitleEn: String = "",
+    val availableChapters: List<ChapterCatalogEntry> = emptyList(),
+    val frontMatterEntry: FrontMatterCatalogEntry? = null,
+    val frontMatterPack: FrontMatterContentPack? = null,
+    val frontMatterPages: List<ReaderPage> = emptyList(),
+    val lastReadFrontMatterSourcePdfPage: Int = 1,
+    val lastReadFrontMatterPageIndex: Int = 0,
+    val lastNavigationNoticeFa: String? = null,
+    val lastOpenedExternalUri: String? = null,
     val sections: List<SectionItem> = emptyList(),
     val diagrams: List<DiagramItem> = emptyList(),
     val currentSectionIndex: Int = 0,
@@ -87,7 +81,8 @@ data class ChapterUiState(
     val fontScale: FontSizeScale = FontSizeScale.NORMAL,
     val bookmarks: Set<String> = emptySet(),
     val pgnStates: Map<String, PgnReplayerState> = emptyMap(),
-    val bd032State: Bd032UiState = Bd032UiState(),
+    val exerciseDefinitions: Map<String, ExerciseDefinition> = emptyMap(),
+    val exerciseStates: Map<String, ExerciseUiState> = emptyMap(),
     val audioSettings: AudioSettingsState = AudioSettingsState(),
     val narrationState: NarrationUiState = NarrationUiState(),
     val showMoveTrail: Boolean = true,
@@ -95,13 +90,54 @@ data class ChapterUiState(
     val showAudioSettingsDialog: Boolean = false,
     val currentTab: AppTab = AppTab.SPLASH
 ) {
+    val hasMultipleChapters: Boolean
+        get() = availableChapters.size > 1
+
+    val hasFrontMatter: Boolean
+        get() = frontMatterEntry != null && frontMatterPack != null && frontMatterPages.isNotEmpty()
+
+    val isReadingFrontMatter: Boolean
+        get() = activeContentRegionId == ChapterRepository.FRONT_MATTER_REGION_ID
+
+    val frontMatterNavigationTitleFa: String
+        get() = frontMatterEntry?.navigationTitleFa ?: "پیش‌درآمد و مبانی شطرنج"
+
+    val frontMatterFullTitleFa: String
+        get() = frontMatterPack?.manifest?.titleFa
+            ?: frontMatterEntry?.titleFa
+            ?: "پیش‌درآمد، مقدمه و آموزش مبانی شطرنج"
+
+    val activeChapterShortTitleFa: String
+        get() = activeChapterTitleFa.substringBefore(":").trim().ifBlank { activeChapterTitleFa }
+
     val currentPage: ReaderPage?
         get() = currentPages.getOrNull(currentPageIndex)
+
+    fun exerciseStateFor(
+        exerciseId: String,
+        diagramId: String? = null
+    ): ExerciseUiState? {
+        exerciseStates[exerciseId]?.let { return it }
+        if (diagramId != null) {
+            val matchedDef = exerciseDefinitions.values.firstOrNull { it.diagramId == diagramId }
+            if (matchedDef != null) {
+                exerciseStates[matchedDef.exerciseId]?.let { return it }
+            }
+        }
+        return null
+    }
+
+    @Deprecated(
+        message = "Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId)."
+    )
+    val bd032State: ExerciseUiState
+        get() = exerciseStates[UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID] ?: ExerciseUiState()
 }
 
 enum class AppTab {
     SPLASH,
     INTRODUCTION,
+    CHAPTERS_LIST,
     SECTIONS_LIST,
     READER,
     AUDIT_REPORT
@@ -127,18 +163,19 @@ data class PgnReplayerState(
         get() = currentStep < totalSteps
 }
 
-class ChapterViewModel(application: Application) : AndroidViewModel(application) {
+class ChapterViewModel @JvmOverloads constructor(
+    application: Application,
+    customRepository: ChapterRepository? = null
+) : AndroidViewModel(application) {
 
-    private val repository = ChapterRepository(application)
+    private val repository = customRepository ?: ChapterRepository(application)
     private val prefs = UserPreferencesManager(application)
     val soundManager = ChessSoundManager(application)
     val narrationManager = BookNarrationManager(application, prefs)
 
     private val replayers = mutableMapOf<String, PgnReplayer>()
-    private val bd032InitialFen = "8/8/1p6/1k2q1P1/7K/8/8/6r1 b - - 0 1"
-
-    // Single consistent adapter instance for BD-032 exercise
-    private val bd032Adapter: ChessRulesAdapter = KotlinChessRulesAdapter(bd032InitialFen)
+    private val exerciseAdapters = mutableMapOf<String, ChessRulesAdapter>()
+    private var loadedPgnSequences: Map<String, PgnSequence> = emptyMap()
 
     private val transitionCounter = AtomicLong(1L)
     private val soundEventCounter = AtomicLong(1L)
@@ -171,31 +208,103 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private fun loadData() {
-        val sections = repository.getSections()
-        val diagrams = repository.getDiagrams()
-        val savedSection = prefs.lastReadSectionIndex.coerceIn(0, (sections.size - 1).coerceAtLeast(0))
+        val (book, initialChapter) = repository.resolveInitialChapterEntry(
+            preferredBookId = prefs.getSavedActiveBookIdOrNull(),
+            preferredChapterId = prefs.getSavedActiveChapterIdOrNull()
+        )
+        val chapters = book.enabledChapters
+
+        loadChapterInternal(
+            bookId = book.bookId,
+            bookTitleFa = book.titleFa,
+            chapterEntry = initialChapter,
+            availableChapters = chapters,
+            targetTab = AppTab.SPLASH
+        )
+    }
+
+    private fun loadChapterInternal(
+        bookId: String,
+        bookTitleFa: String,
+        chapterEntry: ChapterCatalogEntry,
+        availableChapters: List<ChapterCatalogEntry>,
+        targetTab: AppTab
+    ) {
+        val chapterId = chapterEntry.chapterId
+        val manifest = repository.getChapterManifest(chapterId = chapterId, bookId = bookId)
+        val sections = repository.getSections(chapterId = chapterId, bookId = bookId)
+        val diagrams = repository.getDiagrams(chapterId = chapterId, bookId = bookId)
+        val pgnSequences = repository.getAllPgnSequences(chapterId = chapterId, bookId = bookId)
+        val exercises = repository.getExercises(chapterId = chapterId, bookId = bookId)
+        val frontMatterEntry = repository.getFrontMatterCatalogEntry(bookId = bookId)
+        val frontMatterPack = runCatching { repository.getFrontMatterContentPack(bookId = bookId) }.getOrNull()
+
+        loadedPgnSequences = pgnSequences
+
+        val savedPos = prefs.getSavedReadingPosition(chapterId = chapterId, bookId = bookId)
+        val savedSection = if (!savedPos.sectionId.isNullOrBlank()) {
+            val byId = sections.indexOfFirst { it.sectionId == savedPos.sectionId }
+            if (byId >= 0) byId else savedPos.sectionIndexFallback.coerceIn(0, (sections.size - 1).coerceAtLeast(0))
+        } else {
+            savedPos.sectionIndexFallback.coerceIn(0, (sections.size - 1).coerceAtLeast(0))
+        }
+
         val fontScale = prefs.fontScale
         val bookmarks = prefs.getBookmarks()
         val audioSettings = prefs.loadAudioSettings()
         val showMoveTrail = prefs.showMoveTrail
         val playbackSpeed = prefs.playbackSpeed
+        val vpWidth = _uiState.value.viewportWidthDp
+        val vpHeight = _uiState.value.viewportHeightDp
+
+        val frontMatterPages = if (frontMatterPack != null) {
+            ReaderPaginator.paginateFrontMatterPages(
+                frontMatterPages = frontMatterPack.pages,
+                fontScale = fontScale,
+                viewportWidthDp = vpWidth,
+                viewportHeightDp = vpHeight
+            )
+        } else {
+            emptyList()
+        }
+        val savedFmPos = prefs.getSavedFrontMatterReadingPosition(bookId = bookId)
+        val savedFmPageIdx = if (!savedFmPos.pageId.isNullOrBlank()) {
+            val byPageId = frontMatterPages.indexOfFirst { it.pageId == savedFmPos.pageId }
+            if (byPageId >= 0) {
+                byPageId
+            } else {
+                frontMatterPages.indexOfFirst { it.sourcePdfPage == savedFmPos.sourcePdfPage }
+                    .takeIf { it >= 0 }
+                    ?: savedFmPos.pageIndex.coerceIn(0, (frontMatterPages.size - 1).coerceAtLeast(0))
+            }
+        } else {
+            frontMatterPages.indexOfFirst { it.sourcePdfPage == savedFmPos.sourcePdfPage }
+                .takeIf { it >= 0 }
+                ?: savedFmPos.pageIndex.coerceIn(0, (frontMatterPages.size - 1).coerceAtLeast(0))
+        }
 
         val initialPages = sections.getOrNull(savedSection)?.let { section ->
             ReaderPaginator.paginateSection(
                 section = section,
                 diagrams = diagrams,
                 fontScale = fontScale,
-                viewportWidthDp = 380,
-                viewportHeightDp = 640
+                viewportWidthDp = vpWidth,
+                viewportHeightDp = vpHeight
             )
         } ?: emptyList()
 
-        val savedPage = prefs.lastReadPageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+        val savedPage = if (!savedPos.pageId.isNullOrBlank()) {
+            val byPageId = initialPages.indexOfFirst { it.pageId == savedPos.pageId }
+            if (byPageId >= 0) byPageId else savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+        } else {
+            savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+        }
 
+        replayers.clear()
         val pgnStatesMap = mutableMapOf<String, PgnReplayerState>()
         diagrams.forEach { diagram ->
             diagram.pgnRef?.let { pgnRef ->
-                val seq = repository.getPgnSequence(pgnRef)
+                val seq = pgnSequences[pgnRef]
                 if (seq != null) {
                     val replayer = PgnReplayer(seq)
                     replayer.jumpToEnd()
@@ -217,11 +326,45 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             }
         }
 
-        bd032Adapter.resetToFen(bd032InitialFen)
-        val previouslySolved = prefs.isBd032Solved()
+        val diagramsById = diagrams.associateBy { it.diagramId }
+        exerciseAdapters.clear()
+        val exerciseDefsMap = linkedMapOf<String, ExerciseDefinition>()
+        val exerciseStatesMap = linkedMapOf<String, ExerciseUiState>()
+
+        for (exDef in exercises) {
+            exerciseDefsMap[exDef.exerciseId] = exDef
+            val diag = diagramsById[exDef.diagramId] ?: continue
+            val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: continue
+            val adapter = handler.createRulesAdapter(exDef, diag)
+            exerciseAdapters[exDef.exerciseId] = adapter
+            val solved = prefs.isExerciseSolved(exDef.exerciseId)
+            exerciseStatesMap[exDef.exerciseId] = handler.createInitialState(exDef, diag, solved)
+        }
+
+        narrationManager.switchChapterManifest(
+            chapterId = chapterId,
+            manifestAssetPath = manifest.narrationManifest,
+            sections = sections,
+            currentPage = initialPages.getOrNull(savedPage),
+            bookId = bookId,
+            assetReaderOverride = repository.assetReaderOverride
+        )
 
         _uiState.update {
             it.copy(
+                activeBookId = bookId,
+                activeBookTitleFa = bookTitleFa,
+                activeContentRegionId = chapterId,
+                activeChapterId = chapterId,
+                activeChapterNumber = manifest.chapterNumber,
+                activeChapterTitleFa = manifest.titleFa.ifBlank { chapterEntry.titleFa },
+                activeChapterTitleEn = manifest.titleEn.ifBlank { chapterEntry.titleEn },
+                availableChapters = availableChapters,
+                frontMatterEntry = frontMatterEntry,
+                frontMatterPack = frontMatterPack,
+                frontMatterPages = frontMatterPages,
+                lastReadFrontMatterSourcePdfPage = savedFmPos.sourcePdfPage,
+                lastReadFrontMatterPageIndex = savedFmPageIdx,
                 sections = sections,
                 diagrams = diagrams,
                 currentSectionIndex = savedSection,
@@ -233,26 +376,235 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
                 showMoveTrail = showMoveTrail,
                 playbackSpeed = playbackSpeed,
                 pgnStates = pgnStatesMap,
-                bd032State = Bd032UiState(
-                    currentFen = bd032InitialFen,
-                    isSolved = previouslySolved,
-                    phase = if (previouslySolved) Bd032ExercisePhase.SOLVED else Bd032ExercisePhase.IDLE,
-                    activeTransition = null,
-                    activeMoveTrail = null,
-                    lastMoveDescriptionFa = null
-                )
+                exerciseDefinitions = exerciseDefsMap,
+                exerciseStates = exerciseStatesMap,
+                narrationState = narrationManager.state.value,
+                currentTab = targetTab
             )
         }
-        narrationManager.refreshAvailability(sections, initialPages.getOrNull(savedPage))
+    }
+
+    private fun saveCurrentReadingPosition(
+        state: ChapterUiState,
+        sectionIndex: Int,
+        pageIndex: Int,
+        pages: List<ReaderPage>
+    ) {
+        val safeSecIdx = sectionIndex.coerceIn(0, (state.sections.size - 1).coerceAtLeast(0))
+        val safePageIdx = pageIndex.coerceIn(0, (pages.size - 1).coerceAtLeast(0))
+        val secId = state.sections.getOrNull(safeSecIdx)?.sectionId
+        val pageId = pages.getOrNull(safePageIdx)?.pageId
+        if (!secId.isNullOrBlank()) {
+            prefs.saveReadingPosition(
+                bookId = state.activeBookId,
+                chapterId = state.activeChapterId,
+                sectionId = secId,
+                sectionIndex = safeSecIdx,
+                pageIndex = safePageIdx,
+                pageId = pageId
+            )
+        } else {
+            prefs.saveReadingPosition(sectionIndex = safeSecIdx, pageIndex = safePageIdx)
+        }
+    }
+
+    private fun saveCurrentFrontMatterPosition(
+        state: ChapterUiState,
+        pageIndex: Int,
+        pages: List<ReaderPage>
+    ) {
+        if (pages.isEmpty()) return
+        val safeIdx = pageIndex.coerceIn(0, pages.lastIndex)
+        val page = pages[safeIdx]
+        val pdfPage = (page.sourcePdfPage ?: 1).coerceIn(1, 39)
+        prefs.saveFrontMatterReadingPosition(
+            bookId = state.activeBookId,
+            sourcePdfPage = pdfPage,
+            pageIndex = safeIdx,
+            pageId = page.pageId
+        )
     }
 
     /**
-     * Enters a section and always opens its first page (page index 0).
+     * Opens the Front Matter region (`FRONT_MATTER`, PDF pages 1..39) at the specified 1-based [initialSourcePdfPage].
+     */
+    @JvmOverloads
+    fun openFrontMatter(initialSourcePdfPage: Int = 1) {
+        narrationManager.stop()
+        val clampedPdfPage = initialSourcePdfPage.coerceIn(1, 39)
+        _uiState.update { state ->
+            val pack = state.frontMatterPack
+                ?: runCatching { repository.getFrontMatterContentPack(state.activeBookId) }.getOrNull()
+                ?: return@update state
+            val fmPages = state.frontMatterPages.ifEmpty {
+                ReaderPaginator.paginateFrontMatterPages(
+                    frontMatterPages = pack.pages,
+                    fontScale = state.fontScale,
+                    viewportWidthDp = state.viewportWidthDp,
+                    viewportHeightDp = state.viewportHeightDp
+                )
+            }
+            val targetIdx = fmPages.indexOfFirst {
+                it.sourcePdfPage == clampedPdfPage && it.sliceIndexInSourcePage == 1
+            }.takeIf { it >= 0 }
+                ?: fmPages.indexOfFirst { it.sourcePdfPage == clampedPdfPage }.takeIf { it >= 0 }
+                ?: 0
+            val activePdfPage = fmPages.getOrNull(targetIdx)?.sourcePdfPage ?: clampedPdfPage
+            saveCurrentFrontMatterPosition(state, targetIdx, fmPages)
+            state.copy(
+                activeContentRegionId = ChapterRepository.FRONT_MATTER_REGION_ID,
+                frontMatterPack = pack,
+                frontMatterPages = fmPages,
+                currentPages = fmPages,
+                currentPageIndex = targetIdx,
+                lastReadFrontMatterSourcePdfPage = activePdfPage,
+                lastReadFrontMatterPageIndex = targetIdx,
+                lastNavigationNoticeFa = null,
+                currentTab = AppTab.READER
+            )
+        }
+    }
+
+    /**
+     * Resumes reading the Front Matter region (`FRONT_MATTER`) from its last saved PDF page / slice index.
+     */
+    fun resumeFrontMatter() {
+        narrationManager.stop()
+        _uiState.update { state ->
+            val pack = state.frontMatterPack
+                ?: runCatching { repository.getFrontMatterContentPack(state.activeBookId) }.getOrNull()
+                ?: return@update state
+            val fmPages = state.frontMatterPages.ifEmpty {
+                ReaderPaginator.paginateFrontMatterPages(
+                    frontMatterPages = pack.pages,
+                    fontScale = state.fontScale,
+                    viewportWidthDp = state.viewportWidthDp,
+                    viewportHeightDp = state.viewportHeightDp
+                )
+            }
+            val savedFm = prefs.getSavedFrontMatterReadingPosition(state.activeBookId)
+            val targetIdx = when {
+                !savedFm.pageId.isNullOrBlank() -> {
+                    fmPages.indexOfFirst { it.pageId == savedFm.pageId }.takeIf { it >= 0 }
+                }
+                else -> null
+            } ?: fmPages.indexOfFirst { it.sourcePdfPage == savedFm.sourcePdfPage }.takeIf { it >= 0 }
+                ?: savedFm.pageIndex.coerceIn(0, (fmPages.size - 1).coerceAtLeast(0))
+
+            val activePdfPage = fmPages.getOrNull(targetIdx)?.sourcePdfPage ?: savedFm.sourcePdfPage
+            saveCurrentFrontMatterPosition(state, targetIdx, fmPages)
+            state.copy(
+                activeContentRegionId = ChapterRepository.FRONT_MATTER_REGION_ID,
+                frontMatterPack = pack,
+                frontMatterPages = fmPages,
+                currentPages = fmPages,
+                currentPageIndex = targetIdx,
+                lastReadFrontMatterSourcePdfPage = activePdfPage,
+                lastReadFrontMatterPageIndex = targetIdx,
+                lastNavigationNoticeFa = null,
+                currentTab = AppTab.READER
+            )
+        }
+    }
+
+    /**
+     * Navigates directly to a 1-based physical [targetSourcePdfPage] across the book:
+     * - Pages 1..39: opens Front Matter (`FRONT_MATTER`) at the first slice of [targetSourcePdfPage].
+     * - Pages 40..50: opens Chapter 1 (`CH01`) at the section/page corresponding to [targetSourcePdfPage].
+     * - Pages > 50 (future chapters): sets a clear Persian notice without breaking current state.
+     */
+    @JvmOverloads
+    fun navigateToSourcePdfPage(targetSourcePdfPage: Int, chapterIdHint: String? = null): Boolean {
+        if (targetSourcePdfPage in 1..39) {
+            openFrontMatter(initialSourcePdfPage = targetSourcePdfPage)
+            return true
+        }
+        val state = _uiState.value
+        val matchingSectionIdx = state.sections.indexOfFirst { section ->
+            targetSourcePdfPage in section.pdfPages
+        }.takeIf { it >= 0 } ?: if (targetSourcePdfPage == 40 || chapterIdHint == "CH01") 0 else -1
+
+        if (matchingSectionIdx >= 0) {
+            _uiState.update { st ->
+                val targetSection = st.sections[matchingSectionIdx]
+                val pages = ReaderPaginator.paginateSection(
+                    section = targetSection,
+                    diagrams = st.diagrams,
+                    fontScale = st.fontScale,
+                    viewportWidthDp = st.viewportWidthDp,
+                    viewportHeightDp = st.viewportHeightDp
+                )
+                val targetPageIdx = pages.indexOfFirst { it.sourcePdfPage == targetSourcePdfPage }
+                    .takeIf { it >= 0 } ?: 0
+                saveCurrentReadingPosition(st, matchingSectionIdx, targetPageIdx, pages)
+                st.copy(
+                    activeContentRegionId = st.activeChapterId,
+                    currentSectionIndex = matchingSectionIdx,
+                    currentPages = pages,
+                    currentPageIndex = targetPageIdx,
+                    lastNavigationNoticeFa = null,
+                    currentTab = AppTab.READER
+                )
+            }
+            val updated = _uiState.value
+            narrationManager.onManualPageOrSectionChanged(updated.sections, updated.currentPage)
+            return true
+        }
+
+        _uiState.update { st ->
+            st.copy(
+                lastNavigationNoticeFa = "صفحه PDF شماره ${ReaderPaginator.toPersianDigits(targetSourcePdfPage)} مربوط به فصل‌های بعدی کتاب است که در بسته‌های محتوایی آتی بارگذاری می‌شود."
+            )
+        }
+        return false
+    }
+
+    /**
+     * Handles clicking a [FrontMatterSourceLink] (internal PDF page link or external URI).
+     */
+    fun openSourceLink(link: FrontMatterSourceLink): Boolean {
+        val targetPage = link.targetSourcePdfPage
+        if (targetPage != null) {
+            return navigateToSourcePdfPage(targetSourcePdfPage = targetPage, chapterIdHint = link.chapterId)
+        }
+        val uri = link.targetUri?.trim().orEmpty()
+        if (uri.isNotEmpty()) {
+            if (uri.startsWith("clbr://", ignoreCase = true) && uri.contains("cover", ignoreCase = true)) {
+                return navigateToSourcePdfPage(1)
+            }
+            return openExternalUri(uri)
+        }
+        return false
+    }
+
+    fun openExternalUri(uri: String): Boolean {
+        val trimmed = uri.trim()
+        if (trimmed.isEmpty()) return false
+        _uiState.update {
+            it.copy(
+                lastOpenedExternalUri = trimmed,
+                lastNavigationNoticeFa = "پیوند خارجی: $trimmed"
+            )
+        }
+        runCatching {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(trimmed)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            getApplication<Application>().startActivity(intent)
+        }
+        return true
+    }
+
+    fun dismissNavigationNotice() {
+        _uiState.update { it.copy(lastNavigationNoticeFa = null) }
+    }
+
+    /**
+     * Enters a section of the active chapter and always opens its first page (page index 0).
      */
     fun selectSection(index: Int) {
         val stateSnapshot = _uiState.value
         val target = index.coerceIn(0, (stateSnapshot.sections.size - 1).coerceAtLeast(0))
-        prefs.saveReadingPosition(sectionIndex = target, pageIndex = 0)
         _uiState.update { state ->
             val targetSection = state.sections.getOrNull(target)
             val pages = if (targetSection != null) {
@@ -266,6 +618,7 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             } else {
                 emptyList()
             }
+            saveCurrentReadingPosition(state, target, 0, pages)
             // Clear any transient animations, move trails, and persistent move descriptions when switching sections
             val clearedPgnStates = state.pgnStates.mapValues { (_, pgn) ->
                 pgn.copy(
@@ -275,17 +628,22 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
                     isTransitioning = false
                 )
             }
-            state.copy(
-                currentSectionIndex = target,
-                currentPages = pages,
-                currentPageIndex = 0,
-                currentTab = AppTab.READER,
-                pgnStates = clearedPgnStates,
-                bd032State = state.bd032State.copy(
+            val clearedExStates = state.exerciseStates.mapValues { (_, ex) ->
+                ex.copy(
                     activeTransition = null,
                     activeMoveTrail = null,
                     lastMoveDescriptionFa = null
                 )
+            }
+            state.copy(
+                activeContentRegionId = state.activeChapterId,
+                currentSectionIndex = target,
+                currentPages = pages,
+                currentPageIndex = 0,
+                lastNavigationNoticeFa = null,
+                currentTab = AppTab.READER,
+                pgnStates = clearedPgnStates,
+                exerciseStates = clearedExStates
             )
         }
         val updated = _uiState.value
@@ -299,21 +657,23 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
         _uiState.update { state ->
             val targetSectionIdx = state.currentSectionIndex.coerceIn(0, (state.sections.size - 1).coerceAtLeast(0))
             val targetSection = state.sections.getOrNull(targetSectionIdx)
-            val pages = state.currentPages.ifEmpty {
-                if (targetSection != null) {
-                    ReaderPaginator.paginateSection(
-                        section = targetSection,
-                        diagrams = state.diagrams,
-                        fontScale = state.fontScale,
-                        viewportWidthDp = state.viewportWidthDp,
-                        viewportHeightDp = state.viewportHeightDp
-                    )
-                } else {
-                    emptyList()
-                }
+            val pages = if (!state.isReadingFrontMatter && state.currentPages.isNotEmpty()) {
+                state.currentPages
+            } else if (targetSection != null) {
+                ReaderPaginator.paginateSection(
+                    section = targetSection,
+                    diagrams = state.diagrams,
+                    fontScale = state.fontScale,
+                    viewportWidthDp = state.viewportWidthDp,
+                    viewportHeightDp = state.viewportHeightDp
+                )
+            } else {
+                emptyList()
             }
-            val savedPageIdx = state.currentPageIndex.coerceIn(0, (pages.size - 1).coerceAtLeast(0))
-            prefs.saveReadingPosition(sectionIndex = targetSectionIdx, pageIndex = savedPageIdx)
+            val savedPos = prefs.getSavedReadingPosition(chapterId = state.activeChapterId, bookId = state.activeBookId)
+            val basePageIdx = if (state.isReadingFrontMatter) savedPos.pageIndex else state.currentPageIndex
+            val savedPageIdx = basePageIdx.coerceIn(0, (pages.size - 1).coerceAtLeast(0))
+            saveCurrentReadingPosition(state, targetSectionIdx, savedPageIdx, pages)
             val clearedPgnStates = state.pgnStates.mapValues { (_, pgn) ->
                 pgn.copy(
                     activeTransition = null,
@@ -322,17 +682,22 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
                     isTransitioning = false
                 )
             }
-            state.copy(
-                currentSectionIndex = targetSectionIdx,
-                currentPages = pages,
-                currentPageIndex = savedPageIdx,
-                currentTab = AppTab.READER,
-                pgnStates = clearedPgnStates,
-                bd032State = state.bd032State.copy(
+            val clearedExStates = state.exerciseStates.mapValues { (_, ex) ->
+                ex.copy(
                     activeTransition = null,
                     activeMoveTrail = null,
                     lastMoveDescriptionFa = null
                 )
+            }
+            state.copy(
+                activeContentRegionId = state.activeChapterId,
+                currentSectionIndex = targetSectionIdx,
+                currentPages = pages,
+                currentPageIndex = savedPageIdx,
+                lastNavigationNoticeFa = null,
+                currentTab = AppTab.READER,
+                pgnStates = clearedPgnStates,
+                exerciseStates = clearedExStates
             )
         }
         val updated = _uiState.value
@@ -340,26 +705,50 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun nextSection() {
-        if (_uiState.value.currentSectionIndex < _uiState.value.sections.size - 1) {
-            selectSection(_uiState.value.currentSectionIndex + 1)
+        val current = _uiState.value
+        if (current.isReadingFrontMatter) {
+            // Transition from Front Matter (after PDF page 39) to Chapter 1 Section 0 (PDF page 40)
+            selectSection(0)
+            return
+        }
+        if (current.currentSectionIndex < current.sections.size - 1) {
+            selectSection(current.currentSectionIndex + 1)
         }
     }
 
     fun prevSection() {
-        if (_uiState.value.currentSectionIndex > 0) {
-            selectSection(_uiState.value.currentSectionIndex - 1)
+        val current = _uiState.value
+        if (current.isReadingFrontMatter) {
+            return
+        }
+        if (current.currentSectionIndex > 0) {
+            selectSection(current.currentSectionIndex - 1)
         }
     }
 
     /**
-     * Navigates to a specific 0-based page index within the current section and persists the reading position.
+     * Navigates to a specific 0-based page index within the current region/section and persists the reading position.
      */
     fun goToPage(pageIndex: Int) {
         val currentState = _uiState.value
         val maxIdx = (currentState.currentPages.size - 1).coerceAtLeast(0)
         val targetPage = pageIndex.coerceIn(0, maxIdx)
         val pageChanged = targetPage != currentState.currentPageIndex
-        prefs.saveReadingPosition(sectionIndex = currentState.currentSectionIndex, pageIndex = targetPage)
+        if (currentState.isReadingFrontMatter) {
+            saveCurrentFrontMatterPosition(currentState, targetPage, currentState.currentPages)
+            val activePdfPage = currentState.currentPages.getOrNull(targetPage)?.sourcePdfPage
+                ?: currentState.lastReadFrontMatterSourcePdfPage
+            _uiState.update { state ->
+                state.copy(
+                    currentPageIndex = targetPage,
+                    lastReadFrontMatterSourcePdfPage = activePdfPage,
+                    lastReadFrontMatterPageIndex = targetPage
+                )
+            }
+            return
+        }
+
+        saveCurrentReadingPosition(currentState, currentState.currentSectionIndex, targetPage, currentState.currentPages)
         _uiState.update { state ->
             val updatedPgnStates = if (pageChanged) {
                 state.pgnStates.mapValues { (_, pgn) ->
@@ -373,19 +762,21 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             } else {
                 state.pgnStates
             }
-            val updatedBd032 = if (pageChanged) {
-                state.bd032State.copy(
-                    activeTransition = null,
-                    activeMoveTrail = null,
-                    lastMoveDescriptionFa = null
-                )
+            val updatedExStates = if (pageChanged) {
+                state.exerciseStates.mapValues { (_, ex) ->
+                    ex.copy(
+                        activeTransition = null,
+                        activeMoveTrail = null,
+                        lastMoveDescriptionFa = null
+                    )
+                }
             } else {
-                state.bd032State
+                state.exerciseStates
             }
             state.copy(
                 currentPageIndex = targetPage,
                 pgnStates = updatedPgnStates,
-                bd032State = updatedBd032
+                exerciseStates = updatedExStates
             )
         }
         if (pageChanged) {
@@ -396,14 +787,14 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
 
     /**
      * Auto-navigates to the page containing [blockId] inside [sectionIndex] during Mode B
-     * (Continuous Chapter 1 narration) without interrupting active narration playback.
+     * (Continuous Chapter narration) without interrupting active narration playback.
      */
     private fun navigateToSectionAndBlockForNarration(sectionIndex: Int, blockId: String) {
         val normalizedBlockId = ReaderPaginator.originalBlockId(blockId)
         _uiState.update { state ->
             val targetSecIdx = sectionIndex.coerceIn(0, (state.sections.size - 1).coerceAtLeast(0))
             val targetSection = state.sections.getOrNull(targetSecIdx) ?: return@update state
-            val pages = if (targetSecIdx == state.currentSectionIndex && state.currentPages.isNotEmpty()) {
+            val pages = if (!state.isReadingFrontMatter && targetSecIdx == state.currentSectionIndex && state.currentPages.isNotEmpty()) {
                 state.currentPages
             } else {
                 ReaderPaginator.paginateSection(
@@ -417,8 +808,9 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             val pageIdx = pages.indexOfFirst { page ->
                 page.orderedBlocks.any { ReaderPaginator.originalBlockId(it.blockId) == normalizedBlockId }
             }.coerceAtLeast(0)
-            prefs.saveReadingPosition(sectionIndex = targetSecIdx, pageIndex = pageIdx)
+            saveCurrentReadingPosition(state, targetSecIdx, pageIdx, pages)
             state.copy(
+                activeContentRegionId = state.activeChapterId,
                 currentSectionIndex = targetSecIdx,
                 currentPages = pages,
                 currentPageIndex = pageIdx
@@ -430,6 +822,11 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
         val state = _uiState.value
         if (state.currentPageIndex < state.currentPages.size - 1) {
             goToPage(state.currentPageIndex + 1)
+            return true
+        }
+        if (state.isReadingFrontMatter) {
+            // At the very last slice of Front Matter (PDF page 39), advancing transitions to CH01 (PDF page 40)
+            selectSection(0)
             return true
         }
         return false
@@ -452,8 +849,68 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
         _uiState.update { it.copy(currentTab = AppTab.INTRODUCTION) }
     }
 
+    fun openBookFromIntroduction() {
+        val s = _uiState.value
+        if (s.hasMultipleChapters) {
+            _uiState.update { it.copy(currentTab = AppTab.CHAPTERS_LIST) }
+        } else {
+            openSectionsList()
+        }
+    }
+
+    fun openChaptersList() {
+        narrationManager.stop()
+        _uiState.update { it.copy(currentTab = AppTab.CHAPTERS_LIST) }
+    }
+
     fun openSectionsList() {
         _uiState.update { it.copy(currentTab = AppTab.SECTIONS_LIST) }
+    }
+
+    fun selectChapter(chapterId: String, navigateToSectionsList: Boolean = true) {
+        val s = _uiState.value
+        val chapterEntry = s.availableChapters.find { it.chapterId == chapterId } ?: return
+        prefs.activeBookId = s.activeBookId
+        prefs.activeChapterId = chapterId
+        loadChapterInternal(
+            bookId = s.activeBookId,
+            bookTitleFa = s.activeBookTitleFa,
+            chapterEntry = chapterEntry,
+            availableChapters = s.availableChapters,
+            targetTab = if (navigateToSectionsList) AppTab.SECTIONS_LIST else s.currentTab
+        )
+    }
+
+    private fun findPreservedFrontMatterPageIndex(
+        oldPages: List<ReaderPage>,
+        oldPageIndex: Int,
+        newPages: List<ReaderPage>
+    ): Int {
+        if (newPages.isEmpty()) return 0
+        val oldPage = oldPages.getOrNull(oldPageIndex)
+            ?: return oldPageIndex.coerceIn(0, newPages.lastIndex)
+        val targetSourcePdfPage = oldPage.sourcePdfPage
+
+        if (targetSourcePdfPage != null) {
+            val newSlicesForPdfPage = newPages.indices.filter { idx ->
+                newPages[idx].sourcePdfPage == targetSourcePdfPage
+            }
+            if (newSlicesForPdfPage.isNotEmpty()) {
+                val anchorBlock = oldPage.orderedBlocks.firstOrNull()
+                if (anchorBlock != null) {
+                    val origId = ReaderPaginator.originalBlockId(anchorBlock.blockId)
+                    val blockMatch = newSlicesForPdfPage.firstOrNull { idx ->
+                        newPages[idx].orderedBlocks.any {
+                            ReaderPaginator.originalBlockId(it.blockId) == origId
+                        }
+                    }
+                    if (blockMatch != null) return blockMatch
+                }
+                val sliceIdx = (oldPage.sliceIndexInSourcePage - 1).coerceIn(0, newSlicesForPdfPage.lastIndex)
+                return newSlicesForPdfPage[sliceIdx]
+            }
+        }
+        return oldPageIndex.coerceIn(0, newPages.lastIndex)
     }
 
     private fun findPreservedPageIndex(
@@ -472,7 +929,7 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             if (diagramMatch >= 0) return diagramMatch
         }
 
-        // 2. Match the first content block on the page ( preferring non-heading content if a heading precedes a paragraph )
+        // 2. Match the first content block on the page (preferring non-heading content if a heading precedes a paragraph)
         val anchorBlock = oldPage.orderedBlocks.firstOrNull {
             it !is com.example.model.SectionContentBlock.HeadingBlock
         } ?: oldPage.orderedBlocks.firstOrNull()
@@ -510,32 +967,63 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     fun setFontScale(scale: FontSizeScale) {
         prefs.fontScale = scale
         _uiState.update { state ->
-            val currentSection = state.sections.getOrNull(state.currentSectionIndex)
-            val newPages = if (currentSection != null) {
-                ReaderPaginator.paginateSection(
-                    section = currentSection,
-                    diagrams = state.diagrams,
+            val updatedFmPages = state.frontMatterPack?.let { pack ->
+                ReaderPaginator.paginateFrontMatterPages(
+                    frontMatterPages = pack.pages,
                     fontScale = scale,
                     viewportWidthDp = state.viewportWidthDp,
                     viewportHeightDp = state.viewportHeightDp
                 )
+            } ?: state.frontMatterPages
+
+            if (state.isReadingFrontMatter) {
+                val mappedFmIndex = findPreservedFrontMatterPageIndex(
+                    oldPages = state.currentPages,
+                    oldPageIndex = state.currentPageIndex,
+                    newPages = updatedFmPages
+                )
+                val activePdfPage = updatedFmPages.getOrNull(mappedFmIndex)?.sourcePdfPage
+                    ?: state.lastReadFrontMatterSourcePdfPage
+                saveCurrentFrontMatterPosition(state, mappedFmIndex, updatedFmPages)
+                state.copy(
+                    fontScale = scale,
+                    frontMatterPages = updatedFmPages,
+                    currentPages = updatedFmPages,
+                    currentPageIndex = mappedFmIndex,
+                    lastReadFrontMatterSourcePdfPage = activePdfPage,
+                    lastReadFrontMatterPageIndex = mappedFmIndex
+                )
             } else {
-                state.currentPages
+                val currentSection = state.sections.getOrNull(state.currentSectionIndex)
+                val newPages = if (currentSection != null) {
+                    ReaderPaginator.paginateSection(
+                        section = currentSection,
+                        diagrams = state.diagrams,
+                        fontScale = scale,
+                        viewportWidthDp = state.viewportWidthDp,
+                        viewportHeightDp = state.viewportHeightDp
+                    )
+                } else {
+                    state.currentPages
+                }
+                val mappedPageIndex = findPreservedPageIndex(
+                    oldPages = state.currentPages,
+                    oldPageIndex = state.currentPageIndex,
+                    newPages = newPages
+                )
+                saveCurrentReadingPosition(state, state.currentSectionIndex, mappedPageIndex, newPages)
+                state.copy(
+                    fontScale = scale,
+                    frontMatterPages = updatedFmPages,
+                    currentPages = newPages,
+                    currentPageIndex = mappedPageIndex
+                )
             }
-            val mappedPageIndex = findPreservedPageIndex(
-                oldPages = state.currentPages,
-                oldPageIndex = state.currentPageIndex,
-                newPages = newPages
-            )
-            prefs.saveReadingPosition(state.currentSectionIndex, mappedPageIndex)
-            state.copy(
-                fontScale = scale,
-                currentPages = newPages,
-                currentPageIndex = mappedPageIndex
-            )
         }
         val updated = _uiState.value
-        narrationManager.refreshAvailability(updated.sections, updated.currentPage)
+        if (!updated.isReadingFrontMatter) {
+            narrationManager.refreshAvailability(updated.sections, updated.currentPage)
+        }
     }
 
     fun updateViewportSize(widthDp: Int, heightDp: Int) {
@@ -544,30 +1032,60 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
         val current = _uiState.value
         if (current.viewportWidthDp == clampedWidth && current.viewportHeightDp == clampedHeight) return
         _uiState.update { state ->
-            val currentSection = state.sections.getOrNull(state.currentSectionIndex)
-            val newPages = if (currentSection != null) {
-                ReaderPaginator.paginateSection(
-                    section = currentSection,
-                    diagrams = state.diagrams,
+            val updatedFmPages = state.frontMatterPack?.let { pack ->
+                ReaderPaginator.paginateFrontMatterPages(
+                    frontMatterPages = pack.pages,
                     fontScale = state.fontScale,
                     viewportWidthDp = clampedWidth,
                     viewportHeightDp = clampedHeight
                 )
+            } ?: state.frontMatterPages
+
+            if (state.isReadingFrontMatter) {
+                val mappedFmIndex = findPreservedFrontMatterPageIndex(
+                    oldPages = state.currentPages,
+                    oldPageIndex = state.currentPageIndex,
+                    newPages = updatedFmPages
+                )
+                val activePdfPage = updatedFmPages.getOrNull(mappedFmIndex)?.sourcePdfPage
+                    ?: state.lastReadFrontMatterSourcePdfPage
+                saveCurrentFrontMatterPosition(state, mappedFmIndex, updatedFmPages)
+                state.copy(
+                    viewportWidthDp = clampedWidth,
+                    viewportHeightDp = clampedHeight,
+                    frontMatterPages = updatedFmPages,
+                    currentPages = updatedFmPages,
+                    currentPageIndex = mappedFmIndex,
+                    lastReadFrontMatterSourcePdfPage = activePdfPage,
+                    lastReadFrontMatterPageIndex = mappedFmIndex
+                )
             } else {
-                state.currentPages
+                val currentSection = state.sections.getOrNull(state.currentSectionIndex)
+                val newPages = if (currentSection != null) {
+                    ReaderPaginator.paginateSection(
+                        section = currentSection,
+                        diagrams = state.diagrams,
+                        fontScale = state.fontScale,
+                        viewportWidthDp = clampedWidth,
+                        viewportHeightDp = clampedHeight
+                    )
+                } else {
+                    state.currentPages
+                }
+                val mappedPageIndex = findPreservedPageIndex(
+                    oldPages = state.currentPages,
+                    oldPageIndex = state.currentPageIndex,
+                    newPages = newPages
+                )
+                saveCurrentReadingPosition(state, state.currentSectionIndex, mappedPageIndex, newPages)
+                state.copy(
+                    viewportWidthDp = clampedWidth,
+                    viewportHeightDp = clampedHeight,
+                    frontMatterPages = updatedFmPages,
+                    currentPages = newPages,
+                    currentPageIndex = mappedPageIndex
+                )
             }
-            val mappedPageIndex = findPreservedPageIndex(
-                oldPages = state.currentPages,
-                oldPageIndex = state.currentPageIndex,
-                newPages = newPages
-            )
-            prefs.saveReadingPosition(state.currentSectionIndex, mappedPageIndex)
-            state.copy(
-                viewportWidthDp = clampedWidth,
-                viewportHeightDp = clampedHeight,
-                currentPages = newPages,
-                currentPageIndex = mappedPageIndex
-            )
         }
     }
 
@@ -585,27 +1103,33 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
                     sec
                 }
             }
-            val activeSection = updatedSections.getOrNull(state.currentSectionIndex)
-            val newPages = if (activeSection != null) {
-                ReaderPaginator.paginateSection(
-                    section = activeSection,
-                    diagrams = state.diagrams,
-                    fontScale = state.fontScale,
-                    viewportWidthDp = state.viewportWidthDp,
-                    viewportHeightDp = state.viewportHeightDp
-                )
+            if (state.isReadingFrontMatter) {
+                state.copy(sections = updatedSections)
             } else {
-                state.currentPages
+                val activeSection = updatedSections.getOrNull(state.currentSectionIndex)
+                val newPages = if (activeSection != null) {
+                    ReaderPaginator.paginateSection(
+                        section = activeSection,
+                        diagrams = state.diagrams,
+                        fontScale = state.fontScale,
+                        viewportWidthDp = state.viewportWidthDp,
+                        viewportHeightDp = state.viewportHeightDp
+                    )
+                } else {
+                    state.currentPages
+                }
+                val clampedPageIdx = state.currentPageIndex.coerceIn(0, (newPages.size - 1).coerceAtLeast(0))
+                state.copy(
+                    sections = updatedSections,
+                    currentPages = newPages,
+                    currentPageIndex = clampedPageIdx
+                )
             }
-            val clampedPageIdx = state.currentPageIndex.coerceIn(0, (newPages.size - 1).coerceAtLeast(0))
-            state.copy(
-                sections = updatedSections,
-                currentPages = newPages,
-                currentPageIndex = clampedPageIdx
-            )
         }
         val updated = _uiState.value
-        narrationManager.refreshAvailability(updated.sections, updated.currentPage)
+        if (!updated.isReadingFrontMatter) {
+            narrationManager.refreshAvailability(updated.sections, updated.currentPage)
+        }
     }
 
     fun stepPgnNext(pgnRef: String) {
@@ -624,7 +1148,6 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             } else {
                 null
             }
-            // Persistent move description is independent of showMoveTrail and stays visible after trail fades
             val moveDescriptionFa = BoardTransitionResolver.buildPersistentMoveDescriptionFa(transition)
             updatePgnState(
                 pgnRef = pgnRef,
@@ -651,7 +1174,6 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
                 currentFen = fromFen,
                 previousFen = toFen
             )
-            // Undo / Previous move strictly clears MoveTrailState AND clears persistent move description
             updatePgnState(
                 pgnRef = pgnRef,
                 replayer = replayer,
@@ -669,7 +1191,6 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     fun resetPgn(pgnRef: String) {
         val replayer = replayers[pgnRef] ?: return
         replayer.reset()
-        // Direct jump to start: clears transition, move trail, and persistent move description
         updatePgnState(
             pgnRef = pgnRef,
             replayer = replayer,
@@ -682,7 +1203,6 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     fun jumpPgnToEnd(pgnRef: String) {
         val replayer = replayers[pgnRef] ?: return
         replayer.jumpToEnd()
-        // Direct jump to end: clears transition, move trail, and persistent move description
         updatePgnState(
             pgnRef = pgnRef,
             replayer = replayer,
@@ -710,7 +1230,6 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
             val current = state.pgnStates[pgnRef] ?: return@update state
             if (current.activeMoveTrail?.eventId != eventId) return@update state
             val updatedMap = state.pgnStates.toMutableMap()
-            // Clear only activeMoveTrail; lastMoveDescriptionFa remains visible!
             updatedMap[pgnRef] = current.copy(
                 activeMoveTrail = null
             )
@@ -852,16 +1371,20 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     fun setShowMoveTrail(enabled: Boolean) {
         prefs.showMoveTrail = enabled
         _uiState.update { state ->
-            // Note: disabling showMoveTrail clears only activeMoveTrail; lastMoveDescriptionFa stays intact!
             val updatedPgn = if (!enabled) {
                 state.pgnStates.mapValues { (_, pgn) -> pgn.copy(activeMoveTrail = null) }
             } else {
                 state.pgnStates
             }
+            val updatedEx = if (!enabled) {
+                state.exerciseStates.mapValues { (_, ex) -> ex.copy(activeMoveTrail = null) }
+            } else {
+                state.exerciseStates
+            }
             state.copy(
                 showMoveTrail = enabled,
                 pgnStates = updatedPgn,
-                bd032State = if (!enabled) state.bd032State.copy(activeMoveTrail = null) else state.bd032State
+                exerciseStates = updatedEx
             )
         }
     }
@@ -876,324 +1399,134 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
     }
 
     // ==========================================
-    // Dynamic BD-032 Chess Engine Exercise Logic
+    // Generalized Exercise Engine Dispatch
     // ==========================================
 
+    private fun resolveExerciseContext(
+        state: ChapterUiState,
+        exerciseId: String
+    ): Triple<ExerciseDefinition, DiagramItem, ExerciseUiState>? {
+        val exDef = state.exerciseDefinitions[exerciseId] ?: return null
+        val diagram = state.diagrams.find { it.diagramId == exDef.diagramId } ?: return null
+        val currentExState = state.exerciseStates[exerciseId] ?: return null
+        return Triple(exDef, diagram, currentExState)
+    }
+
+    private fun applyExerciseStateUpdate(exerciseId: String, updatedExState: ExerciseUiState) {
+        _uiState.update { state ->
+            val updatedMap = state.exerciseStates + (exerciseId to updatedExState)
+            state.copy(exerciseStates = updatedMap)
+        }
+    }
+
+    fun toggleExerciseLegalMovesHint(exerciseId: String) {
+        val current = _uiState.value
+        val (exDef, _, exState) = resolveExerciseContext(current, exerciseId) ?: return
+        val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: return
+        val updated = handler.onToggleLegalMovesHint(exState)
+        applyExerciseStateUpdate(exerciseId, updated)
+    }
+
+    fun onExerciseSquareClicked(exerciseId: String, file: Int, rank: Int) {
+        val current = _uiState.value
+        val (exDef, diagram, exState) = resolveExerciseContext(current, exerciseId) ?: return
+        val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: return
+        val adapter = exerciseAdapters.getOrPut(exerciseId) {
+            handler.createRulesAdapter(exDef, diagram)
+        }
+        val outcome = handler.onSquareClicked(
+            definition = exDef,
+            diagram = diagram,
+            pgnSequences = loadedPgnSequences,
+            currentState = exState,
+            adapter = adapter,
+            file = file,
+            rank = rank,
+            showMoveTrail = current.showMoveTrail,
+            playbackSpeed = current.playbackSpeed,
+            nextTransitionNumber = { transitionCounter.getAndIncrement() }
+        )
+        if (outcome.newlySolved) {
+            prefs.setExerciseSolved(exerciseId, true)
+        }
+        applyExerciseStateUpdate(exerciseId, outcome.updatedState)
+        outcome.soundToEmit?.let { (type, tag) -> emitSound(type, tag) }
+    }
+
+    fun onExerciseTransitionFinished(exerciseId: String, transitionId: String) {
+        val current = _uiState.value
+        val (exDef, _, exState) = resolveExerciseContext(current, exerciseId) ?: return
+        val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: return
+        val outcome = handler.onTransitionFinished(exDef, exState, transitionId)
+        applyExerciseStateUpdate(exerciseId, outcome.updatedState)
+        outcome.soundToEmit?.let { (type, tag) -> emitSound(type, tag) }
+    }
+
+    fun onExerciseMoveTrailFinished(exerciseId: String, eventId: String) {
+        val current = _uiState.value
+        val (exDef, _, exState) = resolveExerciseContext(current, exerciseId) ?: return
+        val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: return
+        val updated = handler.onMoveTrailFinished(exState, eventId)
+        applyExerciseStateUpdate(exerciseId, updated)
+    }
+
+    fun retryExercise(exerciseId: String) {
+        val current = _uiState.value
+        val (exDef, diagram, _) = resolveExerciseContext(current, exerciseId) ?: return
+        val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: return
+        val adapter = exerciseAdapters.getOrPut(exerciseId) {
+            handler.createRulesAdapter(exDef, diagram)
+        }
+        val outcome = handler.onRetry(exDef, diagram, adapter)
+        applyExerciseStateUpdate(exerciseId, outcome.updatedState)
+        outcome.soundToEmit?.let { (type, tag) -> emitSound(type, tag) }
+    }
+
+    fun resetExercise(exerciseId: String) {
+        val current = _uiState.value
+        val (exDef, diagram, _) = resolveExerciseContext(current, exerciseId) ?: return
+        val handler = ExerciseHandlerRegistry.getHandler(exDef.handlerType) ?: return
+        val adapter = exerciseAdapters.getOrPut(exerciseId) {
+            handler.createRulesAdapter(exDef, diagram)
+        }
+        val outcome = handler.onReset(exDef, diagram, adapter)
+        if (outcome.resetSolvedPreference) {
+            prefs.setExerciseSolved(exerciseId, false)
+        }
+        applyExerciseStateUpdate(exerciseId, outcome.updatedState)
+        outcome.soundToEmit?.let { (type, tag) -> emitSound(type, tag) }
+    }
+
+    // --- Legacy BD-032 Exercise Wrappers (for backward test compatibility only) ---
+
+    @Deprecated("Use toggleExerciseLegalMovesHint(exerciseId) instead")
     fun toggleBd032LegalMovesHint() {
-        _uiState.update { state ->
-            val currentBd = state.bd032State
-            if (currentBd.isBoardLocked) return@update state
-            state.copy(
-                bd032State = currentBd.copy(
-                    showLegalMovesHint = !currentBd.showLegalMovesHint
-                )
-            )
-        }
+        toggleExerciseLegalMovesHint(UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID)
     }
 
+    @Deprecated("Use onExerciseSquareClicked(exerciseId, file, rank) instead")
     fun onBd032SquareClicked(file: Int, rank: Int) {
-        val currentState = _uiState.value.bd032State
-
-        // Disable further interaction when board is locked (solved, animating, or waiting for retry after wrong legal move)
-        if (currentState.isBoardLocked) return
-
-        // Ensure adapter is synced with initial position before evaluating selection/move
-        if (bd032Adapter.currentFen != bd032InitialFen) {
-            bd032Adapter.resetToFen(bd032InitialFen)
-        }
-
-        val clickedNotation = "${('a' + file)}${rank + 1}"
-        val pieceAtClicked = bd032Adapter.getPiece(file, rank)
-
-        // 1. If clicking a friendly black piece, select it and compute its real legal moves (hidden by default unless showLegalMovesHint is toggled on)
-        // Note: piece selection alone does NOT create a persistent move description
-        if (pieceAtClicked != null && !pieceAtClicked.isWhite && bd032Adapter.activeColor == 'b') {
-            val legalMoves = bd032Adapter.getLegalMovesForSquare(file, rank)
-            val legalTargets = legalMoves.map { it.toNotation }
-            _uiState.update {
-                it.copy(
-                    bd032State = currentState.copy(
-                        currentFen = bd032InitialFen,
-                        selectedSquare = clickedNotation,
-                        selectedFile = file,
-                        selectedRank = rank,
-                        legalTargetSquares = legalTargets,
-                        illegalFlashSquares = emptyList(),
-                        phase = Bd032ExercisePhase.PIECE_SELECTED,
-                        feedbackMessage = "مهره انتخاب شد. اکنون خانه مقصد را روی صفحه لمس کنید.",
-                        feedbackIsSuccess = false,
-                        activeTransition = null
-                    )
-                )
-            }
-            return
-        }
-
-        // 2. If a piece is already selected, attempt to move it to the clicked destination square
-        if (currentState.selectedSquare != null && currentState.selectedFile != -1) {
-            val move = Move(
-                fromFile = currentState.selectedFile,
-                fromRank = currentState.selectedRank,
-                toFile = file,
-                toRank = rank
-            )
-            executeBd032Move(move)
-        }
+        onExerciseSquareClicked(UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID, file, rank)
     }
 
-    private fun executeBd032Move(move: Move) {
-        val currentBd = _uiState.value.bd032State
-        // Always evaluate from the initial exercise position using the single adapter
-        bd032Adapter.resetToFen(bd032InitialFen)
-        val moveResult = bd032Adapter.executeMove(move)
-
-        // Case 1: Illegal chess move -> keep piece selected, keep board unchanged, show red highlight and exact error message, emit ILLEGAL_MOVE sound.
-        // Do NOT create a move trail or persistent move description for illegal moves.
-        if (moveResult == null) {
-            bd032Adapter.resetToFen(bd032InitialFen)
-            val flashSquares = listOfNotNull(currentBd.selectedSquare, move.toNotation).distinct()
-            _uiState.update {
-                it.copy(
-                    bd032State = currentBd.copy(
-                        currentFen = bd032InitialFen,
-                        // Keep selected piece selected so user can try another destination immediately
-                        phase = Bd032ExercisePhase.PIECE_SELECTED,
-                        illegalFlashSquares = flashSquares,
-                        feedbackMessage = "این حرکت طبق قوانین شطرنج مجاز نیست.",
-                        feedbackIsSuccess = false,
-                        activeTransition = null
-                    )
-                )
-            }
-            emitSound(ChessSoundType.ILLEGAL_MOVE, "bd032_illegal_move")
-            return
-        }
-
-        val san = moveResult.san
-        val finalFen = bd032Adapter.currentFen
-
-        // Case 2: Legal move AND delivers checkmate -> animate winning move, show final position, mark solved, lock board until Reset
-        if (moveResult.isCheckmate) {
-            val transitionId = "bd032_solve_${transitionCounter.getAndIncrement()}"
-            val transition = BoardTransitionResolver.resolveForwardTransition(
-                transitionId = transitionId,
-                fromFen = bd032InitialFen,
-                toFen = finalFen
-            )
-            val moveTrail = if (transition != null && _uiState.value.showMoveTrail) {
-                BoardTransitionResolver.createMoveTrail(transition, _uiState.value.playbackSpeed)
-            } else {
-                null
-            }
-            val moveDescFa = BoardTransitionResolver.buildPersistentMoveDescriptionFa(transition)
-            prefs.setBd032Solved(true)
-            _uiState.update {
-                it.copy(
-                    bd032State = currentBd.copy(
-                        currentFen = finalFen,
-                        selectedSquare = null,
-                        selectedFile = -1,
-                        selectedRank = -1,
-                        legalTargetSquares = emptyList(),
-                        illegalFlashSquares = emptyList(),
-                        isSolved = true,
-                        phase = if (transition != null) Bd032ExercisePhase.ANIMATING_CORRECT else Bd032ExercisePhase.SOLVED,
-                        canRetry = false,
-                        feedbackMessage = "پاسخ صحیح! حرکت $san توسط موتور قوانین بررسی شد و شاه سفید مات شد.",
-                        feedbackIsSuccess = true,
-                        solutionPlayed = san,
-                        activeTransition = transition,
-                        activeMoveTrail = moveTrail,
-                        lastMoveDescriptionFa = moveDescFa
-                    )
-                )
-            }
-            // Dominant checkmate sound (no overlapping normal move sound)
-            emitSound(ChessSoundType.CHECKMATE, "bd032_checkmate")
-        } else {
-            // Case 3: Legal chess move, but NOT checkmate in 1 ->
-            // Execute and animate the move on the board, keep board at post-move FEN,
-            // and after animation finishes transition to WRONG_LEGAL_MOVE with retry button and feedback.
-            val transitionId = "bd032_wrong_${transitionCounter.getAndIncrement()}"
-            val transition = BoardTransitionResolver.resolveForwardTransition(
-                transitionId = transitionId,
-                fromFen = bd032InitialFen,
-                toFen = finalFen
-            )
-            val moveTrail = if (transition != null && _uiState.value.showMoveTrail) {
-                BoardTransitionResolver.createMoveTrail(transition, _uiState.value.playbackSpeed)
-            } else {
-                null
-            }
-            val moveDescFa = BoardTransitionResolver.buildPersistentMoveDescriptionFa(transition)
-            val moveSound = if (transition != null) {
-                ChessSoundManager.resolveSoundForTransition(transition, preferCaptureOverCheck = true)
-            } else {
-                ChessSoundType.MOVE_NORMAL
-            }
-            emitSound(moveSound, "bd032_wrong_legal_step")
-
-            if (transition != null) {
-                _uiState.update {
-                    it.copy(
-                        bd032State = currentBd.copy(
-                            currentFen = finalFen,
-                            selectedSquare = null,
-                            selectedFile = -1,
-                            selectedRank = -1,
-                            legalTargetSquares = emptyList(),
-                            illegalFlashSquares = emptyList(),
-                            isSolved = false,
-                            phase = Bd032ExercisePhase.ANIMATING_WRONG,
-                            canRetry = true,
-                            feedbackMessage = null,
-                            feedbackIsSuccess = false,
-                            solutionPlayed = san,
-                            activeTransition = transition,
-                            activeMoveTrail = moveTrail,
-                            lastMoveDescriptionFa = moveDescFa
-                        )
-                    )
-                }
-            } else {
-                _uiState.update {
-                    it.copy(
-                        bd032State = currentBd.copy(
-                            currentFen = finalFen,
-                            selectedSquare = null,
-                            selectedFile = -1,
-                            selectedRank = -1,
-                            legalTargetSquares = emptyList(),
-                            illegalFlashSquares = emptyList(),
-                            isSolved = false,
-                            phase = Bd032ExercisePhase.WRONG_LEGAL_MOVE,
-                            canRetry = true,
-                            feedbackMessage = "این حرکت قانونی است، اما مسئله را حل نمی‌کند. دوباره تلاش کنید.",
-                            feedbackIsSuccess = false,
-                            solutionPlayed = san,
-                            activeTransition = null,
-                            activeMoveTrail = null,
-                            lastMoveDescriptionFa = moveDescFa
-                        )
-                    )
-                }
-                emitSound(ChessSoundType.EXERCISE_WRONG, "bd032_wrong_feedback")
-            }
-        }
-    }
-
+    @Deprecated("Use onExerciseTransitionFinished(exerciseId, transitionId) instead")
     fun onBd032TransitionFinished(transitionId: String) {
-        val currentBd = _uiState.value.bd032State
-        if (currentBd.activeTransition?.transitionId != transitionId) return
-
-        when (currentBd.phase) {
-            Bd032ExercisePhase.ANIMATING_WRONG -> {
-                _uiState.update { state ->
-                    state.copy(
-                        bd032State = state.bd032State.copy(
-                            phase = Bd032ExercisePhase.WRONG_LEGAL_MOVE,
-                            canRetry = true,
-                            feedbackMessage = "این حرکت قانونی است، اما مسئله را حل نمی‌کند. دوباره تلاش کنید.",
-                            feedbackIsSuccess = false,
-                            activeTransition = null
-                        )
-                    )
-                }
-                emitSound(ChessSoundType.EXERCISE_WRONG, "bd032_wrong_feedback")
-            }
-            Bd032ExercisePhase.ANIMATING_CORRECT -> {
-                _uiState.update { state ->
-                    state.copy(
-                        bd032State = state.bd032State.copy(
-                            phase = Bd032ExercisePhase.SOLVED,
-                            activeTransition = null
-                        )
-                    )
-                }
-                emitSound(ChessSoundType.EXERCISE_CORRECT, "bd032_correct_complete")
-            }
-            else -> {
-                _uiState.update { state ->
-                    state.copy(
-                        bd032State = state.bd032State.copy(activeTransition = null)
-                    )
-                }
-            }
-        }
+        onExerciseTransitionFinished(UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID, transitionId)
     }
 
+    @Deprecated("Use onExerciseMoveTrailFinished(exerciseId, eventId) instead")
     fun onBd032MoveTrailFinished(eventId: String) {
-        _uiState.update { state ->
-            val currentBd = state.bd032State
-            if (currentBd.activeMoveTrail?.eventId != eventId) return@update state
-            // Clear only activeMoveTrail; lastMoveDescriptionFa remains visible!
-            state.copy(
-                bd032State = currentBd.copy(activeMoveTrail = null)
-            )
-        }
+        onExerciseMoveTrailFinished(UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID, eventId)
     }
 
-    /**
-     * Retries BD-032 after a wrong legal move ("تلاش دوباره"):
-     * - Returns board to initial exercise FEN
-     * - Clears piece selection
-     * - Clears previous feedback message and persistent move description
-     * - Resets legal moves hint to false (off)
-     * - Re-enables piece selection
-     */
+    @Deprecated("Use retryExercise(exerciseId) instead")
     fun retryBd032() {
-        bd032Adapter.resetToFen(bd032InitialFen)
-        _uiState.update {
-            it.copy(
-                bd032State = Bd032UiState(
-                    currentFen = bd032InitialFen,
-                    selectedSquare = null,
-                    selectedFile = -1,
-                    selectedRank = -1,
-                    legalTargetSquares = emptyList(),
-                    showLegalMovesHint = false,
-                    illegalFlashSquares = emptyList(),
-                    isSolved = false,
-                    phase = Bd032ExercisePhase.IDLE,
-                    canRetry = false,
-                    feedbackMessage = null,
-                    feedbackIsSuccess = false,
-                    solutionPlayed = null,
-                    activeTransition = null,
-                    activeMoveTrail = null,
-                    lastMoveDescriptionFa = null
-                )
-            )
-        }
-        emitSound(ChessSoundType.EXERCISE_RESET, "bd032_retry")
+        retryExercise(UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID)
     }
 
+    @Deprecated("Use resetExercise(exerciseId) instead")
     fun resetBd032() {
-        prefs.setBd032Solved(false)
-        bd032Adapter.resetToFen(bd032InitialFen)
-        _uiState.update {
-            it.copy(
-                bd032State = Bd032UiState(
-                    currentFen = bd032InitialFen,
-                    selectedSquare = null,
-                    selectedFile = -1,
-                    selectedRank = -1,
-                    legalTargetSquares = emptyList(),
-                    showLegalMovesHint = false,
-                    illegalFlashSquares = emptyList(),
-                    isSolved = false,
-                    phase = Bd032ExercisePhase.IDLE,
-                    canRetry = false,
-                    feedbackMessage = "تمرین بازنشانی شد. نوبت سیاه است؛ مهره خود را انتخاب کرده و خانه مقصد را لمس کنید.",
-                    feedbackIsSuccess = false,
-                    solutionPlayed = null,
-                    activeTransition = null,
-                    activeMoveTrail = null,
-                    lastMoveDescriptionFa = null
-                )
-            )
-        }
-        emitSound(ChessSoundType.EXERCISE_RESET, "bd032_reset")
+        resetExercise(UserPreferencesManager.DEFAULT_CH01_EXERCISE_ID)
     }
 
     public override fun onCleared() {

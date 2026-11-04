@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 31,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "کیش، کیش‌ومات، پات و آغاز نمادگذاری",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P031_I001",
+      "assetId": "PDFOBJ_057",
+      "descriptionFa": "تصویر اصلی نمونه کیش با فیل به شاه.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 31
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P031_B001",
+      "textFa": "نکته پایانی درباره شاه این است که وقتی شاه مورد حمله قرار می‌گیرد، می‌گوییم «کیش» شده است. در این مثال، فیل سیاه شاه سفید را در میدان دید خود دارد و تهدید می‌کند آن را بگیرد. در شطرنج، وقتی شاه شما کیش می‌شود باید با حرکتی از زیر کیش خارج شوید. در وضعیت کیش، انجام هر حرکتی که شاه را از کیش خارج نکند غیرقانونی است؛ بنابراین باید به کیش پاسخ بدهید. در ادامه، راه‌های مختلف رفع کیش را با جزئیات بیشتری بررسی می‌کنیم.",
+      "sourcePdfPage": 31
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P031_B002",
+      "textFa": "دو وضعیت دیگر مربوط به شاه، کیش‌ومات و پات هستند که در فصل‌های بعد بیشتر به آن‌ها می‌پردازیم. کیش‌ومات زمانی رخ می‌دهد که شاه مورد حمله قرار گرفته و هیچ راه فراری ندارد؛ در این حالت، بازیکنی که کیش‌ومات کرده برنده بازی است. پات زمانی است که شاه در وضعیت کیش نیست، اما بازیکن هیچ حرکت قانونی‌ای ندارد؛ یعنی شاه ناچار می‌شود به خانه‌ای برود که در آن کیش خواهد شد و این حرکت غیرقانونی است، و هیچ‌یک از مهره‌های دیگرش نیز نمی‌توانند حرکت کنند. بنابراین پات به معنای تساوی بازی است. می‌دانم، می‌دانم؛ مطالب زیادی است! اما قول می‌دهم از گلف یا بیسبال ساده‌تر و البته سرگرم‌کننده‌تر است!",
+      "sourcePdfPage": 31
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P031_B003",
+      "textFa": "این‌ها مقدمه‌ای بر مهره‌ها و قواعد بازی بود. انتظار ندارم همه‌چیز را به خاطر سپرده باشید و نگران هم نباشید؛ همه این موارد را با جزئیات بیشتری بررسی می‌کنیم و آموزش را با کیش‌ومات و معنای واقعی برنده‌شدن در یک بازی شطرنج آغاز خواهیم کرد.",
+      "sourcePdfPage": 31
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P031_H001",
+      "textFa": "نمادگذاری شطرنج",
+      "level": 2,
+      "sourcePdfPage": 31
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P031_B004",
+      "textFa": "نمادگذاری شطرنج روشی است برای ثبت و توصیف حرکت‌های یک بازی. برای بازی‌کردن لازم نیست از همان ابتدا آن را بدانید، اما با پیشرفت در یادگیری بهتر است با آن آشنا شوید. گفتیم هر خانه مختصات مشخصی دارد؛ این مختصات بخشی از نشانه‌ای است که برای هر حرکت نوشته می‌شود. بخش دیگر، مهره‌ای است که به آن خانه حرکت کرده است. جدول زیر نشان می‌دهد هر مهره در نمادگذاری شطرنج با چه نشانه‌ای مشخص می‌شود:",
+      "sourcePdfPage": 31
+    }
+  ],
+  "notesFa": "در این صفحه تصویر نمونه کیش، پاراگراف‌های تعریف کیش‌ومات و پات، و تیتر آغاز نمادگذاری وجود دارد.",
+  "sourceAssetIds": [
+    "PDFOBJ_057",
+    "PDFOBJ_058"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 31,
+      "pdfImageObjectIndex": 57,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_057",
+      "file": "assets/pdf_embedded_objects/pdf_p031_obj057.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار نمونه کیش"
+    },
+    {
+      "sourcePdfPage": 31,
+      "pdfImageObjectIndex": 58,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_058",
+      "file": "assets/pdf_embedded_objects/pdf_p031_obj058.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار نمونه کیش"
+    }
+  ]
+}

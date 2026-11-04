@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sectionId": "SEC_CH01_06_SUMMARY",
+  "placeholderNoticeFa": "محتوای این بخش در حال آماده‌سازی است.",
+  "translationStatus": "PENDING_TRANSLATION",
+  "orderedContentBlocks": [
+    {
+      "type": "paragraph",
+      "blockId": "SEC_CH01_06_SUMMARY_P001",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": true
+    },
+    {
+      "type": "externalReference",
+      "blockId": "SEC_CH01_06_SUMMARY_EXT001",
+      "titleFa": null,
+      "isAuthorizedAndEnabled": false
+    }
+  ]
+}

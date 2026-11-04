@@ -2,6 +2,7 @@ package com.example.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.model.TranslationSlot
 
 enum class FontSizeScale(val scale: Float, val labelFa: String) {
     SMALL(0.85f, "کوچک"),
@@ -24,10 +25,51 @@ class UserPreferencesManager(context: Context) {
     private val prefs: SharedPreferences =
         context.getSharedPreferences("chess_chapter_1_prefs", Context.MODE_PRIVATE)
 
+    init {
+        migrateLegacyPreferencesIfNeeded()
+    }
+
+    private fun migrateLegacyPreferencesIfNeeded() {
+        val migratedV18 = prefs.getBoolean(KEY_MIGRATED_V18_CONTENT_PACK, false)
+        if (!migratedV18) {
+            val editor = prefs.edit()
+
+            // 1. Migrate legacy BD-032 exercise solved key -> EX_CH01_BD032
+            if (prefs.contains(KEY_EXERCISE_BD032) && !prefs.contains(exerciseSolvedKey(DEFAULT_CH01_EXERCISE_ID))) {
+                val solved = prefs.getBoolean(KEY_EXERCISE_BD032, false)
+                editor.putBoolean(exerciseSolvedKey(DEFAULT_CH01_EXERCISE_ID), solved)
+            }
+
+            // 2. Migrate legacy sectionIndex/pageIndex -> stable CH01 sectionId & pageIndex
+            if (prefs.contains(KEY_LAST_READ_SECTION) && !prefs.contains(chapterSectionIdKey(ChapterRepository.DEFAULT_CHAPTER_ID))) {
+                val legacyIndex = prefs.getInt(KEY_LAST_READ_SECTION, 0)
+                val mappedSectionId = TranslationSlot.REQUIRED_SECTION_SLOT_IDS.getOrElse(legacyIndex) {
+                    TranslationSlot.REQUIRED_SECTION_SLOT_IDS.first()
+                }
+                val legacyPageIndex = prefs.getInt(KEY_LAST_READ_PAGE, 0).coerceAtLeast(0)
+                editor.putString(KEY_ACTIVE_BOOK_ID, ChapterRepository.DEFAULT_BOOK_ID)
+                editor.putString(KEY_ACTIVE_CHAPTER_ID, ChapterRepository.DEFAULT_CHAPTER_ID)
+                editor.putString(KEY_LAST_READ_SECTION_ID, mappedSectionId)
+                editor.putString(chapterSectionIdKey(ChapterRepository.DEFAULT_CHAPTER_ID), mappedSectionId)
+                editor.putInt(chapterSectionIndexKey(ChapterRepository.DEFAULT_CHAPTER_ID), legacyIndex.coerceAtLeast(0))
+                editor.putInt(chapterPageIndexKey(ChapterRepository.DEFAULT_CHAPTER_ID), legacyPageIndex)
+            }
+
+            editor.putBoolean(KEY_MIGRATED_V18_CONTENT_PACK, true)
+            editor.apply()
+        }
+    }
+
     companion object {
+        const val DEFAULT_CH01_EXERCISE_ID = "EX_CH01_BD032"
+        private const val KEY_MIGRATED_V18_CONTENT_PACK = "key_migrated_v18_content_pack"
         private const val KEY_FONT_SCALE = "key_font_scale"
         private const val KEY_LAST_READ_SECTION = "key_last_read_section"
         private const val KEY_LAST_READ_PAGE = "key_last_read_page"
+        private const val KEY_LAST_READ_SECTION_ID = "key_last_read_section_id"
+        private const val KEY_LAST_READ_PAGE_ID = "key_last_read_page_id"
+        private const val KEY_ACTIVE_BOOK_ID = "key_active_book_id"
+        private const val KEY_ACTIVE_CHAPTER_ID = "key_active_chapter_id"
         private const val KEY_BOOKMARKS = "key_bookmarks"
         private const val KEY_EXERCISE_BD032 = "key_exercise_bd032"
         private const val KEY_SOUND_ENABLED = "key_sound_enabled"
@@ -47,6 +89,8 @@ class UserPreferencesManager(context: Context) {
         private const val KEY_NARRATION_LAST_SECTION_ID = "key_narration_last_section_id"
         private const val KEY_NARRATION_LAST_BLOCK_ID = "key_narration_last_block_id"
         private const val KEY_NARRATION_LAST_POSITION_MS = "key_narration_last_position_ms"
+        private const val KEY_NARRATION_LAST_CHAPTER_ID = "key_narration_last_chapter_id"
+        private const val KEY_NARRATION_LAST_BOOK_ID = "key_narration_last_book_id"
     }
 
     var fontScale: FontSizeScale
@@ -74,11 +118,172 @@ class UserPreferencesManager(context: Context) {
             prefs.edit().putInt(KEY_LAST_READ_PAGE, value).apply()
         }
 
+    var lastReadSectionId: String?
+        get() = prefs.getString(KEY_LAST_READ_SECTION_ID, null)
+        set(value) {
+            prefs.edit().putString(KEY_LAST_READ_SECTION_ID, value).apply()
+        }
+
+    var lastReadPageId: String?
+        get() = prefs.getString(KEY_LAST_READ_PAGE_ID, null)
+        set(value) {
+            prefs.edit().putString(KEY_LAST_READ_PAGE_ID, value).apply()
+        }
+
+    fun getSavedActiveBookIdOrNull(): String? {
+        return prefs.getString(KEY_ACTIVE_BOOK_ID, null)?.takeIf { it.isNotBlank() }
+    }
+
+    fun getSavedActiveChapterIdOrNull(): String? {
+        return prefs.getString(KEY_ACTIVE_CHAPTER_ID, null)?.takeIf { it.isNotBlank() }
+    }
+
+    var activeBookId: String
+        get() = prefs.getString(KEY_ACTIVE_BOOK_ID, ChapterRepository.DEFAULT_BOOK_ID)
+            ?: ChapterRepository.DEFAULT_BOOK_ID
+        set(value) {
+            prefs.edit().putString(KEY_ACTIVE_BOOK_ID, value).apply()
+        }
+
+    var activeChapterId: String
+        get() = prefs.getString(KEY_ACTIVE_CHAPTER_ID, ChapterRepository.DEFAULT_CHAPTER_ID)
+            ?: ChapterRepository.DEFAULT_CHAPTER_ID
+        set(value) {
+            prefs.edit().putString(KEY_ACTIVE_CHAPTER_ID, value).apply()
+        }
+
+    data class SavedReadingPosition(
+        val bookId: String,
+        val chapterId: String,
+        val sectionId: String?,
+        val sectionIndexFallback: Int,
+        val pageIndex: Int,
+        val pageId: String?
+    )
+
     fun saveReadingPosition(sectionIndex: Int, pageIndex: Int) {
-        prefs.edit()
+        val chapterId = activeChapterId
+        val mappedSecId = if (chapterId == ChapterRepository.DEFAULT_CHAPTER_ID) {
+            TranslationSlot.REQUIRED_SECTION_SLOT_IDS.getOrNull(sectionIndex)
+        } else {
+            null
+        }
+        val editor = prefs.edit()
             .putInt(KEY_LAST_READ_SECTION, sectionIndex)
             .putInt(KEY_LAST_READ_PAGE, pageIndex)
+            .putInt(chapterSectionIndexKey(chapterId), sectionIndex)
+            .putInt(chapterPageIndexKey(chapterId), pageIndex)
+        if (mappedSecId != null) {
+            editor.putString(KEY_LAST_READ_SECTION_ID, mappedSecId)
+            editor.putString(chapterSectionIdKey(chapterId), mappedSecId)
+        }
+        editor.apply()
+    }
+
+    fun saveReadingPosition(
+        bookId: String,
+        chapterId: String,
+        sectionId: String,
+        sectionIndex: Int,
+        pageIndex: Int,
+        pageId: String? = null
+    ) {
+        val safeSecIdx = sectionIndex.coerceAtLeast(0)
+        val safePageIdx = pageIndex.coerceAtLeast(0)
+        prefs.edit()
+            .putString(KEY_ACTIVE_BOOK_ID, bookId)
+            .putString(KEY_ACTIVE_CHAPTER_ID, chapterId)
+            .putString(KEY_LAST_READ_SECTION_ID, sectionId)
+            .putString(KEY_LAST_READ_PAGE_ID, pageId)
+            .putInt(KEY_LAST_READ_SECTION, safeSecIdx)
+            .putInt(KEY_LAST_READ_PAGE, safePageIdx)
+            .putString(chapterSectionIdKey(chapterId), sectionId)
+            .putInt(chapterSectionIndexKey(chapterId), safeSecIdx)
+            .putInt(chapterPageIndexKey(chapterId), safePageIdx)
+            .putString(chapterPageIdKey(chapterId), pageId)
             .apply()
+    }
+
+    fun getSavedReadingPosition(
+        chapterId: String = activeChapterId,
+        bookId: String = activeBookId
+    ): SavedReadingPosition {
+        val sectionId = if (prefs.contains(chapterSectionIdKey(chapterId))) {
+            prefs.getString(chapterSectionIdKey(chapterId), null)
+        } else if (chapterId == ChapterRepository.DEFAULT_CHAPTER_ID && prefs.contains(KEY_LAST_READ_SECTION)) {
+            val legacyIdx = prefs.getInt(KEY_LAST_READ_SECTION, 0)
+            TranslationSlot.REQUIRED_SECTION_SLOT_IDS.getOrNull(legacyIdx)
+        } else {
+            null
+        }
+
+        val sectionIndexFallback = if (prefs.contains(chapterSectionIndexKey(chapterId))) {
+            prefs.getInt(chapterSectionIndexKey(chapterId), 0).coerceAtLeast(0)
+        } else if (chapterId == ChapterRepository.DEFAULT_CHAPTER_ID) {
+            prefs.getInt(KEY_LAST_READ_SECTION, 0).coerceAtLeast(0)
+        } else {
+            0
+        }
+
+        val pageIndex = if (prefs.contains(chapterPageIndexKey(chapterId))) {
+            prefs.getInt(chapterPageIndexKey(chapterId), 0).coerceAtLeast(0)
+        } else if (chapterId == ChapterRepository.DEFAULT_CHAPTER_ID) {
+            prefs.getInt(KEY_LAST_READ_PAGE, 0).coerceAtLeast(0)
+        } else {
+            0
+        }
+
+        val pageId = prefs.getString(chapterPageIdKey(chapterId), null)
+            ?: if (chapterId == ChapterRepository.DEFAULT_CHAPTER_ID) {
+                prefs.getString(KEY_LAST_READ_PAGE_ID, null)
+            } else {
+                null
+            }
+
+        return SavedReadingPosition(
+            bookId = bookId,
+            chapterId = chapterId,
+            sectionId = sectionId,
+            sectionIndexFallback = sectionIndexFallback,
+            pageIndex = pageIndex,
+            pageId = pageId
+        )
+    }
+
+    data class SavedFrontMatterPosition(
+        val bookId: String,
+        val sourcePdfPage: Int,
+        val pageIndex: Int,
+        val pageId: String?
+    )
+
+    fun saveFrontMatterReadingPosition(
+        bookId: String = activeBookId,
+        sourcePdfPage: Int,
+        pageIndex: Int,
+        pageId: String? = null
+    ) {
+        val safePdfPage = sourcePdfPage.coerceIn(1, 39)
+        val safePageIdx = pageIndex.coerceAtLeast(0)
+        prefs.edit()
+            .putInt(frontMatterSourcePdfPageKey(bookId), safePdfPage)
+            .putInt(frontMatterPageIndexKey(bookId), safePageIdx)
+            .putString(frontMatterPageIdKey(bookId), pageId)
+            .apply()
+    }
+
+    fun getSavedFrontMatterReadingPosition(
+        bookId: String = activeBookId
+    ): SavedFrontMatterPosition {
+        val sourcePdfPage = prefs.getInt(frontMatterSourcePdfPageKey(bookId), 1).coerceIn(1, 39)
+        val pageIndex = prefs.getInt(frontMatterPageIndexKey(bookId), 0).coerceAtLeast(0)
+        val pageId = prefs.getString(frontMatterPageIdKey(bookId), null)
+        return SavedFrontMatterPosition(
+            bookId = bookId,
+            sourcePdfPage = sourcePdfPage,
+            pageIndex = pageIndex,
+            pageId = pageId
+        )
     }
 
     fun isBookmarked(diagramId: String): Boolean {
@@ -103,12 +308,31 @@ class UserPreferencesManager(context: Context) {
         return prefs.getStringSet(KEY_BOOKMARKS, emptySet()) ?: emptySet()
     }
 
+    fun isExerciseSolved(exerciseId: String): Boolean {
+        val key = exerciseSolvedKey(exerciseId)
+        if (prefs.contains(key)) {
+            return prefs.getBoolean(key, false)
+        }
+        if (exerciseId == DEFAULT_CH01_EXERCISE_ID) {
+            return prefs.getBoolean(KEY_EXERCISE_BD032, false)
+        }
+        return false
+    }
+
+    fun setExerciseSolved(exerciseId: String, solved: Boolean) {
+        val editor = prefs.edit().putBoolean(exerciseSolvedKey(exerciseId), solved)
+        if (exerciseId == DEFAULT_CH01_EXERCISE_ID) {
+            editor.putBoolean(KEY_EXERCISE_BD032, solved)
+        }
+        editor.apply()
+    }
+
     fun isBd032Solved(): Boolean {
-        return prefs.getBoolean(KEY_EXERCISE_BD032, false)
+        return isExerciseSolved(DEFAULT_CH01_EXERCISE_ID)
     }
 
     fun setBd032Solved(solved: Boolean) {
-        prefs.edit().putBoolean(KEY_EXERCISE_BD032, solved).apply()
+        setExerciseSolved(DEFAULT_CH01_EXERCISE_ID, solved)
     }
 
     var soundEnabled: Boolean
@@ -204,9 +428,14 @@ class UserPreferencesManager(context: Context) {
 
     var narrationSpeed: com.example.audio.NarrationPlaybackSpeed
         get() {
-            val name = prefs.getString(KEY_NARRATION_SPEED, com.example.audio.NarrationPlaybackSpeed.SPEED_1_0X.name)
+            val name = prefs.getString(
+                KEY_NARRATION_SPEED,
+                com.example.audio.NarrationPlaybackSpeed.SPEED_1_0X.name
+            )
             return try {
-                com.example.audio.NarrationPlaybackSpeed.valueOf(name ?: com.example.audio.NarrationPlaybackSpeed.SPEED_1_0X.name)
+                com.example.audio.NarrationPlaybackSpeed.valueOf(
+                    name ?: com.example.audio.NarrationPlaybackSpeed.SPEED_1_0X.name
+                )
             } catch (e: Exception) {
                 com.example.audio.NarrationPlaybackSpeed.SPEED_1_0X
             }
@@ -219,6 +448,18 @@ class UserPreferencesManager(context: Context) {
         get() = prefs.getInt(KEY_NARRATION_VOLUME_PERCENT, 85).coerceIn(0, 100)
         set(value) {
             prefs.edit().putInt(KEY_NARRATION_VOLUME_PERCENT, value.coerceIn(0, 100)).apply()
+        }
+
+    var narrationLastChapterId: String?
+        get() = prefs.getString(KEY_NARRATION_LAST_CHAPTER_ID, null)
+        set(value) {
+            prefs.edit().putString(KEY_NARRATION_LAST_CHAPTER_ID, value).apply()
+        }
+
+    var narrationLastBookId: String?
+        get() = prefs.getString(KEY_NARRATION_LAST_BOOK_ID, null)
+        set(value) {
+            prefs.edit().putString(KEY_NARRATION_LAST_BOOK_ID, value).apply()
         }
 
     var narrationLastSectionId: String?
@@ -239,20 +480,115 @@ class UserPreferencesManager(context: Context) {
             prefs.edit().putInt(KEY_NARRATION_LAST_POSITION_MS, value.coerceAtLeast(0)).apply()
         }
 
-    fun saveNarrationResumeState(sectionId: String, blockId: String, positionMs: Int) {
+    data class SavedNarrationPosition(
+        val bookId: String,
+        val chapterId: String,
+        val sectionId: String?,
+        val blockId: String?,
+        val positionMs: Int
+    )
+
+    fun saveNarrationResumeState(
+        sectionId: String,
+        blockId: String,
+        positionMs: Int,
+        chapterId: String = activeChapterId,
+        bookId: String = activeBookId
+    ) {
+        val clampedPos = positionMs.coerceAtLeast(0)
         prefs.edit()
+            .putString(KEY_NARRATION_LAST_BOOK_ID, bookId)
+            .putString(KEY_NARRATION_LAST_CHAPTER_ID, chapterId)
             .putString(KEY_NARRATION_LAST_SECTION_ID, sectionId)
             .putString(KEY_NARRATION_LAST_BLOCK_ID, blockId)
-            .putInt(KEY_NARRATION_LAST_POSITION_MS, positionMs.coerceAtLeast(0))
+            .putInt(KEY_NARRATION_LAST_POSITION_MS, clampedPos)
+            .putString(narrationSectionIdKey(bookId, chapterId), sectionId)
+            .putString(narrationBlockIdKey(bookId, chapterId), blockId)
+            .putInt(narrationPositionMsKey(bookId, chapterId), clampedPos)
             .apply()
     }
 
-    fun clearNarrationResumeState() {
-        prefs.edit()
-            .remove(KEY_NARRATION_LAST_SECTION_ID)
-            .remove(KEY_NARRATION_LAST_BLOCK_ID)
-            .remove(KEY_NARRATION_LAST_POSITION_MS)
-            .apply()
+    fun getSavedNarrationResumeState(
+        chapterId: String,
+        bookId: String = activeBookId
+    ): SavedNarrationPosition {
+        val scopedSecKey = narrationSectionIdKey(bookId, chapterId)
+        val scopedBlkKey = narrationBlockIdKey(bookId, chapterId)
+        val scopedPosKey = narrationPositionMsKey(bookId, chapterId)
+
+        if (prefs.contains(scopedSecKey) || prefs.contains(scopedBlkKey)) {
+            return SavedNarrationPosition(
+                bookId = bookId,
+                chapterId = chapterId,
+                sectionId = prefs.getString(scopedSecKey, null),
+                blockId = prefs.getString(scopedBlkKey, null),
+                positionMs = prefs.getInt(scopedPosKey, 0).coerceAtLeast(0)
+            )
+        }
+
+        // Legacy fallback only if global narration resume belonged to the same chapter (or had no chapter set for CH01)
+        val lastChap = prefs.getString(KEY_NARRATION_LAST_CHAPTER_ID, null)
+        val lastBook = prefs.getString(KEY_NARRATION_LAST_BOOK_ID, null)
+        val matchesLegacy = (lastChap == chapterId && (lastBook == null || lastBook == bookId)) ||
+            (lastChap == null && chapterId == ChapterRepository.DEFAULT_CHAPTER_ID)
+        return if (matchesLegacy) {
+            SavedNarrationPosition(
+                bookId = bookId,
+                chapterId = chapterId,
+                sectionId = prefs.getString(KEY_NARRATION_LAST_SECTION_ID, null),
+                blockId = prefs.getString(KEY_NARRATION_LAST_BLOCK_ID, null),
+                positionMs = prefs.getInt(KEY_NARRATION_LAST_POSITION_MS, 0).coerceAtLeast(0)
+            )
+        } else {
+            SavedNarrationPosition(
+                bookId = bookId,
+                chapterId = chapterId,
+                sectionId = null,
+                blockId = null,
+                positionMs = 0
+            )
+        }
     }
+
+    fun clearNarrationResumeState(
+        chapterId: String? = null,
+        bookId: String = activeBookId
+    ) {
+        val editor = prefs.edit()
+        if (chapterId != null) {
+            editor.remove(narrationSectionIdKey(bookId, chapterId))
+                .remove(narrationBlockIdKey(bookId, chapterId))
+                .remove(narrationPositionMsKey(bookId, chapterId))
+            if (prefs.getString(KEY_NARRATION_LAST_CHAPTER_ID, null) == chapterId) {
+                editor.remove(KEY_NARRATION_LAST_BOOK_ID)
+                    .remove(KEY_NARRATION_LAST_CHAPTER_ID)
+                    .remove(KEY_NARRATION_LAST_SECTION_ID)
+                    .remove(KEY_NARRATION_LAST_BLOCK_ID)
+                    .remove(KEY_NARRATION_LAST_POSITION_MS)
+            }
+        } else {
+            prefs.all.keys
+                .filter { it.startsWith("key_narration_last_") }
+                .forEach { editor.remove(it) }
+        }
+        editor.apply()
+    }
+
+    private fun exerciseSolvedKey(exerciseId: String): String = "key_exercise_solved_$exerciseId"
+    private fun chapterSectionIdKey(chapterId: String): String = "key_last_read_section_id_$chapterId"
+    private fun chapterSectionIndexKey(chapterId: String): String = "key_last_read_section_idx_$chapterId"
+    private fun chapterPageIndexKey(chapterId: String): String = "key_last_read_page_idx_$chapterId"
+    private fun chapterPageIdKey(chapterId: String): String = "key_last_read_page_id_$chapterId"
+    private fun narrationSectionIdKey(bookId: String, chapterId: String): String =
+        "key_narration_last_section_id_${bookId}_$chapterId"
+    private fun narrationBlockIdKey(bookId: String, chapterId: String): String =
+        "key_narration_last_block_id_${bookId}_$chapterId"
+    private fun narrationPositionMsKey(bookId: String, chapterId: String): String =
+        "key_narration_last_pos_ms_${bookId}_$chapterId"
+    private fun frontMatterSourcePdfPageKey(bookId: String): String =
+        "key_front_matter_last_pdf_page_$bookId"
+    private fun frontMatterPageIndexKey(bookId: String): String =
+        "key_front_matter_last_page_idx_$bookId"
+    private fun frontMatterPageIdKey(bookId: String): String =
+        "key_front_matter_last_page_id_$bookId"
 }
-

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "sectionId": "SEC_CH01_01_OPENING",
+  "placeholderNoticeFa": "محتوای این بخش در حال آماده‌سازی است.",
+  "translationStatus": "PENDING_TRANSLATION",
+  "orderedContentBlocks": [
+    {
+      "type": "paragraph",
+      "blockId": "SEC_CH01_01_OPENING_P001",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": true
+    },
+    {
+      "type": "diagram",
+      "blockId": "SEC_CH01_01_OPENING_D025",
+      "diagramId": "BD-025"
+    }
+  ]
+}

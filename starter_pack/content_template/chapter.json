@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "chapterId": "CHXX",
+  "chapterNumber": 2,
+  "titleEn": "Chapter Title (English)",
+  "titleFa": "عنوان فصل به فارسی",
+  "diagramsFile": "diagrams.json",
+  "pgnSequencesFile": "pgn_sequences.json",
+  "exercisesFile": "exercises.json",
+  "narrationManifestFile": "narration/manifest.json",
+  "sections": [
+    {
+      "sectionId": "SEC_CHXX_01_OPENING",
+      "order": 1,
+      "sectionKind": "OPENING",
+      "titleEn": "Chapter opening",
+      "titleFa": "شروع فصل",
+      "pdfPages": [51],
+      "file": "sections/01_opening.json"
+    },
+    {
+      "sectionId": "SEC_CHXX_02_SUMMARY",
+      "order": 2,
+      "sectionKind": "SUMMARY",
+      "titleEn": "Summary",
+      "titleFa": "خلاصه",
+      "pdfPages": [60],
+      "file": "sections/02_summary.json"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chessbook.aistudio.com/schemas/diagrams.schema.json",
+  "title": "Chapter Diagrams Collection",
+  "type": "object",
+  "required": ["schema_version", "diagrams"],
+  "properties": {
+    "schema_version": { "type": "string", "minLength": 1 },
+    "chapter_id": { "type": "string", "minLength": 1 },
+    "source_file": { "type": "string" },
+    "source_pdf_pages": { "type": "integer" },
+    "page_numbering": { "type": "string" },
+    "diagrams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "diagram_id",
+          "pdf_page",
+          "section",
+          "book_context",
+          "diagram_kind",
+          "recommended_interaction",
+          "fen",
+          "side_to_move"
+        ],
+        "properties": {
+          "diagram_id": { "type": "string", "minLength": 1 },
+          "pdf_page": { "type": "integer", "minimum": 1 },
+          "image_xref": { "type": "integer" },
+          "section": { "type": "string" },
+          "book_context": { "type": "string" },
+          "diagram_kind": { "type": "string" },
+          "recommended_interaction": { "type": "string" },
+          "fen": { "type": "string", "minLength": 1 },
+          "fen_status": { "type": "string" },
+          "side_to_move": { "type": "string" },
+          "move_history": { "type": "string" },
+          "pgn_ref": { "type": ["string", "null"] },
+          "solution_pgn_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "highlight_squares": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "related_diagram_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "visual_confidence": { "type": "string" },
+          "audit_status": {
+            "type": "string",
+            "enum": ["VALID", "BLOCKED_NEEDS_HUMAN_REVIEW", "WARNING"]
+          },
+          "audit_warning_fa": { "type": ["string", "null"] },
+          "implementation_notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

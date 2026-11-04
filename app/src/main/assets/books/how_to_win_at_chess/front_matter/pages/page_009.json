@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 9,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "TABLE_OF_CONTENTS",
+  "pageTitleFa": "فهرست مطالب — صفحه 9",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_001",
+      "textFa": "وزیر",
+      "level": 3,
+      "tocTargetSourcePdfPage": 518,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "The Queen",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_002",
+      "textFa": "تعویض مهره‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 524,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "Trading Pieces",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_003",
+      "textFa": "فهرست بازبینی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 548,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "Checklist",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_004",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 570,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_005",
+      "textFa": "اصطلاحات و مفاهیم کلیدی",
+      "level": 1,
+      "tocTargetSourcePdfPage": 571,
+      "tocEntryKind": "backMatter",
+      "chapterId": null,
+      "sourceVisibleText": "KEY TERMS AND CONCEPTS",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_006",
+      "textFa": "سپاسگزاری",
+      "level": 1,
+      "tocTargetSourcePdfPage": 575,
+      "tocEntryKind": "backMatter",
+      "chapterId": null,
+      "sourceVisibleText": "ACKNOWLEDGMENTS",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_007",
+      "textFa": "درباره نویسنده",
+      "level": 1,
+      "tocTargetSourcePdfPage": 576,
+      "tocEntryKind": "backMatter",
+      "chapterId": null,
+      "sourceVisibleText": "ABOUT THE AUTHOR",
+      "sourcePdfPage": 9
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P009_TOC_008",
+      "textFa": "نمایه",
+      "level": 1,
+      "tocTargetSourcePdfPage": 577,
+      "tocEntryKind": "backMatter",
+      "chapterId": null,
+      "sourceVisibleText": "INDEX",
+      "sourcePdfPage": 9
+    }
+  ],
+  "notesFa": "تمام عنوان‌ها، ترتیب و مقصد پیوندهای داخلی فهرست باید حفظ شوند.",
+  "sourceAssetIds": [],
+  "sourceLinks": [
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "The Queen",
+      "linkKind": 1,
+      "targetSourcePdfPage": 518
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "Trading Pieces",
+      "linkKind": 1,
+      "targetSourcePdfPage": 524
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "Checklist",
+      "linkKind": 1,
+      "targetSourcePdfPage": 548
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 570
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "KEY TERMS AND CONCEPTS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 571
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "ACKNOWLEDGMENTS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 575
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "ABOUT THE AUTHOR",
+      "linkKind": 1,
+      "targetSourcePdfPage": 576
+    },
+    {
+      "sourcePdfPage": 9,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "INDEX",
+      "linkKind": 1,
+      "targetSourcePdfPage": 577
+    }
+  ],
+  "sourceAssets": []
+}

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 12,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "صفحه شطرنج و مختصات آن",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P012_I001",
+      "assetId": "PDFOBJ_013",
+      "descriptionFa": "تصویر اصلی صفحه شطرنج ۸×۸ با مختصات از ۱ تا ۸ و a تا h.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 12
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P012_B001",
+      "textFa": "صفحه شطرنج ۶۴ خانه دارد که در قالب شبکه‌ای ۸×۸ چیده شده‌اند. رنگ خانه‌ها یکی‌درمیان روشن و تیره است. گوشه پایین سمت راست باید برای هر دو بازیکن خانه‌ای روشن باشد؛ چه با صفحه واقعی بازی کنید و چه آنلاین.",
+      "sourcePdfPage": 12
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P012_B002",
+      "textFa": "صفحه مختصات هم دارد. در صفحه‌های آنلاین احتمالاً مختصات را روی صفحه می‌بینید، اما بیشتر صفحه‌های واقعی چنین نشانه‌هایی ندارند. مختصات را مانند نقشه‌ای ساده در نظر بگیرید. خط‌های عمودی صفحه شطرنج «ستون» نامیده می‌شوند و از a تا h، از چپ به راست، نام‌گذاری می‌شوند. ردیف‌های افقی «ردیف» نام دارند و از ۱ تا ۸، از پایین به بالا، شماره‌گذاری می‌شوند. بنابراین هر خانه صفحه شطرنج را می‌توان با ترکیب حرف ستون و شماره ردیف مشخص کرد:",
+      "sourcePdfPage": 12
+    }
+  ],
+  "notesFa": "تصویر صفحه شطرنج و مختصات اصلی بدون تغییر حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_013",
+    "PDFOBJ_014"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 12,
+      "pdfImageObjectIndex": 13,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_013",
+      "file": "assets/pdf_embedded_objects/pdf_p012_obj013.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار صفحه شطرنج و نشانگر صفحه"
+    },
+    {
+      "sourcePdfPage": 12,
+      "pdfImageObjectIndex": 14,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_014",
+      "file": "assets/pdf_embedded_objects/pdf_p012_obj014.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار صفحه شطرنج و نشانگر صفحه"
+    }
+  ]
+}

@@ -1,0 +1,730 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 7,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "TABLE_OF_CONTENTS",
+  "pageTitleFa": "فهرست مطالب — صفحه 7",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_001",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 133,
+      "tocEntryKind": "topic",
+      "chapterId": "CH04",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_002",
+      "textFa": "فصل پنجم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 135,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH05",
+      "sourceVisibleText": "CHAPTER FIVE",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_003",
+      "textFa": "آخر بازی‌ها ۲",
+      "level": 2,
+      "tocTargetSourcePdfPage": 136,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH05",
+      "sourceVisibleText": "ENDGAMES II",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_004",
+      "textFa": "مات‌های تک‌مهره‌ای (Solo Acts)",
+      "level": 3,
+      "tocTargetSourcePdfPage": 136,
+      "tocEntryKind": "topic",
+      "chapterId": "CH05",
+      "sourceVisibleText": "Solo Acts",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_005",
+      "textFa": "مات با دو مهره",
+      "level": 3,
+      "tocTargetSourcePdfPage": 141,
+      "tocEntryKind": "topic",
+      "chapterId": "CH05",
+      "sourceVisibleText": "Two-Piece Checkmate",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_006",
+      "textFa": "ارتقای الگوهای کیش‌ومات به سطح بالاتر",
+      "level": 3,
+      "tocTargetSourcePdfPage": 156,
+      "tocEntryKind": "topic",
+      "chapterId": "CH05",
+      "sourceVisibleText": "Taking Checkmates to the Next Level",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_007",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 164,
+      "tocEntryKind": "topic",
+      "chapterId": "CH05",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_008",
+      "textFa": "فصل ششم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 165,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH06",
+      "sourceVisibleText": "CHAPTER SIX",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_009",
+      "textFa": "آخر بازی‌ها ۳",
+      "level": 2,
+      "tocTargetSourcePdfPage": 166,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH06",
+      "sourceVisibleText": "ENDGAMES III",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_010",
+      "textFa": "تساوی با توافق",
+      "level": 3,
+      "tocTargetSourcePdfPage": 166,
+      "tocEntryKind": "topic",
+      "chapterId": "CH06",
+      "sourceVisibleText": "Draw by Agreement",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_011",
+      "textFa": "تساوی بر اثر تکرار وضعیت",
+      "level": 3,
+      "tocTargetSourcePdfPage": 168,
+      "tocEntryKind": "topic",
+      "chapterId": "CH06",
+      "sourceVisibleText": "Draw by Repetition",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_012",
+      "textFa": "تساوی بر اثر پات",
+      "level": 3,
+      "tocTargetSourcePdfPage": 176,
+      "tocEntryKind": "topic",
+      "chapterId": "CH06",
+      "sourceVisibleText": "Draw by Stalemate",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_013",
+      "textFa": "قانون ۵۰ حرکت",
+      "level": 3,
+      "tocTargetSourcePdfPage": 179,
+      "tocEntryKind": "topic",
+      "chapterId": "CH06",
+      "sourceVisibleText": "50-Move Rule",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_014",
+      "textFa": "تساوی به‌دلیل ناکافی‌بودن مهره‌های مات‌کننده",
+      "level": 3,
+      "tocTargetSourcePdfPage": 180,
+      "tocEntryKind": "topic",
+      "chapterId": "CH06",
+      "sourceVisibleText": "Draw by Insufficient Checkmating Material",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_015",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 184,
+      "tocEntryKind": "topic",
+      "chapterId": "CH06",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_016",
+      "textFa": "فصل هفتم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 185,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH07",
+      "sourceVisibleText": "CHAPTER SEVEN",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_017",
+      "textFa": "حمله، دفاع و گرفتن مهره",
+      "level": 2,
+      "tocTargetSourcePdfPage": 186,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH07",
+      "sourceVisibleText": "ATTACKING, DEFENDING, AND CAPTURING",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_018",
+      "textFa": "میدان دید و خانه‌های تحت پوشش مهره‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 186,
+      "tocEntryKind": "topic",
+      "chapterId": "CH07",
+      "sourceVisibleText": "Piece Vision",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_019",
+      "textFa": "حمله و دفاع",
+      "level": 3,
+      "tocTargetSourcePdfPage": 193,
+      "tocEntryKind": "topic",
+      "chapterId": "CH07",
+      "sourceVisibleText": "Attacking and Defending",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_020",
+      "textFa": "تاکتیک‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 209,
+      "tocEntryKind": "topic",
+      "chapterId": "CH07",
+      "sourceVisibleText": "Tactics",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_021",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 231,
+      "tocEntryKind": "topic",
+      "chapterId": "CH07",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_022",
+      "textFa": "فصل هشتم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 232,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH08",
+      "sourceVisibleText": "CHAPTER EIGHT",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_023",
+      "textFa": "راهبرد مقدماتی",
+      "level": 2,
+      "tocTargetSourcePdfPage": 233,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH08",
+      "sourceVisibleText": "BEGINNER STRATEGY",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_024",
+      "textFa": "ضعف‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 233,
+      "tocEntryKind": "topic",
+      "chapterId": "CH08",
+      "sourceVisibleText": "Weaknesses",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_025",
+      "textFa": "فضا",
+      "level": 3,
+      "tocTargetSourcePdfPage": 248,
+      "tocEntryKind": "topic",
+      "chapterId": "CH08",
+      "sourceVisibleText": "Space",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_026",
+      "textFa": "وضعیت‌های بسته در برابر وضعیت‌های باز",
+      "level": 3,
+      "tocTargetSourcePdfPage": 254,
+      "tocEntryKind": "topic",
+      "chapterId": "CH08",
+      "sourceVisibleText": "Closed vs. Open Positions",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_027",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 260,
+      "tocEntryKind": "topic",
+      "chapterId": "CH08",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_028",
+      "textFa": "بخش دوم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 261,
+      "tocEntryKind": "part",
+      "chapterId": null,
+      "sourceVisibleText": "PART TWO",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_029",
+      "textFa": "فصل نهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 263,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH09",
+      "sourceVisibleText": "CHAPTER NINE",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_030",
+      "textFa": "گشایش‌های سطح متوسط",
+      "level": 2,
+      "tocTargetSourcePdfPage": 264,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH09",
+      "sourceVisibleText": "INTERMEDIATE OPENINGS",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_031",
+      "textFa": "یادگیری گشایش‌ها با مهره‌های سفید",
+      "level": 3,
+      "tocTargetSourcePdfPage": 264,
+      "tocEntryKind": "topic",
+      "chapterId": "CH09",
+      "sourceVisibleText": "Learning Openings with White",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_032",
+      "textFa": "یادگیری گشایش‌ها با مهره‌های سیاه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 269,
+      "tocEntryKind": "topic",
+      "chapterId": "CH09",
+      "sourceVisibleText": "Learning Openings with Black",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_033",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 277,
+      "tocEntryKind": "topic",
+      "chapterId": "CH09",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_034",
+      "textFa": "فصل دهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 278,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH10",
+      "sourceVisibleText": "CHAPTER TEN",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_035",
+      "textFa": "گشایش‌های سطح متوسط برای سفید",
+      "level": 2,
+      "tocTargetSourcePdfPage": 279,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH10",
+      "sourceVisibleText": "INTERMEDIATE OPENINGS FOR WHITE",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_036",
+      "textFa": "سیستم لندن",
+      "level": 3,
+      "tocTargetSourcePdfPage": 279,
+      "tocEntryKind": "topic",
+      "chapterId": "CH10",
+      "sourceVisibleText": "London System",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_037",
+      "textFa": "سیستم وین",
+      "level": 3,
+      "tocTargetSourcePdfPage": 286,
+      "tocEntryKind": "topic",
+      "chapterId": "CH10",
+      "sourceVisibleText": "Vienna System",
+      "sourcePdfPage": 7
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P007_TOC_038",
+      "textFa": "واریانت آلپین در دفاع سیسیلی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 296,
+      "tocEntryKind": "topic",
+      "chapterId": "CH10",
+      "sourceVisibleText": "Alapin Sicilian Variation",
+      "sourcePdfPage": 7
+    }
+  ],
+  "notesFa": "تمام عنوان‌ها، ترتیب و مقصد پیوندهای داخلی فهرست باید حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_010",
+    "PDFOBJ_011"
+  ],
+  "sourceLinks": [
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 133
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "CHAPTER FIVE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 135
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "ENDGAMES II",
+      "linkKind": 1,
+      "targetSourcePdfPage": 136
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Solo Acts",
+      "linkKind": 1,
+      "targetSourcePdfPage": 136
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "Two-Piece Checkmate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 141
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "Taking Checkmates to the Next Level",
+      "linkKind": 1,
+      "targetSourcePdfPage": 156
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 164
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "CHAPTER SIX",
+      "linkKind": 1,
+      "targetSourcePdfPage": 165
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 9,
+      "sourceLabel": "ENDGAMES III",
+      "linkKind": 1,
+      "targetSourcePdfPage": 166
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 10,
+      "sourceLabel": "Draw by Agreement",
+      "linkKind": 1,
+      "targetSourcePdfPage": 166
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 11,
+      "sourceLabel": "Draw by Repetition",
+      "linkKind": 1,
+      "targetSourcePdfPage": 168
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 12,
+      "sourceLabel": "Draw by Stalemate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 176
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 13,
+      "sourceLabel": "50-Move Rule",
+      "linkKind": 1,
+      "targetSourcePdfPage": 179
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 14,
+      "sourceLabel": "Draw by Insufficient Checkmating Material",
+      "linkKind": 1,
+      "targetSourcePdfPage": 180
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 15,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 184
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 16,
+      "sourceLabel": "CHAPTER SEVEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 185
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 17,
+      "sourceLabel": "ATTACKING, DEFENDING, AND CAPTURING",
+      "linkKind": 1,
+      "targetSourcePdfPage": 186
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 18,
+      "sourceLabel": "Piece Vision",
+      "linkKind": 1,
+      "targetSourcePdfPage": 186
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 19,
+      "sourceLabel": "Attacking and Defending",
+      "linkKind": 1,
+      "targetSourcePdfPage": 193
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 20,
+      "sourceLabel": "Tactics",
+      "linkKind": 1,
+      "targetSourcePdfPage": 209
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 21,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 231
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 22,
+      "sourceLabel": "CHAPTER EIGHT",
+      "linkKind": 1,
+      "targetSourcePdfPage": 232
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 23,
+      "sourceLabel": "BEGINNER STRATEGY",
+      "linkKind": 1,
+      "targetSourcePdfPage": 233
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 24,
+      "sourceLabel": "Weaknesses",
+      "linkKind": 1,
+      "targetSourcePdfPage": 233
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 25,
+      "sourceLabel": "Space",
+      "linkKind": 1,
+      "targetSourcePdfPage": 248
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 26,
+      "sourceLabel": "Closed vs. Open Positions",
+      "linkKind": 1,
+      "targetSourcePdfPage": 254
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 27,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 260
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 28,
+      "sourceLabel": "PART TWO",
+      "linkKind": 1,
+      "targetSourcePdfPage": 261
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 29,
+      "sourceLabel": "CHAPTER NINE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 263
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 30,
+      "sourceLabel": "INTERMEDIATE OPENINGS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 264
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 31,
+      "sourceLabel": "Learning Openings with White",
+      "linkKind": 1,
+      "targetSourcePdfPage": 264
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 32,
+      "sourceLabel": "Learning Openings with Black",
+      "linkKind": 1,
+      "targetSourcePdfPage": 269
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 33,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 277
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 34,
+      "sourceLabel": "CHAPTER TEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 278
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 35,
+      "sourceLabel": "INTERMEDIATE OPENINGS FOR WHITE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 279
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 36,
+      "sourceLabel": "London System",
+      "linkKind": 1,
+      "targetSourcePdfPage": 279
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 37,
+      "sourceLabel": "Vienna System",
+      "linkKind": 1,
+      "targetSourcePdfPage": 286
+    },
+    {
+      "sourcePdfPage": 7,
+      "linkIndexOnPage": 38,
+      "sourceLabel": "Alapin Sicilian Variation",
+      "linkKind": 1,
+      "targetSourcePdfPage": 296
+    }
+  ],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 7,
+      "pdfImageObjectIndex": 10,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 841,
+      "height": 841,
+      "assetId": "PDFOBJ_010",
+      "file": "assets/pdf_embedded_objects/pdf_p007_obj010.png",
+      "format": "png",
+      "descriptionFa": "نشان صفحه فهرست بخش بعدی و لایه‌های تصویر دارای ماسک"
+    },
+    {
+      "sourcePdfPage": 7,
+      "pdfImageObjectIndex": 11,
+      "pdfImageType": "smask",
+      "pdfObjectId": "no",
+      "width": 841,
+      "height": 841,
+      "assetId": "PDFOBJ_011",
+      "file": "assets/pdf_embedded_objects/pdf_p007_obj011.png",
+      "format": "png",
+      "descriptionFa": "نشان صفحه فهرست بخش بعدی و لایه‌های تصویر دارای ماسک"
+    }
+  ]
+}

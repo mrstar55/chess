@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 8,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "TABLE_OF_CONTENTS",
+  "pageTitleFa": "فهرست مطالب — صفحه 8",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_001",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 302,
+      "tocEntryKind": "topic",
+      "chapterId": "CH10",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_002",
+      "textFa": "فصل یازدهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 303,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH11",
+      "sourceVisibleText": "CHAPTER ELEVEN",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_003",
+      "textFa": "گشایش‌های سطح متوسط برای سیاه",
+      "level": 2,
+      "tocTargetSourcePdfPage": 304,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH11",
+      "sourceVisibleText": "INTERMEDIATE OPENINGS FOR BLACK",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_004",
+      "textFa": "دفاع اسکاندیناوی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 304,
+      "tocEntryKind": "topic",
+      "chapterId": "CH11",
+      "sourceVisibleText": "Scandinavian Defense",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_005",
+      "textFa": "دفاع کارو-کان",
+      "level": 3,
+      "tocTargetSourcePdfPage": 309,
+      "tocEntryKind": "topic",
+      "chapterId": "CH11",
+      "sourceVisibleText": "Caro-Kann Defense",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_006",
+      "textFa": "گامبی وزیر ردشده",
+      "level": 3,
+      "tocTargetSourcePdfPage": 319,
+      "tocEntryKind": "topic",
+      "chapterId": "CH11",
+      "sourceVisibleText": "Queen’s Gambit Declined",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_007",
+      "textFa": "گشایش‌های مبتنی بر چیدمان",
+      "level": 3,
+      "tocTargetSourcePdfPage": 325,
+      "tocEntryKind": "topic",
+      "chapterId": "CH11",
+      "sourceVisibleText": "Setup-Based Openings",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_008",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 330,
+      "tocEntryKind": "topic",
+      "chapterId": "CH11",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_009",
+      "textFa": "فصل دوازدهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 331,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH12",
+      "sourceVisibleText": "CHAPTER TWELVE",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_010",
+      "textFa": "گامبی‌ها",
+      "level": 2,
+      "tocTargetSourcePdfPage": 332,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH12",
+      "sourceVisibleText": "GAMBITS",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_011",
+      "textFa": "گامبی‌های سفید",
+      "level": 3,
+      "tocTargetSourcePdfPage": 332,
+      "tocEntryKind": "topic",
+      "chapterId": "CH12",
+      "sourceVisibleText": "Gambits for White",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_012",
+      "textFa": "گامبی‌های سیاه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 354,
+      "tocEntryKind": "topic",
+      "chapterId": "CH12",
+      "sourceVisibleText": "Gambits for Black",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_013",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 376,
+      "tocEntryKind": "topic",
+      "chapterId": "CH12",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_014",
+      "textFa": "فصل سیزدهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 377,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH13",
+      "sourceVisibleText": "CHAPTER THIRTEEN",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_015",
+      "textFa": "آخر بازی‌های سطح متوسط",
+      "level": 2,
+      "tocTargetSourcePdfPage": 378,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH13",
+      "sourceVisibleText": "INTERMEDIATE ENDGAMES",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_016",
+      "textFa": "آخر بازی شاه و پیاده",
+      "level": 3,
+      "tocTargetSourcePdfPage": 378,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "King and Pawn Endgames",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_017",
+      "textFa": "آخر بازی اسب",
+      "level": 3,
+      "tocTargetSourcePdfPage": 394,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "Knight Endgames",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_018",
+      "textFa": "آخر بازی اسب در برابر فیل",
+      "level": 3,
+      "tocTargetSourcePdfPage": 399,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "Knight vs. Bishop Endgames",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_019",
+      "textFa": "آخر بازی فیل",
+      "level": 3,
+      "tocTargetSourcePdfPage": 403,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "Bishop Endgames",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_020",
+      "textFa": "آخر بازی رخ",
+      "level": 3,
+      "tocTargetSourcePdfPage": 411,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "Rook Endgames",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_021",
+      "textFa": "آخر بازی وزیر",
+      "level": 3,
+      "tocTargetSourcePdfPage": 419,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "Queen Endgames",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_022",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 433,
+      "tocEntryKind": "topic",
+      "chapterId": "CH13",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_023",
+      "textFa": "فصل چهاردهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 434,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH14",
+      "sourceVisibleText": "CHAPTER FOURTEEN",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_024",
+      "textFa": "تاکتیک‌های سطح متوسط",
+      "level": 2,
+      "tocTargetSourcePdfPage": 435,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH14",
+      "sourceVisibleText": "INTERMEDIATE TACTICS",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_025",
+      "textFa": "آغاز به‌کارگیری CCA",
+      "level": 3,
+      "tocTargetSourcePdfPage": 435,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "Beginning to Use CCA",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_026",
+      "textFa": "CCA: سطح بعدی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 439,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "CCA: The Next Level",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_027",
+      "textFa": "CCA: مات در سه حرکت",
+      "level": 3,
+      "tocTargetSourcePdfPage": 443,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "CCA: Checkmate in Three",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_028",
+      "textFa": "CCA: کسب برتری مادی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 449,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "CCA: Winning Material",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_029",
+      "textFa": "حذف مدافع",
+      "level": 3,
+      "tocTargetSourcePdfPage": 453,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "Removing the Defender",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_030",
+      "textFa": "حرکت بینابینی (Zwischenzug)",
+      "level": 3,
+      "tocTargetSourcePdfPage": 455,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "Zwischenzug",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_031",
+      "textFa": "حمله‌های کشف‌شده",
+      "level": 3,
+      "tocTargetSourcePdfPage": 459,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "Discovered Attacks",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_032",
+      "textFa": "قربانی‌ها، منحرف‌سازی و کشاندن مهره",
+      "level": 3,
+      "tocTargetSourcePdfPage": 463,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "Sacrifices, Deflection, and Attraction",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_033",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 474,
+      "tocEntryKind": "topic",
+      "chapterId": "CH14",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_034",
+      "textFa": "فصل پانزدهم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 475,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH15",
+      "sourceVisibleText": "CHAPTER FIFTEEN",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_035",
+      "textFa": "راهبرد سطح متوسط",
+      "level": 2,
+      "tocTargetSourcePdfPage": 476,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH15",
+      "sourceVisibleText": "INTERMEDIATE STRATEGY",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_036",
+      "textFa": "پیاده‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 476,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "Pawns",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_037",
+      "textFa": "فیل‌ها و اسب‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 491,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "Bishops and Knights",
+      "sourcePdfPage": 8
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P008_TOC_038",
+      "textFa": "رخ‌ها",
+      "level": 3,
+      "tocTargetSourcePdfPage": 500,
+      "tocEntryKind": "topic",
+      "chapterId": "CH15",
+      "sourceVisibleText": "Rooks",
+      "sourcePdfPage": 8
+    }
+  ],
+  "notesFa": "تمام عنوان‌ها، ترتیب و مقصد پیوندهای داخلی فهرست باید حفظ شوند.",
+  "sourceAssetIds": [],
+  "sourceLinks": [
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 302
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "CHAPTER ELEVEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 303
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "INTERMEDIATE OPENINGS FOR BLACK",
+      "linkKind": 1,
+      "targetSourcePdfPage": 304
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Scandinavian Defense",
+      "linkKind": 1,
+      "targetSourcePdfPage": 304
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "Caro-Kann Defense",
+      "linkKind": 1,
+      "targetSourcePdfPage": 309
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "Queen’s Gambit Declined",
+      "linkKind": 1,
+      "targetSourcePdfPage": 319
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "Setup-Based Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 325
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 330
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 9,
+      "sourceLabel": "CHAPTER TWELVE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 331
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 10,
+      "sourceLabel": "GAMBITS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 332
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 11,
+      "sourceLabel": "Gambits for White",
+      "linkKind": 1,
+      "targetSourcePdfPage": 332
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 12,
+      "sourceLabel": "Gambits for Black",
+      "linkKind": 1,
+      "targetSourcePdfPage": 354
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 13,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 376
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 14,
+      "sourceLabel": "CHAPTER THIRTEEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 377
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 15,
+      "sourceLabel": "INTERMEDIATE ENDGAMES",
+      "linkKind": 1,
+      "targetSourcePdfPage": 378
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 16,
+      "sourceLabel": "King and Pawn Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 378
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 17,
+      "sourceLabel": "Knight Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 394
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 18,
+      "sourceLabel": "Knight vs. Bishop Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 399
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 19,
+      "sourceLabel": "Bishop Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 403
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 20,
+      "sourceLabel": "Rook Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 411
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 21,
+      "sourceLabel": "Queen Endgames",
+      "linkKind": 1,
+      "targetSourcePdfPage": 419
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 22,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 433
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 23,
+      "sourceLabel": "CHAPTER FOURTEEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 434
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 24,
+      "sourceLabel": "INTERMEDIATE TACTICS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 435
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 25,
+      "sourceLabel": "Beginning to Use CCA",
+      "linkKind": 1,
+      "targetSourcePdfPage": 435
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 26,
+      "sourceLabel": "CCA: The Next Level",
+      "linkKind": 1,
+      "targetSourcePdfPage": 439
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 27,
+      "sourceLabel": "CCA: Checkmate in Three",
+      "linkKind": 1,
+      "targetSourcePdfPage": 443
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 28,
+      "sourceLabel": "CCA: Winning Material",
+      "linkKind": 1,
+      "targetSourcePdfPage": 449
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 29,
+      "sourceLabel": "Removing the Defender",
+      "linkKind": 1,
+      "targetSourcePdfPage": 453
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 30,
+      "sourceLabel": "Zwischenzug",
+      "linkKind": 1,
+      "targetSourcePdfPage": 455
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 31,
+      "sourceLabel": "Discovered Attacks",
+      "linkKind": 1,
+      "targetSourcePdfPage": 459
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 32,
+      "sourceLabel": "Sacrifices, Deflection, and Attraction",
+      "linkKind": 1,
+      "targetSourcePdfPage": 463
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 33,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 474
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 34,
+      "sourceLabel": "CHAPTER FIFTEEN",
+      "linkKind": 1,
+      "targetSourcePdfPage": 475
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 35,
+      "sourceLabel": "INTERMEDIATE STRATEGY",
+      "linkKind": 1,
+      "targetSourcePdfPage": 476
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 36,
+      "sourceLabel": "Pawns",
+      "linkKind": 1,
+      "targetSourcePdfPage": 476
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 37,
+      "sourceLabel": "Bishops and Knights",
+      "linkKind": 1,
+      "targetSourcePdfPage": 491
+    },
+    {
+      "sourcePdfPage": 8,
+      "linkIndexOnPage": 38,
+      "sourceLabel": "Rooks",
+      "linkKind": 1,
+      "targetSourcePdfPage": 500
+    }
+  ],
+  "sourceAssets": []
+}

@@ -1,0 +1,13 @@
+{
+  "EX_CH02_BD102_SOL1": {
+    "id": "EX_CH02_BD102_SOL1",
+    "description": "Template Mate in One solution",
+    "moves": [
+      "Re8#"
+    ],
+    "fens": [
+      "6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+      "4R1k1/5ppp/8/8/8/8/5PPP/6K1 b - - 1 1"
+    ]
+  }
+}

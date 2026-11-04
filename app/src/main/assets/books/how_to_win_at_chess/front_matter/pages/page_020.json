@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 20,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "حرکت عادی پیاده",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P020_I001",
+      "assetId": "PDFOBJ_034",
+      "descriptionFa": "تصویر اصلی حرکت یک‌خانه‌ای پیاده به جلو.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 20
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P020_B001",
+      "textFa": "پیاده در هر نوبت می‌تواند یک خانه به جلو حرکت کند. با این حال، در نخستین حرکت خود ــ و فقط در همان نوبت اول ــ هر پیاده این امکان را دارد که به‌جای یک خانه، دو خانه به جلو برود.",
+      "sourcePdfPage": 20
+    }
+  ],
+  "notesFa": "فلش حرکت پیاده در تصویر منبع حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_034",
+    "PDFOBJ_035"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 20,
+      "pdfImageObjectIndex": 34,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_034",
+      "file": "assets/pdf_embedded_objects/pdf_p020_obj034.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت مستقیم پیاده"
+    },
+    {
+      "sourcePdfPage": 20,
+      "pdfImageObjectIndex": 35,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_035",
+      "file": "assets/pdf_embedded_objects/pdf_p020_obj035.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت مستقیم پیاده"
+    }
+  ]
+}

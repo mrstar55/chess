@@ -1,0 +1,71 @@
+﻿sourcePdfPage,pdfImageObjectIndex,pdfImageType,pdfObjectId,width,height,assetId,file,format,descriptionFa
+1,0,image,no,1650,1883,PDFOBJ_000,assets/pdf_embedded_objects/pdf_p001_obj000.jpg,jpg,تصویر کامل جلد کتاب (تصویر اصلی دارای عنوان انگلیسی)
+2,1,image,no,1750,2000,PDFOBJ_001,assets/pdf_embedded_objects/pdf_p002_obj001.jpg,jpg,تصویر تزئینی دو اسب و سیلوئت مهره‌ها
+3,2,image,no,1750,2000,PDFOBJ_002,assets/pdf_embedded_objects/pdf_p003_obj002.jpg,jpg,صفحه عنوان اصلی کتاب
+4,3,image,no,89,94,PDFOBJ_003,assets/pdf_embedded_objects/pdf_p004_obj003.jpg,jpg,نشان/لوگوی صفحه حقوق نشر و لایه‌های تصویری آن
+4,4,image,no,841,841,PDFOBJ_004,assets/pdf_embedded_objects/pdf_p004_obj004.png,png,نشان/لوگوی صفحه حقوق نشر و لایه‌های تصویری آن
+4,5,smask,no,841,841,PDFOBJ_005,assets/pdf_embedded_objects/pdf_p004_obj005.png,png,نشان/لوگوی صفحه حقوق نشر و لایه‌های تصویری آن
+5,6,image,no,1750,2000,PDFOBJ_006,assets/pdf_embedded_objects/pdf_p005_obj006.jpg,jpg,تصویر مهره‌های شطرنج روی صفحه
+6,7,image,no,89,94,PDFOBJ_007,assets/pdf_embedded_objects/pdf_p006_obj007.jpg,jpg,نشان صفحه فهرست و لایه‌های تصویر دارای ماسک
+6,8,image,no,841,841,PDFOBJ_008,assets/pdf_embedded_objects/pdf_p006_obj008.png,png,نشان صفحه فهرست و لایه‌های تصویر دارای ماسک
+6,9,smask,no,841,841,PDFOBJ_009,assets/pdf_embedded_objects/pdf_p006_obj009.png,png,نشان صفحه فهرست و لایه‌های تصویر دارای ماسک
+7,10,image,no,841,841,PDFOBJ_010,assets/pdf_embedded_objects/pdf_p007_obj010.png,png,نشان صفحه فهرست بخش بعدی و لایه‌های تصویر دارای ماسک
+7,11,smask,no,841,841,PDFOBJ_011,assets/pdf_embedded_objects/pdf_p007_obj011.png,png,نشان صفحه فهرست بخش بعدی و لایه‌های تصویر دارای ماسک
+10,12,image,no,1750,2000,PDFOBJ_012,assets/pdf_embedded_objects/pdf_p010_obj012.jpg,jpg,تصویر شاه روی زمینه دو رنگ
+12,13,image,no,1870,1870,PDFOBJ_013,assets/pdf_embedded_objects/pdf_p012_obj013.jpg,jpg,نمودار صفحه شطرنج و نشانگر صفحه
+12,14,image,no,19,33,PDFOBJ_014,assets/pdf_embedded_objects/pdf_p012_obj014.jpg,jpg,نمودار صفحه شطرنج و نشانگر صفحه
+13,15,image,no,1870,1870,PDFOBJ_015,assets/pdf_embedded_objects/pdf_p013_obj015.jpg,jpg,نمودار خانه f6 و نشانگر صفحه
+13,16,image,no,19,33,PDFOBJ_016,assets/pdf_embedded_objects/pdf_p013_obj016.jpg,jpg,نمودار خانه f6 و نشانگر صفحه
+14,17,image,no,249,253,PDFOBJ_017,assets/pdf_embedded_objects/pdf_p014_obj017.jpg,jpg,نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری
+14,18,image,no,1870,1870,PDFOBJ_018,assets/pdf_embedded_objects/pdf_p014_obj018.jpg,jpg,نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری
+14,19,image,no,19,33,PDFOBJ_019,assets/pdf_embedded_objects/pdf_p014_obj019.jpg,jpg,نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری
+14,20,image,no,19,33,PDFOBJ_020,assets/pdf_embedded_objects/pdf_p014_obj020.jpg,jpg,نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری
+15,21,image,no,181,237,PDFOBJ_021,assets/pdf_embedded_objects/pdf_p015_obj021.jpg,jpg,نمودار حرکت رخ و شکل خطی رخ
+15,22,image,no,1870,1870,PDFOBJ_022,assets/pdf_embedded_objects/pdf_p015_obj022.jpg,jpg,نمودار حرکت رخ و شکل خطی رخ
+15,23,image,no,19,33,PDFOBJ_023,assets/pdf_embedded_objects/pdf_p015_obj023.jpg,jpg,نمودار حرکت رخ و شکل خطی رخ
+16,24,image,no,181,262,PDFOBJ_024,assets/pdf_embedded_objects/pdf_p016_obj024.jpg,jpg,نمودار حرکت فیل و شکل خطی فیل
+16,25,image,no,1870,1870,PDFOBJ_025,assets/pdf_embedded_objects/pdf_p016_obj025.jpg,jpg,نمودار حرکت فیل و شکل خطی فیل
+16,26,image,no,19,33,PDFOBJ_026,assets/pdf_embedded_objects/pdf_p016_obj026.jpg,jpg,نمودار حرکت فیل و شکل خطی فیل
+17,27,image,no,210,253,PDFOBJ_027,assets/pdf_embedded_objects/pdf_p017_obj027.jpg,jpg,نمودار حرکت اسب و شکل خطی اسب
+17,28,image,no,1870,1870,PDFOBJ_028,assets/pdf_embedded_objects/pdf_p017_obj028.jpg,jpg,نمودار حرکت اسب و شکل خطی اسب
+17,29,image,no,19,33,PDFOBJ_029,assets/pdf_embedded_objects/pdf_p017_obj029.jpg,jpg,نمودار حرکت اسب و شکل خطی اسب
+18,30,image,no,1870,1870,PDFOBJ_030,assets/pdf_embedded_objects/pdf_p018_obj030.jpg,jpg,نمودار مسیر پرش اسب
+18,31,image,no,19,33,PDFOBJ_031,assets/pdf_embedded_objects/pdf_p018_obj031.jpg,jpg,نمودار مسیر پرش اسب
+19,32,image,no,176,235,PDFOBJ_032,assets/pdf_embedded_objects/pdf_p019_obj032.jpg,jpg,نمودار آموزشی پیاده و شکل خطی پیاده
+19,33,image,no,1870,1870,PDFOBJ_033,assets/pdf_embedded_objects/pdf_p019_obj033.jpg,jpg,نمودار آموزشی پیاده و شکل خطی پیاده
+20,34,image,no,1870,1870,PDFOBJ_034,assets/pdf_embedded_objects/pdf_p020_obj034.jpg,jpg,نمودار حرکت مستقیم پیاده
+20,35,image,no,19,33,PDFOBJ_035,assets/pdf_embedded_objects/pdf_p020_obj035.jpg,jpg,نمودار حرکت مستقیم پیاده
+21,36,image,no,1870,1870,PDFOBJ_036,assets/pdf_embedded_objects/pdf_p021_obj036.jpg,jpg,نمودار حرکت دوخانه‌ای پیاده
+21,37,image,no,19,33,PDFOBJ_037,assets/pdf_embedded_objects/pdf_p021_obj037.jpg,jpg,نمودار حرکت دوخانه‌ای پیاده
+22,38,image,no,1870,1870,PDFOBJ_038,assets/pdf_embedded_objects/pdf_p022_obj038.jpg,jpg,نمودار گرفتن مورب پیاده
+22,39,image,no,19,33,PDFOBJ_039,assets/pdf_embedded_objects/pdf_p022_obj039.jpg,jpg,نمودار گرفتن مورب پیاده
+23,40,image,no,1870,1870,PDFOBJ_040,assets/pdf_embedded_objects/pdf_p023_obj040.jpg,jpg,نمودار ترفیع پیاده
+23,41,image,no,19,33,PDFOBJ_041,assets/pdf_embedded_objects/pdf_p023_obj041.jpg,jpg,نمودار ترفیع پیاده
+24,42,image,no,1870,1870,PDFOBJ_042,assets/pdf_embedded_objects/pdf_p024_obj042.jpg,jpg,موقعیت مقدماتی آن‌پاسان
+24,43,image,no,19,33,PDFOBJ_043,assets/pdf_embedded_objects/pdf_p024_obj043.jpg,jpg,موقعیت مقدماتی آن‌پاسان
+24,44,image,no,19,33,PDFOBJ_044,assets/pdf_embedded_objects/pdf_p024_obj044.jpg,jpg,موقعیت مقدماتی آن‌پاسان
+25,45,image,no,1870,1870,PDFOBJ_045,assets/pdf_embedded_objects/pdf_p025_obj045.jpg,jpg,موقعیت گرفتن آن‌پاسان
+25,46,image,no,19,33,PDFOBJ_046,assets/pdf_embedded_objects/pdf_p025_obj046.jpg,jpg,موقعیت گرفتن آن‌پاسان
+26,47,image,no,180,190,PDFOBJ_047,assets/pdf_embedded_objects/pdf_p026_obj047.jpg,jpg,نمودار تکمیلی آن‌پاسان و شکل خطی شاه
+26,48,image,no,1870,1870,PDFOBJ_048,assets/pdf_embedded_objects/pdf_p026_obj048.jpg,jpg,نمودار تکمیلی آن‌پاسان و شکل خطی شاه
+26,49,image,no,19,33,PDFOBJ_049,assets/pdf_embedded_objects/pdf_p026_obj049.jpg,jpg,نمودار تکمیلی آن‌پاسان و شکل خطی شاه
+27,50,image,no,1870,1870,PDFOBJ_050,assets/pdf_embedded_objects/pdf_p027_obj050.jpg,jpg,نمودار امنیت حرکت شاه
+28,51,image,no,1870,1870,PDFOBJ_051,assets/pdf_embedded_objects/pdf_p028_obj051.jpg,jpg,نمودار خانه‌های شاه و رخ برای قلعه‌رفتن
+28,52,image,no,19,33,PDFOBJ_052,assets/pdf_embedded_objects/pdf_p028_obj052.jpg,jpg,نمودار خانه‌های شاه و رخ برای قلعه‌رفتن
+28,53,image,no,19,33,PDFOBJ_053,assets/pdf_embedded_objects/pdf_p028_obj053.jpg,jpg,نمودار خانه‌های شاه و رخ برای قلعه‌رفتن
+29,54,image,no,1870,1870,PDFOBJ_054,assets/pdf_embedded_objects/pdf_p029_obj054.jpg,jpg,نمودار قلعه‌رفتن بلند
+29,55,image,no,19,33,PDFOBJ_055,assets/pdf_embedded_objects/pdf_p029_obj055.jpg,jpg,نمودار قلعه‌رفتن بلند
+30,56,image,no,1870,1870,PDFOBJ_056,assets/pdf_embedded_objects/pdf_p030_obj056.jpg,jpg,نمودار موقعیت شاه و رخ پس از قلعه‌رفتن
+31,57,image,no,1870,1870,PDFOBJ_057,assets/pdf_embedded_objects/pdf_p031_obj057.jpg,jpg,نمودار نمونه کیش
+31,58,image,no,19,33,PDFOBJ_058,assets/pdf_embedded_objects/pdf_p031_obj058.jpg,jpg,نمودار نمونه کیش
+32,59,image,no,1870,1870,PDFOBJ_059,assets/pdf_embedded_objects/pdf_p032_obj059.jpg,jpg,نمودار نمونه حرکت پیاده در نمادگذاری
+32,60,image,no,19,33,PDFOBJ_060,assets/pdf_embedded_objects/pdf_p032_obj060.jpg,jpg,نمودار نمونه حرکت پیاده در نمادگذاری
+33,61,image,no,1870,1870,PDFOBJ_061,assets/pdf_embedded_objects/pdf_p033_obj061.jpg,jpg,نمودار ثبت حرکت‌های d4 و d5
+33,62,image,no,19,33,PDFOBJ_062,assets/pdf_embedded_objects/pdf_p033_obj062.jpg,jpg,نمودار ثبت حرکت‌های d4 و d5
+34,63,image,no,1870,1870,PDFOBJ_063,assets/pdf_embedded_objects/pdf_p034_obj063.jpg,jpg,نمودار مثال نمادگذاری حرکت اسب و فیل
+34,64,image,no,19,33,PDFOBJ_064,assets/pdf_embedded_objects/pdf_p034_obj064.jpg,jpg,نمودار مثال نمادگذاری حرکت اسب و فیل
+35,65,image,no,1870,1870,PDFOBJ_065,assets/pdf_embedded_objects/pdf_p035_obj065.jpg,jpg,نمودار رفع ابهام در ثبت حرکت اسب
+35,66,image,no,19,33,PDFOBJ_066,assets/pdf_embedded_objects/pdf_p035_obj066.jpg,jpg,نمودار رفع ابهام در ثبت حرکت اسب
+37,67,image,no,1750,2000,PDFOBJ_067,assets/pdf_embedded_objects/pdf_p037_obj067.jpg,jpg,تصویر جداکننده بخش اول با نشان شاه و برچسب 0–800 Elo
+38,68,image,no,89,94,PDFOBJ_068,assets/pdf_embedded_objects/pdf_p038_obj068.jpg,jpg,نشان/لوگوی کوچک صفحه معرفی بخش اول
+39,69,image,no,85,116,PDFOBJ_069,assets/pdf_embedded_objects/pdf_p039_obj069.jpg,jpg,نشان رخ کوچک در صفحه گذار پیش از فصل اول

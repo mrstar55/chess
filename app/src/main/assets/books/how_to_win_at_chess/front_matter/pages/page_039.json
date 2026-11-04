@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 39,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "INTERSTITIAL_IMAGE",
+  "pageTitleFa": "نشان رخ پیش از فصل اول",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "IMAGE_ONLY_SOURCE_PAGE",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P039_I001",
+      "assetId": "PDFOBJ_069",
+      "descriptionFa": "نشان کوچک رخ در گوشه بالای سمت چپ صفحه؛ تصویر اصلی باید عیناً حفظ شود.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 39
+    }
+  ],
+  "notesFa": "این صفحه متن قابل استخراج ندارد، اما دارای تصویر واقعی رخ است. در ترتیب کتاب حفظ شود؛ عنوان فصل اول در صفحه PDF ۴۰ آغاز می‌شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_069"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 39,
+      "pdfImageObjectIndex": 69,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 85,
+      "height": 116,
+      "assetId": "PDFOBJ_069",
+      "file": "assets/pdf_embedded_objects/pdf_p039_obj069.jpg",
+      "format": "jpg",
+      "descriptionFa": "نشان رخ کوچک در صفحه گذار پیش از فصل اول"
+    }
+  ]
+}

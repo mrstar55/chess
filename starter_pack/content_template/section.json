@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "sectionId": "SEC_CH02_01_OPENING",
+  "placeholderNoticeFa": "اسلات آماده دریافت ترجمه فارسی تأییدشده برای این بخش.",
+  "translationStatus": "PENDING_TRANSLATION",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "BLK_CH02_01_H1",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": false
+    },
+    {
+      "type": "paragraph",
+      "blockId": "BLK_CH02_01_P1",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": true
+    },
+    {
+      "type": "diagram",
+      "blockId": "BLK_CH02_01_D_BD101",
+      "diagramId": "BD-101"
+    },
+    {
+      "type": "exercise",
+      "blockId": "BLK_CH02_01_EX_BD102",
+      "exerciseId": "EX_CH02_BD102",
+      "diagramId": "BD-102"
+    },
+    {
+      "type": "footnote",
+      "blockId": "BLK_CH02_01_FN1",
+      "textFa": null,
+      "showPlaceholderWhenEmpty": false
+    },
+    {
+      "type": "externalReference",
+      "blockId": "BLK_CH02_01_EXT1",
+      "titleFa": null,
+      "isAuthorizedAndEnabled": false
+    }
+  ]
+}

@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 6,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "TABLE_OF_CONTENTS",
+  "pageTitleFa": "فهرست مطالب — صفحه 6",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_001",
+      "textFa": "مقدمه",
+      "level": 1,
+      "tocTargetSourcePdfPage": 11,
+      "tocEntryKind": "frontMatter",
+      "chapterId": null,
+      "sourceVisibleText": "INTRODUCTION",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_002",
+      "textFa": "مبانی شطرنج",
+      "level": 2,
+      "tocTargetSourcePdfPage": 11,
+      "tocEntryKind": "topic",
+      "chapterId": null,
+      "sourceVisibleText": "The Basics of Chess",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_003",
+      "textFa": "نمادگذاری شطرنج",
+      "level": 2,
+      "tocTargetSourcePdfPage": 31,
+      "tocEntryKind": "topic",
+      "chapterId": null,
+      "sourceVisibleText": "Chess Notation",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_004",
+      "textFa": "امتیازدهی",
+      "level": 2,
+      "tocTargetSourcePdfPage": 35,
+      "tocEntryKind": "topic",
+      "chapterId": null,
+      "sourceVisibleText": "Scoring",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_005",
+      "textFa": "تمرین شطرنج",
+      "level": 2,
+      "tocTargetSourcePdfPage": 36,
+      "tocEntryKind": "topic",
+      "chapterId": null,
+      "sourceVisibleText": "Practicing Chess",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_006",
+      "textFa": "مطالب تکمیلی برای یادگیری",
+      "level": 2,
+      "tocTargetSourcePdfPage": 36,
+      "tocEntryKind": "topic",
+      "chapterId": null,
+      "sourceVisibleText": "Additional Learning Material",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_007",
+      "textFa": "بخش اول",
+      "level": 1,
+      "tocTargetSourcePdfPage": 37,
+      "tocEntryKind": "part",
+      "chapterId": null,
+      "sourceVisibleText": "PART ONE",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_008",
+      "textFa": "فصل اول",
+      "level": 1,
+      "tocTargetSourcePdfPage": 39,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH01",
+      "sourceVisibleText": "CHAPTER ONE",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_009",
+      "textFa": "چگونه واقعاً در شطرنج برنده شویم",
+      "level": 2,
+      "tocTargetSourcePdfPage": 40,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH01",
+      "sourceVisibleText": "HOW TO (LITERALLY) WIN AT CHESS",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_010",
+      "textFa": "کیش‌ومات",
+      "level": 3,
+      "tocTargetSourcePdfPage": 40,
+      "tocEntryKind": "topic",
+      "chapterId": "CH01",
+      "sourceVisibleText": "Checkmate",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_011",
+      "textFa": "تسلیم",
+      "level": 3,
+      "tocTargetSourcePdfPage": 45,
+      "tocEntryKind": "topic",
+      "chapterId": "CH01",
+      "sourceVisibleText": "Resignation",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_012",
+      "textFa": "باخت بر اثر اتمام زمان",
+      "level": 3,
+      "tocTargetSourcePdfPage": 46,
+      "tocEntryKind": "topic",
+      "chapterId": "CH01",
+      "sourceVisibleText": "Timing Out",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_013",
+      "textFa": "ترک بازی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 48,
+      "tocEntryKind": "topic",
+      "chapterId": "CH01",
+      "sourceVisibleText": "Abandonment",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_014",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 50,
+      "tocEntryKind": "topic",
+      "chapterId": "CH01",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_015",
+      "textFa": "فصل دوم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 51,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH02",
+      "sourceVisibleText": "CHAPTER TWO",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_016",
+      "textFa": "چگونه بازی را با مهره‌های سفید آغاز کنیم",
+      "level": 2,
+      "tocTargetSourcePdfPage": 52,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH02",
+      "sourceVisibleText": "HOW TO START THE GAME WITH THE WHITE PIECES",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_017",
+      "textFa": "چرا گشایش‌ها را یاد بگیریم؟",
+      "level": 3,
+      "tocTargetSourcePdfPage": 52,
+      "tocEntryKind": "topic",
+      "chapterId": "CH02",
+      "sourceVisibleText": "Why Learn Openings?",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_018",
+      "textFa": "سه اصل گشایش: کنترل مرکز، گسترش مهره‌ها و قلعه‌رفتن",
+      "level": 3,
+      "tocTargetSourcePdfPage": 55,
+      "tocEntryKind": "topic",
+      "chapterId": "CH02",
+      "sourceVisibleText": "Three Principles of the Opening: Center, Develop, Castle",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_019",
+      "textFa": "گشایش‌های ۱.e4",
+      "level": 3,
+      "tocTargetSourcePdfPage": 60,
+      "tocEntryKind": "topic",
+      "chapterId": "CH02",
+      "sourceVisibleText": "e4 Openings",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_020",
+      "textFa": "گشایش‌های ۱.d4",
+      "level": 3,
+      "tocTargetSourcePdfPage": 70,
+      "tocEntryKind": "topic",
+      "chapterId": "CH02",
+      "sourceVisibleText": "d4 Openings",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_021",
+      "textFa": "مات اسکالر (Scholar’s Mate)",
+      "level": 3,
+      "tocTargetSourcePdfPage": 76,
+      "tocEntryKind": "topic",
+      "chapterId": "CH02",
+      "sourceVisibleText": "Scholar’s Mate",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_022",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 85,
+      "tocEntryKind": "topic",
+      "chapterId": "CH02",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_023",
+      "textFa": "فصل سوم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 86,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH03",
+      "sourceVisibleText": "CHAPTER THREE",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_024",
+      "textFa": "چگونه بازی را با مهره‌های سیاه آغاز کنیم",
+      "level": 2,
+      "tocTargetSourcePdfPage": 87,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH03",
+      "sourceVisibleText": "HOW TO START THE GAME WITH THE BLACK PIECES",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_025",
+      "textFa": "گشایش‌های سنتی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 88,
+      "tocEntryKind": "topic",
+      "chapterId": "CH03",
+      "sourceVisibleText": "Traditional Openings",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_026",
+      "textFa": "گشایش‌های مبتنی بر چیدمان",
+      "level": 3,
+      "tocTargetSourcePdfPage": 96,
+      "tocEntryKind": "topic",
+      "chapterId": "CH03",
+      "sourceVisibleText": "Setup-Based Openings",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_027",
+      "textFa": "گشایش‌های پایه‌ای و سازنده",
+      "level": 3,
+      "tocTargetSourcePdfPage": 99,
+      "tocEntryKind": "topic",
+      "chapterId": "CH03",
+      "sourceVisibleText": "Building-Block Openings",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_028",
+      "textFa": "خلاصه",
+      "level": 3,
+      "tocTargetSourcePdfPage": 105,
+      "tocEntryKind": "topic",
+      "chapterId": "CH03",
+      "sourceVisibleText": "Summary",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_029",
+      "textFa": "فصل چهارم",
+      "level": 1,
+      "tocTargetSourcePdfPage": 106,
+      "tocEntryKind": "chapter",
+      "chapterId": "CH04",
+      "sourceVisibleText": "CHAPTER FOUR",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_030",
+      "textFa": "آخر بازی‌ها ۱",
+      "level": 2,
+      "tocTargetSourcePdfPage": 107,
+      "tocEntryKind": "chapterTitle",
+      "chapterId": "CH04",
+      "sourceVisibleText": "ENDGAMES I",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_031",
+      "textFa": "مات نردبانی",
+      "level": 3,
+      "tocTargetSourcePdfPage": 107,
+      "tocEntryKind": "topic",
+      "chapterId": "CH04",
+      "sourceVisibleText": "Ladder Mate",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_032",
+      "textFa": "مات با شاه و وزیر",
+      "level": 3,
+      "tocTargetSourcePdfPage": 115,
+      "tocEntryKind": "topic",
+      "chapterId": "CH04",
+      "sourceVisibleText": "King and Queen Mate",
+      "sourcePdfPage": 6
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P006_TOC_033",
+      "textFa": "مات با شاه و رخ",
+      "level": 3,
+      "tocTargetSourcePdfPage": 123,
+      "tocEntryKind": "topic",
+      "chapterId": "CH04",
+      "sourceVisibleText": "King and Rook Mate",
+      "sourcePdfPage": 6
+    }
+  ],
+  "notesFa": "تمام عنوان‌ها، ترتیب و مقصد پیوندهای داخلی فهرست باید حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_007",
+    "PDFOBJ_008",
+    "PDFOBJ_009"
+  ],
+  "sourceLinks": [
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "INTRODUCTION",
+      "linkKind": 1,
+      "targetSourcePdfPage": 11
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "The Basics of Chess",
+      "linkKind": 1,
+      "targetSourcePdfPage": 11
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 3,
+      "sourceLabel": "Chess Notation",
+      "linkKind": 1,
+      "targetSourcePdfPage": 31
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 4,
+      "sourceLabel": "Scoring",
+      "linkKind": 1,
+      "targetSourcePdfPage": 35
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 5,
+      "sourceLabel": "Practicing Chess",
+      "linkKind": 1,
+      "targetSourcePdfPage": 36
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 6,
+      "sourceLabel": "Additional Learning Material",
+      "linkKind": 1,
+      "targetSourcePdfPage": 36
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 7,
+      "sourceLabel": "PART ONE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 37
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 8,
+      "sourceLabel": "CHAPTER ONE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 39
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 9,
+      "sourceLabel": "HOW TO (LITERALLY) WIN AT CHESS",
+      "linkKind": 1,
+      "targetSourcePdfPage": 40
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 10,
+      "sourceLabel": "Checkmate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 40
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 11,
+      "sourceLabel": "Resignation",
+      "linkKind": 1,
+      "targetSourcePdfPage": 45
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 12,
+      "sourceLabel": "Timing Out",
+      "linkKind": 1,
+      "targetSourcePdfPage": 46
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 13,
+      "sourceLabel": "Abandonment",
+      "linkKind": 1,
+      "targetSourcePdfPage": 48
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 14,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 50
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 15,
+      "sourceLabel": "CHAPTER TWO",
+      "linkKind": 1,
+      "targetSourcePdfPage": 51
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 16,
+      "sourceLabel": "HOW TO START THE GAME WITH THE WHITE PIECES",
+      "linkKind": 1,
+      "targetSourcePdfPage": 52
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 17,
+      "sourceLabel": "Why Learn Openings?",
+      "linkKind": 1,
+      "targetSourcePdfPage": 52
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 18,
+      "sourceLabel": "Three Principles of the Opening: Center, Develop, Castle",
+      "linkKind": 1,
+      "targetSourcePdfPage": 55
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 19,
+      "sourceLabel": "e4 Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 60
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 20,
+      "sourceLabel": "d4 Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 70
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 21,
+      "sourceLabel": "Scholar’s Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 76
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 22,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 85
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 23,
+      "sourceLabel": "CHAPTER THREE",
+      "linkKind": 1,
+      "targetSourcePdfPage": 86
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 24,
+      "sourceLabel": "HOW TO START THE GAME WITH THE BLACK PIECES",
+      "linkKind": 1,
+      "targetSourcePdfPage": 87
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 25,
+      "sourceLabel": "Traditional Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 88
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 26,
+      "sourceLabel": "Setup-Based Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 96
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 27,
+      "sourceLabel": "Building-Block Openings",
+      "linkKind": 1,
+      "targetSourcePdfPage": 99
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 28,
+      "sourceLabel": "Summary",
+      "linkKind": 1,
+      "targetSourcePdfPage": 105
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 29,
+      "sourceLabel": "CHAPTER FOUR",
+      "linkKind": 1,
+      "targetSourcePdfPage": 106
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 30,
+      "sourceLabel": "ENDGAMES I",
+      "linkKind": 1,
+      "targetSourcePdfPage": 107
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 31,
+      "sourceLabel": "Ladder Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 107
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 32,
+      "sourceLabel": "King and Queen Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 115
+    },
+    {
+      "sourcePdfPage": 6,
+      "linkIndexOnPage": 33,
+      "sourceLabel": "King and Rook Mate",
+      "linkKind": 1,
+      "targetSourcePdfPage": 123
+    }
+  ],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 6,
+      "pdfImageObjectIndex": 7,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 89,
+      "height": 94,
+      "assetId": "PDFOBJ_007",
+      "file": "assets/pdf_embedded_objects/pdf_p006_obj007.jpg",
+      "format": "jpg",
+      "descriptionFa": "نشان صفحه فهرست و لایه‌های تصویر دارای ماسک"
+    },
+    {
+      "sourcePdfPage": 6,
+      "pdfImageObjectIndex": 8,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 841,
+      "height": 841,
+      "assetId": "PDFOBJ_008",
+      "file": "assets/pdf_embedded_objects/pdf_p006_obj008.png",
+      "format": "png",
+      "descriptionFa": "نشان صفحه فهرست و لایه‌های تصویر دارای ماسک"
+    },
+    {
+      "sourcePdfPage": 6,
+      "pdfImageObjectIndex": 9,
+      "pdfImageType": "smask",
+      "pdfObjectId": "no",
+      "width": 841,
+      "height": 841,
+      "assetId": "PDFOBJ_009",
+      "file": "assets/pdf_embedded_objects/pdf_p006_obj009.png",
+      "format": "png",
+      "descriptionFa": "نشان صفحه فهرست و لایه‌های تصویر دارای ماسک"
+    }
+  ]
+}

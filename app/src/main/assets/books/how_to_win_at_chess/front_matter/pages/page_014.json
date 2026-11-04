@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 14,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "چیدمان آغازین و حرکت وزیر",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P014_I001",
+      "assetId": "PDFOBJ_018",
+      "descriptionFa": "تصویر اصلی چیدمان آغازین همه ۳۲ مهره شطرنج.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 14
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P014_B001",
+      "textFa": "مهره‌های سفید در ردیف‌های اول و دوم و مهره‌های سیاه در ردیف‌های هفتم و هشتم قرار می‌گیرند. هر طرف ۱۶ مهره دارد؛ بنابراین در مجموع ۳۲ مهره روی صفحه قرار می‌گیرد. چیدمان مهره‌ها باید به همین شکل باشد. در ادامه هر مهره را معرفی می‌کنیم، اما فعلاً مهم است بدانید مهره‌ها چگونه چیده می‌شوند. هر بازیکن یک ردیف پیاده دارد و مهره‌های اصلی پشت آن‌ها قرار می‌گیرند. چیدمان دو طرف متقارن است؛ از جمله شاه‌ها و وزیرها که باید روبه‌روی هم قرار بگیرند: وزیرها روی ستون d و شاه‌ها روی ستون e شروع می‌کنند.",
+      "sourcePdfPage": 14
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P014_B002",
+      "textFa": "در شطرنج، بازیکنان به نوبت مهره‌های خود را حرکت می‌دهند. سفید همیشه نخستین حرکت را انجام می‌دهد. در فصل‌های بعد درباره شروع بازی و راه‌های بردن آن بیشتر صحبت خواهیم کرد؛ اما پیش از آن باید مهره‌ها را معرفی کنیم.",
+      "sourcePdfPage": 14
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P014_I002",
+      "assetId": "PDFOBJ_017",
+      "descriptionFa": "تصویر خطی اصلی مهره وزیر.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 14
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P014_B003",
+      "textFa": "این مهره وزیر است. وزیر ۹ امتیاز ارزش دارد و (به‌جز شاه که بعداً با آن آشنا می‌شویم) باارزش‌ترین مهره بازی است. توجه داشته باشید که امتیاز هر مهره مقداری فرضی است و فقط ارزش نسبی آن را در مقایسه با مهره‌های دیگر نشان می‌دهد. هر بازیکن فقط یک وزیر دارد. وزیر می‌تواند به بالا، پایین، چپ، راست و به‌صورت مورب حرکت کند و در هر یک از این جهت‌ها به هر تعداد خانه که بخواهد برود، به شرط آنکه مسیرش با مهره‌ای مسدود نشده باشد. وزیر نمی‌تواند از روی مهره‌های دیگر، حتی مهره‌های هم‌رنگ خودش، بپرد یا از میان آن‌ها عبور کند. اگر صفحه شطرنج خالی باشد، وزیر می‌تواند به تمام خانه‌های واقع بر ردیف‌ها، ستون‌ها و قطرهای در دسترس خود حرکت کند. وزیر قدرتمندترین مهره شماست؛ هیچ مهره دیگری نمی‌تواند در این تعداد جهت و به این فاصله حرکت کند.",
+      "sourcePdfPage": 14
+    }
+  ],
+  "notesFa": "تصویر چیدمان و تصویر خطی وزیر، دو دارایی تصویری مستقل‌اند و هر دو باید حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_017",
+    "PDFOBJ_018",
+    "PDFOBJ_019",
+    "PDFOBJ_020"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 14,
+      "pdfImageObjectIndex": 17,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 249,
+      "height": 253,
+      "assetId": "PDFOBJ_017",
+      "file": "assets/pdf_embedded_objects/pdf_p014_obj017.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری"
+    },
+    {
+      "sourcePdfPage": 14,
+      "pdfImageObjectIndex": 18,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_018",
+      "file": "assets/pdf_embedded_objects/pdf_p014_obj018.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری"
+    },
+    {
+      "sourcePdfPage": 14,
+      "pdfImageObjectIndex": 19,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_019",
+      "file": "assets/pdf_embedded_objects/pdf_p014_obj019.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری"
+    },
+    {
+      "sourcePdfPage": 14,
+      "pdfImageObjectIndex": 20,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_020",
+      "file": "assets/pdf_embedded_objects/pdf_p014_obj020.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار چیدمان آغازین، شکل وزیر و نشانگرهای تصویری"
+    }
+  ]
+}

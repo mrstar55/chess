@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "defaultBookId": "how_to_win_at_chess",
+  "books": [
+    {
+      "bookId": "how_to_win_at_chess",
+      "titleEn": "How to Win at Chess",
+      "titleFa": "چگونه در شطرنج برنده شویم",
+      "authorEn": "Levy Rozman",
+      "authorFa": "لوی روزمن",
+      "frontMatter": {
+        "contentRegionId": "FRONT_MATTER",
+        "titleFa": "پیش‌درآمد، مقدمه و آموزش مبانی شطرنج",
+        "navigationTitleFa": "پیش‌درآمد و مبانی شطرنج",
+        "manifestPath": "books/how_to_win_at_chess/front_matter/manifest.json",
+        "sourcePdfPageStart": 1,
+        "sourcePdfPageEnd": 39,
+        "enabled": true
+      },
+      "chapters": [
+        {
+          "chapterId": "CH01",
+          "chapterNumber": 1,
+          "titleEn": "How to (Literally) Win at Chess",
+          "titleFa": "فصل اول: چگونه واقعاً در شطرنج برنده شویم",
+          "manifestPath": "books/how_to_win_at_chess/CH01/chapter.json",
+          "enabled": true
+        }
+      ]
+    }
+  ]
+}

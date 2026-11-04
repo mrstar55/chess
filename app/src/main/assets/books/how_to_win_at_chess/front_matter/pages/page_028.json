@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 28,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "قلعه‌رفتن: شرایط اجرای حرکت",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P028_I001",
+      "assetId": "PDFOBJ_051",
+      "descriptionFa": "تصویر اصلی خانه‌های آغازین شاه و رخ‌ها برای قلعه‌رفتن.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 28
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P028_B001",
+      "textFa": "قاعده ویژه دیگری درباره شاه وجود دارد که «قلعه‌رفتن» نامیده می‌شود. در تصویر، خانه‌های آغازین شاه سفید و رخ‌های سفید را می‌بینیم. قلعه‌رفتن حرکتی است که در آن شاه برای رسیدن به موقعیتی امن‌تر، دو خانه به سمت یکی از رخ‌ها حرکت می‌کند و سپس رخ به خانه مجاور شاه در سمت دیگر آن منتقل می‌شود. برای مجازبودن قلعه‌رفتن باید چند شرط برقرار باشد.",
+      "sourcePdfPage": 28
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P028_B002",
+      "textFa": "نخست، شاه یا رخی که می‌خواهید با آن قلعه بروید نباید قبلاً حرکت کرده باشند. دوم، شاه نباید از خانه‌ای عبور کند که در معرض حمله مهره حریف است؛ اگر مهره حریف بتواند شاه را در یکی از خانه‌هایی که هنگام قلعه‌رفتن از آن‌ها عبور می‌کند بگیرد، قلعه‌رفتن مجاز نیست. همچنین هیچ‌یک از مهره‌های خودی نباید بین شاه و رخ قرار داشته باشد.",
+      "sourcePdfPage": 28
+    }
+  ],
+  "notesFa": "تصویر اصلی خانه‌های شاه و رخ و همه نشانه‌های مسیر حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_051",
+    "PDFOBJ_052",
+    "PDFOBJ_053"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 28,
+      "pdfImageObjectIndex": 51,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_051",
+      "file": "assets/pdf_embedded_objects/pdf_p028_obj051.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار خانه‌های شاه و رخ برای قلعه‌رفتن"
+    },
+    {
+      "sourcePdfPage": 28,
+      "pdfImageObjectIndex": 52,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_052",
+      "file": "assets/pdf_embedded_objects/pdf_p028_obj052.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار خانه‌های شاه و رخ برای قلعه‌رفتن"
+    },
+    {
+      "sourcePdfPage": 28,
+      "pdfImageObjectIndex": 53,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_053",
+      "file": "assets/pdf_embedded_objects/pdf_p028_obj053.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار خانه‌های شاه و رخ برای قلعه‌رفتن"
+    }
+  ]
+}

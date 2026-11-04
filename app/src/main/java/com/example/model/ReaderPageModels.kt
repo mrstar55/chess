@@ -20,7 +20,7 @@ enum class ReaderPageType(val labelFa: String) {
 /**
  * Independent model representing a single fixed-viewport page in the book Reader.
  * Guarantees at most one diagram/exercise block per page while preserving the exact
- * sequence of [SectionContentBlock]s.
+ * sequence of [SectionContentBlock]s and the authoritative [sourcePdfPage].
  */
 data class ReaderPage(
     val pageId: String,
@@ -32,21 +32,52 @@ data class ReaderPage(
     val totalPages: Int,
     val primaryDiagramId: String? = null,
     val semanticBadge: SemanticBadgeCategory = SemanticBadgeCategory.EDUCATIONAL_TEXT,
-    val subtitleFa: String? = null
+    val subtitleFa: String? = null,
+    val contentRegionId: String? = null,
+    val sourcePdfPage: Int? = null,
+    val sliceIndexInSourcePage: Int = 1,
+    val totalSlicesInSourcePage: Int = 1,
+    val frontMatterPageKind: FrontMatterPageKind? = null,
+    val pageNotesFa: String? = null,
+    val sourceLinks: List<FrontMatterSourceLink> = emptyList()
 ) {
     val diagramBlockCount: Int
         get() = orderedBlocks.count {
             it is SectionContentBlock.DiagramBlock || it is SectionContentBlock.ExerciseBlock
         }
+
+    val sourceImageBlockCount: Int
+        get() = orderedBlocks.count { it is SectionContentBlock.SourceImageBlock }
+
+    val sourcePdfPageDisplayLabelFa: String?
+        get() {
+            val pdfPage = sourcePdfPage ?: return null
+            val pageFa = ReaderPaginator.toPersianDigits(pdfPage)
+            return if (totalSlicesInSourcePage > 1) {
+                val sliceFa = ReaderPaginator.toPersianDigits(sliceIndexInSourcePage)
+                val totalFa = ReaderPaginator.toPersianDigits(totalSlicesInSourcePage)
+                "صفحه PDF $pageFa — بخش $sliceFa از $totalFa"
+            } else {
+                "صفحه PDF $pageFa"
+            }
+        }
 }
 
 /**
  * Deterministic pagination engine for converting a [SectionItem]'s [TranslationSlot.orderedContentBlocks]
- * into a sequence of [ReaderPage]s without vertical scrolling, content truncation, or block reordering.
+ * or a list of [FrontMatterPage]s into a sequence of [ReaderPage]s without vertical scrolling,
+ * content truncation, block reordering, or merging across different [sourcePdfPage] boundaries.
  */
 object ReaderPaginator {
 
     private const val SPLIT_PART_DELIMITER = "__part_"
+
+    fun toPersianDigits(number: Int): String {
+        val persianDigits = charArrayOf('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹')
+        return number.toString().map { ch ->
+            if (ch in '0'..'9') persianDigits[ch - '0'] else ch
+        }.joinToString("")
+    }
 
     /**
      * Returns the original [SectionContentBlock.blockId] before any long-paragraph pagination split.
@@ -117,6 +148,12 @@ object ReaderPaginator {
                     val text = slot.resolveBlockText(b)
                     if (b.isAuthorizedAndEnabled && !text.isNullOrEmpty()) text else null
                 }
+                is SectionContentBlock.OrderedListBlock,
+                is SectionContentBlock.TableBlock -> {
+                    val text = slot.resolveBlockText(b)
+                    if (!text.isNullOrEmpty()) text else null
+                }
+                is SectionContentBlock.SourceImageBlock,
                 is SectionContentBlock.DiagramBlock,
                 is SectionContentBlock.ExerciseBlock -> null
             }
@@ -217,7 +254,8 @@ object ReaderPaginator {
                     totalPages = 1,
                     primaryDiagramId = null,
                     semanticBadge = SemanticBadgeCategory.EDUCATIONAL_TEXT,
-                    subtitleFa = section.titleFa
+                    subtitleFa = section.titleFa,
+                    sourcePdfPage = section.pdfPages.firstOrNull()
                 )
             )
         }
@@ -334,7 +372,7 @@ object ReaderPaginator {
                 continue
             }
 
-            // Textual block (Paragraph, Heading, Footnote, ExternalReference)
+            // Textual block (Paragraph, Heading, Footnote, ExternalReference, OrderedList, Table)
             if (currentHasDiagram) {
                 flushCurrentPage()
             }
@@ -342,7 +380,7 @@ object ReaderPaginator {
             val blockLines = estimateBlockLines(block)
             val blockChars = visibleTextOf(block)?.length ?: 0
 
-            if (blockLines == 0) {
+            if (blockLines == 0 && block !is SectionContentBlock.SourceImageBlock) {
                 // Zero-height block (e.g. non-placeholder empty block); keep in sequence without consuming budget
                 currentBlocks.add(block)
                 i++
@@ -373,7 +411,9 @@ object ReaderPaginator {
         // merge those zero-height blocks into the previous page so we don't create a blank page.
         if (rawPages.size > 1) {
             val lastPage = rawPages.last()
-            val lastHasVisibleOrDiagram = lastPage.any { isDiagramOrExercise(it) || isVisibleTextBlock(it) }
+            val lastHasVisibleOrDiagram = lastPage.any {
+                isDiagramOrExercise(it) || it is SectionContentBlock.SourceImageBlock || isVisibleTextBlock(it)
+            }
             if (!lastHasVisibleOrDiagram) {
                 val removed = rawPages.removeAt(rawPages.lastIndex)
                 rawPages.last().addAll(removed)
@@ -381,6 +421,16 @@ object ReaderPaginator {
         }
 
         val totalPages = rawPages.size
+        val resolvedPdfPages = rawPages.map { blocks ->
+            val diagId = blocks.filterIsInstance<SectionContentBlock.ExerciseBlock>().firstOrNull()?.diagramId
+                ?: blocks.filterIsInstance<SectionContentBlock.DiagramBlock>().firstOrNull()?.diagramId
+            diagId?.let { diagramsById[it]?.pdfPage }
+                ?: blocks.firstNotNullOfOrNull { it.sourcePdfPage }
+                ?: section.pdfPages.firstOrNull()
+        }
+        val countsByPdfPage = resolvedPdfPages.groupingBy { it }.eachCount()
+        val seenByPdfPage = mutableMapOf<Int?, Int>()
+
         return rawPages.mapIndexed { index, blocks ->
             val pageNum = index + 1
             val (pageType, badge, diagramId) = classifyPage(section, blocks, diagramsById)
@@ -388,6 +438,11 @@ object ReaderPaginator {
                 .firstNotNullOfOrNull { slot.resolveBlockText(it) }
                 ?: diagramId?.let { "نمودار $it" }
                 ?: section.titleFa
+
+            val pdfPage = resolvedPdfPages[index]
+            val sliceIdx = (seenByPdfPage[pdfPage] ?: 0) + 1
+            seenByPdfPage[pdfPage] = sliceIdx
+            val totalSlices = countsByPdfPage[pdfPage] ?: 1
 
             ReaderPage(
                 pageId = "${section.sectionId}_PAGE_$pageNum",
@@ -399,7 +454,305 @@ object ReaderPaginator {
                 totalPages = totalPages,
                 primaryDiagramId = diagramId,
                 semanticBadge = badge,
-                subtitleFa = headingSubtitle
+                subtitleFa = headingSubtitle,
+                sourcePdfPage = pdfPage,
+                sliceIndexInSourcePage = sliceIdx,
+                totalSlicesInSourcePage = totalSlices
+            )
+        }
+    }
+
+    /**
+     * Deterministically paginates a single [FrontMatterPage] into one or more [ReaderPage] slices.
+     *
+     * Authoritative `sourcePdfPage` contract:
+     * - Every slice retains `sourcePdfPage == fmPage.sourcePdfPage`.
+     * - Every block inside every slice retains `sourcePdfPage == fmPage.sourcePdfPage`.
+     * - Content from two different `sourcePdfPage` pages is never merged.
+     * - Image-only pages (`2, 5, 10, 39`) always produce an independent page with their `SourceImageBlock`.
+     * - `PART_DIVIDER` (page 37), `COVER` (page 1), and `TITLE_PAGE` (page 3) keep their master image
+     *   and their Persian UI text layer on the same page.
+     */
+    fun paginateFrontMatterPage(
+        fmPage: FrontMatterPage,
+        fontScale: FontSizeScale = FontSizeScale.NORMAL,
+        viewportWidthDp: Int = 380,
+        viewportHeightDp: Int = 640
+    ): List<ReaderPage> {
+        val pdfPage = fmPage.sourcePdfPage
+        val sectionId = "FM_PAGE_${pdfPage.toString().padStart(3, '0')}"
+        val renderableBlocks = fmPage.buildRenderableBlocks()
+
+        // Single-page visual divider / cover / title / interstitial / image-only pages stay atomic
+        val keepAtomicSinglePage = when (fmPage.pageKind) {
+            FrontMatterPageKind.COVER,
+            FrontMatterPageKind.IMAGE_ONLY,
+            FrontMatterPageKind.TITLE_PAGE,
+            FrontMatterPageKind.PART_DIVIDER,
+            FrontMatterPageKind.INTERSTITIAL_IMAGE -> true
+            else -> false
+        }
+
+        if (keepAtomicSinglePage) {
+            val hasImage = renderableBlocks.any { it is SectionContentBlock.SourceImageBlock }
+            val pageType = if (hasImage) ReaderPageType.STATIC_DIAGRAM else ReaderPageType.TEXT
+            val badge = if (hasImage) SemanticBadgeCategory.VISUAL_EXAMPLE else SemanticBadgeCategory.EDUCATIONAL_TEXT
+            return listOf(
+                ReaderPage(
+                    pageId = "${sectionId}_SLICE_1",
+                    sectionId = sectionId,
+                    lessonId = sectionId,
+                    pageType = pageType,
+                    orderedBlocks = renderableBlocks,
+                    pageNumber = 1,
+                    totalPages = 1,
+                    primaryDiagramId = null,
+                    semanticBadge = badge,
+                    subtitleFa = fmPage.pageTitleFa,
+                    contentRegionId = fmPage.contentRegionId,
+                    sourcePdfPage = pdfPage,
+                    sliceIndexInSourcePage = 1,
+                    totalSlicesInSourcePage = 1,
+                    frontMatterPageKind = fmPage.pageKind,
+                    pageNotesFa = fmPage.notesFa,
+                    sourceLinks = fmPage.sourceLinks
+                )
+            )
+        }
+
+        val heightFactor = (viewportHeightDp.coerceAtLeast(200) / 640f)
+        val widthFactor = (viewportWidthDp.coerceAtLeast(200) / 380f)
+        val fontFactor = fontScale.scale * fontScale.scale
+        val effectiveScale = (heightFactor * widthFactor) / fontFactor
+
+        val isTocOrPartIntro = fmPage.pageKind == FrontMatterPageKind.TABLE_OF_CONTENTS ||
+            fmPage.pageKind == FrontMatterPageKind.PART_INTRODUCTION
+        val maxCharsPerTextPage = ((if (isTocOrPartIntro) 680f else 560f) * effectiveScale).toInt().coerceIn(140, 1400)
+        val maxLinesPerTextPage = ((if (isTocOrPartIntro) 18f else 15f) * (heightFactor / fontScale.scale)).toInt().coerceIn(5, 30)
+        val charsPerLine = (36f * (widthFactor / fontScale.scale)).toInt().coerceIn(15, 65)
+        val maxCompanionCharsWithSourceImage = (380f * effectiveScale).toInt().coerceIn(100, 620)
+        val maxCompanionLinesWithSourceImage = (9f * (heightFactor / fontScale.scale)).toInt().coerceIn(4, 13)
+
+        fun blockTextOf(b: SectionContentBlock): String? {
+            return when (b) {
+                is SectionContentBlock.ParagraphBlock -> b.textFa
+                is SectionContentBlock.HeadingBlock -> b.textFa
+                is SectionContentBlock.FootnoteBlock -> b.textFa
+                is SectionContentBlock.ExternalReferenceBlock -> b.titleFa
+                is SectionContentBlock.OrderedListBlock -> {
+                    val itemsText = b.items.mapIndexed { idx, item -> "${idx + 1}. $item" }.joinToString("\n")
+                    if (!b.titleFa.isNullOrBlank()) "${b.titleFa}\n$itemsText" else itemsText
+                }
+                is SectionContentBlock.TableBlock -> {
+                    val rowsText = b.rows.joinToString("\n") { row -> row.joinToString(" : ") }
+                    if (!b.titleFa.isNullOrBlank()) "${b.titleFa}\n$rowsText" else rowsText
+                }
+                is SectionContentBlock.SourceImageBlock,
+                is SectionContentBlock.DiagramBlock,
+                is SectionContentBlock.ExerciseBlock -> null
+            }
+        }
+
+        fun estimateLines(b: SectionContentBlock): Int {
+            return when (b) {
+                is SectionContentBlock.SourceImageBlock -> if (b.isSynthesizedFromPageAsset) 2 else 6
+                is SectionContentBlock.OrderedListBlock -> (b.items.size + 2).coerceAtLeast(3)
+                is SectionContentBlock.TableBlock -> (b.rows.size + 2).coerceAtLeast(3)
+                is SectionContentBlock.HeadingBlock -> {
+                    val txt = b.textFa.orEmpty()
+                    estimateRawTextLines(txt, charsPerLine).coerceAtLeast(1) + 1
+                }
+                else -> {
+                    val txt = blockTextOf(b) ?: return 0
+                    estimateRawTextLines(txt, charsPerLine).coerceAtLeast(1) + 2
+                }
+            }
+        }
+
+        // Expand overly long ParagraphBlocks while preserving sourcePdfPage on every chunk
+        val maxRawLinesPerFullPage = (maxLinesPerTextPage - 2).coerceAtLeast(2)
+        val expandedBlocks = mutableListOf<SectionContentBlock>()
+        for (block in renderableBlocks) {
+            if (block is SectionContentBlock.ParagraphBlock && !block.textFa.isNullOrEmpty()) {
+                val resolved = block.textFa
+                val rawLines = estimateRawTextLines(resolved, charsPerLine)
+                if (resolved.length > maxCharsPerTextPage || rawLines > maxRawLinesPerFullPage) {
+                    val chunks = splitLongParagraphText(
+                        text = resolved,
+                        maxChunkChars = maxCharsPerTextPage,
+                        maxChunkLines = maxRawLinesPerFullPage,
+                        charsPerLine = charsPerLine
+                    )
+                    chunks.forEachIndexed { idx, chunkText ->
+                        val chunkId = if (idx == 0) block.blockId else "${block.blockId}${SPLIT_PART_DELIMITER}${idx + 1}"
+                        expandedBlocks.add(
+                            block.copy(
+                                blockId = chunkId,
+                                textFa = chunkText,
+                                isPaginatedSlice = true,
+                                sourcePdfPage = pdfPage
+                            )
+                        )
+                    }
+                } else {
+                    expandedBlocks.add(block)
+                }
+            } else {
+                expandedBlocks.add(block)
+            }
+        }
+
+        val rawSlices = mutableListOf<MutableList<SectionContentBlock>>()
+        var currentBlocks = mutableListOf<SectionContentBlock>()
+        var currentLines = 0
+        var currentChars = 0
+        var currentHasMajorSourceImage = false
+
+        fun flushSlice() {
+            if (currentBlocks.isNotEmpty()) {
+                rawSlices.add(currentBlocks)
+                currentBlocks = mutableListOf()
+                currentLines = 0
+                currentChars = 0
+                currentHasMajorSourceImage = false
+            }
+        }
+
+        var idx = 0
+        while (idx < expandedBlocks.size) {
+            val block = expandedBlocks[idx]
+            if (block is SectionContentBlock.SourceImageBlock && !block.isSynthesizedFromPageAsset) {
+                val assetMeta = fmPage.sourceAssets.find { it.assetId == block.assetId }
+                val isSmallPieceIcon = assetMeta != null && assetMeta.width <= 320 && assetMeta.height <= 320
+                if (currentHasMajorSourceImage && !isSmallPieceIcon) {
+                    flushSlice()
+                } else if (currentBlocks.any { it !is SectionContentBlock.SourceImageBlock && it !is SectionContentBlock.HeadingBlock }) {
+                    // Flush preceding text paragraphs before starting a new diagram/piece image section
+                    flushSlice()
+                }
+
+                currentBlocks.add(block)
+                if (!isSmallPieceIcon) {
+                    currentHasMajorSourceImage = true
+                }
+                currentLines += estimateLines(block)
+
+                // If another small piece icon immediately follows (e.g., pages 15, 16, 17, 19), keep them together
+                while (idx + 1 < expandedBlocks.size) {
+                    val nextBlk = expandedBlocks[idx + 1]
+                    if (nextBlk is SectionContentBlock.SourceImageBlock && !nextBlk.isSynthesizedFromPageAsset) {
+                        val nextMeta = fmPage.sourceAssets.find { it.assetId == nextBlk.assetId }
+                        if (nextMeta != null && nextMeta.width <= 320 && nextMeta.height <= 320) {
+                            idx++
+                            currentBlocks.add(nextBlk)
+                            currentLines += 2
+                            continue
+                        }
+                    }
+                    break
+                }
+
+                // Attach companion paragraph right after the image if it fits
+                if (idx + 1 < expandedBlocks.size) {
+                    val nextBlk = expandedBlocks[idx + 1]
+                    if (nextBlk !is SectionContentBlock.SourceImageBlock) {
+                        val nextTxt = blockTextOf(nextBlk).orEmpty()
+                        val nextLines = estimateRawTextLines(nextTxt, charsPerLine)
+                        if (nextTxt.length <= maxCompanionCharsWithSourceImage &&
+                            nextLines <= maxCompanionLinesWithSourceImage
+                        ) {
+                            idx++
+                            currentBlocks.add(nextBlk)
+                        }
+                    }
+                }
+                flushSlice()
+                idx++
+                continue
+            }
+
+            val bLines = estimateLines(block)
+            val bChars = blockTextOf(block)?.length ?: 0
+
+            val hasNonHeaderContent = currentBlocks.any {
+                !(it is SectionContentBlock.SourceImageBlock && it.isSynthesizedFromPageAsset)
+            }
+            val wouldOverflowLines = (currentLines + bLines) > maxLinesPerTextPage
+            val wouldOverflowChars = (currentChars + bChars) > maxCharsPerTextPage
+
+            if (hasNonHeaderContent && (wouldOverflowLines || wouldOverflowChars)) {
+                flushSlice()
+            }
+
+            currentBlocks.add(block)
+            currentLines += bLines
+            currentChars += bChars
+            idx++
+        }
+
+        flushSlice()
+
+        if (rawSlices.isEmpty()) {
+            rawSlices.add(expandedBlocks.toMutableList())
+        }
+
+        val totalSlices = rawSlices.size
+        return rawSlices.mapIndexed { sIdx, sliceBlocks ->
+            val sliceNum = sIdx + 1
+            val hasSourceImg = sliceBlocks.any { it is SectionContentBlock.SourceImageBlock }
+            val pageType = if (hasSourceImg) ReaderPageType.STATIC_DIAGRAM else ReaderPageType.TEXT
+            val badge = if (hasSourceImg) SemanticBadgeCategory.VISUAL_EXAMPLE else SemanticBadgeCategory.EDUCATIONAL_TEXT
+            val subtitle = sliceBlocks.filterIsInstance<SectionContentBlock.HeadingBlock>()
+                .firstNotNullOfOrNull { it.textFa }
+                ?: fmPage.pageTitleFa
+
+            ReaderPage(
+                pageId = "${sectionId}_SLICE_$sliceNum",
+                sectionId = sectionId,
+                lessonId = sectionId,
+                pageType = pageType,
+                orderedBlocks = sliceBlocks.toList(),
+                pageNumber = sliceNum,
+                totalPages = totalSlices,
+                primaryDiagramId = null,
+                semanticBadge = badge,
+                subtitleFa = subtitle,
+                contentRegionId = fmPage.contentRegionId,
+                sourcePdfPage = pdfPage,
+                sliceIndexInSourcePage = sliceNum,
+                totalSlicesInSourcePage = totalSlices,
+                frontMatterPageKind = fmPage.pageKind,
+                pageNotesFa = fmPage.notesFa,
+                sourceLinks = fmPage.sourceLinks
+            )
+        }
+    }
+
+    /**
+     * Paginates all 39 [FrontMatterPage]s (`1..39`) in strict `sourcePdfPage` order into a unified
+     * list of [ReaderPage]s for the `FRONT_MATTER` content region while preserving each slice's
+     * authoritative `sourcePdfPage`, `sliceIndexInSourcePage`, and `totalSlicesInSourcePage`.
+     */
+    fun paginateFrontMatterPages(
+        frontMatterPages: List<FrontMatterPage>,
+        fontScale: FontSizeScale = FontSizeScale.NORMAL,
+        viewportWidthDp: Int = 380,
+        viewportHeightDp: Int = 640
+    ): List<ReaderPage> {
+        val sortedPages = frontMatterPages.sortedBy { it.sourcePdfPage }
+        val allSlices = sortedPages.flatMap { fmPage ->
+            paginateFrontMatterPage(
+                fmPage = fmPage,
+                fontScale = fontScale,
+                viewportWidthDp = viewportWidthDp,
+                viewportHeightDp = viewportHeightDp
+            )
+        }
+        val total = allSlices.size
+        return allSlices.mapIndexed { idx, slice ->
+            slice.copy(
+                pageNumber = idx + 1,
+                totalPages = total
             )
         }
     }
@@ -415,6 +768,7 @@ object ReaderPaginator {
     ): Triple<ReaderPageType, SemanticBadgeCategory, String?> {
         val exerciseBlock = blocks.filterIsInstance<SectionContentBlock.ExerciseBlock>().firstOrNull()
         val diagramBlock = blocks.filterIsInstance<SectionContentBlock.DiagramBlock>().firstOrNull()
+        val sourceImageBlock = blocks.filterIsInstance<SectionContentBlock.SourceImageBlock>().firstOrNull()
 
         val diagramId = exerciseBlock?.diagramId ?: diagramBlock?.diagramId
         val diagram = diagramId?.let { diagramsById[it] }
@@ -459,15 +813,17 @@ object ReaderPaginator {
             return Triple(pageType, badge, diagram.diagramId)
         }
 
+        if (sourceImageBlock != null) {
+            return Triple(ReaderPageType.STATIC_DIAGRAM, SemanticBadgeCategory.VISUAL_EXAMPLE, null)
+        }
+
         val isSummary = isSummarySection(section)
         val pageType = if (isSummary) ReaderPageType.SUMMARY else ReaderPageType.TEXT
         return Triple(pageType, SemanticBadgeCategory.EDUCATIONAL_TEXT, null)
     }
 
-    private fun isSummarySection(section: SectionItem): Boolean {
-        return section.sectionId.contains("SUMMARY", ignoreCase = true) ||
-            section.titleFa.contains("خلاصه") ||
-            section.titleEn.contains("Summary", ignoreCase = true)
+    fun isSummarySection(section: SectionItem): Boolean {
+        return section.sectionKind == SectionKind.SUMMARY
     }
 
     /**

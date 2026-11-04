@@ -32,7 +32,7 @@ enum class NarrationPlaybackSpeed(val multiplier: Float, val labelFa: String) {
 
 enum class NarrationPlaybackMode(val labelFa: String) {
     CURRENT_PAGE("پخش همین صفحه"),
-    CONTINUOUS_CHAPTER("پخش پیوسته فصل اول")
+    CONTINUOUS_CHAPTER("پخش پیوسته فصل")
 }
 
 enum class NarrationStatus {
@@ -47,14 +47,18 @@ enum class NarrationStatus {
 data class NarrationBlockAssetEntry(
     val sectionId: String,
     val blockId: String,
-    val assetRelativePath: String
+    val assetRelativePath: String,
+    val status: String = NarrationManifestValidator.STATUS_AVAILABLE,
+    val durationMs: Int? = null
 ) {
     val compositeKey: String get() = "$sectionId:$blockId"
+    val isAvailable: Boolean get() = status == NarrationManifestValidator.STATUS_AVAILABLE
 }
 
 data class NarrationManifest(
     val schemaVersion: Int = 1,
-    val chapterId: String = "CH01",
+    val chapterId: String = "",
+    val chapterIds: Set<String> = emptySet(),
     val declaredSectionIds: Set<String> = emptySet(),
     val entriesByCompositeKey: Map<String, NarrationBlockAssetEntry> = emptyMap(),
     val entriesByBlockId: Map<String, NarrationBlockAssetEntry> = emptyMap(),
@@ -68,15 +72,33 @@ data class NarrationManifest(
     }
 }
 
+data class NarrationManifestValidationResult(
+    val isValid: Boolean,
+    val errors: List<String> = emptyList(),
+    val chapterIds: List<String> = emptyList(),
+    val sectionIdsByChapter: Map<String, Set<String>> = emptyMap(),
+    val validatedBlockCount: Int = 0
+)
+
 object NarrationManifestValidator {
 
+    const val STATUS_AVAILABLE = "AVAILABLE"
+    const val STATUS_UNAVAILABLE = "UNAVAILABLE"
+
+    private val ALLOWED_STATUSES = setOf(STATUS_AVAILABLE, STATUS_UNAVAILABLE)
+    private val ALLOWED_ROOT_KEYS = setOf("schemaVersion", "chapters")
+    private val ALLOWED_CHAPTER_KEYS = setOf("chapterId", "sections")
+    private val ALLOWED_SECTION_KEYS = setOf("sectionId", "blocks")
+    private val ALLOWED_BLOCK_KEYS = setOf("blockId", "audioAssetPath", "status", "durationMs")
+
     private val VALID_ID_REGEX = Regex("^[A-Za-z0-9_\\-]{1,128}$")
+    private val SAFE_AUDIO_PATH_REGEX = Regex("^[A-Za-z0-9_\\-]+(/[A-Za-z0-9_\\-]+)*\\.(mp3|wav|ogg|m4a|aac)$")
     private val DRIVE_LETTER_REGEX = Regex("^[A-Za-z]:.*")
     private val ALLOWED_EXTENSIONS = listOf(".mp3", ".wav", ".ogg", ".m4a", ".aac")
 
     /**
-     * Validates a sectionId or blockId:
-     * - Non-blank, alphanumeric + underscore/hyphen
+     * Validates a chapterId, sectionId, or blockId:
+     * - Non-blank, alphanumeric + underscore/hyphen (1..128 chars)
      * - Never allows pagination slice suffix (`__part_`) as a manifest key
      */
     fun isValidBlockOrSectionId(id: String?): Boolean {
@@ -86,12 +108,19 @@ object NarrationManifestValidator {
     }
 
     /**
-     * Strictly validates that an asset path inside `manifest.json` is a safe relative path
+     * Validates `status` field of a narration block (`"AVAILABLE"` or `"UNAVAILABLE"`).
+     */
+    fun isValidStatus(status: String?): Boolean {
+        return status != null && status in ALLOWED_STATUSES
+    }
+
+    /**
+     * Strictly validates that `audioAssetPath` inside `manifest.json` is a safe relative path
      * under `assets/narration/`:
      * - No absolute paths (starting with `/` or `\` or drive letter)
      * - No URLs (`http://`, `https://`, `file://`, `content://`, or any `://`)
      * - No path traversal (`..` or `.` segments)
-     * - Must end with a supported audio extension
+     * - Must match `^[A-Za-z0-9_\-]+(/[A-Za-z0-9_\-]+)*\.(mp3|wav|ogg|m4a|aac)$`
      */
     fun isValidRelativeAssetPath(assetPath: String?): Boolean {
         if (assetPath.isNullOrBlank()) return false
@@ -123,68 +152,381 @@ object NarrationManifestValidator {
         if (ALLOWED_EXTENSIONS.none { fileName.endsWith(it) && fileName.length > it.length }) {
             return false
         }
-        return true
+        return SAFE_AUDIO_PATH_REGEX.matches(trimmed)
     }
 
-    fun parseManifestJson(jsonString: String): NarrationManifest {
+    /**
+     * Resolves an `audioAssetPath` strictly under `<assetsDir>/narration/<audioAssetPath>`,
+     * matching Android Runtime `appContext.assets.open("narration/$audioAssetPath")` and
+     * Gradle `validateContentPacks`. Never falls back to `<assetsDir>/<audioAssetPath>` or
+     * chapter directories, and verifies canonical path containment under `<assetsDir>/narration/`.
+     */
+    fun resolveAudioFileInAssetsDir(assetsDir: java.io.File, audioAssetPath: String): java.io.File? {
+        if (!isValidRelativeAssetPath(audioAssetPath)) return null
+        return try {
+            val narrationRootCanonical = java.io.File(assetsDir, "narration").canonicalFile
+            val candidateCanonical = java.io.File(assetsDir, "narration/$audioAssetPath").canonicalFile
+            val rootPrefix = narrationRootCanonical.path + java.io.File.separator
+            if (!candidateCanonical.path.startsWith(rootPrefix)) {
+                null
+            } else {
+                candidateCanonical.takeIf { it.exists() && it.isFile }
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private fun extractOptionalDurationMs(obj: JSONObject): Pair<Boolean, Int?> {
+        if (!obj.has("durationMs")) {
+            return true to null
+        }
+        if (obj.isNull("durationMs")) {
+            return false to null
+        }
+        val raw = obj.opt("durationMs")
+        val value = when (raw) {
+            is Int -> raw
+            is Long -> if (raw in 0..Int.MAX_VALUE) raw.toInt() else -1
+            else -> -1
+        }
+        return if (value >= 0) (true to value) else (false to null)
+    }
+
+    private fun JSONObject.keySetList(): List<String> {
+        val list = mutableListOf<String>()
+        val it = keys()
+        while (it.hasNext()) {
+            list.add(it.next())
+        }
+        return list
+    }
+
+    /**
+     * Strictly validates the nested `chapters -> sections -> blocks` structure of a Narration Manifest JSON
+     * against the single unified contract (`content_schemas/narration_manifest.schema.json` & Gradle `validateContentPacks`):
+     * - Root object must have only `schemaVersion` (const `1`) and `chapters` (array; empty `[]` is allowed).
+     * - Each Chapter object must have only `chapterId` (valid, unique) and `sections` (array).
+     * - When [expectedChapterId] is provided and `chapters` is non-empty, [expectedChapterId] must match the manifest's chapter(s).
+     * - Each Section object must have only `sectionId` (valid, unique in chapter, matching real sections when provided) and `blocks` (array).
+     * - Each Block object must have only `blockId` (valid, unique in section/chapter, matching real blocks when provided),
+     *   `audioAssetPath` (safe relative path with supported audio extension), `status` (`"AVAILABLE"` or `"UNAVAILABLE"`),
+     *   and optional `durationMs` (integer `>= 0`).
+     * - When `status == "AVAILABLE"` and [assetExistsPredicate] is provided, the physical audio file must exist.
+     * - When `status == "UNAVAILABLE"`, a missing audio file is permitted.
+     */
+    fun validateManifestStructure(
+        jsonString: String,
+        expectedChapterId: String? = null,
+        validSectionIds: Set<String> = emptySet(),
+        validSectionIdsByChapter: Map<String, Set<String>> = emptyMap(),
+        validBlockIdsBySection: Map<String, Set<String>> = emptyMap(),
+        assetExistsPredicate: ((String) -> Boolean)? = null
+    ): NarrationManifestValidationResult {
+        val errors = mutableListOf<String>()
+        val seenChapterIds = linkedSetOf<String>()
+        val sectionIdsByChapter = linkedMapOf<String, Set<String>>()
+        var blockCount = 0
+
+        try {
+            val root = JSONObject(jsonString)
+
+            for (key in root.keySetList()) {
+                if (key !in ALLOWED_ROOT_KEYS) {
+                    errors.add("Unsupported root property in narration manifest: '$key'")
+                }
+            }
+
+            val rawSchemaVer = root.opt("schemaVersion")
+            val schemaVersion = when (rawSchemaVer) {
+                is Int -> rawSchemaVer
+                is Long -> rawSchemaVer.toInt()
+                else -> -1
+            }
+            if (!root.has("schemaVersion") || schemaVersion != 1) {
+                errors.add("Invalid or missing schemaVersion: '$rawSchemaVer' (expected integer 1)")
+            }
+
+            if (!root.has("chapters") || root.opt("chapters") !is org.json.JSONArray) {
+                errors.add("Manifest must contain a required 'chapters' array")
+            } else {
+                val chaptersArr = root.getJSONArray("chapters")
+                for (c in 0 until chaptersArr.length()) {
+                    val chapterObj = chaptersArr.optJSONObject(c)
+                    if (chapterObj == null) {
+                        errors.add("Chapter entry at index $c is not a JSON object")
+                        continue
+                    }
+
+                    for (key in chapterObj.keySetList()) {
+                        if (key !in ALLOWED_CHAPTER_KEYS) {
+                            errors.add("Unsupported property '$key' in chapter entry at index $c")
+                        }
+                    }
+
+                    val rawChapterId = chapterObj.opt("chapterId")
+                    val chapterId = if (rawChapterId is String) rawChapterId else ""
+                    if (!chapterObj.has("chapterId") || !isValidBlockOrSectionId(chapterId)) {
+                        errors.add("Invalid or empty chapterId at index $c: '$chapterId'")
+                        continue
+                    }
+                    if (!seenChapterIds.add(chapterId)) {
+                        errors.add("Duplicate chapterId in narration manifest: '$chapterId'")
+                    }
+
+                    val expectedSectionsForChapter: Set<String> =
+                        validSectionIdsByChapter[chapterId]
+                            ?: if (expectedChapterId == null || expectedChapterId == chapterId) validSectionIds else emptySet()
+
+                    if (!chapterObj.has("sections") || chapterObj.opt("sections") !is org.json.JSONArray) {
+                        errors.add("Missing or invalid 'sections' array in chapter '$chapterId'")
+                        continue
+                    }
+                    val sectionsArr = chapterObj.getJSONArray("sections")
+                    val seenSections = linkedSetOf<String>()
+                    val seenBlocksInChapter = linkedSetOf<String>()
+
+                    for (s in 0 until sectionsArr.length()) {
+                        val secObj = sectionsArr.optJSONObject(s)
+                        if (secObj == null) {
+                            errors.add("Section entry at index $s in chapter '$chapterId' is not a JSON object")
+                            continue
+                        }
+
+                        for (key in secObj.keySetList()) {
+                            if (key !in ALLOWED_SECTION_KEYS) {
+                                errors.add("Unsupported property '$key' in section at index $s of chapter '$chapterId'")
+                            }
+                        }
+
+                        val rawSectionId = secObj.opt("sectionId")
+                        val sectionId = if (rawSectionId is String) rawSectionId else ""
+                        if (!secObj.has("sectionId") || !isValidBlockOrSectionId(sectionId)) {
+                            errors.add("Invalid or empty sectionId '$sectionId' in chapter '$chapterId'")
+                            continue
+                        }
+                        if (!seenSections.add(sectionId)) {
+                            errors.add("Duplicate sectionId '$sectionId' in chapter '$chapterId'")
+                        }
+                        if (expectedSectionsForChapter.isNotEmpty() && sectionId !in expectedSectionsForChapter) {
+                            errors.add("Section '$sectionId' in narration manifest does not belong to chapter '$chapterId'")
+                        }
+
+                        if (!secObj.has("blocks") || secObj.opt("blocks") !is org.json.JSONArray) {
+                            errors.add("Missing or invalid 'blocks' array in section '$sectionId' of chapter '$chapterId'")
+                            continue
+                        }
+                        val blocksArr = secObj.getJSONArray("blocks")
+                        val seenBlocksInSection = linkedSetOf<String>()
+                        val expectedBlocksForSection = validBlockIdsBySection[sectionId] ?: emptySet()
+
+                        for (b in 0 until blocksArr.length()) {
+                            val blockObj = blocksArr.optJSONObject(b)
+                            if (blockObj == null) {
+                                errors.add("Block entry at index $b in section '$sectionId' is not a JSON object")
+                                continue
+                            }
+
+                            val rawBlockId = blockObj.opt("blockId")
+                            val blockId = if (rawBlockId is String) rawBlockId else ""
+
+                            for (key in blockObj.keySetList()) {
+                                if (key !in ALLOWED_BLOCK_KEYS) {
+                                    errors.add("Unsupported property '$key' in block '$blockId' of section '$sectionId' (chapter '$chapterId')")
+                                }
+                            }
+
+                            if (!blockObj.has("blockId") || !isValidBlockOrSectionId(blockId)) {
+                                errors.add("Invalid or empty blockId '$blockId' in section '$sectionId' of chapter '$chapterId'")
+                            } else {
+                                if (!seenBlocksInSection.add(blockId) || !seenBlocksInChapter.add(blockId)) {
+                                    errors.add("Duplicate blockId '$blockId' in section '$sectionId' of chapter '$chapterId'")
+                                }
+                                if (expectedBlocksForSection.isNotEmpty() && blockId !in expectedBlocksForSection) {
+                                    errors.add("Block '$blockId' in narration manifest does not exist in section '$sectionId' of chapter '$chapterId'")
+                                }
+                            }
+
+                            val (durOk, _) = extractOptionalDurationMs(blockObj)
+                            if (!durOk) {
+                                errors.add("Invalid durationMs for block '$blockId' in section '$sectionId' of chapter '$chapterId'")
+                            }
+
+                            val rawPath = blockObj.opt("audioAssetPath")
+                            val audioAssetPath = if (rawPath is String) rawPath else ""
+                            if (!blockObj.has("audioAssetPath") || !isValidRelativeAssetPath(audioAssetPath)) {
+                                errors.add("Invalid or missing audioAssetPath '$audioAssetPath' for block '$blockId' in section '$sectionId' of chapter '$chapterId'")
+                            }
+
+                            val rawStatus = blockObj.opt("status")
+                            val status = if (rawStatus is String) rawStatus else ""
+                            if (!blockObj.has("status") || !isValidStatus(status)) {
+                                errors.add("Invalid or missing status '$status' for block '$blockId' in section '$sectionId' of chapter '$chapterId' (expected AVAILABLE or UNAVAILABLE)")
+                            } else if (status == STATUS_AVAILABLE &&
+                                isValidRelativeAssetPath(audioAssetPath) &&
+                                assetExistsPredicate != null &&
+                                !assetExistsPredicate(audioAssetPath)
+                            ) {
+                                errors.add("Audio asset '$audioAssetPath' for AVAILABLE block '$blockId' in section '$sectionId' of chapter '$chapterId' does not exist")
+                            }
+
+                            blockCount++
+                        }
+                    }
+                    sectionIdsByChapter[chapterId] = seenSections
+                }
+
+                if (!expectedChapterId.isNullOrBlank() && seenChapterIds.isNotEmpty()) {
+                    if (seenChapterIds.size == 1 && seenChapterIds.first() != expectedChapterId) {
+                        errors.add("Manifest chapterId '${seenChapterIds.first()}' does not match expected chapterId '$expectedChapterId'")
+                    } else if (expectedChapterId !in seenChapterIds) {
+                        errors.add("Expected chapterId '$expectedChapterId' not found in narration manifest chapters: $seenChapterIds")
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            errors.add("Malformed JSON in narration manifest: ${e.message}")
+        }
+
+        return NarrationManifestValidationResult(
+            isValid = errors.isEmpty(),
+            errors = errors,
+            chapterIds = seenChapterIds.toList(),
+            sectionIdsByChapter = sectionIdsByChapter,
+            validatedBlockCount = blockCount
+        )
+    }
+
+    fun parseManifestJson(
+        jsonString: String,
+        expectedChapterId: String = ""
+    ): NarrationManifest {
         return try {
             val root = JSONObject(jsonString)
-            val schemaVersion = root.optInt("schemaVersion", 1)
-            if (schemaVersion < 1) {
+
+            for (key in root.keySetList()) {
+                if (key !in ALLOWED_ROOT_KEYS) {
+                    return NarrationManifest(isValid = false)
+                }
+            }
+
+            val rawSchemaVer = root.opt("schemaVersion")
+            val schemaVersion = when (rawSchemaVer) {
+                is Int -> rawSchemaVer
+                is Long -> rawSchemaVer.toInt()
+                else -> -1
+            }
+            if (!root.has("schemaVersion") || schemaVersion != 1) {
                 return NarrationManifest(schemaVersion = schemaVersion, isValid = false)
             }
-            val chaptersArr = root.optJSONArray("chapters")
-                ?: return NarrationManifest(schemaVersion = schemaVersion, isValid = true)
 
+            if (!root.has("chapters") || root.opt("chapters") !is org.json.JSONArray) {
+                return NarrationManifest(schemaVersion = schemaVersion, isValid = false)
+            }
+
+            val chaptersArr = root.getJSONArray("chapters")
+            val declaredChapters = linkedSetOf<String>()
             val declaredSections = linkedSetOf<String>()
             val byComposite = linkedMapOf<String, NarrationBlockAssetEntry>()
             val byBlock = linkedMapOf<String, NarrationBlockAssetEntry>()
             var rejected = 0
-            var primaryChapterId = "CH01"
+            var primaryChapterId = ""
+            var chapterStructureValid = true
 
             for (c in 0 until chaptersArr.length()) {
-                val chapterObj = chaptersArr.optJSONObject(c) ?: continue
-                val chapterId = chapterObj.optString("chapterId", "CH01")
-                if (c == 0 && isValidBlockOrSectionId(chapterId)) {
-                    primaryChapterId = chapterId
+                val chapterObj = chaptersArr.optJSONObject(c)
+                if (chapterObj == null) {
+                    chapterStructureValid = false
+                    continue
                 }
-                val sectionsArr = chapterObj.optJSONArray("sections") ?: continue
+                if (chapterObj.keySetList().any { it !in ALLOWED_CHAPTER_KEYS }) {
+                    chapterStructureValid = false
+                    continue
+                }
+                val rawChapterId = chapterObj.opt("chapterId") as? String ?: ""
+                if (!isValidBlockOrSectionId(rawChapterId) || !declaredChapters.add(rawChapterId)) {
+                    chapterStructureValid = false
+                    rejected++
+                    continue
+                }
+                if (primaryChapterId.isBlank() || rawChapterId == expectedChapterId) {
+                    primaryChapterId = rawChapterId
+                }
+                val shouldLoadEntriesForChapter = expectedChapterId.isBlank() || rawChapterId == expectedChapterId
+
+                val sectionsArr = chapterObj.opt("sections") as? org.json.JSONArray
+                if (sectionsArr == null) {
+                    chapterStructureValid = false
+                    continue
+                }
+                val seenSectionsInChapter = linkedSetOf<String>()
+                val seenBlocksInChapter = linkedSetOf<String>()
                 for (s in 0 until sectionsArr.length()) {
-                    val secObj = sectionsArr.optJSONObject(s) ?: continue
-                    val sectionId = secObj.optString("sectionId", "")
-                    if (!isValidBlockOrSectionId(sectionId)) {
+                    val secObj = sectionsArr.optJSONObject(s)
+                    if (secObj == null || secObj.keySetList().any { it !in ALLOWED_SECTION_KEYS }) {
                         rejected++
                         continue
                     }
-                    declaredSections.add(sectionId)
-                    val blocksArr = secObj.optJSONArray("blocks") ?: continue
+                    val sectionId = secObj.opt("sectionId") as? String ?: ""
+                    if (!isValidBlockOrSectionId(sectionId) || !seenSectionsInChapter.add(sectionId)) {
+                        rejected++
+                        continue
+                    }
+                    if (shouldLoadEntriesForChapter) {
+                        declaredSections.add(sectionId)
+                    }
+                    val blocksArr = secObj.opt("blocks") as? org.json.JSONArray ?: continue
+                    val seenBlocksInSection = linkedSetOf<String>()
                     for (b in 0 until blocksArr.length()) {
-                        val blockObj = blocksArr.optJSONObject(b) ?: continue
-                        val blockId = blockObj.optString("blockId", "")
-                        val asset = blockObj.optString("asset", "")
-                        if (!isValidBlockOrSectionId(blockId) || !isValidRelativeAssetPath(asset)) {
+                        val blockObj = blocksArr.optJSONObject(b)
+                        if (blockObj == null || blockObj.keySetList().any { it !in ALLOWED_BLOCK_KEYS }) {
                             rejected++
                             continue
                         }
-                        val entry = NarrationBlockAssetEntry(
-                            sectionId = sectionId,
-                            blockId = blockId,
-                            assetRelativePath = asset
-                        )
-                        byComposite[entry.compositeKey] = entry
-                        byBlock[blockId] = entry
+                        val blockId = blockObj.opt("blockId") as? String ?: ""
+                        val audioAssetPath = blockObj.opt("audioAssetPath") as? String ?: ""
+                        val status = blockObj.opt("status") as? String ?: ""
+                        val (durOk, durationMs) = extractOptionalDurationMs(blockObj)
+
+                        if (!isValidBlockOrSectionId(blockId) ||
+                            !seenBlocksInSection.add(blockId) ||
+                            !seenBlocksInChapter.add(blockId) ||
+                            !durOk ||
+                            !isValidStatus(status) ||
+                            !isValidRelativeAssetPath(audioAssetPath)
+                        ) {
+                            rejected++
+                            continue
+                        }
+                        if (shouldLoadEntriesForChapter && status == STATUS_AVAILABLE) {
+                            val entry = NarrationBlockAssetEntry(
+                                sectionId = sectionId,
+                                blockId = blockId,
+                                assetRelativePath = audioAssetPath,
+                                status = status,
+                                durationMs = durationMs
+                            )
+                            byComposite[entry.compositeKey] = entry
+                            byBlock[blockId] = entry
+                        }
                     }
                 }
             }
 
+            if (expectedChapterId.isNotBlank() && declaredChapters.isNotEmpty() && expectedChapterId !in declaredChapters) {
+                chapterStructureValid = false
+            }
+
+            val hasValidChapterId = primaryChapterId.isBlank() || isValidBlockOrSectionId(primaryChapterId)
             NarrationManifest(
                 schemaVersion = schemaVersion,
                 chapterId = primaryChapterId,
+                chapterIds = declaredChapters,
                 declaredSectionIds = declaredSections,
                 entriesByCompositeKey = byComposite,
                 entriesByBlockId = byBlock,
                 rejectedEntryCount = rejected,
-                isValid = true
+                isValid = hasValidChapterId && chapterStructureValid
             )
         } catch (_: Exception) {
             NarrationManifest(isValid = false)
@@ -247,7 +589,7 @@ data class NarrationUiState(
 
 /**
  * Pluggable playback engine abstraction for long-form book narration.
- * Completely independent from [ChessSoundManager] and [ android.media.SoundPool ].
+ * Completely independent from [ChessSoundManager] and [android.media.SoundPool].
  */
 interface NarrationPlaybackEngine {
     val isPlaying: Boolean
@@ -655,10 +997,10 @@ class FakeNarrationPlaybackEngine : NarrationPlaybackEngine {
  *
  * Completely isolated from [ChessSoundManager]:
  * - Never touches [ChessSoundManager] or [android.media.SoundPool].
- * - Loads `assets/narration/manifest.json` and validates all block IDs and asset paths.
+ * - Loads each chapter's own narration manifest via [switchChapterManifest] without any hardcoded chapter ID.
  * - Normalizes paginated block IDs via [ReaderPaginator.originalBlockId] so split paragraphs
  *   are never queued or read multiple times.
- * - Supports Mode A (Play Current Page) and Mode B (Continuous Chapter 1 Playback).
+ * - Supports Mode A (Play Current Page) and Mode B (Continuous Chapter Playback across all sections of the active chapter).
  */
 class BookNarrationManager(
     private val context: Context,
@@ -666,17 +1008,25 @@ class BookNarrationManager(
     engineOverride: NarrationPlaybackEngine? = null
 ) {
     companion object {
-        const val MANIFEST_ASSET_PATH = "narration/manifest.json"
         const val MSG_PAGE_AUDIO_NOT_READY = "فایل صوتی این صفحه هنوز آماده نشده است"
-        const val MSG_CHAPTER_AUDIO_NOT_READY = "فایل صوتی فصل اول هنوز آماده نشده است"
+        const val MSG_CHAPTER_AUDIO_NOT_READY = "فایل صوتی این فصل هنوز آماده نشده است"
         const val MSG_PARTIAL_BLOCKS_SKIPPED = "برخی بلوک‌های فاقد فایل صوتی رد شدند"
-        const val MSG_CHAPTER_COMPLETED = "پخش صوتی فصل اول به پایان رسید"
+        const val MSG_CHAPTER_COMPLETED = "پخش صوتی این فصل به پایان رسید"
     }
+
+    var activeBookId: String = ""
+        private set
+
+    var activeChapterId: String = ""
+        private set
+
+    var activeManifestAssetPath: String = ""
+        private set
 
     var engine: NarrationPlaybackEngine = engineOverride ?: MediaPlayerNarrationEngine(context)
         private set
 
-    var manifest: NarrationManifest = loadManifestFromAssets()
+    var manifest: NarrationManifest = NarrationManifest(isValid = false)
         private set
 
     private var activeQueue: List<NarrationQueueItem> = emptyList()
@@ -699,29 +1049,68 @@ class BookNarrationManager(
     }
 
     private fun createInitialState(): NarrationUiState {
-        val savedSectionId = prefs.narrationLastSectionId
-        val savedBlockId = prefs.narrationLastBlockId
-        val savedPosMs = prefs.narrationLastPositionMs
         return NarrationUiState(
             status = NarrationStatus.IDLE,
             mode = NarrationPlaybackMode.CURRENT_PAGE,
             narrationEnabled = prefs.narrationEnabled,
             speed = prefs.narrationSpeed,
             volumePercent = prefs.narrationVolumePercent,
-            savedSectionId = savedSectionId,
-            savedBlockId = savedBlockId,
-            savedPositionMs = savedPosMs,
+            savedSectionId = null,
+            savedBlockId = null,
+            savedPositionMs = 0,
             canResumeSavedPosition = false
         )
     }
 
-    fun loadManifestFromAssets(): NarrationManifest {
-        return try {
-            val json = context.assets.open(MANIFEST_ASSET_PATH).bufferedReader().use { it.readText() }
-            NarrationManifestValidator.parseManifestJson(json)
-        } catch (_: Exception) {
-            NarrationManifest(isValid = false)
+    fun loadManifestFromAssets(
+        manifestAssetPath: String = activeManifestAssetPath,
+        assetReaderOverride: ((String) -> String)? = null,
+        expectedChapterId: String = activeChapterId
+    ): NarrationManifest {
+        if (manifestAssetPath.isBlank()) {
+            return NarrationManifest(chapterId = expectedChapterId, isValid = false)
         }
+        return try {
+            val json = if (assetReaderOverride != null) {
+                assetReaderOverride(manifestAssetPath)
+            } else {
+                context.assets.open(manifestAssetPath).bufferedReader().use { it.readText() }
+            }
+            NarrationManifestValidator.parseManifestJson(json, expectedChapterId = expectedChapterId)
+        } catch (_: Exception) {
+            NarrationManifest(chapterId = expectedChapterId, isValid = false)
+        }
+    }
+
+    /**
+     * Switches the narration manager to a new chapter, stopping any active playback,
+     * releasing previous resources, and loading the chapter's own narration manifest.
+     * Never falls back to another chapter's manifest if the target manifest is missing or invalid.
+     */
+    fun switchChapterManifest(
+        chapterId: String,
+        manifestAssetPath: String,
+        sections: List<SectionItem>,
+        currentPage: ReaderPage?,
+        bookId: String = activeBookId,
+        assetReaderOverride: ((String) -> String)? = null
+    ) {
+        stop()
+        engine.release()
+        activeBookId = bookId
+        activeChapterId = chapterId
+        activeManifestAssetPath = manifestAssetPath
+        manifest = if (manifestAssetPath.isBlank()) {
+            NarrationManifest(chapterId = chapterId, isValid = false)
+        } else {
+            loadManifestFromAssets(
+                manifestAssetPath = manifestAssetPath,
+                assetReaderOverride = assetReaderOverride,
+                expectedChapterId = chapterId
+            )
+        }
+        cachedSections = sections
+        refreshAvailability(sections, currentPage)
     }
 
     /**
@@ -731,9 +1120,13 @@ class BookNarrationManager(
         customManifest: NarrationManifest,
         customEngine: NarrationPlaybackEngine,
         sections: List<SectionItem> = cachedSections,
-        currentPage: ReaderPage? = null
+        currentPage: ReaderPage? = null,
+        chapterId: String = customManifest.chapterId.ifBlank { activeChapterId },
+        bookId: String = activeBookId
     ) {
         engine.release()
+        activeBookId = bookId
+        activeChapterId = chapterId
         manifest = customManifest
         engine = customEngine
         cachedSections = sections
@@ -765,7 +1158,10 @@ class BookNarrationManager(
                 is SectionContentBlock.HeadingBlock,
                 is SectionContentBlock.DiagramBlock,
                 is SectionContentBlock.ExerciseBlock,
-                is SectionContentBlock.FootnoteBlock -> {
+                is SectionContentBlock.FootnoteBlock,
+                is SectionContentBlock.SourceImageBlock,
+                is SectionContentBlock.OrderedListBlock,
+                is SectionContentBlock.TableBlock -> {
                     val origId = ReaderPaginator.originalBlockId(block.blockId)
                     if (NarrationManifestValidator.isValidBlockOrSectionId(origId)) {
                         seen.add(origId)
@@ -789,7 +1185,11 @@ class BookNarrationManager(
         var missingCount = 0
 
         for (blockId in origIds) {
-            val assetPath = manifest.resolveAssetPath(section.sectionId, blockId)
+            val assetPath = if (manifest.isValid) {
+                manifest.resolveAssetPath(section.sectionId, blockId)
+            } else {
+                null
+            }
             if (assetPath != null && engine.assetExists(assetPath)) {
                 playable.add(
                     NarrationQueueItem(
@@ -813,7 +1213,7 @@ class BookNarrationManager(
     }
 
     /**
-     * Builds the canonical chapter-wide playback queue across all 6 [SectionItem]s (Mode B),
+     * Builds the canonical chapter-wide playback queue across all [SectionItem]s of the active chapter (Mode B),
      * using each section's unsplit `orderedContentBlocks` so paginated paragraphs are never repeated.
      */
     fun buildContinuousChapterQueue(
@@ -821,6 +1221,9 @@ class BookNarrationManager(
         startSectionIndex: Int = 0,
         startBlockId: String? = null
     ): NarrationQueueBuildResult {
+        if (sections.isEmpty()) {
+            return NarrationQueueBuildResult(emptyList(), 0, 0)
+        }
         val safeStartSec = startSectionIndex.coerceIn(0, (sections.size - 1).coerceAtLeast(0))
         val normalizedStartBlock = startBlockId?.let { ReaderPaginator.originalBlockId(it) }
         val playable = mutableListOf<NarrationQueueItem>()
@@ -840,7 +1243,11 @@ class BookNarrationManager(
                     }
                 }
                 totalEligible++
-                val assetPath = manifest.resolveAssetPath(section.sectionId, blockId)
+                val assetPath = if (manifest.isValid) {
+                    manifest.resolveAssetPath(section.sectionId, blockId)
+                } else {
+                    null
+                }
                 if (assetPath != null && engine.assetExists(assetPath)) {
                     playable.add(
                         NarrationQueueItem(
@@ -877,9 +1284,13 @@ class BookNarrationManager(
         }
         val chapterQueue = buildContinuousChapterQueue(sections, startSectionIndex = 0)
 
-        val savedSecId = prefs.narrationLastSectionId
-        val savedBlkId = prefs.narrationLastBlockId
-        val savedAsset = if (savedSecId != null && savedBlkId != null) {
+        val savedResume = prefs.getSavedNarrationResumeState(
+            chapterId = activeChapterId,
+            bookId = activeBookId
+        )
+        val savedSecId = savedResume.sectionId
+        val savedBlkId = savedResume.blockId
+        val savedAsset = if (manifest.isValid && savedSecId != null && savedBlkId != null) {
             manifest.resolveAssetPath(savedSecId, savedBlkId)
         } else {
             null
@@ -893,7 +1304,7 @@ class BookNarrationManager(
                 canResumeSavedPosition = st.narrationEnabled && canResumeSaved,
                 savedSectionId = savedSecId,
                 savedBlockId = savedBlkId,
-                savedPositionMs = prefs.narrationLastPositionMs
+                savedPositionMs = savedResume.positionMs
             )
         }
     }
@@ -948,7 +1359,7 @@ class BookNarrationManager(
     }
 
     /**
-     * Mode B: Starts continuous chapter playback across all 6 sections of Chapter 1.
+     * Mode B: Starts continuous chapter playback across all sections of the active chapter.
      */
     fun playContinuousChapter(
         sections: List<SectionItem>,
@@ -1028,7 +1439,9 @@ class BookNarrationManager(
                 prefs.saveNarrationResumeState(
                     sectionId = item.sectionId,
                     blockId = item.blockId,
-                    positionMs = startPositionMs.coerceIn(0, durMs)
+                    positionMs = startPositionMs.coerceIn(0, durMs),
+                    chapterId = activeChapterId,
+                    bookId = activeBookId
                 )
                 updateState {
                     it.copy(
@@ -1112,7 +1525,13 @@ class BookNarrationManager(
         val secId = st.activeSectionId
         val blkId = st.activeBlockId
         if (secId != null && blkId != null) {
-            prefs.saveNarrationResumeState(secId, blkId, pos)
+            prefs.saveNarrationResumeState(
+                sectionId = secId,
+                blockId = blkId,
+                positionMs = pos,
+                chapterId = activeChapterId,
+                bookId = activeBookId
+            )
         }
         updateState {
             it.copy(
@@ -1142,10 +1561,15 @@ class BookNarrationManager(
             return true
         }
 
-        // Resume from persisted saved state in UserPreferencesManager if valid asset exists
-        val savedSecId = prefs.narrationLastSectionId ?: return false
-        val savedBlkId = prefs.narrationLastBlockId ?: return false
-        val savedPos = prefs.narrationLastPositionMs.coerceAtLeast(0)
+        // Resume from persisted saved state in UserPreferencesManager for the active book & chapter
+        val savedResume = prefs.getSavedNarrationResumeState(
+            chapterId = activeChapterId,
+            bookId = activeBookId
+        )
+        val savedSecId = savedResume.sectionId ?: return false
+        val savedBlkId = savedResume.blockId ?: return false
+        val savedPos = savedResume.positionMs.coerceAtLeast(0)
+        if (!manifest.isValid) return false
         val assetPath = manifest.resolveAssetPath(savedSecId, savedBlkId) ?: return false
         if (!engine.assetExists(assetPath)) return false
 
@@ -1164,7 +1588,13 @@ class BookNarrationManager(
         val secId = st.activeSectionId
         val blkId = st.activeBlockId
         if (secId != null && blkId != null) {
-            prefs.saveNarrationResumeState(secId, blkId, pos)
+            prefs.saveNarrationResumeState(
+                sectionId = secId,
+                blockId = blkId,
+                positionMs = pos,
+                chapterId = activeChapterId,
+                bookId = activeBookId
+            )
         }
         engine.stop()
         activeQueue = emptyList()
@@ -1194,7 +1624,13 @@ class BookNarrationManager(
         val secId = st.activeSectionId
         val blkId = st.activeBlockId
         if (secId != null && blkId != null) {
-            prefs.saveNarrationResumeState(secId, blkId, clamped)
+            prefs.saveNarrationResumeState(
+                sectionId = secId,
+                blockId = blkId,
+                positionMs = clamped,
+                chapterId = activeChapterId,
+                bookId = activeBookId
+            )
         }
         updateState {
             it.copy(
@@ -1257,7 +1693,13 @@ class BookNarrationManager(
             val secId = st.activeSectionId
             val blkId = st.activeBlockId
             if (secId != null && blkId != null) {
-                prefs.saveNarrationResumeState(secId, blkId, pos)
+                prefs.saveNarrationResumeState(
+                    sectionId = secId,
+                    blockId = blkId,
+                    positionMs = pos,
+                    chapterId = activeChapterId,
+                    bookId = activeBookId
+                )
             }
         }
         engine.release()

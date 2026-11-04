@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "titleFa": "پیش‌درآمد، مقدمه و آموزش مبانی شطرنج",
+  "sourcePdfFile": "how-to-win-at-chess-by-levy-rozman-NB-003957.pdf",
+  "sourcePdfSha256": "461b30a603b6b1477ca36d8072eb8e463c4c23816686b34717bf8b6af1982ec0",
+  "sourcePdfTotalPages": 591,
+  "sourcePdfPageStart": 1,
+  "sourcePdfPageEnd": 39,
+  "pageNumberAuthority": "sourcePdfPage is the 1-based physical page index in the supplied PDF. It must be the page number displayed to the reader; it must not be replaced by a reflowed app page index.",
+  "pageBoundaryPolicy": "Content blocks may be split into reader slices on small screens, but every slice must retain the same sourcePdfPage and slices from different PDF pages must never be merged into one source page.",
+  "sourcePdfPages": [
+    {
+      "sourcePdfPage": 1,
+      "file": "front_matter/pages/page_001.json",
+      "pageKind": "COVER",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 2,
+      "file": "front_matter/pages/page_002.json",
+      "pageKind": "IMAGE_ONLY",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 3,
+      "file": "front_matter/pages/page_003.json",
+      "pageKind": "TITLE_PAGE",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 4,
+      "file": "front_matter/pages/page_004.json",
+      "pageKind": "COPYRIGHT_AND_CREDITS",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 5,
+      "file": "front_matter/pages/page_005.json",
+      "pageKind": "IMAGE_ONLY",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 6,
+      "file": "front_matter/pages/page_006.json",
+      "pageKind": "TABLE_OF_CONTENTS",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 7,
+      "file": "front_matter/pages/page_007.json",
+      "pageKind": "TABLE_OF_CONTENTS",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 8,
+      "file": "front_matter/pages/page_008.json",
+      "pageKind": "TABLE_OF_CONTENTS",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 9,
+      "file": "front_matter/pages/page_009.json",
+      "pageKind": "TABLE_OF_CONTENTS",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 10,
+      "file": "front_matter/pages/page_010.json",
+      "pageKind": "IMAGE_ONLY",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 11,
+      "file": "front_matter/pages/page_011.json",
+      "pageKind": "INTRODUCTION",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 12,
+      "file": "front_matter/pages/page_012.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 13,
+      "file": "front_matter/pages/page_013.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 14,
+      "file": "front_matter/pages/page_014.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 15,
+      "file": "front_matter/pages/page_015.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 16,
+      "file": "front_matter/pages/page_016.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 17,
+      "file": "front_matter/pages/page_017.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 18,
+      "file": "front_matter/pages/page_018.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 19,
+      "file": "front_matter/pages/page_019.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 20,
+      "file": "front_matter/pages/page_020.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 21,
+      "file": "front_matter/pages/page_021.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 22,
+      "file": "front_matter/pages/page_022.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 23,
+      "file": "front_matter/pages/page_023.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 24,
+      "file": "front_matter/pages/page_024.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 25,
+      "file": "front_matter/pages/page_025.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 26,
+      "file": "front_matter/pages/page_026.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 27,
+      "file": "front_matter/pages/page_027.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 28,
+      "file": "front_matter/pages/page_028.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 29,
+      "file": "front_matter/pages/page_029.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 30,
+      "file": "front_matter/pages/page_030.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 31,
+      "file": "front_matter/pages/page_031.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 32,
+      "file": "front_matter/pages/page_032.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 33,
+      "file": "front_matter/pages/page_033.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 34,
+      "file": "front_matter/pages/page_034.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 35,
+      "file": "front_matter/pages/page_035.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 36,
+      "file": "front_matter/pages/page_036.json",
+      "pageKind": "EDUCATIONAL_CONTENT",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 37,
+      "file": "front_matter/pages/page_037.json",
+      "pageKind": "PART_DIVIDER",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 38,
+      "file": "front_matter/pages/page_038.json",
+      "pageKind": "PART_INTRODUCTION",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    },
+    {
+      "sourcePdfPage": 39,
+      "file": "front_matter/pages/page_039.json",
+      "pageKind": "INTERSTITIAL_IMAGE",
+      "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+    }
+  ],
+  "nextSourcePage": 40,
+  "interstitialPages": [],
+  "nextContentStartsAt": {
+    "sourcePdfPage": 40,
+    "titleFa": "فصل اول: چگونه واقعاً در شطرنج برنده شویم"
+  },
+  "sourcePage39NoteFa": "صفحه PDF شماره ۳۹ صفحه خالی نیست؛ نشان کوچک رخ به‌عنوان دارایی تصویری در page_039.json ثبت شده است. فصل اول در صفحه ۴۰ آغاز می‌شود.",
+  "sourceAssetDirectory": "assets/pdf_embedded_objects/",
+  "sourceLinksFile": "source_links/source_links_pages_001_039.json",
+  "sourceAssetsFile": "source_metadata/source_image_placements_pages_001_039.csv",
+  "tableOfContentsFile": "front_matter/table_of_contents.json",
+  "terminologyFile": "terminology/terminology_glossary_fa.csv",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW"
+}

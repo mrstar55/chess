@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 26,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "اجرای آن‌پاسان و معرفی شاه",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P026_I001",
+      "assetId": "PDFOBJ_048",
+      "descriptionFa": "تصویر اصلی نمونه گرفتن آن‌پاسان.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 26
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P026_B001",
+      "textFa": "این تنها نوع گرفتن در شطرنج است که در آن مهره زننده روی خانه‌ای متفاوت از خانه مهره گرفته‌شده فرود می‌آید. در واقع، پیاده حریف را از خانه‌ای می‌گیرید که اگر در حرکت اولش فقط یک خانه جلو آمده بود، در آن قرار می‌گرفت.",
+      "sourcePdfPage": 26
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P026_B002",
+      "textFa": "همان‌طور که گفتم، آن‌پاسان عجیب‌ترین حرکت شطرنج است و ممکن است درک آن کمی زمان ببرد. این حرکت فقط زمانی ممکن است که یک پیاده در نخستین حرکت خود دو خانه جلو برود و کنار پیاده حریف قرار بگیرد. در این صورت، بازیکن می‌تواند تصمیم بگیرد که آن‌پاسان بگیرد یا نه؛ این کار اجباری نیست، درست مانند هر گرفتن مهره دیگری. اما اگر بلافاصله پس از حرکت دوخانه‌ای پیاده حریف، آن‌پاسان نگیرید، فرصت آن را از دست می‌دهید و دیگر نمی‌توانید در نوبت‌های بعدی این کار را انجام دهید. آن‌پاسان فقط به‌وسیله پیاده اجرا می‌شود و مهره‌ای که با این روش گرفته می‌شود نیز باید پیاده باشد.",
+      "sourcePdfPage": 26
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P026_I002",
+      "assetId": "PDFOBJ_047",
+      "descriptionFa": "تصویر خطی اصلی مهره شاه.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 26
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P026_B003",
+      "textFa": "در پایان، باید با شاه آشنا شویم. هر بازیکن، درست مانند وزیر، فقط یک شاه دارد. شاه از این جهت منحصربه‌فرد است که هرگز نمی‌توان آن را گرفت. بنابراین برخلاف مهره‌های دیگر، ارزش امتیازی ندارد؛ بسته به نگاه شما می‌توان ارزش آن را صفر یا بی‌نهایت دانست. شاه مهم‌ترین مهره شماست. بازی شطرنج زمانی برده یا باخته می‌شود که شاه شما کیش‌ومات شود؛ یعنی مهره‌ای تهدید به گرفتن آن کند و شاه هیچ خانه امنی برای فرار نداشته باشد. در فصل‌های بعد با مفهوم کیش‌ومات دقیق‌تر آشنا می‌شویم. شاه در هر نوبت فقط یک خانه حرکت می‌کند، اما می‌تواند در هر جهتی حرکت کند.",
+      "sourcePdfPage": 26
+    }
+  ],
+  "notesFa": "صفحه شامل تصویر نمونه آن‌پاسان و تصویر خطی شاه است؛ هر دو حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_047",
+    "PDFOBJ_048",
+    "PDFOBJ_049"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 26,
+      "pdfImageObjectIndex": 47,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 180,
+      "height": 190,
+      "assetId": "PDFOBJ_047",
+      "file": "assets/pdf_embedded_objects/pdf_p026_obj047.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار تکمیلی آن‌پاسان و شکل خطی شاه"
+    },
+    {
+      "sourcePdfPage": 26,
+      "pdfImageObjectIndex": 48,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_048",
+      "file": "assets/pdf_embedded_objects/pdf_p026_obj048.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار تکمیلی آن‌پاسان و شکل خطی شاه"
+    },
+    {
+      "sourcePdfPage": 26,
+      "pdfImageObjectIndex": 49,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_049",
+      "file": "assets/pdf_embedded_objects/pdf_p026_obj049.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار تکمیلی آن‌پاسان و شکل خطی شاه"
+    }
+  ]
+}

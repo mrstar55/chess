@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 15,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "حرکت رخ",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P015_I001",
+      "assetId": "PDFOBJ_022",
+      "descriptionFa": "تصویر اصلی حرکت‌های رخ در امتداد ردیف‌ها و ستون‌ها.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 15
+    },
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P015_I002",
+      "assetId": "PDFOBJ_021",
+      "descriptionFa": "تصویر خطی اصلی مهره رخ.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 15
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P015_B001",
+      "textFa": "رخ دومین مهره باارزش بازی است (باز هم با صرف‌نظر از شاه) و ۵ امتیاز ارزش دارد. هر بازیکن بازی را با دو رخ آغاز می‌کند. رخ می‌تواند در امتداد عمودی یا افقی، یعنی به بالا، پایین، چپ یا راست، به هر تعداد خانه حرکت کند؛ به شرط آنکه مهره دیگری مسیرش را مسدود نکرده باشد.",
+      "sourcePdfPage": 15
+    }
+  ],
+  "notesFa": "هر دو تصویر اصلی رخ حفظ شوند؛ جهت‌های حرکت در تصویر بخشی از آموزش‌اند.",
+  "sourceAssetIds": [
+    "PDFOBJ_021",
+    "PDFOBJ_022",
+    "PDFOBJ_023"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 15,
+      "pdfImageObjectIndex": 21,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 181,
+      "height": 237,
+      "assetId": "PDFOBJ_021",
+      "file": "assets/pdf_embedded_objects/pdf_p015_obj021.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت رخ و شکل خطی رخ"
+    },
+    {
+      "sourcePdfPage": 15,
+      "pdfImageObjectIndex": 22,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_022",
+      "file": "assets/pdf_embedded_objects/pdf_p015_obj022.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت رخ و شکل خطی رخ"
+    },
+    {
+      "sourcePdfPage": 15,
+      "pdfImageObjectIndex": 23,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_023",
+      "file": "assets/pdf_embedded_objects/pdf_p015_obj023.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت رخ و شکل خطی رخ"
+    }
+  ]
+}

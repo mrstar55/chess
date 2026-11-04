@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "sourcePdfFile": "how-to-win-at-chess-by-levy-rozman-NB-003957.pdf",
+  "sourcePdfSha256": "461b30a603b6b1477ca36d8072eb8e463c4c23816686b34717bf8b6af1982ec0",
+  "sourcePdfTotalPages": 591,
+  "pageNumberAuthority": "All page numbers are 1-based physical page indexes in the supplied PDF. Reader reflow never changes sourcePdfPage.",
+  "readingOrder": [
+    {
+      "regionId": "FRONT_MATTER",
+      "kind": "frontMatter",
+      "sourcePdfPageStart": 1,
+      "sourcePdfPageEnd": 38,
+      "manifest": "front_matter/manifest.json",
+      "noteFa": "جلد، حقوق نشر، فهرست، مقدمه و مبانی شطرنج و معرفی بخش اول."
+    },
+    {
+      "regionId": "CH01_TRANSITION",
+      "kind": "chapterTransitionImage",
+      "sourcePdfPageStart": 39,
+      "sourcePdfPageEnd": 39,
+      "pageJson": "front_matter/pages/page_039.json",
+      "outlineAnchorForChapterId": "CH01",
+      "noteFa": "صفحه تصویری دارای نشان رخ؛ پیوند فهرست CHAPTER ONE به این صفحه می‌رود. صفحه را حذف نکن."
+    },
+    {
+      "regionId": "CH01",
+      "kind": "chapter",
+      "chapterId": "CH01",
+      "tocAnchorSourcePdfPage": 39,
+      "visibleChapterTitleSourcePdfPage": 40,
+      "contentSourcePdfPageStart": 40,
+      "contentSourcePdfPageEnd": 50,
+      "noteFa": "عنوان کامل فصل اول در PDF صفحه ۴۰ آغاز می‌شود؛ مقصد نشانک/پیوند CHAPTER ONE در صفحه ۳۹ است."
+    }
+  ],
+  "importantBoundaryNotesFa": [
+    "PDF صفحه ۳۹ صفحه سفید نیست؛ نشان کوچک رخ در گوشه بالای چپ دارد.",
+    "پیوند TOC با برچسب CHAPTER ONE در PDF صفحه ۶ به PDF صفحه ۳۹ می‌رود.",
+    "پیوند عنوان کامل HOW TO (LITERALLY) WIN AT CHESS در همان فهرست به PDF صفحه ۴۰ می‌رود.",
+    "این نگاشت از شماره فیزیکی PDF استفاده می‌کند؛ شماره چاپی احتمالی یا شماره داخلی Reader جایگزین آن نیست."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 24,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "قاعده آن‌پاسان: موقعیت اولیه",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P024_I001",
+      "assetId": "PDFOBJ_042",
+      "descriptionFa": "تصویر اصلی موقعیت پیاده سفید در e5 و پیاده سیاه در d7.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 24
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P024_B001",
+      "textFa": "قاعده ویژه بعدی پیاده‌ها «آن‌پاسان» نام دارد؛ این احتمالاً عجیب‌ترین قانون شطرنج است. در موقعیت بالا، پیاده سفید از نیمه صفحه گذشته و پیاده سیاه روی d7 هنوز در خانه آغازین خود قرار دارد. بنابراین بازیکنِ دارای مهره‌های سیاه می‌تواند پیاده‌اش را دو خانه به جلو حرکت دهد؛ همان‌طور که در تصویر بعد می‌بینید.",
+      "sourcePdfPage": 24
+    }
+  ],
+  "notesFa": "تصویر موقعیت پیش از حرکت دوخانه‌ای حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_042",
+    "PDFOBJ_043",
+    "PDFOBJ_044"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 24,
+      "pdfImageObjectIndex": 42,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_042",
+      "file": "assets/pdf_embedded_objects/pdf_p024_obj042.jpg",
+      "format": "jpg",
+      "descriptionFa": "موقعیت مقدماتی آن‌پاسان"
+    },
+    {
+      "sourcePdfPage": 24,
+      "pdfImageObjectIndex": 43,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_043",
+      "file": "assets/pdf_embedded_objects/pdf_p024_obj043.jpg",
+      "format": "jpg",
+      "descriptionFa": "موقعیت مقدماتی آن‌پاسان"
+    },
+    {
+      "sourcePdfPage": 24,
+      "pdfImageObjectIndex": 44,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_044",
+      "file": "assets/pdf_embedded_objects/pdf_p024_obj044.jpg",
+      "format": "jpg",
+      "descriptionFa": "موقعیت مقدماتی آن‌پاسان"
+    }
+  ]
+}

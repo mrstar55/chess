@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChapterNarrationManifest",
+  "description": "Unified narration manifest contract (chapters -> sections -> blocks) for Book Content Packs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "chapters"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "chapters": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/ChapterNarrationEntry"
+      }
+    }
+  },
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_\\-]{1,128}$",
+      "not": {
+        "pattern": "__part_"
+      }
+    },
+    "SafeAudioAssetPath": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 512,
+      "pattern": "^[A-Za-z0-9_\\-]+(/[A-Za-z0-9_\\-]+)*\\.(mp3|wav|ogg|m4a|aac)$"
+    },
+    "BlockAudioStatus": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "UNAVAILABLE"
+      ]
+    },
+    "ChapterNarrationEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapterId",
+        "sections"
+      ],
+      "properties": {
+        "chapterId": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "sections": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/SectionNarrationEntry"
+          }
+        }
+      }
+    },
+    "SectionNarrationEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sectionId",
+        "blocks"
+      ],
+      "properties": {
+        "sectionId": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "blocks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/BlockNarrationEntry"
+          }
+        }
+      }
+    },
+    "BlockNarrationEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockId",
+        "audioAssetPath",
+        "status"
+      ],
+      "properties": {
+        "blockId": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "audioAssetPath": {
+          "$ref": "#/$defs/SafeAudioAssetPath"
+        },
+        "status": {
+          "$ref": "#/$defs/BlockAudioStatus"
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

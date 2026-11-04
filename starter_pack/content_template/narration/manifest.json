@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "chapters": [
+    {
+      "chapterId": "CH02",
+      "sections": [
+        {
+          "sectionId": "SEC_CH02_01_OPENING",
+          "blocks": []
+        },
+        {
+          "sectionId": "SEC_CH02_02_SUMMARY",
+          "blocks": []
+        }
+      ]
+    }
+  ]
+}

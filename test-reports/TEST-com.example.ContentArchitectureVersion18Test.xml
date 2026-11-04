@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.ContentArchitectureVersion18Test" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T17:26:10.147Z" hostname="localhost" time="13.997">
+  <properties/>
+  <testcase name="exercise engine 1 to 4 - loads from exercises json binds by exerciseId runs 2 exercises independently and rejects invalid refs" classname="com.example.ContentArchitectureVersion18Test" time="10.595"/>
+  <testcase name="ch01 parity 1 to 6 - loads from assets books pack with 6 sections 10 diagrams valid FENs PGNs and BD-027 blocked" classname="com.example.ContentArchitectureVersion18Test" time="0.587"/>
+  <testcase name="ch01 parity 7 to 11 - BD-032 solves with Qh8 and Qh2 paginator narration sounds and preferences work" classname="com.example.ContentArchitectureVersion18Test" time="0.389"/>
+  <testcase name="multi-chapter UI - ChaptersListScreen renders active chapters and navigates to selected chapter" classname="com.example.ContentArchitectureVersion18Test" time="1.683"/>
+  <testcase name="multi-chapter 1 to 7 - CH02 fixture navigation pagination PGN replay exercise and narration stop" classname="com.example.ContentArchitectureVersion18Test" time="0.342"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

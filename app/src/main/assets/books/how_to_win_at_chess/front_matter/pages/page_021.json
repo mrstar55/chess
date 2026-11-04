@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 21,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "حق حرکت دوخانه‌ای پیاده در حرکت اول",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P021_I001",
+      "assetId": "PDFOBJ_036",
+      "descriptionFa": "تصویر اصلی پیشروی دوخانه‌ای پیاده.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 21
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P021_B001",
+      "textFa": "در فصل‌های مربوط به گشایش در این کتاب، موقعیت‌های گوناگونی را بررسی می‌کنیم که در آن‌ها یک پیاده می‌تواند یک یا دو خانه حرکت کند. فعلاً کافی است بدانید هر بازیکن می‌تواند در نخستین حرکت هر یک از هشت پیاده خود، آن را یک یا دو خانه به جلو براند. پس از آن، آن پیاده فقط می‌تواند در هر نوبت یک خانه به جلو حرکت کند.",
+      "sourcePdfPage": 21
+    }
+  ],
+  "notesFa": "دو پیوند داخلی عبارت this page در منبع به صفحه‌های PDF ۵۲ و ۸۶ می‌رسند؛ پیوندها در source_links حفظ شده‌اند.",
+  "sourceAssetIds": [
+    "PDFOBJ_036",
+    "PDFOBJ_037"
+  ],
+  "sourceLinks": [
+    {
+      "sourcePdfPage": 21,
+      "linkIndexOnPage": 1,
+      "sourceLabel": "(this page",
+      "linkKind": 1,
+      "targetSourcePdfPage": 52
+    },
+    {
+      "sourcePdfPage": 21,
+      "linkIndexOnPage": 2,
+      "sourceLabel": "this page)",
+      "linkKind": 1,
+      "targetSourcePdfPage": 86
+    }
+  ],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 21,
+      "pdfImageObjectIndex": 36,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_036",
+      "file": "assets/pdf_embedded_objects/pdf_p021_obj036.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت دوخانه‌ای پیاده"
+    },
+    {
+      "sourcePdfPage": 21,
+      "pdfImageObjectIndex": 37,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_037",
+      "file": "assets/pdf_embedded_objects/pdf_p021_obj037.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار حرکت دوخانه‌ای پیاده"
+    }
+  ]
+}

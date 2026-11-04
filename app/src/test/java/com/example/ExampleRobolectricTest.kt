@@ -2265,8 +2265,8 @@ class ExampleRobolectricTest {
         assertFalse(viewModel.uiState.value.bd032State.showLegalMovesHint)
         assertTrue(viewModel.uiState.value.bd032State.visibleTargetSquares.isEmpty())
 
-        // 2. Click "نمایش حرکت‌های قانونی" (bd032_legal_hint_btn) -> legal target squares become visible
-        composeTestRule.onNodeWithTag("bd032_legal_hint_btn").performClick()
+        // 2. Click "نمایش حرکت‌های قانونی" (exercise_legal_hint_btn_EX_CH01_BD032) -> legal target squares become visible
+        composeTestRule.onNodeWithTag("exercise_legal_hint_btn_EX_CH01_BD032").performClick()
         composeTestRule.waitForIdle()
         assertTrue(viewModel.uiState.value.bd032State.showLegalMovesHint)
         assertTrue("Legal moves for Queen on e5 must be visible when hint is toggled on", viewModel.uiState.value.bd032State.visibleTargetSquares.isNotEmpty())
@@ -2294,7 +2294,7 @@ class ExampleRobolectricTest {
         assertEquals("8/8/1p6/1k4q1/7K/8/8/6r1 w - - 0 2", stateAfterWrongCapture.currentFen)
         assertEquals("این حرکت قانونی است، اما مسئله را حل نمی‌کند. دوباره تلاش کنید.", stateAfterWrongCapture.feedbackMessage)
         composeTestRule.onNodeWithText("این حرکت قانونی است، اما مسئله را حل نمی‌کند. دوباره تلاش کنید.").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("bd032_retry_btn").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("exercise_retry_btn_EX_CH01_BD032").assertIsDisplayed()
 
         // Verify both CAPTURE sound (at move start) and EXERCISE_WRONG sound (after animation end) were emitted in order!
         assertEquals(
@@ -2304,8 +2304,8 @@ class ExampleRobolectricTest {
 
         saveRootViewScreenshot("09_bd032_wrong_legal_move_locked.png")
 
-        // 5. Click "تلاش دوباره" (bd032_retry_btn) -> returns to initial FEN, clears feedback, resets showLegalMovesHint to false
-        composeTestRule.onNodeWithTag("bd032_retry_btn").performClick()
+        // 5. Click "تلاش دوباره" (exercise_retry_btn_EX_CH01_BD032) -> returns to initial FEN, clears feedback, resets showLegalMovesHint to false
+        composeTestRule.onNodeWithTag("exercise_retry_btn_EX_CH01_BD032").performClick()
         composeTestRule.waitForIdle()
         val stateAfterRetry = viewModel.uiState.value.bd032State
         assertEquals(initialFen, stateAfterRetry.currentFen)
@@ -3552,8 +3552,8 @@ class ExampleRobolectricTest {
             assertNotNull(viewModel.uiState.value.bd032State.feedbackMessage)
             assertBoardSizeUnchanged("After selecting piece e5")
 
-            // 3. Toggle "نمایش حرکت‌های قانونی" (bd032_legal_hint_btn)
-            composeTestRule.onNodeWithTag("bd032_legal_hint_btn").performClick()
+            // 3. Toggle "نمایش حرکت‌های قانونی" (exercise_legal_hint_btn_EX_CH01_BD032)
+            composeTestRule.onNodeWithTag("exercise_legal_hint_btn_EX_CH01_BD032").performClick()
             composeTestRule.waitForIdle()
             assertTrue(viewModel.uiState.value.bd032State.showLegalMovesHint)
             assertBoardSizeUnchanged("After toggling legal moves hint")
@@ -3563,12 +3563,12 @@ class ExampleRobolectricTest {
             composeTestRule.waitForIdle()
             assertBoardSizeUnchanged("After illegal move e5 -> c4")
 
-            // 5. Play wrong legal move e5 -> e8 (animates, shows exercise_feedback + bd032_retry_btn + persistent_move_description)
+            // 5. Play wrong legal move e5 -> e8 (animates, shows exercise_feedback + exercise_retry_btn_EX_CH01_BD032 + persistent_move_description)
             composeTestRule.onNodeWithTag("square_e8").performClick()
             composeTestRule.waitForIdle()
             assertEquals(com.example.ui.Bd032ExercisePhase.WRONG_LEGAL_MOVE, viewModel.uiState.value.bd032State.phase)
             composeTestRule.onNodeWithTag("exercise_feedback").assertIsDisplayed()
-            composeTestRule.onNodeWithTag("bd032_retry_btn").assertIsDisplayed()
+            composeTestRule.onNodeWithTag("exercise_retry_btn_EX_CH01_BD032").assertIsDisplayed()
             assertBoardSizeUnchanged("After wrong legal move e5 -> e8 with feedback and Retry button visible")
 
             if (widthDp == 370) {
@@ -3576,7 +3576,7 @@ class ExampleRobolectricTest {
             }
 
             // 6. Click Retry ("تلاش دوباره") -> clears feedback, Retry button, and move description
-            composeTestRule.onNodeWithTag("bd032_retry_btn").performClick()
+            composeTestRule.onNodeWithTag("exercise_retry_btn_EX_CH01_BD032").performClick()
             composeTestRule.waitForIdle()
             assertNull(viewModel.uiState.value.bd032State.feedbackMessage)
             assertBoardSizeUnchanged("After clicking Retry")
@@ -3642,10 +3642,10 @@ class ExampleRobolectricTest {
                     {
                       "sectionId": "SEC_CH01_01_OPENING",
                       "blocks": [
-                        { "blockId": "SEC_CH01_01_OPENING_P001", "asset": "ch01/sec01_p001.mp3" },
-                        { "blockId": "SEC_CH01_01_OPENING_P001__part_2", "asset": "ch01/dup.mp3" },
-                        { "blockId": "SEC_CH01_01_OPENING_D025", "asset": "../traversal.mp3" },
-                        { "blockId": "SEC_CH01_01_OPENING_D026", "asset": "https://evil.com/a.mp3" }
+                        { "blockId": "SEC_CH01_01_OPENING_P001", "audioAssetPath": "ch01/sec01_p001.mp3", "status": "AVAILABLE", "durationMs": 12000 },
+                        { "blockId": "SEC_CH01_01_OPENING_P001__part_2", "audioAssetPath": "ch01/dup.mp3", "status": "AVAILABLE" },
+                        { "blockId": "SEC_CH01_01_OPENING_D025", "audioAssetPath": "../traversal.mp3", "status": "AVAILABLE" },
+                        { "blockId": "SEC_CH01_01_OPENING_D026", "audioAssetPath": "https://evil.com/a.mp3", "status": "AVAILABLE" }
                       ]
                     }
                   ]
@@ -3738,16 +3738,16 @@ class ExampleRobolectricTest {
                     {
                       "sectionId": "SEC_CH01_01_OPENING",
                       "blocks": [
-                        { "blockId": "SEC_CH01_01_OPENING_P001", "asset": "ch01/s1_p001.mp3" },
-                        { "blockId": "SEC_CH01_01_OPENING_D025", "asset": "ch01/s1_d025.mp3" },
-                        { "blockId": "SEC_CH01_01_OPENING_P002", "asset": "ch01/s1_p002.mp3" }
+                        { "blockId": "SEC_CH01_01_OPENING_P001", "audioAssetPath": "ch01/s1_p001.mp3", "status": "AVAILABLE", "durationMs": 15000 },
+                        { "blockId": "SEC_CH01_01_OPENING_D025", "audioAssetPath": "ch01/s1_d025.mp3", "status": "AVAILABLE", "durationMs": 8000 },
+                        { "blockId": "SEC_CH01_01_OPENING_P002", "audioAssetPath": "ch01/s1_p002.mp3", "status": "AVAILABLE", "durationMs": 10000 }
                       ]
                     },
                     {
                       "sectionId": "SEC_CH01_02_CHECKMATE",
                       "blocks": [
-                        { "blockId": "SEC_CH01_02_CHECKMATE_P001", "asset": "ch01/s2_p001.mp3" },
-                        { "blockId": "SEC_CH01_02_CHECKMATE_D026", "asset": "ch01/s2_d026.mp3" }
+                        { "blockId": "SEC_CH01_02_CHECKMATE_P001", "audioAssetPath": "ch01/s2_p001.mp3", "status": "AVAILABLE", "durationMs": 12000 },
+                        { "blockId": "SEC_CH01_02_CHECKMATE_D026", "audioAssetPath": "ch01/s2_d026.mp3", "status": "AVAILABLE", "durationMs": 9000 }
                       ]
                     }
                   ]

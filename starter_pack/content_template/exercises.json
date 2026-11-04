@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "chapterId": "CHXX",
+  "exercises": [
+    {
+      "exerciseId": "EX_CHXX_BD001",
+      "diagramId": "BD-001",
+      "exerciseType": "MATE_IN_ONE",
+      "initialFen": "6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+      "sideToMove": "white",
+      "promptFa": "نوبت سفید است: حرکت مات در یک حرکت را پیدا کنید.",
+      "acceptedSolutionIds": [
+        "CHXX_EX001_SOL1"
+      ],
+      "successFeedbackFa": "آفرین! پاسخ صحیح است و شاه حریف مات شد.",
+      "wrongMoveFeedbackFa": "این حرکت قانونی است اما به مات در یک حرکت منجر نمی‌شود.",
+      "illegalMoveFeedbackFa": "این حرکت قانونی نیست.",
+      "hintFa": "به عرض آخر (ردیف هشتم) و محدودیت حرکت شاه سیاه دقت کنید.",
+      "allowLegalMoveHints": true
+    }
+  ]
+}

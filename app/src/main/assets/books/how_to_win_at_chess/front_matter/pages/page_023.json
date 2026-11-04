@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 23,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "ترفیع یا ارتقای پیاده",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P023_I001",
+      "assetId": "PDFOBJ_040",
+      "descriptionFa": "تصویر اصلی رسیدن پیاده به ردیف آخر و ترفیع.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 23
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P023_B001",
+      "textFa": "قاعده جالب دیگر درباره پیاده‌ها این است که وقتی به انتهای صفحه می‌رسند ــ یعنی برای سفید ردیف هشتم و برای سیاه ردیف اول ــ ترفیع پیدا می‌کنند. ترفیع یعنی پیاده به انتخاب بازیکن به اسب، فیل، رخ یا وزیر تبدیل می‌شود. در بیشتر موقعیت‌ها انتخاب وزیر منطقی است، چون قدرتمندترین مهره است؛ اما در موارد نادری ممکن است بهتر باشد پیاده را به مهره دیگری ارتقا دهید. از نظر تئوری، می‌توانید هر هشت پیاده خود را تا انتهای صفحه پیش ببرید و همه را به وزیر تبدیل کنید؛ در آن صورت نه وزیر خواهید داشت.",
+      "sourcePdfPage": 23
+    }
+  ],
+  "notesFa": "مهره نمایش‌داده‌شده و فلش ترفیع در تصویر منبع حفظ شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_040",
+    "PDFOBJ_041"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 23,
+      "pdfImageObjectIndex": 40,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_040",
+      "file": "assets/pdf_embedded_objects/pdf_p023_obj040.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار ترفیع پیاده"
+    },
+    {
+      "sourcePdfPage": 23,
+      "pdfImageObjectIndex": 41,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_041",
+      "file": "assets/pdf_embedded_objects/pdf_p023_obj041.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار ترفیع پیاده"
+    }
+  ]
+}

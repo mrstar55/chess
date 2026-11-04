@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 30,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "هدف قلعه‌رفتن و جمع‌بندی قواعد مهره‌ها",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P030_I001",
+      "assetId": "PDFOBJ_056",
+      "descriptionFa": "تصویر اصلی موقعیت شاه و رخ پس از قلعه‌رفتن.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 30
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P030_B001",
+      "textFa": "در فصل‌های بعد با جزئیات بیشتری بررسی می‌کنیم که چه زمانی باید قلعه رفت. در اصل، هدف این است که شاه را به گوشه‌ای امن‌تر منتقل کنید و هم‌زمان رخ خود را به مرکز صفحه بیاورید؛ جایی که فعالیت مؤثرتری دارد. قلعه‌رفتن تنها حرکت شطرنج است که در آن می‌توانید دو مهره را هم‌زمان حرکت دهید.",
+      "sourcePdfPage": 30
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P030_B002",
+      "textFa": "می‌دانم تعداد مهره‌ها و قواعدی که تا اینجا معرفی شد زیاد است. اگر مبتدی هستید و از همین حالا احساس سردرگمی یا ناامیدی می‌کنید، نگران نباشید؛ همه این مرحله را پشت سر می‌گذارند. قول می‌دهم از اینجا به بعد کار آسان‌تر و جذاب‌تر می‌شود و خیلی زود یاد می‌گیرید هر مهره چگونه حرکت می‌کند و این قواعد و حرکت‌های ویژه چه زمانی به کار می‌آیند.",
+      "sourcePdfPage": 30
+    }
+  ],
+  "notesFa": "تصویر اصلی پس از قلعه‌رفتن حفظ شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_056"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 30,
+      "pdfImageObjectIndex": 56,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_056",
+      "file": "assets/pdf_embedded_objects/pdf_p030_obj056.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار موقعیت شاه و رخ پس از قلعه‌رفتن"
+    }
+  ]
+}

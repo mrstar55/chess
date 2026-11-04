@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 3,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "TITLE_PAGE",
+  "pageTitleFa": "صفحه عنوان",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "heading",
+      "blockId": "FM_P003_H001",
+      "textFa": "چگونه در شطرنج برنده شویم",
+      "level": 1,
+      "sourceVisibleText": "HOW TO WIN AT CHESS",
+      "sourcePdfPage": 3
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P003_B001",
+      "textFa": "راهنمای جامع برای مبتدیان و فراتر از آن",
+      "sourceVisibleText": "THE ULTIMATE GUIDE FOR BEGINNERS AND BEYOND",
+      "sourcePdfPage": 3
+    },
+    {
+      "type": "heading",
+      "blockId": "FM_P003_H002",
+      "textFa": "لِوی روزمن",
+      "level": 1,
+      "sourceVisibleText": "LEVY ROZMAN",
+      "sourcePdfPage": 3
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P003_B002",
+      "textFa": "انتشارات Ten Speed Press؛ کالیفرنیا و نیویورک",
+      "sourceVisibleText": "TEN SPEED PRESS / California | New York",
+      "sourcePdfPage": 3
+    }
+  ],
+  "notesFa": "تصویر عنوان اصلی حفظ شود؛ متن‌های فارسی به‌صورت مستقل و بدون تخریب تصویر اصلی اضافه شوند.",
+  "sourceAssetIds": [
+    "PDFOBJ_002"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 3,
+      "pdfImageObjectIndex": 2,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1750,
+      "height": 2000,
+      "assetId": "PDFOBJ_002",
+      "file": "assets/pdf_embedded_objects/pdf_p003_obj002.jpg",
+      "format": "jpg",
+      "descriptionFa": "صفحه عنوان اصلی کتاب"
+    }
+  ]
+}

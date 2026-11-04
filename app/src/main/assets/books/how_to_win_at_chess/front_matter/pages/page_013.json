@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "contentRegionId": "FRONT_MATTER",
+  "sourcePdfPage": 13,
+  "sourcePageNumbering": "1-based physical page index in the supplied 591-page PDF",
+  "pageKind": "EDUCATIONAL_CONTENT",
+  "pageTitleFa": "خواندن مختصات و جایگاه آغازین",
+  "translationStatus": "DRAFT_TRANSLATION_REQUIRES_EDITORIAL_REVIEW",
+  "contentCompleteness": "ALL_VISIBLE_TEXT_TRANSCRIBED_AND_TRANSLATED",
+  "orderedContentBlocks": [
+    {
+      "type": "sourceImage",
+      "blockId": "FM_P013_I001",
+      "assetId": "PDFOBJ_015",
+      "descriptionFa": "تصویر اصلی صفحه شطرنج با خانه f6 مشخص‌شده.",
+      "preserveOriginal": true,
+      "sourcePdfPage": 13
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P013_B001",
+      "textFa": "برای نمونه، خانه مشخص‌شده در تصویر روی ستون f و ردیف ششم قرار دارد؛ بنابراین مختصات آن f6 است. (همیشه ابتدا حرف ستون و سپس شماره ردیف نوشته می‌شود.)",
+      "sourcePdfPage": 13
+    },
+    {
+      "type": "paragraph",
+      "blockId": "FM_P013_B002",
+      "textFa": "حالا مهره‌ها را روی صفحه قرار دهیم. این، چیدمان آغازین یک بازی شطرنج است:",
+      "sourcePdfPage": 13
+    }
+  ],
+  "notesFa": "خانه f6 در تصویر اصلی قرمز مشخص شده است؛ این نشانه تصویری نباید حذف شود.",
+  "sourceAssetIds": [
+    "PDFOBJ_015",
+    "PDFOBJ_016"
+  ],
+  "sourceLinks": [],
+  "sourceAssets": [
+    {
+      "sourcePdfPage": 13,
+      "pdfImageObjectIndex": 15,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 1870,
+      "height": 1870,
+      "assetId": "PDFOBJ_015",
+      "file": "assets/pdf_embedded_objects/pdf_p013_obj015.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار خانه f6 و نشانگر صفحه"
+    },
+    {
+      "sourcePdfPage": 13,
+      "pdfImageObjectIndex": 16,
+      "pdfImageType": "image",
+      "pdfObjectId": "no",
+      "width": 19,
+      "height": 33,
+      "assetId": "PDFOBJ_016",
+      "file": "assets/pdf_embedded_objects/pdf_p013_obj016.jpg",
+      "format": "jpg",
+      "descriptionFa": "نمودار خانه f6 و نشانگر صفحه"
+    }
+  ]
+}
