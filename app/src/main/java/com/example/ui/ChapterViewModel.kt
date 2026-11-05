@@ -143,7 +143,8 @@ enum class AppTab {
     CHAPTERS_LIST,
     SECTIONS_LIST,
     READER,
-    AUDIT_REPORT
+    AUDIT_REPORT,
+    SETTINGS
 }
 
 data class PgnReplayerState(
@@ -1002,6 +1003,28 @@ class ChapterViewModel @JvmOverloads constructor(
 
     fun openSectionsList() {
         _uiState.update { it.copy(currentTab = AppTab.SECTIONS_LIST) }
+    }
+
+    private var previousTabBeforeSettings: AppTab = AppTab.CHAPTERS_LIST
+
+    fun openSettings() {
+        val current = _uiState.value.currentTab
+        if (current != AppTab.SETTINGS && current != AppTab.AUDIT_REPORT) {
+            previousTabBeforeSettings = current
+        }
+        _uiState.update { it.copy(currentTab = AppTab.SETTINGS) }
+    }
+
+    fun closeSettings() {
+        _uiState.update { it.copy(currentTab = previousTabBeforeSettings) }
+    }
+
+    fun openAuditReport() {
+        _uiState.update { it.copy(currentTab = AppTab.AUDIT_REPORT) }
+    }
+
+    fun closeAuditReport() {
+        _uiState.update { it.copy(currentTab = AppTab.SETTINGS) }
     }
 
     fun selectChapter(chapterId: String, navigateToSectionsList: Boolean = true) {

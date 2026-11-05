@@ -473,10 +473,9 @@ class FrontMatterVersion20Test {
         assertEquals(6, state.sections.size)
         assertEquals(10, state.diagrams.size)
 
-        // Verify BD-027 has corrected FEN and AuditStatus.VALID
+        // Verify BD-027 remains BLOCKED_NEEDS_HUMAN_REVIEW
         val bd027 = state.diagrams.first { it.diagramId == "BD-027" }
-        assertEquals(AuditStatus.VALID, bd027.auditStatus)
-        assertEquals("7k/6B1/6KN/8/8/8/8/8 b - - 0 1", bd027.initialFen)
+        assertEquals(AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW, bd027.auditStatus)
 
         // Verify PGN replay on BD-029 (Scholar's Mate)
         val bd029 = state.diagrams.first { it.diagramId == "BD-029" }

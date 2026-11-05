@@ -157,6 +157,62 @@ object BookTocNavigationHelper {
             )
         }
     }
+
+    /**
+     * Resolves the Persian ordinal label for any chapter ID (e.g. CH01 -> "فصل اول", CH02 -> "فصل دوم").
+     */
+    fun chapterIdToLabelFa(chapterId: String?, shortTitleFa: String = ""): String {
+        val trimmed = shortTitleFa.trim()
+        if (trimmed.startsWith("فصل ") || trimmed == "فصل اول" || trimmed.startsWith("فصل")) {
+            return trimmed
+        }
+        val chNum = chapterId?.removePrefix("CH")?.toIntOrNull() ?: 1
+        return when (chNum) {
+            1 -> "فصل اول"
+            2 -> "فصل دوم"
+            3 -> "فصل سوم"
+            4 -> "فصل چهارم"
+            5 -> "فصل پنجم"
+            6 -> "فصل ششم"
+            7 -> "فصل هفتم"
+            8 -> "فصل هشتم"
+            9 -> "فصل نهم"
+            10 -> "فصل دهم"
+            11 -> "فصل یازدهم"
+            12 -> "فصل دوازدهم"
+            13 -> "فصل سیزدهم"
+            14 -> "فصل چهاردهم"
+            15 -> "فصل پانزدهم"
+            else -> "فصل ${ReaderPaginator.toPersianDigits(chNum)}"
+        }
+    }
+
+    /**
+     * Resolves the authoritative toolbar title across the application:
+     * - Main Book TOC: "آموزش شطرنج"
+     * - Reading Front Matter: "آموزش شطرنج — پیش‌درآمد"
+     * - Reading or inside Chapter (e.g. CH01, CH02): "آموزش شطرنج — $chapterLabel"
+     */
+    fun resolveToolbarTitle(
+        isMainToc: Boolean,
+        isReadingFrontMatter: Boolean,
+        activePdfPage: Int?,
+        activeChapterId: String?,
+        activeChapterShortTitleFa: String
+    ): String {
+        if (isMainToc) {
+            return "آموزش شطرنج"
+        }
+        val isCh01OnPage39 = isReadingFrontMatter && activePdfPage == 39
+        val isActualFrontMatter = isReadingFrontMatter && !isCh01OnPage39
+
+        val label = when {
+            isActualFrontMatter -> FRONT_MATTER_BADGE_LABEL_FA
+            isCh01OnPage39 -> "فصل اول"
+            else -> chapterIdToLabelFa(activeChapterId, activeChapterShortTitleFa)
+        }
+        return "آموزش شطرنج — $label"
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -175,6 +231,7 @@ fun ChaptersListScreen(
         }
     },
     onDismissNavigationNotice: () -> Unit = {},
+    onOpenSettings: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val fontMultiplier = state.fontScale.scale
@@ -197,19 +254,18 @@ fun ChaptersListScreen(
             topBar = {
                 TopAppBar(
                     title = {
-                        Column {
-                            Text(
-                                text = "فهرست فصل‌های کتاب",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier.testTag("chapters_list_title")
-                            )
-                            Text(
-                                text = state.activeBookTitleFa,
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
-                            )
-                        }
+                        Text(
+                            text = BookTocNavigationHelper.resolveToolbarTitle(
+                                isMainToc = true,
+                                isReadingFrontMatter = state.isReadingFrontMatter,
+                                activePdfPage = state.currentPage?.sourcePdfPage ?: state.lastReadFrontMatterSourcePdfPage,
+                                activeChapterId = state.activeChapterId,
+                                activeChapterShortTitleFa = state.activeChapterShortTitleFa.ifBlank { state.activeChapterTitleFa }
+                            ),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.testTag("chapters_list_title")
+                        )
                     },
                     navigationIcon = {
                         IconButton(
@@ -219,6 +275,17 @@ fun ChaptersListScreen(
                             Icon(
                                 imageVector = AppIcons.ArrowBack,
                                 contentDescription = "بازگشت به معرفی کتاب"
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(
+                            onClick = onOpenSettings,
+                            modifier = Modifier.testTag("settings_btn")
+                        ) {
+                            Icon(
+                                imageVector = AppIcons.Settings,
+                                contentDescription = "تنظیمات"
                             )
                         }
                     },

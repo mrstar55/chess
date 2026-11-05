@@ -159,12 +159,9 @@ data class FrontMatterPage(
             .map { it.assetId }
             .toSet()
 
-        // Filter primary visual assets (exclude alpha/soft-mask objects `pdfImageType == "smask"`
-        // and external scan watermarks `PDFOBJ_010` / `PDFOBJ_011` on PDF page 7)
-        val suppressedWatermarkAssetIds = setOf("PDFOBJ_010", "PDFOBJ_011")
+        // Filter primary visual assets (exclude alpha/soft-mask objects `pdfImageType == "smask"`)
         val unreferencedVisualAssets = sourceAssets.filter { asset ->
             asset.assetId !in explicitAssetIds &&
-                asset.assetId !in suppressedWatermarkAssetIds &&
                 !asset.pdfImageType.equals("smask", ignoreCase = true)
         }
 

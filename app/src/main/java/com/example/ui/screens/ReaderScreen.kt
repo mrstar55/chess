@@ -76,7 +76,6 @@ import com.example.data.FontSizeScale
 import com.example.model.AuditStatus
 import com.example.model.DiagramItem
 import com.example.model.FrontMatterSourceLink
-import com.example.model.PieceType
 import com.example.model.ReaderPage
 import com.example.model.ReaderPageType
 import com.example.model.ReaderPaginator
@@ -88,10 +87,7 @@ import com.example.ui.ChapterViewModel
 import com.example.ui.components.AuditBadge
 import com.example.ui.components.AudioSettingsDialog
 import com.example.ui.components.ChessBoardView
-import com.example.ui.components.CompactValidAuditCheckIcon
 import com.example.ui.components.InteractiveExerciseView
-import com.example.ui.components.PieceMovementDiagram
-import com.example.ui.components.StartingPositionIntroBoard
 import com.example.ui.components.PersistentMoveDescriptionBar
 import com.example.ui.components.PgnControlsView
 import com.example.ui.theme.AppIcons
@@ -950,10 +946,10 @@ private fun ReaderSinglePageContent(
 
     val diagramNonBoardChromeDp = when {
         !hasDiagram && !hasSourceImage -> 0.dp
-        isInteractiveExercise -> 200.dp
-        hasPgnControls -> 150.dp
-        isBlockedDiagram -> 150.dp
-        else -> 44.dp
+        isInteractiveExercise -> 244.dp
+        hasPgnControls -> 190.dp
+        isBlockedDiagram -> 162.dp
+        else -> 64.dp
     }
 
     val linksBarHeightDp = if (page.sourceLinks.isNotEmpty() &&
@@ -1704,19 +1700,8 @@ private fun SourceImageCard(
     val resolvedAsset = state.frontMatterPack?.sourceAssetsById?.get(block.assetId)
         ?: state.chapterSourcePageIndex?.sourceAssetsById?.get(block.assetId)
     val effectiveAssetPath = block.resolvedAssetPath.ifBlank { resolvedAsset?.resolvedAssetPath.orEmpty() }
-
-    // Mismatched source PDF movement boards on pages 15..17 replaced by rules-verified PieceMovementDiagram
-    val replacementMovementPieceType: PieceType? = when (block.assetId) {
-        "PDFOBJ_022" -> PieceType.ROOK   // PDF page 15 Rook movement (source image had 8 Queen arrows)
-        "PDFOBJ_025" -> PieceType.BISHOP // PDF page 16 Bishop movement (source image had 4 orthogonal Rook arrows)
-        "PDFOBJ_028" -> PieceType.KNIGHT // PDF page 17 Knight movement (source image had 4 diagonal Bishop arrows)
-        else -> null
-    }
-    val isInteractiveStartingSetupBoard = block.assetId == "PDFOBJ_018" && block.sourcePdfPage == 14
-    val companionQueenMovementDiagram = block.assetId == "PDFOBJ_017" && block.sourcePdfPage == 14
-
-    val imageBitmap = remember(effectiveAssetPath, replacementMovementPieceType, isInteractiveStartingSetupBoard) {
-        if (effectiveAssetPath.isBlank() || replacementMovementPieceType != null || isInteractiveStartingSetupBoard) {
+    val imageBitmap = remember(effectiveAssetPath) {
+        if (effectiveAssetPath.isBlank()) {
             null
         } else {
             runCatching {
@@ -1729,7 +1714,7 @@ private fun SourceImageCard(
     val imgWidth = if (block.imageWidth > 0) block.imageWidth else (resolvedAsset?.width ?: 0)
     val imgHeight = if (block.imageHeight > 0) block.imageHeight else (resolvedAsset?.height ?: 0)
     val isSmallIcon = imgWidth in 1..320 && imgHeight in 1..320
-    val targetMaxHeight = if (isSmallIcon) 96.dp else maxImageHeight
+    val targetMaxHeight = if (isSmallIcon) 110.dp else maxImageHeight
 
     OutlinedCard(
         modifier = Modifier
@@ -1773,38 +1758,17 @@ private fun SourceImageCard(
                 }
             }
 
-            when {
-                isInteractiveStartingSetupBoard -> {
-                    StartingPositionIntroBoard(
-                        maxBoardHeight = (maxImageHeight - 54.dp).coerceIn(170.dp, 290.dp),
-                        modifier = Modifier.testTag("source_image_${block.assetId}")
-                    )
-                }
-                replacementMovementPieceType != null -> {
-                    PieceMovementDiagram(
-                        pieceType = replacementMovementPieceType,
-                        maxBoardHeight = (maxImageHeight - 36.dp).coerceIn(170.dp, 280.dp),
-                        modifier = Modifier.testTag("source_image_${block.assetId}")
-                    )
-                }
-                imageBitmap != null -> {
-                    Image(
-                        bitmap = imageBitmap,
-                        contentDescription = block.descriptionFa.ifBlank { block.assetId },
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(min = if (isSmallIcon) 48.dp else 120.dp, max = targetMaxHeight)
-                            .clip(RoundedCornerShape(8.dp))
-                            .testTag("source_image_${block.assetId}")
-                    )
-                    if (companionQueenMovementDiagram) {
-                        PieceMovementDiagram(
-                            pieceType = PieceType.QUEEN,
-                            maxBoardHeight = (maxImageHeight - 72.dp).coerceIn(160.dp, 240.dp)
-                        )
-                    }
-                }
+            if (imageBitmap != null) {
+                Image(
+                    bitmap = imageBitmap,
+                    contentDescription = block.descriptionFa.ifBlank { block.assetId },
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = if (isSmallIcon) 56.dp else 120.dp, max = targetMaxHeight)
+                        .clip(RoundedCornerShape(8.dp))
+                        .testTag("source_image_${block.assetId}")
+                )
             }
 
             if (block.descriptionFa.isNotBlank()) {
@@ -1939,10 +1903,6 @@ fun DiagramCard(
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.outline
                     )
-                    if (diagram.auditStatus == AuditStatus.VALID) {
-                        Spacer(modifier = Modifier.width(6.dp))
-                        CompactValidAuditCheckIcon()
-                    }
                 }
 
                 IconButton(
@@ -1957,13 +1917,11 @@ fun DiagramCard(
                 }
             }
 
-            // Full-width Audit Warning Banner only when BLOCKED_NEEDS_HUMAN_REVIEW
-            if (diagram.auditStatus != AuditStatus.VALID) {
-                AuditBadge(
-                    status = diagram.auditStatus,
-                    warningText = diagram.auditWarning
-                )
-            }
+            // Audit Status Badge
+            AuditBadge(
+                status = diagram.auditStatus,
+                warningText = diagram.auditWarning
+            )
 
             // Specific UI per Diagram Type (generalized ExerciseBlock / ExerciseDefinition dispatch)
             val exerciseUiState = resolvedExerciseId?.let { state.exerciseStateFor(it, diagram.diagramId) }

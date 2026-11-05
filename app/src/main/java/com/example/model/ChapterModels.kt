@@ -671,7 +671,6 @@ data class DiagramItem(
     val implementationNotes: String,
     val auditStatus: AuditStatus,
     val auditWarning: String? = null,
-    val digitalReconstructionNoteFa: String? = null,
     val sourceImageAssetId: String? = null,
     val sourceImageFile: String? = null
 )

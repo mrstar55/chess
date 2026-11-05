@@ -255,14 +255,18 @@ class ChessChapterOneTest {
     }
 
     @Test
-    fun testChessEngine_Bd027CorrectedValidCheckmateVerification() {
-        val correctedFen = "7k/6B1/6KN/8/8/8/8/8 b - - 0 1"
-        val engine = ChessEngine(correctedFen)
+    fun testChessEngine_Bd027BlockedVerification() {
+        val fen = "7k/6B1/6K1/7N/8/8/8/8 b - - 0 1"
+        val engine = ChessEngine(fen)
 
         assertEquals('b', engine.state.activeColor)
         assertTrue("Black king at h8 is in check by bishop on g7", engine.isInCheck())
-        assertTrue("With White knight on h6 controlling g8, BD-027 has zero legal moves", engine.generateLegalMoves().isEmpty())
-        assertTrue("BD-027 with knight on h6 MUST be reported as checkmate", engine.isCheckmate())
+
+        val legalMoves = engine.generateLegalMoves()
+        assertEquals("Black king must have exactly 1 legal move to escape", 1, legalMoves.size)
+        assertEquals("h8", legalMoves.first().fromNotation)
+        assertEquals("g8", legalMoves.first().toNotation)
+        assertFalse("BD-027 MUST NOT be reported as checkmate", engine.isCheckmate())
     }
 
     @Test
@@ -334,7 +338,7 @@ class ChessChapterOneTest {
         val chapterDiagrams = mapOf(
             "BD-025" to "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
             "BD-026" to "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
-            "BD-027" to "7k/6B1/6KN/8/8/8/8/8 b - - 0 1",
+            "BD-027" to "7k/6B1/6K1/7N/8/8/8/8 b - - 0 1",
             "BD-028" to "r1bq3r/pppp2pp/2n2n2/2b2Q2/3kP3/2NPB3/PPP1BPPP/R3K2R b - - 0 1",
             "BD-029" to "r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
             "BD-030" to "rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3",
@@ -344,8 +348,8 @@ class ChessChapterOneTest {
             "BD-034" to "r1r4k/pp1q3R/5pp1/3p2N1/6Q1/8/PP3PPP/2R3K1 b - - 0 25"
         )
 
-        val expectedCheckmates = setOf("BD-026", "BD-027", "BD-028", "BD-029", "BD-030")
-        val expectedInCheckButNotMate = setOf("BD-034")
+        val expectedCheckmates = setOf("BD-026", "BD-028", "BD-029", "BD-030")
+        val expectedInCheckButNotMate = setOf("BD-027", "BD-034")
 
         for ((id, fen) in chapterDiagrams) {
             val engine = ChessEngine(fen)
@@ -441,7 +445,7 @@ class ChessChapterOneTest {
         val chapterDiagrams = listOf(
             "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
             "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
-            "7k/6B1/6KN/8/8/8/8/8 b - - 0 1",
+            "7k/6B1/6K1/7N/8/8/8/8 b - - 0 1",
             "r1bq3r/pppp2pp/2n2n2/2b2Q2/3kP3/2NPB3/PPP1BPPP/R3K2R b - - 0 1",
             "r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
             "rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR w KQkq - 1 3",

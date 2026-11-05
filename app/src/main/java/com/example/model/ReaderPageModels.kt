@@ -315,14 +315,7 @@ object ReaderPaginator {
                     isVisibleTextBlock(currentBlocks[idx])
                 }
 
-                if (block is SectionContentBlock.ExerciseBlock) {
-                    // Interactive exercises render their own title, prompt, move bar, feedback, and action buttons,
-                    // so flush any preceding text blocks to keep the exercise board at full standard size.
-                    if (visibleTextIndices.isNotEmpty()) {
-                        flushCurrentPage()
-                        currentPdfPage = blockPdfPage
-                    }
-                } else if (visibleTextIndices.size >= 2) {
+                if (visibleTextIndices.size >= 2) {
                     val lastVisibleIdx = visibleTextIndices.last()
                     val companionBlock = currentBlocks[lastVisibleIdx]
                     val companionLen = visibleTextOf(companionBlock)?.length ?: 0
@@ -377,9 +370,9 @@ object ReaderPaginator {
                     currentBlocks.add(expandedBlocks[i])
                 }
 
-                // Check if there is a short trailing explanation right after a non-exercise diagram on the SAME sourcePdfPage
+                // Check if there is a short trailing explanation right after the diagram on the SAME sourcePdfPage
                 val hadVisibleTextBeforeDiagram = currentBlocks.any { !isDiagramOrExercise(it) && isVisibleTextBlock(it) }
-                if (block !is SectionContentBlock.ExerciseBlock && !hadVisibleTextBeforeDiagram && i + 1 < expandedBlocks.size) {
+                if (!hadVisibleTextBeforeDiagram && i + 1 < expandedBlocks.size) {
                     val nextBlock = expandedBlocks[i + 1]
                     val nextBlockPdfPage = effectivePdfPageOf(nextBlock)
                     val blockAfterNext = expandedBlocks.getOrNull(i + 2)
@@ -654,11 +647,11 @@ object ReaderPaginator {
 
         val isTocOrPartIntro = fmPage.pageKind == FrontMatterPageKind.TABLE_OF_CONTENTS ||
             fmPage.pageKind == FrontMatterPageKind.PART_INTRODUCTION
-        val maxCharsPerTextPage = ((if (isTocOrPartIntro) 840f else 820f) * effectiveScale).toInt().coerceIn(220, 1600)
-        val maxLinesPerTextPage = ((if (isTocOrPartIntro) 24f else 24f) * (heightFactor / fontScale.scale)).toInt().coerceIn(8, 36)
+        val maxCharsPerTextPage = ((if (isTocOrPartIntro) 680f else 560f) * effectiveScale).toInt().coerceIn(140, 1400)
+        val maxLinesPerTextPage = ((if (isTocOrPartIntro) 18f else 15f) * (heightFactor / fontScale.scale)).toInt().coerceIn(5, 30)
         val charsPerLine = (36f * (widthFactor / fontScale.scale)).toInt().coerceIn(15, 65)
-        val maxCompanionCharsWithSourceImage = (760f * effectiveScale).toInt().coerceIn(200, 1100)
-        val maxCompanionLinesWithSourceImage = (22f * (heightFactor / fontScale.scale)).toInt().coerceIn(6, 28)
+        val maxCompanionCharsWithSourceImage = (380f * effectiveScale).toInt().coerceIn(100, 620)
+        val maxCompanionLinesWithSourceImage = (9f * (heightFactor / fontScale.scale)).toInt().coerceIn(4, 13)
 
         fun blockTextOf(b: SectionContentBlock): String? {
             return when (b) {
@@ -779,25 +772,19 @@ object ReaderPaginator {
                     break
                 }
 
-                // Attach companion paragraph(s) right after the image if they fit
-                var companionCharsSoFar = 0
-                var companionLinesSoFar = 0
-                while (idx + 1 < expandedBlocks.size) {
+                // Attach companion paragraph right after the image if it fits
+                if (idx + 1 < expandedBlocks.size) {
                     val nextBlk = expandedBlocks[idx + 1]
-                    if (nextBlk !is SectionContentBlock.SourceImageBlock && nextBlk !is SectionContentBlock.HeadingBlock) {
+                    if (nextBlk !is SectionContentBlock.SourceImageBlock) {
                         val nextTxt = blockTextOf(nextBlk).orEmpty()
                         val nextLines = estimateRawTextLines(nextTxt, charsPerLine)
-                        if (companionCharsSoFar + nextTxt.length <= maxCompanionCharsWithSourceImage &&
-                            companionLinesSoFar + nextLines <= maxCompanionLinesWithSourceImage
+                        if (nextTxt.length <= maxCompanionCharsWithSourceImage &&
+                            nextLines <= maxCompanionLinesWithSourceImage
                         ) {
                             idx++
                             currentBlocks.add(nextBlk)
-                            companionCharsSoFar += nextTxt.length
-                            companionLinesSoFar += nextLines
-                            continue
                         }
                     }
-                    break
                 }
                 flushSlice()
                 idx++

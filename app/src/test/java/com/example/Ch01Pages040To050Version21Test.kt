@@ -163,13 +163,14 @@ class Ch01Pages040To050Version21Test {
     // Test 3: صفحه ۴۲ متن BD-027 را نشان می‌دهد و هشدار ممیزی BD-027 را حفظ می‌کند
     // =========================================================================
     @Test
-    fun `v21 test 3 - page 42 displays BD-027 text and corrected VALID checkmate diagram`() {
+    fun `v21 test 3 - page 42 displays BD-027 text and preserves BLOCKED_NEEDS_HUMAN_REVIEW audit warning`() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
 
         val bd027 = viewModel.uiState.value.diagrams.first { it.diagramId == "BD-027" }
-        assertEquals(AuditStatus.VALID, bd027.auditStatus)
-        assertEquals("7k/6B1/6KN/8/8/8/8/8 b - - 0 1", bd027.initialFen)
+        assertEquals(AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW, bd027.auditStatus)
+        assertNotNull(bd027.auditWarning)
+        assertTrue(bd027.auditWarning!!.isNotBlank())
 
         viewModel.navigateToSourcePdfPage(42)
         val pages = viewModel.uiState.value.currentPages
@@ -180,7 +181,7 @@ class Ch01Pages040To050Version21Test {
         assertTrue(baseIds.contains("CH01_P042_D027"))
         assertTrue(baseIds.contains("CH01_P042_B002"))
 
-        // Navigate to the slice containing BD-027 and verify UI renders the valid diagram card
+        // Navigate to the slice containing BD-027 and verify UI renders the audit warning
         val bd027SliceIdx = pages.indexOfFirst { page ->
             page.orderedBlocks.any { it.blockId == "CH01_P042_D027" }
         }
@@ -196,7 +197,13 @@ class Ch01Pages040To050Version21Test {
         composeTestRule.waitForIdle()
 
         composeTestRule.onNodeWithTag("diagram_card_BD-027").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("audit_valid_compact_icon", useUnmergedTree = true).assertExists()
+        val semanticsStrings = collectAllSemanticsStrings(
+            composeTestRule.onRoot(useUnmergedTree = true).fetchSemanticsNode()
+        )
+        assertTrue(
+            "BD-027 Persian audit warning must remain displayed on page 42",
+            semanticsStrings.any { it.contains("g8") || it.contains("بازبینی") }
+        )
     }
 
     // =========================================================================

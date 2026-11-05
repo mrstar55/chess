@@ -630,13 +630,13 @@ class ReaderPaginationRobolectricTest {
         saveReaderScreenshot("10_reader_static_diagram_page.png")
         saveReaderScreenshot("02_static_diagram_page.png")
 
-        // B. STATIC_DIAGRAM (BD-027 in Section 1) -> VISUAL_EXAMPLE ("مثال تصویری") after V22 FEN correction
+        // B. NEEDS_REVIEW (BD-027 in Section 1) -> NEEDS_REVIEW ("نیازمند بازبینی")
         viewModel.selectSection(1)
         val bd027Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-027" }
         viewModel.goToPage(bd027Idx)
         composeTestRule.waitForIdle()
-        composeTestRule.onNodeWithTag("reader_semantic_badge_VISUAL_EXAMPLE").assertIsDisplayed()
-        composeTestRule.onNodeWithText("مثال تصویری").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("reader_semantic_badge_NEEDS_REVIEW").assertIsDisplayed()
+        composeTestRule.onNodeWithText("نیازمند بازبینی").assertIsDisplayed()
 
         // C. MOVE_REPLAY (BD-029 in Section 1) -> MOVE_REPLAY ("بازپخش حرکات")
         val bd029Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-029" }

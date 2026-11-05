@@ -101,10 +101,11 @@ class ContentArchitectureVersion18Test {
         val validation = repo.validateChapterPack("CH01")
         assertTrue("CH01 pack validation must pass: ${validation.errorMessages}", validation.isValid)
 
-        // 6: BD-027 is VALID with corrected FEN 7k/6B1/6KN/8/8/8/8/8 b - - 0 1
+        // 6: BD-027 remains BLOCKED_NEEDS_HUMAN_REVIEW from JSON metadata
         val bd027 = diagrams.first { it.diagramId == "BD-027" }
-        assertEquals(AuditStatus.VALID, bd027.auditStatus)
-        assertEquals("7k/6B1/6KN/8/8/8/8/8 b - - 0 1", bd027.initialFen)
+        assertEquals(AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW, bd027.auditStatus)
+        assertNotNull(bd027.auditWarning)
+        assertTrue(bd027.auditWarning!!.contains("g8"))
     }
 
     @Test

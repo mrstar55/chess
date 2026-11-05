@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -58,6 +59,7 @@ import com.example.ui.theme.AppIcons
 fun SectionsListScreen(
     viewModel: ChapterViewModel,
     state: ChapterUiState,
+    onOpenSettings: () -> Unit = { viewModel.openSettings() },
     modifier: Modifier = Modifier
 ) {
     val fontMultiplier = state.fontScale.scale
@@ -91,19 +93,29 @@ fun SectionsListScreen(
             )
         }
 
-        val chapterDisplayName = state.activeChapterShortTitleFa.ifBlank { state.activeChapterTitleFa }
-        val totalDiagramsCount = state.diagrams.size
-        val validDiagramsCount = state.diagrams.count { it.auditStatus == com.example.model.AuditStatus.VALID }
-        val blockedDiagramsCount = state.diagrams.count { it.auditStatus == com.example.model.AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW }
+        val activePdfPage = state.currentPage?.sourcePdfPage ?: state.lastReadFrontMatterSourcePdfPage
+        val isCh01OnPage39 = state.isReadingFrontMatter && activePdfPage == 39
+        val isActuallyFrontMatter = state.isReadingFrontMatter && !isCh01OnPage39
+
+        val chapterDisplayName = when {
+            isActuallyFrontMatter -> BookTocNavigationHelper.FRONT_MATTER_BADGE_LABEL_FA
+            isCh01OnPage39 -> "فصل اول"
+            else -> BookTocNavigationHelper.chapterIdToLabelFa(
+                chapterId = state.activeChapterId,
+                shortTitleFa = state.activeChapterShortTitleFa.ifBlank { state.activeChapterTitleFa }
+            )
+        }
+        val toolbarTitle = "آموزش شطرنج — $chapterDisplayName"
 
         Scaffold(
             topBar = {
                 TopAppBar(
                     title = {
                         Text(
-                            text = "آموزش شطرنج — $chapterDisplayName",
+                            text = toolbarTitle,
                             style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.testTag("sections_list_title")
                         )
                     },
                     navigationIcon = {
@@ -129,6 +141,15 @@ fun SectionsListScreen(
                                 contentDescription = "تنظیمات صدا"
                             )
                         }
+                        IconButton(
+                            onClick = onOpenSettings,
+                            modifier = Modifier.testTag("settings_btn")
+                        ) {
+                            Icon(
+                                imageVector = AppIcons.Settings,
+                                contentDescription = "تنظیمات"
+                            )
+                        }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -146,93 +167,32 @@ fun SectionsListScreen(
                     .testTag("sections_lazy_column"),
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                // Book Info Header Card
-                item {
-                    ElevatedCard(
-                        modifier = Modifier.fillMaxWidth(),
+                // 1. Single Full-Width "ادامه مطالعه" Button (Replacing the old large book info card)
+                item(key = "resume_reading_action_item") {
+                    Button(
+                        onClick = { viewModel.resumeReading() },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = 48.dp)
+                            .testTag("resume_reading_btn"),
                         shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.elevatedCardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant
-                        )
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
                     ) {
-                        Column(modifier = Modifier.padding(10.dp)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Surface(
-                                    shape = CircleShape,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(32.dp)
-                                ) {
-                                    Box(contentAlignment = Alignment.Center) {
-                                        Text("♔", fontSize = 18.sp, color = Color.White)
-                                    }
-                                }
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Column {
-                                    Text(
-                                        text = "کتاب تعاملی آموزش شطرنج — $chapterDisplayName",
-                                        style = MaterialTheme.typography.titleSmall,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    Text(
-                                        text = "کتاب‌خوان تعاملی فارسی — ${state.activeChapterTitleFa}",
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(4.dp))
-
-                            // Stats row
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text("$totalDiagramsCount دیاگرام رندر شده از FEN", style = MaterialTheme.typography.labelSmall)
-                                Text(
-                                    "$validDiagramsCount تأیید | $blockedDiagramsCount نیازمند بازبینی",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = if (blockedDiagramsCount == 0) Color(0xFF16A34A) else Color(0xFFD97706),
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(6.dp))
-
-                            // Action buttons
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                Button(
-                                    onClick = { viewModel.resumeReading() },
-                                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(36.dp)
-                                        .testTag("resume_reading_btn")
-                                ) {
-                                    Icon(AppIcons.AutoStories, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text("ادامه مطالعه", fontSize = 12.sp)
-                                }
-
-                                Button(
-                                    onClick = { viewModel.setTab(AppTab.AUDIT_REPORT) },
-                                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(36.dp)
-                                        .testTag("view_audit_btn")
-                                ) {
-                                    Icon(AppIcons.Shield, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text("گزارش ممیزی", fontSize = 12.sp)
-                                }
-                            }
-                        }
+                        Icon(
+                            imageVector = AppIcons.AutoStories,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "ادامه مطالعه",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 }
 
@@ -275,136 +235,6 @@ fun SectionsListScreen(
                     }
                 }
 
-                // Direct source PDF page navigation strip (Pages 40..50 from source_page_index.json)
-                val sourcePages = state.chapterSourcePageIndex?.allSourcePdfPages.orEmpty()
-                if (sourcePages.isNotEmpty()) {
-                    item {
-                        OutlinedCard(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .testTag("chapter_pdf_pages_index_card"),
-                            shape = RoundedCornerShape(10.dp),
-                            colors = CardDefaults.outlinedCardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
-                            )
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
-                                verticalArrangement = Arrangement.spacedBy(3.dp)
-                            ) {
-                                Text(
-                                    text = "ناوبری مستقیم صفحات PDF فصل (${ReaderPaginator.toPersianDigits(sourcePages.first())} تا ${ReaderPaginator.toPersianDigits(sourcePages.last())})",
-                                    style = MaterialTheme.typography.labelMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    sourcePages.forEach { pdfPage ->
-                                        val isCurrentPdf = !state.isReadingFrontMatter &&
-                                            state.currentPage?.sourcePdfPage == pdfPage
-                                        Surface(
-                                            shape = RoundedCornerShape(6.dp),
-                                            color = if (isCurrentPdf) {
-                                                MaterialTheme.colorScheme.primary
-                                            } else {
-                                                MaterialTheme.colorScheme.secondaryContainer
-                                            },
-                                            modifier = Modifier
-                                                .weight(1f)
-                                                .clickable { viewModel.navigateToSourcePdfPage(pdfPage) }
-                                                .testTag("chapter_pdf_page_chip_$pdfPage")
-                                        ) {
-                                            Box(
-                                                contentAlignment = Alignment.Center,
-                                                modifier = Modifier.padding(vertical = 3.dp)
-                                            ) {
-                                                Text(
-                                                    text = ReaderPaginator.toPersianDigits(pdfPage),
-                                                    fontSize = 11.sp,
-                                                    fontWeight = FontWeight.Bold,
-                                                    color = if (isCurrentPdf) {
-                                                        MaterialTheme.colorScheme.onPrimary
-                                                    } else {
-                                                        MaterialTheme.colorScheme.onSecondaryContainer
-                                                    }
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // 6 sections list of active chapter
-                itemsIndexed(state.sections) { index, section ->
-                    val isCurrent = !state.isReadingFrontMatter && index == state.currentSectionIndex
-                    OutlinedCard(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { viewModel.selectSection(index) }
-                            .testTag("section_item_$index"),
-                        shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.outlinedCardColors(
-                            containerColor = if (isCurrent) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f) else MaterialTheme.colorScheme.surface
-                        )
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 10.dp, vertical = 5.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = if (isCurrent) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
-                                modifier = Modifier.size(26.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Text(
-                                        text = "${index + 1}",
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = if (isCurrent) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = section.titleFa,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = "صفحات ${section.pdfPages.joinToString("، ")}",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.outline
-                                )
-                                if (section.diagramIds.isNotEmpty()) {
-                                    Text(
-                                        text = "${section.diagramIds.size} دیاگرام (${section.diagramIds.joinToString(", ")})",
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.primary
-                                    )
-                                }
-                            }
-
-                            Icon(
-                                imageVector = AppIcons.ChevronLeft,
-                                contentDescription = "مشاهده بخش",
-                                tint = MaterialTheme.colorScheme.outline
-                            )
-                        }
-                    }
-                }
-
                 // Unified Main Book Table of Contents (پیش‌درآمد و فصل‌های ۱ تا ۱۵)
                 if (state.hasFrontMatter || tocChapterGroups.isNotEmpty()) {
                     item(key = "unified_book_toc_header") {
@@ -413,7 +243,9 @@ fun SectionsListScreen(
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(top = 6.dp)
+                            modifier = Modifier
+                                .padding(top = 6.dp)
+                                .testTag("unified_book_toc_header")
                         )
                     }
 

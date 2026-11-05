@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
   "sectionId": "SEC_CH01_03_RESIGNATION",
-  "translationStatus": "COMPLETE",
+  "translationStatus": "IN_PROGRESS",
+  "placeholderNoticeFa": "محتوای این بخش در حال آماده‌سازی است.",
   "orderedContentBlocks": [
     {
       "type": "heading",

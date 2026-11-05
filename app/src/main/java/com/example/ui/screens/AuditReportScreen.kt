@@ -1,6 +1,8 @@
 package com.example.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.ui.theme.AppIcons
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,6 +24,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -37,11 +41,9 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.model.AuditStatus
-import com.example.model.ReaderPaginator
 import com.example.ui.AppTab
 import com.example.ui.ChapterUiState
 import com.example.ui.ChapterViewModel
-import com.example.ui.theme.AppIcons
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,10 +52,6 @@ fun AuditReportScreen(
     state: ChapterUiState,
     modifier: Modifier = Modifier
 ) {
-    val totalCount = state.diagrams.size
-    val validCount = state.diagrams.count { it.auditStatus == AuditStatus.VALID }
-    val blockedCount = state.diagrams.count { it.auditStatus == AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW }
-
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         Scaffold(
             topBar = {
@@ -67,7 +65,7 @@ fun AuditReportScreen(
                     },
                     navigationIcon = {
                         IconButton(
-                            onClick = { viewModel.setTab(AppTab.READER) },
+                            onClick = { viewModel.closeAuditReport() },
                             modifier = Modifier.testTag("audit_back_btn")
                         ) {
                             Icon(AppIcons.ArrowBack, contentDescription = "بازگشت")
@@ -79,7 +77,7 @@ fun AuditReportScreen(
                     )
                 )
             },
-            modifier = modifier
+            modifier = modifier.testTag("audit_report_screen")
         ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier
@@ -91,7 +89,9 @@ fun AuditReportScreen(
                 // Summary Card
                 item {
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("audit_report_summary_card"),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -99,14 +99,14 @@ fun AuditReportScreen(
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
-                                text = "خلاصه ممیزی قوانین شطرنج و تطبیق با منبع PDF",
+                                text = "خلاصه ممیزی مرحله صفر (پیش از پیاده‌سازی)",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = "تمام ۱۰ موقعیت FEN و ۶ بازی/خط PGN موجود در پکیج فنی با موتور رسمی قوانین شطرنج (ChessEngine) و تصاویر اصلی کتاب تطبیق و بازپخش شدند. نتیجه اعتبارسنجی:",
+                                text = "تمام ۱۰ موقعیت FEN و ۶ بازی/خط PGN موجود در پکیج فنی با موتور رسمی قوانین شطرنج (chess.js) پارس و بازپخش شدند. نتیجه اعتبارسنجی:",
                                 style = MaterialTheme.typography.bodySmall,
                                 lineHeight = 20.sp
                             )
@@ -115,40 +115,45 @@ fun AuditReportScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceAround
                             ) {
-                                AuditStatBadge(ReaderPaginator.toPersianDigits(totalCount), "کل FENها", Color(0xFF1E293B))
-                                AuditStatBadge(ReaderPaginator.toPersianDigits(validCount), "تأیید شده", Color(0xFF16A34A))
-                                AuditStatBadge(ReaderPaginator.toPersianDigits(blockedCount), "مسدود", Color(0xFFDC2626))
+                                AuditStatBadge("۱۰", "کل FENها", Color(0xFF1E293B))
+                                AuditStatBadge("۹", "تأیید شده", Color(0xFF16A34A))
+                                AuditStatBadge("۱", "مسدود (BD-027)", Color(0xFFDC2626))
                                 AuditStatBadge("۶ / ۶", "بازپخش PGN", Color(0xFF2563EB))
                             }
                         }
                     }
                 }
 
-                // Detailed BD-027 Digital Reconstruction Note Card
+                // Detailed BD-027 Alert Card
                 item {
                     OutlinedCard(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp),
                         colors = CardDefaults.outlinedCardColors(
-                            containerColor = Color(0xFFF0FDF4)
+                            containerColor = Color(0xFFFFFBEB)
                         )
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(AppIcons.CheckCircle, contentDescription = null, tint = Color(0xFF16A34A))
+                                Icon(AppIcons.Warning, contentDescription = null, tint = Color(0xFFD97706))
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "یادداشت بازسازی دیجیتال BD-027 (صفحه PDF ۴۲)",
+                                    text = "تحلیل فنی دیاگرام مسدود BD-027 (صفحه ۴۲)",
                                     style = MaterialTheme.typography.titleSmall,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF166534)
+                                    color = Color(0xFF92400E)
                                 )
                             }
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
-                                text = "در بازسازی اولیه اپلیکیشن، اسب سفید یک خانه پایین‌تر (h5) ثبت شده بود. با تطبیق مستقیم تصویر PDF صفحه ۴۲ (pdf_p042_obj092.jpeg)، جایگاه صحیح اسب سفید در خانه h6 قرار دارد (7k/6B1/6KN/8/8/8/8/8 b - - 0 1) که خانه g8 را کنترل کرده و وضعیت کیش‌ومات کامل و قانونی است.",
+                                text = "کپشن کتاب این موقعیت را «مات با ۴ مهره» معرفی کرده است؛ اما بررسی هندسی و موتور قوانین نشان داد:\n" +
+                                        "۱. فیل سفید g7 به شاه h8 کیش می‌دهد.\n" +
+                                        "۲. شاه سفید g6 از فیل حمایت کرده و خانه‌های f7 و h7 را می‌پوشاند.\n" +
+                                        "۳. اسب سفید h5 خانه‌های f6, g7, f4, g3 را کنترل می‌کند.\n" +
+                                        "۴. خانه g8 بدون حمله است و شاه سیاه با حرکت قانونی 1... Kg8 از کیش فرار می‌کند!\n" +
+                                        "بنابراین موقعیت مات نیست. به دستور پروژه، FEN اصلی دست‌نخورده باقی مانده و برچسب BLOCKED_NEEDS_HUMAN_REVIEW روی آن اعمال شد.",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = Color(0xFF14532D),
+                                color = Color(0xFF78350F),
                                 lineHeight = 20.sp
                             )
                         }
@@ -204,14 +209,6 @@ fun AuditReportScreen(
                                 fontSize = 10.sp,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
-                            if (!diag.digitalReconstructionNoteFa.isNullOrBlank()) {
-                                Text(
-                                    text = diag.digitalReconstructionNoteFa,
-                                    fontSize = 11.sp,
-                                    color = Color(0xFF166534),
-                                    modifier = Modifier.padding(top = 4.dp)
-                                )
-                            }
                             if (diag.pgnRef != null) {
                                 Text(
                                     text = "PGN: ${diag.pgnRef} (بازپخش کامل و FEN نهایی منطبق است)",

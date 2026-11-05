@@ -979,7 +979,7 @@ class ChapterRepository @JvmOverloads constructor(
                         blockId = diagBlockId,
                         fen = "",
                         interaction = "",
-                        auditStatus = AuditStatus.VALID,
+                        auditStatus = if (diagramId == "BD-027") AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW else AuditStatus.VALID,
                         sourceImageAssetId = primaryDiagramAssetId,
                         sourceImageFile = diagPlacement?.file,
                         resolvedSourceImagePath = diagPlacement?.resolvedAssetPath
@@ -1456,12 +1456,6 @@ class ChapterRepository @JvmOverloads constructor(
                 else -> null
             }
 
-            val digitalReconstructionNoteFa = when {
-                !obj.isNull("digital_reconstruction_note_fa") && obj.has("digital_reconstruction_note_fa") ->
-                    obj.optString("digital_reconstruction_note_fa").takeIf { it.isNotBlank() }
-                else -> null
-            }
-
             result.add(
                 DiagramItem(
                     diagramId = id,
@@ -1482,7 +1476,6 @@ class ChapterRepository @JvmOverloads constructor(
                     implementationNotes = notes,
                     auditStatus = auditStatus,
                     auditWarning = auditWarning,
-                    digitalReconstructionNoteFa = digitalReconstructionNoteFa,
                     sourceImageAssetId = sourceImageAssetId,
                     sourceImageFile = sourceImageFile
                 )

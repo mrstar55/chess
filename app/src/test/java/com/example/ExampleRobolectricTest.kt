@@ -92,7 +92,7 @@ class ExampleRobolectricTest {
         assertEquals("SEC_CH01_06_SUMMARY", sections[5].sectionId)
 
         sections.forEach { section ->
-            assertFalse(section.translationSlot.isPending)
+            assertTrue(section.translationSlot.isPending)
             assertEquals(section.sectionId, section.translationSlot.sectionId)
         }
     }
