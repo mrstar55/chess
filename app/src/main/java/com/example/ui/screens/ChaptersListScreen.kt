@@ -288,7 +288,7 @@ fun ChaptersListScreen(
                             startPdfPage = BookTocNavigationHelper.FRONT_MATTER_START_PDF_PAGE,
                             endPdfPage = BookTocNavigationHelper.FRONT_MATTER_END_PDF_PAGE,
                             isReady = true,
-                            isActive = state.isReadingFrontMatter,
+                            isActive = state.isReadingFrontMatter && state.lastReadFrontMatterSourcePdfPage in BookTocNavigationHelper.FRONT_MATTER_START_PDF_PAGE..BookTocNavigationHelper.FRONT_MATTER_END_PDF_PAGE,
                             isExpanded = frontMatterExpanded,
                             subtopics = frontMatterTopics,
                             fontMultiplier = fontMultiplier,
@@ -331,18 +331,21 @@ fun ChaptersListScreen(
                                     startPdfPage = BookTocNavigationHelper.PART_TWO_START_PDF_PAGE,
                                     endPdfPage = BookTocNavigationHelper.PART_TWO_END_PDF_PAGE,
                                     testTag = "toc_part_divider_2",
-                                    onClick = {
-                                        onNavigateToPdfPage(BookTocNavigationHelper.PART_TWO_START_PDF_PAGE, null)
-                                    }
+                                    onClick = null
                                 )
                             }
                         }
 
                         item(key = tocChapter.chapterId) {
                             val isReady = tocChapter.chapterId in enabledChapterIds
-                            val isActive = !state.isReadingFrontMatter &&
+                            val isCurrentChapter = !state.isReadingFrontMatter &&
                                 isReady &&
                                 state.activeChapterId == tocChapter.chapterId
+                            val isCh01OnPage39 = tocChapter.chapterId == "CH01" &&
+                                isReady &&
+                                state.isReadingFrontMatter &&
+                                state.lastReadFrontMatterSourcePdfPage == 39
+                            val isActive = isCurrentChapter || isCh01OnPage39
 
                             BookTocRowCard(
                                 rowTestTag = "chapter_card_${tocChapter.chapterId}",
@@ -380,6 +383,10 @@ fun ChaptersListScreen(
                     // Fallback for synthetic multi-chapter tests without front_matter/table_of_contents.json
                     items(state.availableChapters, key = { it.chapterId }) { chapter ->
                         val authoritativeRange = BookTocNavigationHelper.AUTHORITATIVE_CHAPTER_RANGES[chapter.chapterId]
+                        val isCurrentChapter = !state.isReadingFrontMatter && state.activeChapterId == chapter.chapterId
+                        val isCh01OnPage39 = chapter.chapterId == "CH01" && state.isReadingFrontMatter && state.lastReadFrontMatterSourcePdfPage == 39
+                        val isActive = isCurrentChapter || isCh01OnPage39
+
                         BookTocRowCard(
                             rowTestTag = "chapter_card_${chapter.chapterId}",
                             badgeLabelFa = "فصل ${ReaderPaginator.toPersianDigits(chapter.chapterNumber)}",
@@ -387,7 +394,7 @@ fun ChaptersListScreen(
                             startPdfPage = authoritativeRange?.first ?: 39,
                             endPdfPage = authoritativeRange?.last ?: 50,
                             isReady = true,
-                            isActive = !state.isReadingFrontMatter && state.activeChapterId == chapter.chapterId,
+                            isActive = isActive,
                             isExpanded = false,
                             subtopics = emptyList(),
                             fontMultiplier = fontMultiplier,

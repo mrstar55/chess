@@ -6,13 +6,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertHasClickAction
+import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import com.example.chess.ChessEngine
@@ -31,6 +36,7 @@ import com.example.ui.components.StartingPositionIntroBoard
 import com.example.ui.screens.BookTocNavigationHelper
 import com.example.ui.screens.ChaptersListScreen
 import com.example.ui.screens.DiagramCard
+import com.example.ui.screens.SectionsListScreen
 import com.example.ui.theme.MyApplicationTheme
 import java.io.File
 import kotlin.math.abs
@@ -579,5 +585,167 @@ class Version22EditorialAndVisualTest {
         composeTestRule.waitForIdle()
         assertEquals(AppTab.CHAPTERS_LIST, viewModel.uiState.value.currentTab)
         composeTestRule.onNodeWithTag("navigation_notice_banner").assertIsDisplayed()
+    }
+
+    @Test
+    fun test16_patch23A_activeRowIndicatorAndPartTwoDividerInChaptersListScreen() {
+        viewModel.openChaptersList()
+        composeTestRule.setContent {
+            val state by viewModel.uiState.collectAsState()
+            MyApplicationTheme {
+                ChaptersListScreen(
+                    state = state,
+                    onSelectChapter = { viewModel.selectChapter(it) },
+                    onBackToIntroduction = {},
+                    onStartFrontMatter = { viewModel.openFrontMatter(it) },
+                    onResumeFrontMatter = { viewModel.resumeFrontMatter() },
+                    onNavigateToPdfPage = { page, chId -> viewModel.navigateToSourcePdfPage(page, chId) },
+                    onDismissNavigationNotice = { viewModel.dismissNavigationNotice() }
+                )
+            }
+        }
+        composeTestRule.waitForIdle()
+
+        // 1. Pages 11..36: Front Matter card is active ("در حال مطالعه"), CH01 is NOT active
+        viewModel.navigateToSourcePdfPage(11, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("front_matter_status_badge", useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        viewModel.navigateToSourcePdfPage(36, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("front_matter_status_badge", useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        // 2. Pages 37 and 38: NEITHER Front Matter nor Chapter 1 is active
+        viewModel.navigateToSourcePdfPage(37, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        viewModel.navigateToSourcePdfPage(38, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        // 3. Page 39: Chapter 1 is active ("در حال مطالعه"), Front Matter is NOT active
+        viewModel.navigateToSourcePdfPage(39, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onNodeWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertIsDisplayed()
+
+        // 4. Page 40+ in CH01: Chapter 1 is active, Front Matter is NOT active
+        viewModel.navigateToSourcePdfPage(40, "CH01")
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onNodeWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertIsDisplayed()
+
+        // 5. Part Two divider (toc_part_divider_2) is unclickable (no navigation, no notice)
+        viewModel.openChaptersList()
+        viewModel.dismissNavigationNotice()
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("chapters_lazy_list")
+            .performScrollToNode(hasTestTag("toc_part_divider_2"))
+        composeTestRule.waitForIdle()
+
+        val partTwoDivider = composeTestRule.onNodeWithTag("toc_part_divider_2")
+        partTwoDivider.assertIsDisplayed()
+        partTwoDivider.assertHasNoClickAction()
+
+        val pageBeforeClick = viewModel.uiState.value.currentPage?.sourcePdfPage
+        val tabBeforeClick = viewModel.uiState.value.currentTab
+        val noticeBeforeClick = viewModel.uiState.value.lastNavigationNoticeFa
+
+        partTwoDivider.performClick()
+        composeTestRule.waitForIdle()
+
+        assertEquals(pageBeforeClick, viewModel.uiState.value.currentPage?.sourcePdfPage)
+        assertEquals(tabBeforeClick, viewModel.uiState.value.currentTab)
+        assertEquals(noticeBeforeClick, viewModel.uiState.value.lastNavigationNoticeFa)
+        composeTestRule.onAllNodesWithTag("navigation_notice_banner", useUnmergedTree = true).assertCountEquals(0)
+
+        // 6. Navigation for Front Matter, subtopics, and Part One divider remains working
+        composeTestRule.onNodeWithTag("chapters_lazy_list")
+            .performScrollToNode(hasTestTag("toc_part_divider_1"))
+        composeTestRule.waitForIdle()
+        val partOneDivider = composeTestRule.onNodeWithTag("toc_part_divider_1")
+        partOneDivider.assertHasClickAction()
+        partOneDivider.performClick()
+        composeTestRule.waitForIdle()
+        assertTrue(viewModel.uiState.value.isReadingFrontMatter)
+        assertEquals(37, viewModel.uiState.value.currentPage?.sourcePdfPage)
+    }
+
+    @Test
+    fun test17_patch23A_activeRowIndicatorAndPartTwoDividerInSectionsListScreen() {
+        viewModel.openSectionsList()
+        composeTestRule.setContent {
+            val state by viewModel.uiState.collectAsState()
+            MyApplicationTheme {
+                SectionsListScreen(
+                    viewModel = viewModel,
+                    state = state
+                )
+            }
+        }
+        composeTestRule.waitForIdle()
+
+        // 1. Pages 11..36: Front Matter active
+        viewModel.navigateToSourcePdfPage(25, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("sections_lazy_column")
+            .performScrollToNode(hasTestTag("front_matter_region_card"))
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("front_matter_status_badge", useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        // 2. Pages 37 and 38: Neither active
+        viewModel.navigateToSourcePdfPage(37, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        viewModel.navigateToSourcePdfPage(38, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onAllNodesWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertCountEquals(0)
+
+        // 3. Page 39: CH01 active
+        viewModel.navigateToSourcePdfPage(39, null)
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onNodeWithTag("sections_lazy_column")
+            .performScrollToNode(hasTestTag("chapter_card_CH01"))
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertIsDisplayed()
+
+        // 4. Page 42 in CH01: CH01 active
+        viewModel.navigateToSourcePdfPage(42, "CH01")
+        composeTestRule.waitForIdle()
+        composeTestRule.onAllNodesWithTag("front_matter_status_badge", useUnmergedTree = true).assertCountEquals(0)
+        composeTestRule.onNodeWithTag("sections_lazy_column")
+            .performScrollToNode(hasTestTag("chapter_card_CH01"))
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("chapter_status_badge_CH01", useUnmergedTree = true).assertIsDisplayed()
+
+        // 5. Part Two divider is not clickable
+        viewModel.openSectionsList()
+        viewModel.dismissNavigationNotice()
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("sections_lazy_column")
+            .performScrollToNode(hasTestTag("toc_part_divider_2"))
+        composeTestRule.waitForIdle()
+
+        val secPartTwoDivider = composeTestRule.onNodeWithTag("toc_part_divider_2")
+        secPartTwoDivider.assertIsDisplayed()
+        secPartTwoDivider.assertHasNoClickAction()
+
+        val pageBeforeClick = viewModel.uiState.value.currentPage?.sourcePdfPage
+        secPartTwoDivider.performClick()
+        composeTestRule.waitForIdle()
+        assertEquals(pageBeforeClick, viewModel.uiState.value.currentPage?.sourcePdfPage)
+        assertNull(viewModel.uiState.value.lastNavigationNoticeFa)
     }
 }

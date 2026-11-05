@@ -426,7 +426,7 @@ fun SectionsListScreen(
                                 startPdfPage = BookTocNavigationHelper.FRONT_MATTER_START_PDF_PAGE,
                                 endPdfPage = BookTocNavigationHelper.FRONT_MATTER_END_PDF_PAGE,
                                 isReady = true,
-                                isActive = state.isReadingFrontMatter,
+                                isActive = state.isReadingFrontMatter && state.lastReadFrontMatterSourcePdfPage in BookTocNavigationHelper.FRONT_MATTER_START_PDF_PAGE..BookTocNavigationHelper.FRONT_MATTER_END_PDF_PAGE,
                                 isExpanded = frontMatterTopicsExpanded,
                                 subtopics = frontMatterTopics,
                                 fontMultiplier = fontMultiplier,
@@ -472,21 +472,21 @@ fun SectionsListScreen(
                                     startPdfPage = BookTocNavigationHelper.PART_TWO_START_PDF_PAGE,
                                     endPdfPage = BookTocNavigationHelper.PART_TWO_END_PDF_PAGE,
                                     testTag = "toc_part_divider_2",
-                                    onClick = {
-                                        viewModel.navigateToSourcePdfPage(
-                                            BookTocNavigationHelper.PART_TWO_START_PDF_PAGE,
-                                            null
-                                        )
-                                    }
+                                    onClick = null
                                 )
                             }
                         }
 
                         item(key = "sec_list_${tocChapter.chapterId}") {
                             val isReady = tocChapter.chapterId in enabledChapterIds
-                            val isActive = !state.isReadingFrontMatter &&
+                            val isCurrentChapter = !state.isReadingFrontMatter &&
                                 isReady &&
                                 state.activeChapterId == tocChapter.chapterId
+                            val isCh01OnPage39 = tocChapter.chapterId == "CH01" &&
+                                isReady &&
+                                state.isReadingFrontMatter &&
+                                state.lastReadFrontMatterSourcePdfPage == 39
+                            val isActive = isCurrentChapter || isCh01OnPage39
 
                             BookTocRowCard(
                                 rowTestTag = "chapter_card_${tocChapter.chapterId}",
