@@ -92,7 +92,7 @@ class ExampleRobolectricTest {
         assertEquals("SEC_CH01_06_SUMMARY", sections[5].sectionId)
 
         sections.forEach { section ->
-            assertTrue(section.translationSlot.isPending)
+            assertFalse(section.translationSlot.isPending)
             assertEquals(section.sectionId, section.translationSlot.sectionId)
         }
     }
@@ -405,8 +405,8 @@ class ExampleRobolectricTest {
             readerSec1Strings.any { it.contains("The chapter recalls the standard initial chess position", ignoreCase = true) }
         )
         assertTrue(
-            "Persian pending notice must be displayed in ReaderScreen UI",
-            readerSec1Strings.any { it.contains("محتوای این بخش در حال آماده‌سازی است.") }
+            "Persian chapter opening text must be displayed in ReaderScreen UI",
+            readerSec1Strings.any { it.contains("تصمیم گرفتم بهترین راه برای آغاز کتابی با عنوان") }
         )
         saveRootViewScreenshot("02_reader_screen_section1.png")
 
@@ -733,7 +733,22 @@ class ExampleRobolectricTest {
     fun `test 8 - placeholder notice is not repeated under diagrams`() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
-        // Select Section 2 (Checkmate), which has 1 untranslated ParagraphBlock and 5 DiagramBlocks
+        // Configure Section 2 (Checkmate) with 1 untranslated ParagraphBlock and 5 DiagramBlocks
+        viewModel.updateSectionTranslationSlot(
+            sectionId = "SEC_CH01_02_CHECKMATE",
+            updatedSlot = TranslationSlot(
+                sectionId = "SEC_CH01_02_CHECKMATE",
+                orderedContentBlocks = listOf(
+                    SectionContentBlock.ParagraphBlock(blockId = "SEC_CH01_02_CHECKMATE_P001", textFa = null),
+                    SectionContentBlock.DiagramBlock(blockId = "SEC_CH01_02_CHECKMATE_D026", diagramId = "BD-026"),
+                    SectionContentBlock.DiagramBlock(blockId = "SEC_CH01_02_CHECKMATE_D027", diagramId = "BD-027"),
+                    SectionContentBlock.DiagramBlock(blockId = "SEC_CH01_02_CHECKMATE_D028", diagramId = "BD-028"),
+                    SectionContentBlock.DiagramBlock(blockId = "SEC_CH01_02_CHECKMATE_D029", diagramId = "BD-029"),
+                    SectionContentBlock.DiagramBlock(blockId = "SEC_CH01_02_CHECKMATE_D030", diagramId = "BD-030")
+                ),
+                translationStatus = TranslationStatus.PENDING
+            )
+        )
         viewModel.selectSection(1)
 
         composeTestRule.setContent {
@@ -3715,6 +3730,23 @@ class ExampleRobolectricTest {
             updatedSlot = TranslationSlot(
                 sectionId = "SEC_CH01_01_OPENING",
                 orderedContentBlocks = sec0Blocks,
+                translationStatus = TranslationStatus.COMPLETE
+            )
+        )
+        viewModel.updateSectionTranslationSlot(
+            sectionId = "SEC_CH01_02_CHECKMATE",
+            updatedSlot = TranslationSlot(
+                sectionId = "SEC_CH01_02_CHECKMATE",
+                orderedContentBlocks = listOf(
+                    SectionContentBlock.ParagraphBlock(
+                        blockId = "SEC_CH01_02_CHECKMATE_P001",
+                        textFa = "پاراگراف اول بخش کیش‌ومات برای تست خوانش صوتی."
+                    ),
+                    SectionContentBlock.DiagramBlock(
+                        blockId = "SEC_CH01_02_CHECKMATE_D026",
+                        diagramId = "BD-026"
+                    )
+                ),
                 translationStatus = TranslationStatus.COMPLETE
             )
         )

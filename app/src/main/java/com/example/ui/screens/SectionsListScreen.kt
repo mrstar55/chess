@@ -1,6 +1,5 @@
 package com.example.ui.screens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,7 +22,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +33,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -58,6 +60,21 @@ fun SectionsListScreen(
     state: ChapterUiState,
     modifier: Modifier = Modifier
 ) {
+    val fontMultiplier = state.fontScale.scale
+    val tocEntries = state.frontMatterPack?.tableOfContents?.entries.orEmpty()
+    val frontMatterTopics = remember(tocEntries) {
+        BookTocNavigationHelper.extractFrontMatterTopics(tocEntries)
+    }
+    val tocChapterGroups = remember(tocEntries) {
+        BookTocNavigationHelper.extractChapterGroups(tocEntries)
+    }
+    val enabledChapterIds = remember(state.availableChapters) {
+        state.availableChapters.map { it.chapterId }.toSet()
+    }
+
+    var frontMatterTopicsExpanded by remember { mutableStateOf(false) }
+    var expandedTocChapterId by remember { mutableStateOf<String?>(null) }
+
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         if (state.showAudioSettingsDialog) {
             AudioSettingsDialog(
@@ -90,7 +107,7 @@ fun SectionsListScreen(
                         )
                     },
                     navigationIcon = {
-                        if (state.hasMultipleChapters) {
+                        if (state.hasMultipleChapters || state.hasFrontMatter) {
                             IconButton(
                                 onClick = { viewModel.openChaptersList() },
                                 modifier = Modifier.testTag("back_to_chapters_btn")
@@ -175,7 +192,7 @@ fun SectionsListScreen(
                                 Text(
                                     "$validDiagramsCount تأیید | $blockedDiagramsCount نیازمند بازبینی",
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = Color(0xFFD97706),
+                                    color = if (blockedDiagramsCount == 0) Color(0xFF16A34A) else Color(0xFFD97706),
                                     fontWeight = FontWeight.Bold
                                 )
                             }
@@ -219,32 +236,111 @@ fun SectionsListScreen(
                     }
                 }
 
-                // Region 1: FRONT_MATTER (PDF Pages 1 to 39) — strictly BEFORE the chapters/sections list
-                if (state.hasFrontMatter) {
-                    item {
-                        FrontMatterRegionCard(
-                            navigationTitleFa = state.frontMatterNavigationTitleFa,
-                            fullTitleFa = state.frontMatterFullTitleFa,
-                            lastReadPdfPage = state.lastReadFrontMatterSourcePdfPage,
-                            isActiveRegion = state.isReadingFrontMatter,
-                            onStartFromPage1 = { viewModel.openFrontMatter(1) },
-                            onResumeFrontMatter = { viewModel.resumeFrontMatter() },
-                            onOpenIntroPage11 = { viewModel.openFrontMatter(11) }
-                        )
+                if (!state.lastNavigationNoticeFa.isNullOrBlank()) {
+                    item(key = "sections_navigation_notice_banner") {
+                        OutlinedCard(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("navigation_notice_banner"),
+                            shape = RoundedCornerShape(10.dp),
+                            colors = CardDefaults.outlinedCardColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 10.dp, vertical = 6.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = state.lastNavigationNoticeFa,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                    modifier = Modifier.weight(1f)
+                                )
+                                IconButton(
+                                    onClick = { viewModel.dismissNavigationNotice() },
+                                    modifier = Modifier.size(24.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = AppIcons.Close,
+                                        contentDescription = "بستن اعلان"
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
 
-                item {
-                    Text(
-                        text = "فهرست بخش‌های $chapterDisplayName (شروع از صفحه PDF ۴۰)",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(top = 2.dp)
-                    )
+                // Direct source PDF page navigation strip (Pages 40..50 from source_page_index.json)
+                val sourcePages = state.chapterSourcePageIndex?.allSourcePdfPages.orEmpty()
+                if (sourcePages.isNotEmpty()) {
+                    item {
+                        OutlinedCard(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("chapter_pdf_pages_index_card"),
+                            shape = RoundedCornerShape(10.dp),
+                            colors = CardDefaults.outlinedCardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
+                            )
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                                verticalArrangement = Arrangement.spacedBy(3.dp)
+                            ) {
+                                Text(
+                                    text = "ناوبری مستقیم صفحات PDF فصل (${ReaderPaginator.toPersianDigits(sourcePages.first())} تا ${ReaderPaginator.toPersianDigits(sourcePages.last())})",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    sourcePages.forEach { pdfPage ->
+                                        val isCurrentPdf = !state.isReadingFrontMatter &&
+                                            state.currentPage?.sourcePdfPage == pdfPage
+                                        Surface(
+                                            shape = RoundedCornerShape(6.dp),
+                                            color = if (isCurrentPdf) {
+                                                MaterialTheme.colorScheme.primary
+                                            } else {
+                                                MaterialTheme.colorScheme.secondaryContainer
+                                            },
+                                            modifier = Modifier
+                                                .weight(1f)
+                                                .clickable { viewModel.navigateToSourcePdfPage(pdfPage) }
+                                                .testTag("chapter_pdf_page_chip_$pdfPage")
+                                        ) {
+                                            Box(
+                                                contentAlignment = Alignment.Center,
+                                                modifier = Modifier.padding(vertical = 3.dp)
+                                            ) {
+                                                Text(
+                                                    text = ReaderPaginator.toPersianDigits(pdfPage),
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = if (isCurrentPdf) {
+                                                        MaterialTheme.colorScheme.onPrimary
+                                                    } else {
+                                                        MaterialTheme.colorScheme.onSecondaryContainer
+                                                    }
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
-                // 6 sections list
+                // 6 sections list of active chapter
                 itemsIndexed(state.sections) { index, section ->
                     val isCurrent = !state.isReadingFrontMatter && index == state.currentSectionIndex
                     OutlinedCard(
@@ -260,13 +356,13 @@ fun SectionsListScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 10.dp, vertical = 6.dp),
+                                .padding(horizontal = 10.dp, vertical = 5.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Surface(
                                 shape = CircleShape,
                                 color = if (isCurrent) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
-                                modifier = Modifier.size(28.dp)
+                                modifier = Modifier.size(26.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Text(
@@ -308,136 +404,122 @@ fun SectionsListScreen(
                         }
                     }
                 }
-            }
-        }
-    }
-}
 
-@Composable
-fun FrontMatterRegionCard(
-    navigationTitleFa: String,
-    fullTitleFa: String,
-    lastReadPdfPage: Int,
-    isActiveRegion: Boolean,
-    onStartFromPage1: () -> Unit,
-    onResumeFrontMatter: () -> Unit,
-    onOpenIntroPage11: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    OutlinedCard(
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable { onResumeFrontMatter() }
-            .testTag("front_matter_region_card"),
-        shape = RoundedCornerShape(12.dp),
-        border = BorderStroke(
-            width = if (isActiveRegion) 1.5.dp else 1.dp,
-            color = if (isActiveRegion) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
-        ),
-        colors = CardDefaults.outlinedCardColors(
-            containerColor = if (isActiveRegion) {
-                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.32f)
-            } else {
-                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.28f)
-            }
-        )
-    ) {
-        Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 7.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Surface(
-                        shape = RoundedCornerShape(7.dp),
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(26.dp)
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Icon(
-                                imageVector = AppIcons.AutoStories,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onPrimary,
-                                modifier = Modifier.size(15.dp)
+                // Unified Main Book Table of Contents (پیش‌درآمد و فصل‌های ۱ تا ۱۵)
+                if (state.hasFrontMatter || tocChapterGroups.isNotEmpty()) {
+                    item(key = "unified_book_toc_header") {
+                        Text(
+                            text = "فهرست اصلی کتاب",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(top = 6.dp)
+                        )
+                    }
+
+                    if (state.hasFrontMatter) {
+                        item(key = "sec_front_matter_unified_item") {
+                            BookTocRowCard(
+                                rowTestTag = "front_matter_region_card",
+                                badgeLabelFa = BookTocNavigationHelper.FRONT_MATTER_BADGE_LABEL_FA,
+                                titleFa = BookTocNavigationHelper.FRONT_MATTER_ROW_TITLE_FA,
+                                startPdfPage = BookTocNavigationHelper.FRONT_MATTER_START_PDF_PAGE,
+                                endPdfPage = BookTocNavigationHelper.FRONT_MATTER_END_PDF_PAGE,
+                                isReady = true,
+                                isActive = state.isReadingFrontMatter,
+                                isExpanded = frontMatterTopicsExpanded,
+                                subtopics = frontMatterTopics,
+                                fontMultiplier = fontMultiplier,
+                                titleTestTag = "front_matter_nav_title_text",
+                                pageRangeTestTag = "front_matter_page_range_badge",
+                                statusBadgeTestTag = "front_matter_status_badge",
+                                expandBtnTestTag = "front_matter_toggle_topics_btn",
+                                subtopicTagPrefix = "front_matter_toc_topic",
+                                onRowClick = {
+                                    viewModel.navigateToSourcePdfPage(
+                                        BookTocNavigationHelper.FRONT_MATTER_START_PDF_PAGE,
+                                        null
+                                    )
+                                },
+                                onToggleExpand = { frontMatterTopicsExpanded = !frontMatterTopicsExpanded },
+                                onSubtopicClick = { topic ->
+                                    viewModel.navigateToSourcePdfPage(topic.targetSourcePdfPage, null)
+                                }
+                            )
+                        }
+
+                        item(key = "sec_part_one_divider") {
+                            BookTocPartDivider(
+                                titleFa = BookTocNavigationHelper.PART_ONE_TITLE_FA,
+                                startPdfPage = BookTocNavigationHelper.PART_ONE_START_PDF_PAGE,
+                                endPdfPage = BookTocNavigationHelper.PART_ONE_END_PDF_PAGE,
+                                testTag = "toc_part_divider_1",
+                                onClick = {
+                                    viewModel.navigateToSourcePdfPage(
+                                        BookTocNavigationHelper.PART_ONE_START_PDF_PAGE,
+                                        null
+                                    )
+                                }
                             )
                         }
                     }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Column {
-                        Text(
-                            text = navigationTitleFa,
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.testTag("front_matter_nav_title_text")
-                        )
-                        Text(
-                            text = fullTitleFa,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.testTag("front_matter_full_title_text")
-                        )
+
+                    tocChapterGroups.forEach { tocChapter ->
+                        if (tocChapter.chapterId == "CH09") {
+                            item(key = "sec_part_two_divider") {
+                                BookTocPartDivider(
+                                    titleFa = BookTocNavigationHelper.PART_TWO_TITLE_FA,
+                                    startPdfPage = BookTocNavigationHelper.PART_TWO_START_PDF_PAGE,
+                                    endPdfPage = BookTocNavigationHelper.PART_TWO_END_PDF_PAGE,
+                                    testTag = "toc_part_divider_2",
+                                    onClick = {
+                                        viewModel.navigateToSourcePdfPage(
+                                            BookTocNavigationHelper.PART_TWO_START_PDF_PAGE,
+                                            null
+                                        )
+                                    }
+                                )
+                            }
+                        }
+
+                        item(key = "sec_list_${tocChapter.chapterId}") {
+                            val isReady = tocChapter.chapterId in enabledChapterIds
+                            val isActive = !state.isReadingFrontMatter &&
+                                isReady &&
+                                state.activeChapterId == tocChapter.chapterId
+
+                            BookTocRowCard(
+                                rowTestTag = "chapter_card_${tocChapter.chapterId}",
+                                badgeLabelFa = tocChapter.chapterLabelFa,
+                                titleFa = tocChapter.chapterTitleFa,
+                                startPdfPage = tocChapter.startPdfPage,
+                                endPdfPage = tocChapter.endPdfPage,
+                                isReady = isReady,
+                                isActive = isActive,
+                                isExpanded = expandedTocChapterId == tocChapter.chapterId,
+                                subtopics = tocChapter.subtopics,
+                                fontMultiplier = fontMultiplier,
+                                titleTestTag = "chapter_title_${tocChapter.chapterId}",
+                                pageRangeTestTag = "chapter_page_range_${tocChapter.chapterId}",
+                                statusBadgeTestTag = "chapter_status_badge_${tocChapter.chapterId}",
+                                expandBtnTestTag = "toc_expand_btn_${tocChapter.chapterId}",
+                                subtopicTagPrefix = "toc_subtopic_${tocChapter.chapterId}",
+                                onRowClick = {
+                                    viewModel.navigateToSourcePdfPage(tocChapter.startPdfPage, tocChapter.chapterId)
+                                },
+                                onToggleExpand = {
+                                    expandedTocChapterId = if (expandedTocChapterId == tocChapter.chapterId) {
+                                        null
+                                    } else {
+                                        tocChapter.chapterId
+                                    }
+                                },
+                                onSubtopicClick = { topic ->
+                                    viewModel.navigateToSourcePdfPage(topic.targetSourcePdfPage, tocChapter.chapterId)
+                                }
+                            )
+                        }
                     }
-                }
-
-                Surface(
-                    shape = RoundedCornerShape(6.dp),
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
-                ) {
-                    Text(
-                        text = "صفحات PDF ۱ تا ۳۹",
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier
-                            .padding(horizontal = 6.dp, vertical = 2.dp)
-                            .testTag("front_matter_page_range_badge")
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(5.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                FilledTonalButton(
-                    onClick = onStartFromPage1,
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 2.dp),
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(30.dp)
-                        .testTag("front_matter_start_btn")
-                ) {
-                    Text("شروع از صفحه ۱", fontSize = 10.5.sp, fontWeight = FontWeight.Bold)
-                }
-
-                FilledTonalButton(
-                    onClick = onOpenIntroPage11,
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 2.dp),
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(30.dp)
-                        .testTag("front_matter_intro_page11_btn")
-                ) {
-                    Text("مقدمه (صفحه ۱۱)", fontSize = 10.5.sp, fontWeight = FontWeight.Bold)
-                }
-
-                Button(
-                    onClick = onResumeFrontMatter,
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 2.dp),
-                    modifier = Modifier
-                        .weight(1.2f)
-                        .height(30.dp)
-                        .testTag("front_matter_resume_btn")
-                ) {
-                    val lastPageFa = ReaderPaginator.toPersianDigits(lastReadPdfPage)
-                    Text("ادامه (صفحه $lastPageFa)", fontSize = 10.5.sp, fontWeight = FontWeight.Bold)
                 }
             }
         }

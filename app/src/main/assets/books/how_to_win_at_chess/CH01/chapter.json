@@ -16,7 +16,9 @@
       "sectionKind": "OPENING",
       "titleEn": "Chapter opening",
       "titleFa": "شروع فصل",
-      "pdfPages": [40],
+      "pdfPages": [
+        40
+      ],
       "file": "sections/01_opening.json"
     },
     {
@@ -25,7 +27,14 @@
       "sectionKind": "CONTENT",
       "titleEn": "Checkmate",
       "titleFa": "مات",
-      "pdfPages": [41, 42, 43, 44, 45],
+      "pdfPages": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
       "file": "sections/02_checkmate.json"
     },
     {
@@ -34,7 +43,10 @@
       "sectionKind": "CONTENT",
       "titleEn": "Resignation",
       "titleFa": "تسلیم",
-      "pdfPages": [45, 46],
+      "pdfPages": [
+        45,
+        46
+      ],
       "file": "sections/03_resignation.json"
     },
     {
@@ -43,7 +55,11 @@
       "sectionKind": "CONTENT",
       "titleEn": "Timing Out",
       "titleFa": "اتمام زمان",
-      "pdfPages": [47, 48],
+      "pdfPages": [
+        46,
+        47,
+        48
+      ],
       "file": "sections/04_timing_out.json"
     },
     {
@@ -52,7 +68,10 @@
       "sectionKind": "CONTENT",
       "titleEn": "Abandonment",
       "titleFa": "ترک بازی",
-      "pdfPages": [48, 49],
+      "pdfPages": [
+        48,
+        49
+      ],
       "file": "sections/05_abandonment.json"
     },
     {
@@ -61,7 +80,9 @@
       "sectionKind": "SUMMARY",
       "titleEn": "Summary and additional lesson link",
       "titleFa": "خلاصه",
-      "pdfPages": [50],
+      "pdfPages": [
+        50
+      ],
       "file": "sections/06_summary.json"
     }
   ]

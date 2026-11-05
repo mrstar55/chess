@@ -497,6 +497,46 @@ abstract class ValidateContentPacksTask : org.gradle.api.DefaultTask() {
           }
         }
 
+        // Validate optional source_page_index.json if declared in chapter.json
+        val sourcePageIndexFileRel = chapterMap["sourcePageIndexFile"]?.toString()?.trim().orEmpty()
+        if (sourcePageIndexFileRel.isNotEmpty()) {
+          val spiFile = File(chapterFolder, sourcePageIndexFileRel)
+          val spiRel = spiFile.relativeTo(assetsDir).path
+          val spiMap = parseJsonFile(spiFile) as? Map<*, *>
+            ?: throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [$chapterId] Root must be JSON object")
+          val spiPages = spiMap["pages"] as? List<*>
+            ?: throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [$chapterId] Missing 'pages' array")
+          if (spiPages.isEmpty()) {
+            throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [$chapterId] 'pages' array cannot be empty")
+          }
+          for (pObj in spiPages) {
+            val pMap = pObj as? Map<*, *> ?: continue
+            val pNum = (pMap["sourcePdfPage"] as? Number)?.toInt() ?: -1
+            if (pNum <= 0) {
+              throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [$chapterId] Invalid sourcePdfPage '$pNum'")
+            }
+            val orderedBlockIds = (pMap["orderedBlockIds"] as? List<*>)?.mapNotNull { it?.toString()?.trim() } ?: emptyList()
+            for (bId in orderedBlockIds) {
+              if (!seenBlockIds.contains(bId)) {
+                throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [page $pNum] orderedBlockId '$bId' not found in chapter sections")
+              }
+            }
+            val placements = pMap["imagePlacements"] as? List<*> ?: emptyList<Any>()
+            for (imgObj in placements) {
+              val imgMap = imgObj as? Map<*, *> ?: continue
+              val assetId = imgMap["assetId"]?.toString()?.trim().orEmpty()
+              val relPath = imgMap["relativePath"]?.toString()?.trim().orEmpty()
+              if (assetId.isEmpty() || relPath.isEmpty()) {
+                throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [page $pNum] imagePlacement missing assetId or relativePath")
+              }
+              val imgFile = File(chapterFolder.parentFile, relPath)
+              if (!imgFile.exists() || !imgFile.isFile || imgFile.length() <= 0L) {
+                throw org.gradle.api.GradleException("[validateContentPacks] [$spiRel] [$assetId] Missing or empty image asset '${imgFile.relativeTo(assetsDir)}'")
+              }
+            }
+          }
+        }
+
         // Validate narration/manifest.json strictly against the unified contract (chapters -> sections -> blocks)
         val narrationRel = narrationFile.relativeTo(assetsDir).path
         val narrationMap = parseJsonFile(narrationFile) as? Map<*, *>

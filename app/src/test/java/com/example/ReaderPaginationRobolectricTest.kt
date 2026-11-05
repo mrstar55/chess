@@ -99,7 +99,6 @@ class ReaderPaginationRobolectricTest {
     fun `reader test 1 - swipe right from left to right advances to next page in Persian RTL`() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
-        // Section 1 (SEC_CH01_02_CHECKMATE) has 5 diagrams across 5 pages
         viewModel.selectSection(1)
 
         composeTestRule.setContent {
@@ -109,12 +108,12 @@ class ReaderPaginationRobolectricTest {
             }
         }
         composeTestRule.waitForIdle()
+        val total = viewModel.uiState.value.currentPages.size
 
         assertEquals(0, viewModel.uiState.value.currentPageIndex)
-        composeTestRule.onNodeWithText("صفحه 1 از 5").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("diagram_card_BD-026").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه 1 از $total").assertIsDisplayed()
 
-        // Swipe from Left to Right (swipeRight) -> must move to Next Page (Page 2, BD-027)
+        // Swipe from Left to Right (swipeRight) -> must move to Next Page (Page 2)
         composeTestRule.onNodeWithTag("reader_horizontal_pager").performTouchInput {
             swipeRight()
         }
@@ -125,8 +124,7 @@ class ReaderPaginationRobolectricTest {
             1,
             viewModel.uiState.value.currentPageIndex
         )
-        composeTestRule.onNodeWithText("صفحه 2 از 5").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("diagram_card_BD-027").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه 2 از $total").assertIsDisplayed()
     }
 
     // =========================================================================
@@ -137,7 +135,9 @@ class ReaderPaginationRobolectricTest {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
         viewModel.selectSection(1)
-        viewModel.goToPage(2) // Start on Page 3 (BD-028)
+        val total = viewModel.uiState.value.currentPages.size
+        val bd027Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-027" }
+        viewModel.goToPage(bd027Idx)
 
         composeTestRule.setContent {
             val state by viewModel.uiState.collectAsState()
@@ -147,11 +147,11 @@ class ReaderPaginationRobolectricTest {
         }
         composeTestRule.waitForIdle()
 
-        assertEquals(2, viewModel.uiState.value.currentPageIndex)
-        composeTestRule.onNodeWithText("صفحه 3 از 5").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("diagram_card_BD-028").assertIsDisplayed()
+        assertEquals(bd027Idx, viewModel.uiState.value.currentPageIndex)
+        composeTestRule.onNodeWithText("صفحه ${bd027Idx + 1} از $total").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("diagram_card_BD-027").assertIsDisplayed()
 
-        // Swipe from Right to Left (swipeLeft) -> must return to Previous Page (Page 2, BD-027)
+        // Swipe from Right to Left (swipeLeft) -> must return to Previous Page
         composeTestRule.onNodeWithTag("reader_horizontal_pager").performTouchInput {
             swipeLeft()
         }
@@ -159,11 +159,10 @@ class ReaderPaginationRobolectricTest {
 
         assertEquals(
             "Swiping from right to left (swipeLeft) must return to the previous page in Persian Reader",
-            1,
+            bd027Idx - 1,
             viewModel.uiState.value.currentPageIndex
         )
-        composeTestRule.onNodeWithText("صفحه 2 از 5").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("diagram_card_BD-027").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه $bd027Idx از $total").assertIsDisplayed()
     }
 
     // =========================================================================
@@ -182,6 +181,7 @@ class ReaderPaginationRobolectricTest {
             }
         }
         composeTestRule.waitForIdle()
+        val total = viewModel.uiState.value.currentPages.size
 
         // Verify physical geometry: Left arrow button (reader_next_page_btn) is physically on the left side,
         // and Right arrow button (reader_prev_page_btn) is physically on the right side
@@ -196,15 +196,13 @@ class ReaderPaginationRobolectricTest {
         composeTestRule.onNodeWithTag("reader_next_page_btn").performClick()
         composeTestRule.waitForIdle()
         assertEquals(1, viewModel.uiState.value.currentPageIndex)
-        composeTestRule.onNodeWithText("صفحه 2 از 5").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("diagram_card_BD-027").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه 2 از $total").assertIsDisplayed()
 
         // Click Right arrow button -> returns from Page 2 to Page 1
         composeTestRule.onNodeWithTag("reader_prev_page_btn").performClick()
         composeTestRule.waitForIdle()
         assertEquals(0, viewModel.uiState.value.currentPageIndex)
-        composeTestRule.onNodeWithText("صفحه 1 از 5").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("diagram_card_BD-026").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه 1 از $total").assertIsDisplayed()
     }
 
     // =========================================================================
@@ -435,7 +433,7 @@ class ReaderPaginationRobolectricTest {
     fun `reader test 9 - pageNumber and totalPages are accurate and displayed in UI`() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
-        viewModel.selectSection(1) // SEC_CH01_02_CHECKMATE -> 5 pages
+        viewModel.selectSection(1) // SEC_CH01_02_CHECKMATE
 
         composeTestRule.setContent {
             val state by viewModel.uiState.collectAsState()
@@ -446,19 +444,20 @@ class ReaderPaginationRobolectricTest {
         composeTestRule.waitForIdle()
 
         val pages = viewModel.uiState.value.currentPages
-        assertEquals(5, pages.size)
+        val total = pages.size
+        assertTrue(total >= 5)
         pages.forEachIndexed { idx, page ->
             assertEquals(idx + 1, page.pageNumber)
-            assertEquals(5, page.totalPages)
+            assertEquals(total, page.totalPages)
         }
 
         composeTestRule.onNodeWithTag("reader_breadcrumb_text").assertIsDisplayed()
         composeTestRule.onNodeWithText("فصل اول / بخش 2 / مات").assertIsDisplayed()
-        composeTestRule.onNodeWithText("صفحه 1 از 5").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه 1 از $total").assertIsDisplayed()
 
         viewModel.goToPage(3)
         composeTestRule.waitForIdle()
-        composeTestRule.onNodeWithText("صفحه 4 از 5").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه 4 از $total").assertIsDisplayed()
     }
 
     // =========================================================================
@@ -623,37 +622,44 @@ class ReaderPaginationRobolectricTest {
 
         // A. STATIC_DIAGRAM (BD-025 in Section 0) -> VISUAL_EXAMPLE ("مثال تصویری")
         viewModel.selectSection(0)
+        val bd025Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" }
+        viewModel.goToPage(bd025Idx)
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithTag("reader_semantic_badge_VISUAL_EXAMPLE").assertIsDisplayed()
         composeTestRule.onNodeWithText("مثال تصویری").assertIsDisplayed()
         saveReaderScreenshot("10_reader_static_diagram_page.png")
         saveReaderScreenshot("02_static_diagram_page.png")
 
-        // B. NEEDS_REVIEW (BD-027 in Section 1, Page 2) -> NEEDS_REVIEW ("نیازمند بازبینی")
+        // B. STATIC_DIAGRAM (BD-027 in Section 1) -> VISUAL_EXAMPLE ("مثال تصویری") after V22 FEN correction
         viewModel.selectSection(1)
-        viewModel.goToPage(1)
+        val bd027Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-027" }
+        viewModel.goToPage(bd027Idx)
         composeTestRule.waitForIdle()
-        composeTestRule.onNodeWithTag("reader_semantic_badge_NEEDS_REVIEW").assertIsDisplayed()
-        composeTestRule.onNodeWithText("نیازمند بازبینی").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("reader_semantic_badge_VISUAL_EXAMPLE").assertIsDisplayed()
+        composeTestRule.onNodeWithText("مثال تصویری").assertIsDisplayed()
 
-        // C. MOVE_REPLAY (BD-029 in Section 1, Page 4) -> MOVE_REPLAY ("بازپخش حرکات")
-        viewModel.goToPage(3)
+        // C. MOVE_REPLAY (BD-029 in Section 1) -> MOVE_REPLAY ("بازپخش حرکات")
+        val bd029Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-029" }
+        viewModel.goToPage(bd029Idx)
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithTag("reader_semantic_badge_MOVE_REPLAY").assertIsDisplayed()
         composeTestRule.onNodeWithText("بازپخش حرکات").assertIsDisplayed()
         saveReaderScreenshot("11_reader_move_replay_page.png")
         saveReaderScreenshot("03_move_replay_page.png")
 
-        // D. INTERACTIVE_EXERCISE (BD-032 in Section 3, Page 1) -> INTERACTIVE_EXERCISE ("تمرین تعاملی")
+        // D. INTERACTIVE_EXERCISE (BD-032 in Section 3) -> INTERACTIVE_EXERCISE ("تمرین تعاملی")
         viewModel.selectSection(3)
+        val bd032Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-032" }
+        viewModel.goToPage(bd032Idx)
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithTag("reader_semantic_badge_INTERACTIVE_EXERCISE").assertIsDisplayed()
         composeTestRule.onNodeWithText("تمرین تعاملی").assertIsDisplayed()
         saveReaderScreenshot("12_reader_exercise_bd032_page.png")
         saveReaderScreenshot("04_exercise_bd032_page.png")
 
-        // E. POSITION_COMPARISON (BD-033 in Section 3, Page 2) -> POSITION_COMPARISON ("مقایسه موقعیت")
-        viewModel.goToPage(1)
+        // E. POSITION_COMPARISON (BD-033 in Section 3) -> POSITION_COMPARISON ("مقایسه موقعیت")
+        val bd033Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-033" }
+        viewModel.goToPage(bd033Idx)
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithTag("reader_semantic_badge_POSITION_COMPARISON").assertIsDisplayed()
         composeTestRule.onNodeWithText("مقایسه موقعیت").assertIsDisplayed()
@@ -672,9 +678,10 @@ class ReaderPaginationRobolectricTest {
     fun `reader test 14 - piece movement animation and reverse animation are preserved after turning pages and returning`() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
-        // Section 1, Page 4 is BD-029 (Scholar's Mate MOVE_REPLAY)
+        // Section 1, BD-029 (Scholar's Mate MOVE_REPLAY)
         viewModel.selectSection(1)
-        viewModel.goToPage(3)
+        val bd029Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-029" }
+        viewModel.goToPage(bd029Idx)
 
         composeTestRule.setContent {
             val state by viewModel.uiState.collectAsState()
@@ -684,14 +691,14 @@ class ReaderPaginationRobolectricTest {
         }
         composeTestRule.waitForIdle()
 
-        // Turn to Page 5 (BD-030) and then turn back to Page 4 (BD-029)
+        // Turn to next page and then turn back to BD-029 page
         composeTestRule.onNodeWithTag("reader_next_page_btn").performClick()
         composeTestRule.waitForIdle()
-        assertEquals(4, viewModel.uiState.value.currentPageIndex)
+        assertEquals(bd029Idx + 1, viewModel.uiState.value.currentPageIndex)
 
         composeTestRule.onNodeWithTag("reader_prev_page_btn").performClick()
         composeTestRule.waitForIdle()
-        assertEquals(3, viewModel.uiState.value.currentPageIndex)
+        assertEquals(bd029Idx, viewModel.uiState.value.currentPageIndex)
         composeTestRule.onNodeWithTag("diagram_card_BD-029").assertIsDisplayed()
 
         // Now pause clock and test Reverse Animation (Previous step: Qxf7# reversed f7 -> h5 with f7 pawn fade-in)
@@ -735,8 +742,10 @@ class ReaderPaginationRobolectricTest {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
         viewModel.resetBd032()
-        // Section 3 (Timing Out): Page 1 has BD-032 (Exercise), Page 2 has BD-033 (Comparison)
+        // Section 3 (Timing Out): navigate to BD-032 page
         viewModel.selectSection(3)
+        val bd032Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-032" }
+        viewModel.goToPage(bd032Idx)
 
         composeTestRule.setContent {
             val state by viewModel.uiState.collectAsState()
@@ -768,7 +777,9 @@ class ReaderPaginationRobolectricTest {
     fun `reader test 16 - chessboard files a to h LTR and ranks 8 to 1 top to bottom are preserved inside paginated RTL ReaderPage`() {
         val app = ApplicationProvider.getApplicationContext<Application>()
         val viewModel = ChapterViewModel(app)
-        viewModel.selectSection(0) // BD-025 on Page 1
+        viewModel.selectSection(0)
+        val bd025Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" }
+        viewModel.goToPage(bd025Idx)
 
         composeTestRule.setContent {
             val state by viewModel.uiState.collectAsState()
@@ -1259,15 +1270,17 @@ class ReaderPaginationRobolectricTest {
         composeTestRule.onNodeWithTag("intro_enter_book_btn").performClick()
         composeTestRule.waitForIdle()
 
-        // 1. Select Section 2 ("مات", index 1) and advance to Page 4 (0-based index 3, BD-029)
+        // 1. Select Section 2 ("مات", index 1) and advance to BD-029 page
         composeTestRule.onNodeWithTag("section_item_1").performClick()
         composeTestRule.waitForIdle()
-        viewModel.goToPage(3)
+        val total = viewModel.uiState.value.currentPages.size
+        val bd029Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-029" }
+        viewModel.goToPage(bd029Idx)
         composeTestRule.waitForIdle()
 
         assertEquals(1, viewModel.uiState.value.currentSectionIndex)
-        assertEquals(3, viewModel.uiState.value.currentPageIndex)
-        composeTestRule.onNodeWithText("صفحه 4 از 5").assertIsDisplayed()
+        assertEquals(bd029Idx, viewModel.uiState.value.currentPageIndex)
+        composeTestRule.onNodeWithText("صفحه ${bd029Idx + 1} از $total").assertIsDisplayed()
         composeTestRule.onNodeWithTag("diagram_card_BD-029").assertIsDisplayed()
 
         // 2. Return to SectionsListScreen via nav_toc_btn
@@ -1275,18 +1288,18 @@ class ReaderPaginationRobolectricTest {
         composeTestRule.waitForIdle()
         assertEquals(com.example.ui.AppTab.SECTIONS_LIST, viewModel.uiState.value.currentTab)
 
-        // 3. Click "ادامه مطالعه" (resume_reading_btn) -> must return to Section 1, Page 4 (index 3), NOT Page 1!
+        // 3. Click "ادامه مطالعه" (resume_reading_btn) -> must return to Section 1, BD-029 page, NOT Page 1!
         composeTestRule.onNodeWithTag("resume_reading_btn").performClick()
         composeTestRule.waitForIdle()
 
         assertEquals(com.example.ui.AppTab.READER, viewModel.uiState.value.currentTab)
         assertEquals(1, viewModel.uiState.value.currentSectionIndex)
         assertEquals(
-            "Continue Reading must preserve the last saved page index (3 -> Page 4), NOT reset to 0",
-            3,
+            "Continue Reading must preserve the last saved page index ($bd029Idx), NOT reset to 0",
+            bd029Idx,
             viewModel.uiState.value.currentPageIndex
         )
-        composeTestRule.onNodeWithText("صفحه 4 از 5").assertIsDisplayed()
+        composeTestRule.onNodeWithText("صفحه ${bd029Idx + 1} از $total").assertIsDisplayed()
         composeTestRule.onNodeWithTag("diagram_card_BD-029").assertIsDisplayed()
     }
 
@@ -1298,6 +1311,8 @@ class ReaderPaginationRobolectricTest {
     ): Float {
         // Navigate to Section 0 (Opening -> BD-025 starting position with all 32 pieces)
         viewModel.selectSection(0)
+        val bd025Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" }
+        viewModel.goToPage(bd025Idx)
         composeTestRule.waitForIdle()
 
         // 1. Verify board container is strictly 1:1 square
@@ -1373,9 +1388,11 @@ class ReaderPaginationRobolectricTest {
         // Capture full-screen screenshot of the 32-piece board at this screen width
         saveReaderScreenshot(screenshotFileName)
 
-        // 7. Verify piece movement animation works at this screen width (Section 1, Page 4 -> BD-029 Scholar's Mate)
+        // 7. Verify piece movement animation works at this screen width (Section 1 -> BD-029 Scholar's Mate)
         viewModel.selectSection(1)
-        viewModel.goToPage(3)
+        composeTestRule.waitForIdle()
+        val bd029Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-029" }
+        viewModel.goToPage(bd029Idx)
         composeTestRule.waitForIdle()
 
         composeTestRule.mainClock.autoAdvance = false
@@ -1480,13 +1497,18 @@ class ReaderPaginationRobolectricTest {
 
         // 2. Measure piece symbol height at 370dp width
         viewModel.selectSection(0)
+        viewModel.goToPage(viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" })
         testWidthDp = 370.dp
+        composeTestRule.waitForIdle()
+        viewModel.goToPage(viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" })
         composeTestRule.waitForIdle()
         val pieceHeightAt370 = composeTestRule.onNodeWithTag("piece_symbol_e1", useUnmergedTree = true)
             .fetchSemanticsNode().boundsInRoot.height
 
         // 3. Measure piece symbol height at 310dp width
         testWidthDp = 310.dp
+        composeTestRule.waitForIdle()
+        viewModel.goToPage(viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" })
         composeTestRule.waitForIdle()
         val pieceHeightAt310 = composeTestRule.onNodeWithTag("piece_symbol_e1", useUnmergedTree = true)
             .fetchSemanticsNode().boundsInRoot.height
@@ -1519,8 +1541,10 @@ class ReaderPaginationRobolectricTest {
         }
         composeTestRule.waitForIdle()
 
-        // 1. Static diagram BD-025 (Section 0, Page 1): board must expand well beyond the old 215dp cap
+        // 1. Static diagram BD-025 (Section 0): board must expand well beyond the old 215dp cap
         viewModel.selectSection(0)
+        val bd025Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-025" }
+        viewModel.goToPage(bd025Idx)
         composeTestRule.waitForIdle()
         val staticBoardBounds = composeTestRule.onNodeWithTag("chessboard_container").fetchSemanticsNode().boundsInRoot
         val staticBoardDp = staticBoardBounds.width / density
@@ -1529,8 +1553,10 @@ class ReaderPaginationRobolectricTest {
             staticBoardDp > 300f
         )
 
-        // 2. Interactive exercise BD-032 (Section 3, Page 1): board must expand well beyond the old 200dp cap
+        // 2. Interactive exercise BD-032 (Section 3): board must expand well beyond the old 200dp cap
         viewModel.selectSection(3)
+        val bd032Idx = viewModel.uiState.value.currentPages.indexOfFirst { it.primaryDiagramId == "BD-032" }
+        viewModel.goToPage(bd032Idx)
         composeTestRule.waitForIdle()
         val bd032BoardBounds = composeTestRule.onNodeWithTag("chessboard_container").fetchSemanticsNode().boundsInRoot
         val bd032BoardDp = bd032BoardBounds.width / density

@@ -73,14 +73,15 @@ fun InteractiveExerciseView(
         ?: defaultExercisePromptFa(state.currentFen)
     val allowLegalMoveHints = definition?.allowLegalMoveHints ?: true
 
-    ElevatedCard(
+    Surface(
         modifier = modifier
             .fillMaxWidth()
             .testTag("interactive_exercise_card_$exerciseId"),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        color = Color.Transparent
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
+            modifier = Modifier.padding(horizontal = 0.dp, vertical = 2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(

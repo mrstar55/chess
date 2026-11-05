@@ -158,7 +158,9 @@ class UserPreferencesManager(context: Context) {
         val sectionId: String?,
         val sectionIndexFallback: Int,
         val pageIndex: Int,
-        val pageId: String?
+        val pageId: String?,
+        val sourcePdfPage: Int? = null,
+        val blockId: String? = null
     )
 
     fun saveReadingPosition(sectionIndex: Int, pageIndex: Int) {
@@ -180,17 +182,20 @@ class UserPreferencesManager(context: Context) {
         editor.apply()
     }
 
+    @JvmOverloads
     fun saveReadingPosition(
         bookId: String,
         chapterId: String,
         sectionId: String,
         sectionIndex: Int,
         pageIndex: Int,
-        pageId: String? = null
+        pageId: String? = null,
+        sourcePdfPage: Int? = null,
+        blockId: String? = null
     ) {
         val safeSecIdx = sectionIndex.coerceAtLeast(0)
         val safePageIdx = pageIndex.coerceAtLeast(0)
-        prefs.edit()
+        val editor = prefs.edit()
             .putString(KEY_ACTIVE_BOOK_ID, bookId)
             .putString(KEY_ACTIVE_CHAPTER_ID, chapterId)
             .putString(KEY_LAST_READ_SECTION_ID, sectionId)
@@ -201,7 +206,13 @@ class UserPreferencesManager(context: Context) {
             .putInt(chapterSectionIndexKey(chapterId), safeSecIdx)
             .putInt(chapterPageIndexKey(chapterId), safePageIdx)
             .putString(chapterPageIdKey(chapterId), pageId)
-            .apply()
+            .putString(chapterBlockIdKey(chapterId), blockId)
+        if (sourcePdfPage != null) {
+            editor.putInt(chapterSourcePdfPageKey(chapterId), sourcePdfPage)
+        } else {
+            editor.remove(chapterSourcePdfPageKey(chapterId))
+        }
+        editor.apply()
     }
 
     fun getSavedReadingPosition(
@@ -240,13 +251,22 @@ class UserPreferencesManager(context: Context) {
                 null
             }
 
+        val sourcePdfPage = if (prefs.contains(chapterSourcePdfPageKey(chapterId))) {
+            prefs.getInt(chapterSourcePdfPageKey(chapterId), 0).takeIf { it > 0 }
+        } else {
+            null
+        }
+        val blockId = prefs.getString(chapterBlockIdKey(chapterId), null)?.takeIf { it.isNotBlank() }
+
         return SavedReadingPosition(
             bookId = bookId,
             chapterId = chapterId,
             sectionId = sectionId,
             sectionIndexFallback = sectionIndexFallback,
             pageIndex = pageIndex,
-            pageId = pageId
+            pageId = pageId,
+            sourcePdfPage = sourcePdfPage,
+            blockId = blockId
         )
     }
 
@@ -579,6 +599,8 @@ class UserPreferencesManager(context: Context) {
     private fun chapterSectionIndexKey(chapterId: String): String = "key_last_read_section_idx_$chapterId"
     private fun chapterPageIndexKey(chapterId: String): String = "key_last_read_page_idx_$chapterId"
     private fun chapterPageIdKey(chapterId: String): String = "key_last_read_page_id_$chapterId"
+    private fun chapterSourcePdfPageKey(chapterId: String): String = "key_last_read_pdf_page_$chapterId"
+    private fun chapterBlockIdKey(chapterId: String): String = "key_last_read_block_id_$chapterId"
     private fun narrationSectionIdKey(bookId: String, chapterId: String): String =
         "key_narration_last_section_id_${bookId}_$chapterId"
     private fun narrationBlockIdKey(bookId: String, chapterId: String): String =

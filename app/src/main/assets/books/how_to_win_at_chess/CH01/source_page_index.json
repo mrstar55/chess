@@ -1,0 +1,635 @@
+{
+  "schemaVersion": 1,
+  "bookId": "how_to_win_at_chess",
+  "chapterId": "CH01",
+  "sourcePdfFile": "how-to-win-at-chess-by-levy-rozman-NB-003957.pdf",
+  "sourcePdfSha256": "461b30a603b6b1477ca36d8072eb8e463c4c23816686b34717bf8b6af1982ec0",
+  "sourcePdfTotalPages": 591,
+  "pageNumbering": "1-based physical PDF page index",
+  "pageBoundaryPolicy": "A content block may be split into app slices, but every slice remains attached to its exact sourcePdfPage. Content from different sourcePdfPage values must never be merged.",
+  "pages": [
+    {
+      "sourcePdfPage": 40,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 40,
+          "assetId": "PDFOBJ_P040_X890_01",
+          "xref": 890,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p040_xref890_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            130.349,
+            147.614,
+            135.603,
+            156.622
+          ],
+          "sha256": "f04e1f0bd98bdbbe20ee160c3d93212b095ce302b3ea30909d810afe4c34e0b0",
+          "byteLength": 3889
+        },
+        {
+          "sourcePdfPage": 40,
+          "assetId": "PDFOBJ_P040_X1097_01",
+          "xref": 1097,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p040_xref1097_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            172.386,
+            523.7,
+            620.536
+          ],
+          "sha256": "73382aa6fe5a70a5c1f07008848a78145023e7ccf596bf801b52c1bfdc381a91",
+          "byteLength": 53576
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_01_OPENING",
+        "SEC_CH01_02_CHECKMATE"
+      ],
+      "orderedBlockIds": [
+        "CH01_P040_B001",
+        "CH01_P040_B002",
+        "CH01_P040_B003",
+        "CH01_P040_D025",
+        "CH01_P040_B004",
+        "CH01_P040_B005",
+        "CH01_P040_B006",
+        "CH01_P040_B007"
+      ],
+      "diagramId": "BD-025",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P040_X1097_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 41,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 41,
+          "assetId": "PDFOBJ_P041_X1101_01",
+          "xref": 1101,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p041_xref1101_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            59.786,
+            523.7,
+            507.936
+          ],
+          "sha256": "cacdfe0e336b6baf25239efb024f4b23a9a2f02bcf62fae0b932a328931bd372",
+          "byteLength": 50796
+        },
+        {
+          "sourcePdfPage": 41,
+          "assetId": "PDFOBJ_P041_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p041_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            522.198,
+            36.515,
+            531.206
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        },
+        {
+          "sourcePdfPage": 41,
+          "assetId": "PDFOBJ_P041_X890_01",
+          "xref": 890,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p041_xref890_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            347.292,
+            654.317,
+            352.547,
+            664.075
+          ],
+          "sha256": "f04e1f0bd98bdbbe20ee160c3d93212b095ce302b3ea30909d810afe4c34e0b0",
+          "byteLength": 3889
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_02_CHECKMATE"
+      ],
+      "orderedBlockIds": [
+        "CH01_P041_B001",
+        "CH01_P041_D026",
+        "CH01_P041_B002",
+        "CH01_P041_B003",
+        "CH01_P041_B004"
+      ],
+      "diagramId": "BD-026",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P041_X1101_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 42,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 42,
+          "assetId": "PDFOBJ_P042_X1103_01",
+          "xref": 1103,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p042_xref1103_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            20.0,
+            523.7,
+            468.15
+          ],
+          "sha256": "6174ef9286dbcd323b5699b3485b52b6f20742f28c08580dcf446e0643b27271",
+          "byteLength": 51024
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_02_CHECKMATE"
+      ],
+      "orderedBlockIds": [
+        "CH01_P042_D027",
+        "CH01_P042_B001",
+        "CH01_P042_B002"
+      ],
+      "diagramId": "BD-027",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P042_X1103_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 43,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 43,
+          "assetId": "PDFOBJ_P043_X1105_01",
+          "xref": 1105,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p043_xref1105_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            20.0,
+            523.7,
+            468.15
+          ],
+          "sha256": "885c076f0dfb2cab880cfa84c78eef75d5f9a7128fda58c78307c25f9f5eb999",
+          "byteLength": 53003
+        },
+        {
+          "sourcePdfPage": 43,
+          "assetId": "PDFOBJ_P043_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p043_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            482.413,
+            36.515,
+            491.421
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_02_CHECKMATE"
+      ],
+      "orderedBlockIds": [
+        "CH01_P043_D028",
+        "CH01_P043_B001",
+        "CH01_P043_B002"
+      ],
+      "diagramId": "BD-028",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P043_X1105_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 44,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 44,
+          "assetId": "PDFOBJ_P044_X1107_01",
+          "xref": 1107,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p044_xref1107_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            20.0,
+            523.7,
+            468.15
+          ],
+          "sha256": "a0d5a5f961a1968bab22160ddc9eab9fbf534ccca1fbc032be20d605540cc019",
+          "byteLength": 52866
+        },
+        {
+          "sourcePdfPage": 44,
+          "assetId": "PDFOBJ_P044_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p044_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            482.413,
+            36.515,
+            491.421
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_02_CHECKMATE"
+      ],
+      "orderedBlockIds": [
+        "CH01_P044_D029",
+        "CH01_P044_B001"
+      ],
+      "diagramId": "BD-029",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P044_X1107_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 45,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 45,
+          "assetId": "PDFOBJ_P045_X1109_01",
+          "xref": 1109,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p045_xref1109_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            20.0,
+            523.7,
+            468.15
+          ],
+          "sha256": "c94dd274a051bc98521c02897d08e9c71394fda7d2b1162b5e83c99f23253a3c",
+          "byteLength": 53937
+        },
+        {
+          "sourcePdfPage": 45,
+          "assetId": "PDFOBJ_P045_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p045_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            482.413,
+            36.515,
+            491.421
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_02_CHECKMATE",
+        "SEC_CH01_03_RESIGNATION"
+      ],
+      "orderedBlockIds": [
+        "CH01_P045_D030",
+        "CH01_P045_B001",
+        "CH01_P045_B002",
+        "CH01_P045_B003",
+        "CH01_P045_B004",
+        "CH01_P045_B005",
+        "CH01_P045_B006"
+      ],
+      "diagramId": "BD-030",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P045_X1109_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 46,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 46,
+          "assetId": "PDFOBJ_P046_X1111_01",
+          "xref": 1111,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p046_xref1111_01.jpeg",
+          "format": "jpeg",
+          "width": 89,
+          "height": 94,
+          "visualRole": "FUN_FACT_ICON",
+          "bboxPdfPoints": [
+            65.04,
+            37.266,
+            80.804,
+            53.78
+          ],
+          "sha256": "588d25e596b4e4376cad3816ff335a8d6164d441bbc7f93dcbf49b10123a1d22",
+          "byteLength": 19418
+        },
+        {
+          "sourcePdfPage": 46,
+          "assetId": "PDFOBJ_P046_X1113_01",
+          "xref": 1113,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p046_xref1113_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            148.365,
+            523.7,
+            596.515
+          ],
+          "sha256": "606932d9625c30efb88385cc074484a3dc11a588d990fedc15c0126e7434dd91",
+          "byteLength": 49528
+        },
+        {
+          "sourcePdfPage": 46,
+          "assetId": "PDFOBJ_P046_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p046_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            610.778,
+            36.515,
+            619.786
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_03_RESIGNATION",
+        "SEC_CH01_04_TIMING_OUT"
+      ],
+      "orderedBlockIds": [
+        "CH01_P046_B001",
+        "CH01_P046_B002",
+        "CH01_P046_D031",
+        "CH01_P046_B003",
+        "CH01_P046_B004",
+        "CH01_P046_B005"
+      ],
+      "diagramId": "BD-031",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P046_X1113_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 47,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 47,
+          "assetId": "PDFOBJ_P047_X1115_01",
+          "xref": 1115,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p047_xref1115_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            133.351,
+            523.7,
+            581.501
+          ],
+          "sha256": "8f8c9abba57b17e75f08425562ba1c025389e95ea55c46ad2100d250d4e1ec27",
+          "byteLength": 51075
+        },
+        {
+          "sourcePdfPage": 47,
+          "assetId": "PDFOBJ_P047_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p047_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            595.764,
+            36.515,
+            604.772
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_04_TIMING_OUT"
+      ],
+      "orderedBlockIds": [
+        "CH01_P047_B001",
+        "CH01_P047_B002",
+        "CH01_P047_EX_BD032",
+        "CH01_P047_B003",
+        "CH01_P047_B004",
+        "CH01_P047_B005"
+      ],
+      "diagramId": "BD-032",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P047_X1115_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 48,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 48,
+          "assetId": "PDFOBJ_P048_X1118_01",
+          "xref": 1118,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p048_xref1118_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            20.0,
+            523.7,
+            468.15
+          ],
+          "sha256": "1e934e8b5e3d6dde19da8e8e602b5966fc5d3484829505e0caaea28ef8999fbf",
+          "byteLength": 50785
+        },
+        {
+          "sourcePdfPage": 48,
+          "assetId": "PDFOBJ_P048_X882_01",
+          "xref": 882,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p048_xref882_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            31.26,
+            482.413,
+            36.515,
+            491.421
+          ],
+          "sha256": "487c66a8530ab70b438a27071a3bb8a04ec562a4f8f41a4d57c32a9ad8a97396",
+          "byteLength": 3920
+        },
+        {
+          "sourcePdfPage": 48,
+          "assetId": "PDFOBJ_P048_X890_01",
+          "xref": 890,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p048_xref890_01.jpeg",
+          "format": "jpeg",
+          "width": 19,
+          "height": 33,
+          "visualRole": "PARAGRAPH_MARKER",
+          "bboxPdfPoints": [
+            423.861,
+            679.839,
+            429.115,
+            689.598
+          ],
+          "sha256": "f04e1f0bd98bdbbe20ee160c3d93212b095ce302b3ea30909d810afe4c34e0b0",
+          "byteLength": 3889
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_04_TIMING_OUT",
+        "SEC_CH01_05_ABANDONMENT"
+      ],
+      "orderedBlockIds": [
+        "CH01_P048_D033",
+        "CH01_P048_B001",
+        "CH01_P048_B002",
+        "CH01_P048_B003"
+      ],
+      "diagramId": "BD-033",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P048_X1118_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 49,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [
+        {
+          "sourcePdfPage": 49,
+          "assetId": "PDFOBJ_P049_X1121_01",
+          "xref": 1121,
+          "occurrence": 1,
+          "file": "assets/pdf_embedded_objects/pdf_p049_xref1121_01.jpeg",
+          "format": "jpeg",
+          "width": 1870,
+          "height": 1870,
+          "visualRole": "CHESS_DIAGRAM",
+          "bboxPdfPoints": [
+            76.3,
+            20.0,
+            523.7,
+            468.15
+          ],
+          "sha256": "1f09ecd6a9ee2a22d6181deaa2fd69990b51761b83980f5eea74bbbbe50ba55b",
+          "byteLength": 50900
+        }
+      ],
+      "sectionRefs": [
+        "SEC_CH01_05_ABANDONMENT"
+      ],
+      "orderedBlockIds": [
+        "CH01_P049_D034",
+        "CH01_P049_B001",
+        "CH01_P049_B002"
+      ],
+      "diagramId": "BD-034",
+      "primaryDiagramSourceAssetId": "PDFOBJ_P049_X1121_01",
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    },
+    {
+      "sourcePdfPage": 50,
+      "pageWidthPt": 594.96,
+      "pageHeightPt": 841.92,
+      "imagePlacements": [],
+      "sectionRefs": [
+        "SEC_CH01_06_SUMMARY"
+      ],
+      "orderedBlockIds": [
+        "CH01_P050_B001",
+        "CH01_P050_B002",
+        "CH01_P050_L001",
+        "CH01_P050_L002",
+        "CH01_P050_L003",
+        "CH01_P050_L004",
+        "CH01_P050_LINK001",
+        "CH01_P050_B003",
+        "CH01_P050_FN001"
+      ],
+      "diagramId": null,
+      "primaryDiagramSourceAssetId": null,
+      "translationCompleteness": "ALL_EXTRACTED_TEXT_BLOCKS_TRANSLATED_AND_MAPPED"
+    }
+  ]
+}

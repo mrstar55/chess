@@ -1,19 +1,47 @@
 {
   "schemaVersion": 1,
   "sectionId": "SEC_CH01_01_OPENING",
-  "placeholderNoticeFa": "محتوای این بخش در حال آماده‌سازی است.",
-  "translationStatus": "PENDING_TRANSLATION",
+  "translationStatus": "COMPLETE",
   "orderedContentBlocks": [
     {
+      "type": "heading",
+      "blockId": "CH01_P040_B001",
+      "textFa": "فصل اول",
+      "level": 1,
+      "sourceVisibleText": "CHAPTER ONE",
+      "sourcePdfPage": 40
+    },
+    {
+      "type": "heading",
+      "blockId": "CH01_P040_B002",
+      "textFa": "چگونه واقعاً در شطرنج برنده شویم",
+      "level": 1,
+      "sourceVisibleText": "HOW TO (LITERALLY) WIN AT CHESS",
+      "sourcePdfPage": 40
+    },
+    {
       "type": "paragraph",
-      "blockId": "SEC_CH01_01_OPENING_P001",
-      "textFa": null,
-      "showPlaceholderWhenEmpty": true
+      "blockId": "CH01_P040_B003",
+      "textFa": "تصمیم گرفتم بهترین راه برای آغاز کتابی با عنوان «چگونه در شطرنج برنده شویم» این باشد که فصلی را به توضیح دقیق معنای واقعیِ بردن یک بازی شطرنج و چگونگی رسیدن به آن اختصاص بدهم. همان‌طور که تا اینجا می‌دانید، وضعیت آغازین هر بازی شطرنج به این شکل است:",
+      "sourcePdfPage": 40
     },
     {
       "type": "diagram",
-      "blockId": "SEC_CH01_01_OPENING_D025",
-      "diagramId": "BD-025"
+      "blockId": "CH01_P040_D025",
+      "diagramId": "BD-025",
+      "sourcePdfPage": 40
+    },
+    {
+      "type": "paragraph",
+      "blockId": "CH01_P040_B004",
+      "textFa": "هر طرف شانزده مهره دارد. بسیاری از آن‌ها به شکل‌های متفاوتی حرکت می‌کنند و قوانین حرکتشان نیز با یکدیگر فرق دارد. خانه گوشه پایینِ سمت چپ باید تیره باشد و همه مهره‌ها باید با تقارن کامل چیده شوند. حالا دو طرف آماده‌اند تا نبرد را آغاز کنند.",
+      "sourcePdfPage": 40
+    },
+    {
+      "type": "paragraph",
+      "blockId": "CH01_P040_B005",
+      "textFa": "شاید نمی‌دانستید که بهتر است یادگیری شطرنج را با کمترین تعداد مهره ممکن آغاز کنید. اگر بازی را با هر سی‌ودو مهره روی صفحه شروع کنیم، ممکن است خیلی زود گیج‌کننده شود؛ زیرا روبه‌رو شدن با اطلاعات بیش از اندازه از همان ابتدا می‌تواند طاقت‌فرسا باشد. راه بهتر این است که ابتدا ببینیم بردن یک بازی شطرنج به چه معناست و چگونه می‌توان به آن رسید. بالاخره نام این کتاب همین است و در نهایت هم چیزی که برایمان اهمیت دارد همین است، درست است؟",
+      "sourcePdfPage": 40
     }
   ]
 }

@@ -101,11 +101,10 @@ class ContentArchitectureVersion18Test {
         val validation = repo.validateChapterPack("CH01")
         assertTrue("CH01 pack validation must pass: ${validation.errorMessages}", validation.isValid)
 
-        // 6: BD-027 remains BLOCKED_NEEDS_HUMAN_REVIEW from JSON metadata
+        // 6: BD-027 is VALID with corrected FEN 7k/6B1/6KN/8/8/8/8/8 b - - 0 1
         val bd027 = diagrams.first { it.diagramId == "BD-027" }
-        assertEquals(AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW, bd027.auditStatus)
-        assertNotNull(bd027.auditWarning)
-        assertTrue(bd027.auditWarning!!.contains("g8"))
+        assertEquals(AuditStatus.VALID, bd027.auditStatus)
+        assertEquals("7k/6B1/6KN/8/8/8/8/8 b - - 0 1", bd027.initialFen)
     }
 
     @Test
@@ -149,8 +148,8 @@ class ContentArchitectureVersion18Test {
             diagrams = diagrams,
             fontScale = FontSizeScale.NORMAL
         )
-        assertEquals(1, summaryPages.size)
-        assertEquals(ReaderPageType.SUMMARY, summaryPages.first().pageType)
+        assertTrue(summaryPages.isNotEmpty())
+        assertTrue(summaryPages.all { it.pageType == ReaderPageType.SUMMARY && it.sourcePdfPage == 50 })
 
         // 9: Narration manifest loads from CH01 narration pack with all 6 declared sections via ChapterViewModel
         val narrationManager = viewModel.narrationManager

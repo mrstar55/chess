@@ -120,7 +120,9 @@ data class SectionManifestEntry(
     val titleEn: String,
     val titleFa: String,
     val pdfPages: List<Int>,
-    val contentFile: String
+    val contentFile: String,
+    val sharedStartPageWithPreviousSection: Boolean = false,
+    val sharedEndPageWithNextSection: Boolean = false
 )
 
 data class ChapterManifest(
@@ -134,7 +136,10 @@ data class ChapterManifest(
     val pgnFile: String,
     val exercisesFile: String,
     val narrationManifest: String,
-    val sections: List<SectionManifestEntry>
+    val sections: List<SectionManifestEntry>,
+    val sourcePdfPageStart: Int? = null,
+    val sourcePdfPageEnd: Int? = null,
+    val sourcePageIndexFile: String? = null
 )
 
 /**
@@ -224,7 +229,8 @@ sealed class SectionContentBlock {
         override val sourcePdfPage: Int? = null,
         val sourceVisibleText: String? = null,
         val sourceUrl: String? = null,
-        val sourcePageReferences: List<Int> = emptyList()
+        val sourcePageReferences: List<Int> = emptyList(),
+        val inlineSourceAssets: List<ChapterImagePlacement> = emptyList()
     ) : SectionContentBlock()
 
     data class HeadingBlock(
@@ -236,7 +242,8 @@ sealed class SectionContentBlock {
         val sourceVisibleText: String? = null,
         val tocTargetSourcePdfPage: Int? = null,
         val tocEntryKind: String? = null,
-        val chapterId: String? = null
+        val chapterId: String? = null,
+        val inlineSourceAssets: List<ChapterImagePlacement> = emptyList()
     ) : SectionContentBlock()
 
     data class DiagramBlock(
@@ -256,7 +263,8 @@ sealed class SectionContentBlock {
         override val blockId: String,
         val textFa: String? = null,
         val showPlaceholderWhenEmpty: Boolean = false,
-        override val sourcePdfPage: Int? = null
+        override val sourcePdfPage: Int? = null,
+        val sourcePageReferences: List<Int> = emptyList()
     ) : SectionContentBlock()
 
     data class ExternalReferenceBlock(
@@ -639,7 +647,9 @@ data class SectionItem(
     val pdfPages: List<Int>,
     val diagramIds: List<String>,
     val translationSlot: TranslationSlot,
-    val sectionKind: SectionKind = SectionKind.fromSectionMetadata(sectionId, titleEn, titleFa)
+    val sectionKind: SectionKind = SectionKind.fromSectionMetadata(sectionId, titleEn, titleFa),
+    val sharedStartPageWithPreviousSection: Boolean = false,
+    val sharedEndPageWithNextSection: Boolean = false
 )
 
 data class DiagramItem(
@@ -660,5 +670,90 @@ data class DiagramItem(
     val visualConfidence: String,
     val implementationNotes: String,
     val auditStatus: AuditStatus,
-    val auditWarning: String? = null
+    val auditWarning: String? = null,
+    val digitalReconstructionNoteFa: String? = null,
+    val sourceImageAssetId: String? = null,
+    val sourceImageFile: String? = null
 )
+
+enum class ChapterImageVisualRole {
+    CHESS_DIAGRAM,
+    FUN_FACT_ICON,
+    PARAGRAPH_MARKER,
+    ILLUSTRATION;
+
+    companion object {
+        fun fromString(raw: String?): ChapterImageVisualRole = when (raw?.trim()?.uppercase()) {
+            "CHESS_DIAGRAM" -> CHESS_DIAGRAM
+            "FUN_FACT_ICON" -> FUN_FACT_ICON
+            "PARAGRAPH_MARKER" -> PARAGRAPH_MARKER
+            else -> ILLUSTRATION
+        }
+    }
+}
+
+data class ChapterImagePlacement(
+    val assetId: String,
+    val sourcePdfPage: Int = 0,
+    val file: String,
+    val resolvedAssetPath: String,
+    val xref: Int = 0,
+    val width: Int = 0,
+    val height: Int = 0,
+    val bboxPt: List<Double> = emptyList(),
+    val visualRole: ChapterImageVisualRole = ChapterImageVisualRole.ILLUSTRATION,
+    val mappedDiagramId: String? = null,
+    val sha256: String = ""
+)
+
+data class ChapterSourcePageDiagramRef(
+    val diagramId: String,
+    val blockId: String,
+    val fen: String,
+    val interaction: String,
+    val auditStatus: AuditStatus,
+    val sourceImageAssetId: String? = null,
+    val sourceImageFile: String? = null,
+    val resolvedSourceImagePath: String? = null
+)
+
+data class ChapterSourcePageEntry(
+    val sourcePdfPage: Int,
+    val sectionIds: List<String>,
+    val orderedBlockIds: List<String>,
+    val diagrams: List<ChapterSourcePageDiagramRef> = emptyList(),
+    val imagePlacements: List<ChapterImagePlacement> = emptyList(),
+    val diagramId: String? = null,
+    val primaryDiagramSourceAssetId: String? = null,
+    val pageWidthPt: Double = 594.96,
+    val pageHeightPt: Double = 841.92,
+    val translationCompleteness: String = ""
+) {
+    val sectionRefs: List<String>
+        get() = sectionIds
+
+    val isSharedAcrossSections: Boolean
+        get() = sectionIds.size > 1
+}
+
+data class ChapterSourcePageIndex(
+    val schemaVersion: Int = 1,
+    val bookId: String,
+    val chapterId: String,
+    val chapterNumber: Int = 1,
+    val sourcePdfPageStart: Int,
+    val sourcePdfPageEnd: Int,
+    val pages: List<ChapterSourcePageEntry>,
+    val sourceAssetsById: Map<String, FrontMatterSourceAsset> = emptyMap(),
+    val imagePlacementsByPage: Map<Int, List<ChapterImagePlacement>> = emptyMap()
+) {
+    private val pagesByPdfNumber: Map<Int, ChapterSourcePageEntry> =
+        pages.associateBy { it.sourcePdfPage }
+
+    fun entryForPage(sourcePdfPage: Int): ChapterSourcePageEntry? =
+        pagesByPdfNumber[sourcePdfPage]
+
+    val allSourcePdfPages: List<Int>
+        get() = pages.map { it.sourcePdfPage }.sorted()
+}
+

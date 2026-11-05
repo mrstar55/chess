@@ -22,6 +22,7 @@ import com.example.data.UserPreferencesManager
 import com.example.model.BoardTransition
 import com.example.model.BoardTransitionResolver
 import com.example.model.ChapterCatalogEntry
+import com.example.model.ChapterSourcePageIndex
 import com.example.model.DiagramItem
 import com.example.model.ExerciseDefinition
 import com.example.model.ExercisePhase
@@ -67,6 +68,8 @@ data class ChapterUiState(
     val frontMatterEntry: FrontMatterCatalogEntry? = null,
     val frontMatterPack: FrontMatterContentPack? = null,
     val frontMatterPages: List<ReaderPage> = emptyList(),
+    val chapterSourcePageIndex: ChapterSourcePageIndex? = null,
+    val activeSourcePdfPageFilter: Int? = null,
     val lastReadFrontMatterSourcePdfPage: Int = 1,
     val lastReadFrontMatterPageIndex: Int = 0,
     val lastNavigationNoticeFa: String? = null,
@@ -154,7 +157,8 @@ data class PgnReplayerState(
     val activeTransition: BoardTransition? = null,
     val activeMoveTrail: MoveTrailState? = null,
     val lastMoveDescriptionFa: String? = null,
-    val isTransitioning: Boolean = false
+    val isTransitioning: Boolean = false,
+    val hasUserStartedReplay: Boolean = false
 ) {
     val canGoPrevious: Boolean
         get() = currentStep > 0
@@ -168,7 +172,7 @@ class ChapterViewModel @JvmOverloads constructor(
     customRepository: ChapterRepository? = null
 ) : AndroidViewModel(application) {
 
-    private val repository = customRepository ?: ChapterRepository(application)
+    val repository = customRepository ?: ChapterRepository(application)
     private val prefs = UserPreferencesManager(application)
     val soundManager = ChessSoundManager(application)
     val narrationManager = BookNarrationManager(application, prefs)
@@ -238,6 +242,9 @@ class ChapterViewModel @JvmOverloads constructor(
         val exercises = repository.getExercises(chapterId = chapterId, bookId = bookId)
         val frontMatterEntry = repository.getFrontMatterCatalogEntry(bookId = bookId)
         val frontMatterPack = runCatching { repository.getFrontMatterContentPack(bookId = bookId) }.getOrNull()
+        val chapterSourcePageIndex = runCatching {
+            repository.getChapterSourcePageIndex(chapterId = chapterId, bookId = bookId)
+        }.getOrNull()
 
         loadedPgnSequences = pgnSequences
 
@@ -283,21 +290,52 @@ class ChapterViewModel @JvmOverloads constructor(
                 ?: savedFmPos.pageIndex.coerceIn(0, (frontMatterPages.size - 1).coerceAtLeast(0))
         }
 
-        val initialPages = sections.getOrNull(savedSection)?.let { section ->
-            ReaderPaginator.paginateSection(
-                section = section,
+        val restoredSourcePageEntry = if (
+            savedPos.pageId?.startsWith("PDF_P") == true &&
+            savedPos.sourcePdfPage != null
+        ) {
+            chapterSourcePageIndex?.entryForPage(savedPos.sourcePdfPage)
+        } else {
+            null
+        }
+
+        val initialPages = if (restoredSourcePageEntry != null && sections.isNotEmpty()) {
+            ReaderPaginator.paginateChapterSourcePdfPage(
+                pageEntry = restoredSourcePageEntry,
+                sections = sections,
                 diagrams = diagrams,
                 fontScale = fontScale,
                 viewportWidthDp = vpWidth,
                 viewportHeightDp = vpHeight
             )
-        } ?: emptyList()
-
-        val savedPage = if (!savedPos.pageId.isNullOrBlank()) {
-            val byPageId = initialPages.indexOfFirst { it.pageId == savedPos.pageId }
-            if (byPageId >= 0) byPageId else savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
         } else {
-            savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+            sections.getOrNull(savedSection)?.let { section ->
+                ReaderPaginator.paginateSection(
+                    section = section,
+                    diagrams = diagrams,
+                    fontScale = fontScale,
+                    viewportWidthDp = vpWidth,
+                    viewportHeightDp = vpHeight
+                )
+            } ?: emptyList()
+        }
+
+        val savedPage = when {
+            !savedPos.pageId.isNullOrBlank() -> {
+                val byPageId = initialPages.indexOfFirst { it.pageId == savedPos.pageId }
+                if (byPageId >= 0) byPageId else savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+            }
+            !savedPos.blockId.isNullOrBlank() -> {
+                val byBlockId = initialPages.indexOfFirst { page ->
+                    page.orderedBlocks.any { ReaderPaginator.originalBlockId(it.blockId) == savedPos.blockId }
+                }
+                if (byBlockId >= 0) byBlockId else savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+            }
+            savedPos.sourcePdfPage != null -> {
+                val byPdfPage = initialPages.indexOfFirst { it.sourcePdfPage == savedPos.sourcePdfPage }
+                if (byPdfPage >= 0) byPdfPage else savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
+            }
+            else -> savedPos.pageIndex.coerceIn(0, (initialPages.size - 1).coerceAtLeast(0))
         }
 
         replayers.clear()
@@ -320,7 +358,8 @@ class ChapterViewModel @JvmOverloads constructor(
                         activeTransition = null,
                         activeMoveTrail = null,
                         lastMoveDescriptionFa = null,
-                        isTransitioning = false
+                        isTransitioning = false,
+                        hasUserStartedReplay = false
                     )
                 }
             }
@@ -363,6 +402,8 @@ class ChapterViewModel @JvmOverloads constructor(
                 frontMatterEntry = frontMatterEntry,
                 frontMatterPack = frontMatterPack,
                 frontMatterPages = frontMatterPages,
+                chapterSourcePageIndex = chapterSourcePageIndex,
+                activeSourcePdfPageFilter = restoredSourcePageEntry?.sourcePdfPage,
                 lastReadFrontMatterSourcePdfPage = savedFmPos.sourcePdfPage,
                 lastReadFrontMatterPageIndex = savedFmPageIdx,
                 sections = sections,
@@ -392,8 +433,21 @@ class ChapterViewModel @JvmOverloads constructor(
     ) {
         val safeSecIdx = sectionIndex.coerceIn(0, (state.sections.size - 1).coerceAtLeast(0))
         val safePageIdx = pageIndex.coerceIn(0, (pages.size - 1).coerceAtLeast(0))
-        val secId = state.sections.getOrNull(safeSecIdx)?.sectionId
-        val pageId = pages.getOrNull(safePageIdx)?.pageId
+        val currentPage = pages.getOrNull(safePageIdx)
+        val firstBlock = currentPage?.orderedBlocks?.firstOrNull()
+        val firstBlockId = firstBlock?.blockId?.let { ReaderPaginator.originalBlockId(it) }
+        val blockOwnerSectionId = if (firstBlockId != null) {
+            state.sections.firstOrNull { sec ->
+                sec.translationSlot.orderedContentBlocks.any { it.blockId == firstBlockId }
+            }?.sectionId
+        } else {
+            null
+        }
+        val secId = blockOwnerSectionId
+            ?: currentPage?.sectionId?.takeIf { it.isNotBlank() }
+            ?: state.sections.getOrNull(safeSecIdx)?.sectionId
+        val pageId = currentPage?.pageId
+        val sourcePdfPage = currentPage?.sourcePdfPage
         if (!secId.isNullOrBlank()) {
             prefs.saveReadingPosition(
                 bookId = state.activeBookId,
@@ -401,7 +455,9 @@ class ChapterViewModel @JvmOverloads constructor(
                 sectionId = secId,
                 sectionIndex = safeSecIdx,
                 pageIndex = safePageIdx,
-                pageId = pageId
+                pageId = pageId,
+                sourcePdfPage = sourcePdfPage,
+                blockId = firstBlockId
             )
         } else {
             prefs.saveReadingPosition(sectionIndex = safeSecIdx, pageIndex = safePageIdx)
@@ -510,7 +566,8 @@ class ChapterViewModel @JvmOverloads constructor(
     /**
      * Navigates directly to a 1-based physical [targetSourcePdfPage] across the book:
      * - Pages 1..39: opens Front Matter (`FRONT_MATTER`) at the first slice of [targetSourcePdfPage].
-     * - Pages 40..50: opens Chapter 1 (`CH01`) at the section/page corresponding to [targetSourcePdfPage].
+     * - Pages 40..50: uses `source_page_index.json` (`orderedBlockIds` and `sectionRefs`) to open
+     *   the exact physical PDF page in Chapter 1 (`CH01`) without merging adjacent PDF pages.
      * - Pages > 50 (future chapters): sets a clear Persian notice without breaking current state.
      */
     @JvmOverloads
@@ -520,8 +577,69 @@ class ChapterViewModel @JvmOverloads constructor(
             return true
         }
         val state = _uiState.value
+        val sourcePageIndex = state.chapterSourcePageIndex ?: runCatching {
+            repository.getChapterSourcePageIndex(
+                chapterId = chapterIdHint?.takeIf { it.isNotBlank() } ?: state.activeChapterId,
+                bookId = state.activeBookId
+            )
+        }.getOrNull()
+
+        val pageEntry = sourcePageIndex?.entryForPage(targetSourcePdfPage)
+        if (pageEntry != null && state.sections.isNotEmpty()) {
+            _uiState.update { st ->
+                val primarySecId = pageEntry.sectionIds.firstOrNull()
+                val matchingSectionIdx = st.sections.indexOfFirst { it.sectionId == primarySecId }
+                    .takeIf { it >= 0 }
+                    ?: st.sections.indexOfFirst { targetSourcePdfPage in it.pdfPages }
+                        .takeIf { it >= 0 }
+                    ?: 0
+                val pages = ReaderPaginator.paginateChapterSourcePdfPage(
+                    pageEntry = pageEntry,
+                    sections = st.sections,
+                    diagrams = st.diagrams,
+                    fontScale = st.fontScale,
+                    viewportWidthDp = st.viewportWidthDp,
+                    viewportHeightDp = st.viewportHeightDp
+                )
+                val targetPageIdx = 0
+                saveCurrentReadingPosition(st, matchingSectionIdx, targetPageIdx, pages)
+                val clearedPgnStates = st.pgnStates.mapValues { (_, pgn) ->
+                    pgn.copy(
+                        activeTransition = null,
+                        activeMoveTrail = null,
+                        lastMoveDescriptionFa = null,
+                        isTransitioning = false,
+                        hasUserStartedReplay = false
+                    )
+                }
+                val clearedExStates = st.exerciseStates.mapValues { (_, ex) ->
+                    ex.copy(
+                        activeTransition = null,
+                        activeMoveTrail = null,
+                        lastMoveDescriptionFa = null
+                    )
+                }
+                st.copy(
+                    activeContentRegionId = st.activeChapterId,
+                    chapterSourcePageIndex = sourcePageIndex,
+                    activeSourcePdfPageFilter = targetSourcePdfPage,
+                    currentSectionIndex = matchingSectionIdx,
+                    currentPages = pages,
+                    currentPageIndex = targetPageIdx,
+                    lastNavigationNoticeFa = null,
+                    currentTab = AppTab.READER,
+                    pgnStates = clearedPgnStates,
+                    exerciseStates = clearedExStates
+                )
+            }
+            val updated = _uiState.value
+            narrationManager.onManualPageOrSectionChanged(updated.sections, updated.currentPage)
+            return true
+        }
+
         val matchingSectionIdx = state.sections.indexOfFirst { section ->
-            targetSourcePdfPage in section.pdfPages
+            targetSourcePdfPage in section.pdfPages ||
+                section.translationSlot.orderedContentBlocks.any { it.sourcePdfPage == targetSourcePdfPage }
         }.takeIf { it >= 0 } ?: if (targetSourcePdfPage == 40 || chapterIdHint == "CH01") 0 else -1
 
         if (matchingSectionIdx >= 0) {
@@ -539,6 +657,7 @@ class ChapterViewModel @JvmOverloads constructor(
                 saveCurrentReadingPosition(st, matchingSectionIdx, targetPageIdx, pages)
                 st.copy(
                     activeContentRegionId = st.activeChapterId,
+                    activeSourcePdfPageFilter = null,
                     currentSectionIndex = matchingSectionIdx,
                     currentPages = pages,
                     currentPageIndex = targetPageIdx,
@@ -553,7 +672,7 @@ class ChapterViewModel @JvmOverloads constructor(
 
         _uiState.update { st ->
             st.copy(
-                lastNavigationNoticeFa = "صفحه PDF شماره ${ReaderPaginator.toPersianDigits(targetSourcePdfPage)} مربوط به فصل‌های بعدی کتاب است که در بسته‌های محتوایی آتی بارگذاری می‌شود."
+                lastNavigationNoticeFa = "محتوا در حال آماده‌سازی — صفحه PDF شماره ${ReaderPaginator.toPersianDigits(targetSourcePdfPage)} مربوط به فصل‌های بعدی کتاب است که در بسته‌های محتوایی آتی بارگذاری می‌شود."
             )
         }
         return false
@@ -625,7 +744,8 @@ class ChapterViewModel @JvmOverloads constructor(
                     activeTransition = null,
                     activeMoveTrail = null,
                     lastMoveDescriptionFa = null,
-                    isTransitioning = false
+                    isTransitioning = false,
+                    hasUserStartedReplay = false
                 )
             }
             val clearedExStates = state.exerciseStates.mapValues { (_, ex) ->
@@ -637,6 +757,7 @@ class ChapterViewModel @JvmOverloads constructor(
             }
             state.copy(
                 activeContentRegionId = state.activeChapterId,
+                activeSourcePdfPageFilter = null,
                 currentSectionIndex = target,
                 currentPages = pages,
                 currentPageIndex = 0,
@@ -679,7 +800,8 @@ class ChapterViewModel @JvmOverloads constructor(
                     activeTransition = null,
                     activeMoveTrail = null,
                     lastMoveDescriptionFa = null,
-                    isTransitioning = false
+                    isTransitioning = false,
+                    hasUserStartedReplay = false
                 )
             }
             val clearedExStates = state.exerciseStates.mapValues { (_, ex) ->
@@ -756,7 +878,8 @@ class ChapterViewModel @JvmOverloads constructor(
                         activeTransition = null,
                         activeMoveTrail = null,
                         lastMoveDescriptionFa = null,
-                        isTransitioning = false
+                        isTransitioning = false,
+                        hasUserStartedReplay = false
                     )
                 }
             } else {
@@ -829,6 +952,13 @@ class ChapterViewModel @JvmOverloads constructor(
             selectSection(0)
             return true
         }
+        val activePdfFilter = state.activeSourcePdfPageFilter
+        if (activePdfFilter != null) {
+            val nextEntry = state.chapterSourcePageIndex?.entryForPage(activePdfFilter + 1)
+            if (nextEntry != null) {
+                return navigateToSourcePdfPage(activePdfFilter + 1)
+            }
+        }
         return false
     }
 
@@ -837,6 +967,13 @@ class ChapterViewModel @JvmOverloads constructor(
         if (state.currentPageIndex > 0) {
             goToPage(state.currentPageIndex - 1)
             return true
+        }
+        val activePdfFilter = state.activeSourcePdfPageFilter
+        if (activePdfFilter != null) {
+            val prevEntry = state.chapterSourcePageIndex?.entryForPage(activePdfFilter - 1)
+            if (prevEntry != null) {
+                return navigateToSourcePdfPage(activePdfFilter - 1)
+            }
         }
         return false
     }
@@ -994,8 +1131,19 @@ class ChapterViewModel @JvmOverloads constructor(
                     lastReadFrontMatterPageIndex = mappedFmIndex
                 )
             } else {
+                val activePdfFilter = state.activeSourcePdfPageFilter
+                val filterEntry = activePdfFilter?.let { state.chapterSourcePageIndex?.entryForPage(it) }
                 val currentSection = state.sections.getOrNull(state.currentSectionIndex)
-                val newPages = if (currentSection != null) {
+                val newPages = if (filterEntry != null && state.sections.isNotEmpty()) {
+                    ReaderPaginator.paginateChapterSourcePdfPage(
+                        pageEntry = filterEntry,
+                        sections = state.sections,
+                        diagrams = state.diagrams,
+                        fontScale = scale,
+                        viewportWidthDp = state.viewportWidthDp,
+                        viewportHeightDp = state.viewportHeightDp
+                    )
+                } else if (currentSection != null) {
                     ReaderPaginator.paginateSection(
                         section = currentSection,
                         diagrams = state.diagrams,
@@ -1060,8 +1208,19 @@ class ChapterViewModel @JvmOverloads constructor(
                     lastReadFrontMatterPageIndex = mappedFmIndex
                 )
             } else {
+                val activePdfFilter = state.activeSourcePdfPageFilter
+                val filterEntry = activePdfFilter?.let { state.chapterSourcePageIndex?.entryForPage(it) }
                 val currentSection = state.sections.getOrNull(state.currentSectionIndex)
-                val newPages = if (currentSection != null) {
+                val newPages = if (filterEntry != null && state.sections.isNotEmpty()) {
+                    ReaderPaginator.paginateChapterSourcePdfPage(
+                        pageEntry = filterEntry,
+                        sections = state.sections,
+                        diagrams = state.diagrams,
+                        fontScale = state.fontScale,
+                        viewportWidthDp = clampedWidth,
+                        viewportHeightDp = clampedHeight
+                    )
+                } else if (currentSection != null) {
                     ReaderPaginator.paginateSection(
                         section = currentSection,
                         diagrams = state.diagrams,
@@ -1242,7 +1401,8 @@ class ChapterViewModel @JvmOverloads constructor(
         replayer: PgnReplayer,
         transition: BoardTransition?,
         moveTrail: MoveTrailState? = null,
-        lastMoveDescriptionFa: String? = null
+        lastMoveDescriptionFa: String? = null,
+        hasUserStartedReplay: Boolean = true
     ) {
         _uiState.update { state ->
             val updatedMap = state.pgnStates.toMutableMap()
@@ -1257,7 +1417,8 @@ class ChapterViewModel @JvmOverloads constructor(
                 activeTransition = transition,
                 activeMoveTrail = moveTrail,
                 lastMoveDescriptionFa = lastMoveDescriptionFa,
-                isTransitioning = transition != null
+                isTransitioning = transition != null,
+                hasUserStartedReplay = hasUserStartedReplay
             )
             state.copy(pgnStates = updatedMap)
         }

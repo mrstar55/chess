@@ -1,0 +1,175 @@
+Reusing configuration cache.
+> Task :app:generateDebugAssets UP-TO-DATE
+
+> Task :app:validateContentPacks
+[validateContentPacks] All book content packs in assets/books/ validated successfully.
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:preDebugUnitTestBuild
+> Task :app:javaPreCompileDebug
+> Task :app:generateDebugResources
+> Task :app:generateDebugBuildConfig
+> Task :app:kspDebugKotlin SKIPPED
+> Task :app:mapDebugSourceSetPaths
+> Task :app:checkDebugAarMetadata
+> Task :app:processDebugNavigationResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:compileDebugNavigationResources
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeDebugAssets
+> Task :app:packageDebugResources
+> Task :app:processDebugUnitTestManifest
+> Task :app:parseDebugLocalResources
+> Task :app:generateDebugRFile
+> Task :app:mergeDebugResources
+> Task :app:processDebugResources
+> Task :app:packageDebugUnitTestForUnitTest
+> Task :app:generateDebugUnitTestConfig
+> Task :app:compileDebugKotlin
+w: file:///app/applet/app/src/main/java/com/example/audio/ChessSoundManager.kt:20:5 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+
+> Task :app:processDebugJavaRes
+> Task :app:compileDebugJavaWithJavac
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:kspDebugUnitTestKotlin SKIPPED
+
+> Task :app:compileDebugUnitTestKotlin
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:311:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:312:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:313:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:314:33 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:315:23 'fun onBd032TransitionFinished(transitionId: String): Unit' is deprecated. Use onExerciseTransitionFinished(exerciseId, transitionId) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:317:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:318:54 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:321:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:322:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:323:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:324:33 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:325:23 'fun onBd032TransitionFinished(transitionId: String): Unit' is deprecated. Use onExerciseTransitionFinished(exerciseId, transitionId) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:327:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:328:54 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:338:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:341:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:342:76 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:345:37 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:349:37 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:353:19 'fun toggleBd032LegalMovesHint(): Unit' is deprecated. Use toggleExerciseLegalMovesHint(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:356:37 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt:360:37 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:26:8 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:120:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:121:22 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:121:81 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:122:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:123:46 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:125:23 'fun onBd032TransitionFinished(transitionId: String): Unit' is deprecated. Use onExerciseTransitionFinished(exerciseId, transitionId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:127:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:128:54 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:132:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:133:45 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:134:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:135:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:136:46 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:138:23 'fun onBd032TransitionFinished(transitionId: String): Unit' is deprecated. Use onExerciseTransitionFinished(exerciseId, transitionId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:140:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:141:54 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:495:13 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:596:22 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:599:22 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ContentArchitectureVersion18Test.kt:633:22 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:132:46 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:141:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:142:53 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:149:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:150:59 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:154:37 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:157:19 'fun onBd032TransitionFinished(transitionId: String): Unit' is deprecated. Use onExerciseTransitionFinished(exerciseId, transitionId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:158:55 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:159:37 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:164:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:165:59 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:168:19 'fun retryBd032(): Unit' is deprecated. Use retryExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:169:58 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:170:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:171:45 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:174:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:175:52 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:176:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:178:51 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:186:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:187:57 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:188:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:198:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:199:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:200:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:204:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:205:86 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:212:46 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:311:110 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:369:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1478:95 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1616:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1617:52 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1618:90 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1621:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1622:87 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1623:52 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1626:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1627:50 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1634:19 'fun retryBd032(): Unit' is deprecated. Use retryExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1637:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1638:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1639:51 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1646:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1647:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:1648:45 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2279:52 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2280:45 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2281:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2286:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2287:115 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2293:57 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2307:62 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2308:37 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2325:55 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2338:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2339:37 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:2339:88 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3257:103 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3370:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3371:100 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3372:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3373:95 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3374:19 'fun onBd032SquareClicked(file: Int, rank: Int): Unit' is deprecated. Use onExerciseSquareClicked(exerciseId, file, rank) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3375:88 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3376:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3377:91 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3532:23 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3534:23 'fun retryBd032(): Unit' is deprecated. Use retryExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3545:48 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3567:51 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3573:48 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3584:41 'typealias Bd032ExercisePhase = ExercisePhase' is deprecated. Use ExercisePhase from com.example.model instead.
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3584:102 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3596:48 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ExampleRobolectricTest.kt:3604:48 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+w: file:///app/applet/app/src/test/java/com/example/ReaderPaginationRobolectricTest.kt:744:19 'fun resetBd032(): Unit' is deprecated. Use resetExercise(exerciseId) instead.
+w: file:///app/applet/app/src/test/java/com/example/ReaderPaginationRobolectricTest.kt:768:44 'val bd032State: ExerciseUiState' is deprecated. Legacy test compatibility accessor; active code must use exerciseStates[exerciseId] or exerciseStateFor(exerciseId).
+
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 3m 9s
+31 actionable tasks: 31 executed
+Configuration cache entry reused.

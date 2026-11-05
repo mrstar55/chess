@@ -77,7 +77,9 @@ fun ChessAppMain(viewModel: ChapterViewModel = viewModel()) {
             onSelectChapter = { viewModel.selectChapter(it) },
             onBackToIntroduction = { viewModel.openIntroduction() },
             onStartFrontMatter = { viewModel.openFrontMatter(it) },
-            onResumeFrontMatter = { viewModel.resumeFrontMatter() }
+            onResumeFrontMatter = { viewModel.resumeFrontMatter() },
+            onNavigateToPdfPage = { pdfPage, chapterId -> viewModel.navigateToSourcePdfPage(pdfPage, chapterId) },
+            onDismissNavigationNotice = { viewModel.dismissNavigationNotice() }
         )
         AppTab.SECTIONS_LIST -> SectionsListScreen(viewModel = viewModel, state = state)
         AppTab.READER -> ReaderScreen(viewModel = viewModel, state = state)

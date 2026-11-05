@@ -1,61 +1,50 @@
-# گزارش فنی پیاده‌سازی نسخه ۲۰ (`CH01_CHESS_ANDROID_PROTOTYPE-20.zip`)
+# گزارش فنی پیاده‌سازی نسخه ۲۱ (`CH01_CHESS_ANDROID_PROTOTYPE-21.zip`)
 
 ## ۱. مشخصات بسته‌های ورودی و خروجی
 
 | ویژگی | مقدار |
 |---|---|
-| **فایل سورس مبنا** | `CH01_CHESS_ANDROID_PROTOTYPE-19.3.zip` |
-| **SHA-256 سورس مبنا** | `6048fe882cf32dbbcf12eca2cf050db79c5abc1fee8c1e3c02b336719d9c29db` |
-| **حجم سورس مبنا** | `4,257,075` بایت |
-| **بسته محتوایی ورودی (Front Matter)** | `FRONT_MATTER_CONTENT_PACK_FA_v0.3.zip` |
-| **SHA-256 بسته محتوایی ورودی** | `c50ca90a2b7137cc2652cb3875427f3acba1a1c316e7609e67731564a17e704c` |
-| **فایل خروجی نهایی** | `CH01_CHESS_ANDROID_PROTOTYPE-20.zip` |
+| **فایل سورس مبنا** | `CH01_CHESS_ANDROID_PROTOTYPE-20.zip` |
+| **بسته محتوایی ورودی (فصل اول — صفحات ۴۰ تا ۵۰)** | `CH01_CONTENT_PAGES_040_050_FA_v0.1.zip` (`CH01_Content_Pages_040-050_FA_v0.1_a19186b4.zip`) |
+| **SHA-256 فایل PDF مرجع (`591` صفحه)** | `461b30a603b6b1477ca36d8072eb8e463c4c23816686b34717bf8b6af1982ec0` |
+| **فایل خروجی نهایی** | `CH01_CHESS_ANDROID_PROTOTYPE-21.zip` |
 
 ---
 
-## ۲. خلاصه اقدامات انجام‌شده در نسخه ۲۰ (ورود محتوای مقدماتی صفحات ۱ تا ۳۹ PDF)
+## ۲. خلاصه اقدامات انجام‌شده در نسخه ۲۱ (ورود محتوای واقعی فصل اول — صفحات PDF ۴۰ تا ۵۰)
 
-در این مرحله، بسته محتوایی تأییدشدهٔ `FRONT_MATTER_CONTENT_PACK_FA_v0.3.zip` (پوشش‌دهندهٔ صفحات فیزیکی ۱ تا ۳۹ فایل PDF اصلی کتاب *How to Win at Chess*) بدون هیچ‌گونه ترجمهٔ مجدد، خلاصه‌سازی، بازنویسی یا تغییر متن، عیناً وارد معماری Content Pack اپلیکیشن شد و به موتور کتاب‌خوان متصل گردید.
+در این نسخه، بستهٔ محتوایی تأییدشدهٔ `CH01_CONTENT_PAGES_040_050_FA_v0.1.zip` شامل ترجمهٔ فارسی نهایی، نگاشت دقیق بلوک‌به‌صفحه (`source_page_index.json`)، ۲۱ شیء تصویری استخراج‌شده از صفحات ۴۰ تا ۴۹ PDF و جدول‌های متادیتای منبع، بدون هیچ‌گونه تغییر در ترجمه، خلاصه‌سازی یا افزودن متن دلخواه، در سورس نسخهٔ ۲۰ ادغام شد.
 
-### الف) انتقال کامل ۱۲۱ فایل بسته `FRONT_MATTER_CONTENT_PACK_FA_v0.3` به `assets/books/how_to_win_at_chess/`
-1. **`front_matter/manifest.json` و `front_matter/table_of_contents.json`:**
-   - تعریف ناحیهٔ مستقل `contentRegionId: "FRONT_MATTER"` برای صفحات `1..39` و پیوند به شروع فصل اول (`nextSourcePage: 40`).
-2. **`front_matter/pages/page_001.json` تا `page_039.json` (۳۹ فایل صفحه):**
-   - صفحات ۱ تا ۱۰: جلد (`COVER`)، تصاویر آغازین (`IMAGE_ONLY`: صفحات ۲ و ۵)، صفحه عنوان (`TITLE_PAGE`: صفحه ۳)، حقوق نشر و عوامل تولید (`COPYRIGHT_AND_CREDITS`: صفحه ۴)، فهرست مطالب (`TABLE_OF_CONTENTS`: صفحات ۶ تا ۹) و تصویر تزئینی (`IMAGE_ONLY`: صفحه ۱۰).
-   - صفحات ۱۱ تا ۳۶: مقدمه (`INTRODUCTION`: صفحه ۱۱) و آموزش مبانی شطرنج (`EDUCATIONAL_CONTENT`: صفحات ۱۲ تا ۳۶) شامل معرفی مهره‌ها، قواعد حرکت، آن‌پاسان، قلعه‌رفتن، کیش/کیش‌ومات/پات، نمادگذاری شطرنج، ارزش مهره‌ها و تمرین شطرنج.
-   - صفحه ۳۷ (`PART_DIVIDER`): جداکنندهٔ تصویری بخش اول (`0-800 ELO`، شیء `PDFOBJ_067`) همراه با بلوک‌های متنی فارسی مجزا (`بخش اول` و `درجه اِلو: ۰ تا ۸۰۰`) بدون دست‌کاری تصویر اصلی.
-   - صفحه ۳۸ (`PART_INTRODUCTION`): صفحهٔ خوش‌آمدگویی به بخش اول همراه با نشان تاج (`PDFOBJ_068`) و بلوک `FM_P038_L001` شامل ۶ هدف یادگیری (با ترجمهٔ دقیق `middlegame` به **«میانه‌بازی»** و عدم وجود کامل واژهٔ ممنوع «وسط‌بازی»).
-   - صفحه ۳۹ (`INTERSTITIAL_IMAGE`): صفحهٔ مستقل آغازگر تصویری فصل اول با آیکون رخ در گوشهٔ بالا سمت چپ (`FM_P039_I001` -> `PDFOBJ_069`، `assets/pdf_embedded_objects/pdf_p039_obj069.jpg`). این صفحه حذف یا با صفحهٔ ۴۰ ادغام نشده است.
-3. **`assets/pdf_embedded_objects/` (۷۰ فایل شیء تصویری استخراج‌شده از PDF):**
-   - حفظ دست‌نخورده و باینری هر ۷۰ فایل (`PDFOBJ_000` تا `PDFOBJ_069`) بدون کراپ، بدون تغییر فرمت و بدون حذف اشیای کوچک یا ماسک‌ها، منطبق با `source_metadata/source_image_manifest.json` و `source_metadata/source_image_placements_pages_001_039.csv`.
-4. **`source_links/source_links_pages_001_039.json` و `.csv` (۱۲۶ پیوند):**
-   - حفظ و بارگذاری هر ۱۲۶ پیوند صفحات ۱ تا ۳۹، شامل پیوندهای صفحهٔ ۴ (`TenSpeed.com` و پیوندهای صفحات ۲، ۵، ۱۰، ۳۷، ۲۶۱)، پیوندهای فهرست مطالب در صفحات ۶ تا ۹ (از جمله `"CHAPTER ONE"` -> صفحهٔ `39` و `"HOW TO (LITERALLY) WIN AT CHESS"` -> صفحهٔ `40`) و پیوندهای درون‌متنی صفحهٔ ۲۱ به صفحات `52` و `86`.
-5. **`terminology/terminology_glossary_fa.csv` و `TRANSLATION_NOTES_FA.md`:**
-   - واژه‌نامهٔ رسمی فارسی و یادداشت‌های ترجمه در مسیر `assets/books/how_to_win_at_chess/terminology/`.
-
----
-
-### ب) پیاده‌سازی قرارداد الزامی `sourcePdfPage` در کتاب‌خوان (`ReaderPaginator` و `ReaderScreen`)
-1. **مرجعیت مطلق `sourcePdfPage`:**
-   - فیلد `sourcePdfPage` (شمارهٔ ۱-مبنا در PDF اصلی ۵۹۱ صفحه‌ای) به‌عنوان شمارهٔ رسمی صفحه در سراسر مدل داده، صفحه‌بند و هدر کتاب‌خوان (`Modifier.testTag("reader_source_pdf_page_badge")`) به کاربر نمایش داده می‌شود.
-2. **پشتیبانی از برش‌های نمایشی موبایل بدون تغییر `sourcePdfPage`:**
-   - اگر محتوای یک صفحهٔ فیزیکی PDF در صفحه‌نمایش موبایل به چند برش (`ReaderPage` slice) تقسیم شود، تمام برش‌ها دقیقاً همان `sourcePdfPage` را حفظ می‌کنند و برچسب هدر به‌صورت `صفحه PDF ۱۴ — بخش ۱ از ۶`، `صفحه PDF ۱۴ — بخش ۲ از ۶` و ... نمایش می‌یابد.
-3. **عدم ادغام دو `sourcePdfPage` متفاوت:**
-   - صفحه‌بند (`ReaderPaginator.paginateFrontMatterPage` و `paginateFrontMatterPages`) هر صفحهٔ منبع را به‌صورت مستقل صفحه‌بندی می‌کند و هرگز بلوک‌های دو `sourcePdfPage` متفاوت را در یک صفحهٔ نمایشی ادغام نمی‌کند.
-4. **پایداری در برابر تغییر اندازهٔ فونت و ابعاد صفحه:**
-   - تغییر اندازهٔ فونت (`SMALL`, `NORMAL`, `LARGE`) در `ChapterViewModel.setFontScale` همیشه کاربر را روی همان `sourcePdfPage` نگه می‌دارد.
+### الف) انتقال و اعتبارسنجی فایل‌های محتوایی در `assets/books/how_to_win_at_chess/`
+1. **`CH01/chapter.json` و `CH01/source_page_index.json`:**
+   - ثبت بازهٔ صفحات فیزیکی فصل اول (`sourcePdfPageStart = 40`, `sourcePdfPageEnd = 50`) و اتصال مرجع رسمی `source_page_index.json`.
+   - نگاشت دقیق هر ۱۱ صفحهٔ فیزیکی PDF (`40..50`) به `sectionRefs`، `orderedBlockIds`، `imagePlacements` و دیاگرام‌های متناظر (`BD-025` تا `BD-034`).
+2. **`CH01/sections/01_opening.json` تا `06_summary.json`:**
+   - جایگزینی کامل هر ۶ فایل بخش با متون فارسی تأییدشدهٔ بستهٔ محتوایی و حفظ دقیق ترتیب `orderedContentBlocks` و `sourcePdfPage` هر بلوک:
+     - `01_opening.json` (`SEC_CH01_01_OPENING`): صفحهٔ ۴۰ (`CH01_P040_B001..B003`, `CH01_P040_D025`, `CH01_P040_B004..B005`).
+     - `02_checkmate.json` (`SEC_CH01_02_CHECKMATE`): صفحات ۴۰ تا ۴۵ (`CH01_P040_B006..B007` تا `CH01_P045_D030`, `CH01_P045_B001..B003`).
+     - `03_resignation.json` (`SEC_CH01_03_RESIGNATION`): صفحات ۴۵ و ۴۶ (`CH01_P045_B004..B006` و `CH01_P046_B001..B004`, `CH01_P046_D031`).
+     - `04_timing_out.json` (`SEC_CH01_04_TIMING_OUT`): صفحات ۴۶ تا ۴۸ (`CH01_P046_B005`, `CH01_P047_B001..B005`, `CH01_P047_EX_BD032`, `CH01_P048_D033`, `CH01_P048_B001`).
+     - `05_abandonment.json` (`SEC_CH01_05_ABANDONMENT`): صفحات ۴۸ و ۴۹ (`CH01_P048_B002..B003`, `CH01_P049_D034`, `CH01_P049_B001..B002`).
+     - `06_summary.json` (`SEC_CH01_06_SUMMARY`): صفحهٔ ۵۰ (`CH01_P050_B001..B002`, چهار مورد خلاصه `CH01_P050_L001..L004`, پیوند درس تکمیلی `CH01_P050_LINK001`, `CH01_P050_B003`, و پاورقی `CH01_P050_FN001` با ارجاع به صفحهٔ ۴۷).
+3. **`assets/pdf_embedded_objects/` (۲۱ فایل تصویر صفحات ۴۰ تا ۴۹ در کنار ۷۰ فایل صفحات ۱ تا ۳۹):**
+   - افزودن هر ۲۱ شیء تصویری صفحات ۴۰ تا ۴۹ (`pdf_p040_xref890_01.jpeg` تا `pdf_p049_xref882_01.jpeg`) با تطابق ۱۰۰٪ هش SHA-256 با `PACKAGE_MANIFEST.json` و `source_metadata/source_image_placements_pages_040_050.csv`.
+   - اتصال خودکار آیکن اصلی «نکته جالب» (`PDFOBJ_P046_X1111_01`, `visualRole = FUN_FACT_ICON`) به بلوک `CH01_P046_B001` در صفحهٔ ۴۶ و رندر آن در `ReaderScreen` با تگ `inline_source_asset_PDFOBJ_P046_X1111_01`.
+4. **حفظ دست‌نخوردهٔ `diagrams.json`، `pgn_sequences.json` و `exercises.json` نسخهٔ ۲۰:**
+   - حفظ کامل وضعیت ممیزی مسدود `BD-027` (`audit_status = BLOCKED_NEEDS_HUMAN_REVIEW` و هشدار فارسی آن در صفحهٔ ۴۲).
+   - حفظ کامل تمرین تعاملی `BD-032` (`CH01_P047_EX_BD032`, `diagramId = BD-032`, `exerciseId = EX_CH01_BD032`) در صفحهٔ ۴۷ با پذیرش هر دو پاسخ `Qh8#` و `Qh2#`، مخفی بودن پیش‌فرض راهنمای حرکات قانونی و ارجاع متقابل پاورقی صفحهٔ ۵۰ (`CH01_P050_FN001` -> صفحهٔ PDF ۴۷).
 
 ---
 
-### ج) یکپارچه‌سازی معماری ناحیهٔ `FRONT_MATTER` بدون ایجاد فصل جعلی
-1. **ثبت `frontMatter` در `books/library.json` و `content_schemas/library.schema.json`:**
-   - ناحیهٔ `FRONT_MATTER` به‌عنوان یک بخش مستقل پیش از فصل‌ها با عنوان ناوبری **«پیش‌درآمد و مبانی شطرنج»** و عنوان کامل **«پیش‌درآمد، مقدمه و آموزش مبانی شطرنج»** ثبت شده است.
-   - هیچ فصل جعلی مانند `CH00` ساخته نشده و تعداد فصل‌های کتاب تغییر نکرده است.
-2. **پشتیبانی از ۴ نوع بلوک محتوایی جدید در موتور کتاب‌خوان:**
-   - `HeadingBlock` (با پشتیبانی از فیلدهای تعاملی فهرست مطالب `tocTargetSourcePdfPage`, `tocEntryKind`, `chapterId`)
-   - `SourceImageBlock` (رندر مستقیم تصویر اصلی از `assets/books/how_to_win_at_chess/assets/pdf_embedded_objects/` همراه با برچسب `assetId`، کپشن فارسی و `sourcePdfPage`)
-   - `OrderedListBlock` (رندر فهرست‌های شماره‌گذاری‌شدهٔ فارسی با ارقام فارسی، مانند ۶ هدف آموزشی صفحهٔ ۳۸)
-   - `TableBlock` (رندر جداول آموزشی، مانند جدول نمادگذاری مهره‌ها در صفحهٔ ۳۱ و جدول ارزش مهره‌ها در صفحهٔ ۳۵)
+### ب) نگاشت دقیق صفحات مشترک (`40, 45, 46, 48`) و صفحه‌بندی مبتنی بر `sourcePdfPage`
+1. **عدم ادغام دو `sourcePdfPage` متفاوت در `ReaderPaginator`:**
+   - در `ReaderPaginator.paginateSection`، مرز `sourcePdfPage` به‌صورت قطعی اعمال می‌شود تا هیچ دو بلوکی با `sourcePdfPage` متفاوت (مانند بلوک‌های صفحهٔ ۴۰ و ۴۱ در بخش کیش‌ومات، یا صفحات ۴۵ و ۴۶ در بخش تسلیم، یا صفحات ۴۶، ۴۷ و ۴۸ در بخش اتمام زمان) هرگز در یک صفحه یا برش (`ReaderPage`) قرار نگیرند.
+2. **پشتیبانی از صفحات مشترک بین دو بخش (`ReaderPaginator.paginateChapterSourcePdfPage` و `ChapterViewModel.navigateToSourcePdfPage`):**
+   - هنگام ناوبری به هر یک از صفحات ۴۰ تا ۵۰ (از فهرست مطالب، نوار انتخاب صفحهٔ PDF فصل اول `chapter_pdf_page_chip_40..50`، یا پیوند پاورقی صفحهٔ ۵۰ به صفحهٔ ۴۷)، `ChapterViewModel.navigateToSourcePdfPage` مستقیماً از `CH01/source_page_index.json` و آرایهٔ `orderedBlockIds` همان صفحه استفاده می‌کند.
+   - برای صفحات مشترک (`40`, `45`, `46`, `48`)، تمام بلوک‌های متعلق به همان `sourcePdfPage` از هر دو بخش به ترتیب دقیق PDF نمایش داده می‌شوند، بدون آنکه بلوکی از صفحهٔ قبلی یا بعدی وارد شود.
+   - ورق زدن به جلو/عقب (`nextPage` / `prevPage`) در حالت صفحه‌محور، به ترتیب پیوسته بین صفحات فیزیکی ۴۰ تا ۵۰ حرکت می‌کند و در صفحهٔ ۳۹ به پیش‌درآمد (`FRONT_MATTER`) متصل می‌شود.
+3. **ذخیره و بازیابی محل مطالعه (`UserPreferencesManager`):**
+   - ذخیره و بازیابی هم‌زمان `chapterId + sourcePdfPage + sectionId + blockId + pageId`.
 
 ---
 
@@ -63,30 +52,16 @@
 
 1. **`gradle :app:validateContentPacks --console=plain`**:
    - وضعیت: `BUILD SUCCESSFUL` (`[validateContentPacks] All book content packs in assets/books/ validated successfully.`)
-   - بررسی خودکار `front_matter/manifest.json`، وجود و ترتیب صفحات `1..39`، یکتایی `blockId`ها، برابری `sourcePdfPage`، وجود هر ۷۰ فایل تصویر در `assets/pdf_embedded_objects/`، صحت هر ۱۲۶ پیوند، صحت ۶ آیتم `FM_P038_L001` و وجود «میانه‌بازی» در صفحهٔ ۳۸، و وجود `FM_P039_I001` (`PDFOBJ_069`) در صفحهٔ ۳۹.
+   - بررسی خودکار `front_matter` (صفحات ۱ تا ۳۹ و ۷۰ تصویر) + `CH01` (شامل `chapter.json`، ۶ فایل بخش، `source_page_index.json`، تطابق تمام `orderedBlockIds` و وجود هر ۲۱ فایل تصویر صفحات ۴۰ تا ۴۹).
 2. **`gradle :app:testDebugUnitTest --rerun-tasks --console=plain`**:
-   - وضعیت: `BUILD SUCCESSFUL` — **۱۴۲ تست اجرا شد، ۰ خطا، ۰ شکست:**
-     - `ExampleRobolectricTest`: ۶۰ تست
-     - `ReaderPaginationRobolectricTest`: ۳۲ تست
-     - `ChessChapterOneTest`: ۲۳ تست
-     - `FrontMatterVersion20Test`: ۱۴ تست جامع پذیرش نسخه ۲۰
-     - `ContentArchitectureVersion19Test`: ۷ تست
-     - `ContentArchitectureVersion18Test`: ۵ تست
-     - `ExampleUnitTest`: ۱ تست
+   - وضعیت: `BUILD SUCCESSFUL` — **۱۵۴ تست اجرا شد، ۰ خطا، ۰ شکست:**
+     - `Ch01Pages040To050Version21Test`: **۱۲ تست الزامی نسخه ۲۱** (پوشش کامل هر ۱۲ شرط بخش ۱۰ پرامپت)
+     - `FrontMatterVersion20Test`: **۱۴ تست**
+     - `ExampleRobolectricTest`: **۶۰ تست**
+     - `ReaderPaginationRobolectricTest`: **۳۲ تست**
+     - `ChessChapterOneTest`: **۲۳ تست**
+     - `ContentArchitectureVersion19Test`: **۷ تست**
+     - `ContentArchitectureVersion18Test`: **۵ تست**
+     - `ExampleUnitTest`: **۱ تست**
 3. **`gradle :app:assembleDebug --console=plain`**:
    - وضعیت: `BUILD SUCCESSFUL`
-
----
-
-## ۴. فهرست ۸ اسکرین‌شات واقعی تولیدشده از محیط اجرای تست (`screenshots/`)
-
-| ردیف | مسیر فایل اسکرین‌شات | صفحه PDF | محتوای تأییدشده در تصویر |
-|---|---|---|---|
-| ۱ | `screenshots/pdf_page_011.webp` | صفحه ۱۱ | صفحه شروع مقدمه («مقدمه — سلام، خوش آمدید! من لوی هستم...») با نشان `صفحه PDF ۱۱` |
-| ۲ | `screenshots/pdf_page_014.webp` | صفحه ۱۴ | صفحه چیدمان آغازین تخته شطرنج (`PDFOBJ_018`) با نشان `صفحه PDF ۱۴` |
-| ۳ | `screenshots/pdf_page_021.webp` | صفحه ۲۱ | صفحه پیشروی دوخانه‌ای پیاده (`PDFOBJ_036`) و دکمه‌های ارجاع به صفحات ۵۲ و ۸۶ PDF |
-| ۴ | `screenshots/pdf_page_036.webp` | صفحه ۳۶ | صفحه «تمرین شطرنج» و مطالب تکمیلی یادگیری با نشان `صفحه PDF ۳۶` |
-| ۵ | `screenshots/pdf_page_037.webp` | صفحه ۳۷ | صفحه جداکنندهٔ تصویری بخش اول (`PART ONE / 0-800 ELO`، `PDFOBJ_067`) + لایهٔ متنی فارسی مجزا («بخش اول» / «درجه اِلو: ۰ تا ۸۰۰») |
-| ۶ | `screenshots/pdf_page_038.webp` | صفحه ۳۸ | صفحه معرفی بخش اول (`PDFOBJ_068`، «به بخش اول خوش آمدید!») و فهرست ۶ هدف آموزشی شامل «ترکیب‌های کیش‌ومات در میانه‌بازی؛» |
-| ۷ | `screenshots/pdf_page_039.webp` | صفحه ۳۹ | صفحه مستقل آغازگر تصویری فصل اول با آیکون رخ (`PDFOBJ_069`) و نشان `صفحه PDF ۳۹` |
-| ۸ | `screenshots/pdf_page_040.webp` | صفحه ۴۰ | صفحه شروع فصل اول (`CH01`، بخش ۱: «شروع فصل»، دیاگرام `BD-025`) با نشان `صفحه PDF ۴۰` |

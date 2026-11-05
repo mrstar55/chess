@@ -76,6 +76,7 @@ import com.example.data.FontSizeScale
 import com.example.model.AuditStatus
 import com.example.model.DiagramItem
 import com.example.model.FrontMatterSourceLink
+import com.example.model.PieceType
 import com.example.model.ReaderPage
 import com.example.model.ReaderPageType
 import com.example.model.ReaderPaginator
@@ -87,7 +88,10 @@ import com.example.ui.ChapterViewModel
 import com.example.ui.components.AuditBadge
 import com.example.ui.components.AudioSettingsDialog
 import com.example.ui.components.ChessBoardView
+import com.example.ui.components.CompactValidAuditCheckIcon
 import com.example.ui.components.InteractiveExerciseView
+import com.example.ui.components.PieceMovementDiagram
+import com.example.ui.components.StartingPositionIntroBoard
 import com.example.ui.components.PersistentMoveDescriptionBar
 import com.example.ui.components.PgnControlsView
 import com.example.ui.theme.AppIcons
@@ -910,7 +914,16 @@ private fun ReaderSinglePageContent(
                 val resolved = slot?.resolveBlockText(block) ?: block.textFa
                 if (!resolved.isNullOrBlank()) {
                     val lines = ReaderPaginator.estimateRawTextLines(resolved, charsPerLine).coerceAtLeast(1)
-                    acc + (lines * 18f * fontMultiplier + 16f).dp
+                    val refExtra = if (block.sourcePageReferences.isNotEmpty()) 26f else 0f
+                    acc + (lines * 18f * fontMultiplier + 16f + refExtra).dp
+                } else {
+                    acc
+                }
+            }
+            is SectionContentBlock.ExternalReferenceBlock -> {
+                val resolved = slot?.resolveBlockText(block) ?: block.titleFa ?: block.url
+                if (!resolved.isNullOrBlank()) {
+                    acc + (44f * fontMultiplier).dp
                 } else {
                     acc
                 }
@@ -937,10 +950,10 @@ private fun ReaderSinglePageContent(
 
     val diagramNonBoardChromeDp = when {
         !hasDiagram && !hasSourceImage -> 0.dp
-        isInteractiveExercise -> 244.dp
-        hasPgnControls -> 190.dp
-        isBlockedDiagram -> 162.dp
-        else -> 64.dp
+        isInteractiveExercise -> 200.dp
+        hasPgnControls -> 150.dp
+        isBlockedDiagram -> 150.dp
+        else -> 44.dp
     }
 
     val linksBarHeightDp = if (page.sourceLinks.isNotEmpty() &&
@@ -1197,14 +1210,21 @@ fun SectionContentBlockItem(
                                 lineHeight = (22f * fontMultiplier).sp,
                                 color = MaterialTheme.colorScheme.onBackground
                             )
-                            if (!block.sourceUrl.isNullOrBlank() || block.sourcePageReferences.isNotEmpty()) {
+                            if (!block.sourceUrl.isNullOrBlank() ||
+                                block.sourcePageReferences.isNotEmpty() ||
+                                block.inlineSourceAssets.isNotEmpty()
+                            ) {
                                 Spacer(modifier = Modifier.height(6.dp))
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .horizontalScroll(rememberScrollState()),
-                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
+                                    if (block.inlineSourceAssets.isNotEmpty()) {
+                                        InlineSourceAssetsRow(placements = block.inlineSourceAssets)
+                                    }
                                     if (!block.sourceUrl.isNullOrBlank()) {
                                         Surface(
                                             shape = RoundedCornerShape(6.dp),
@@ -1303,7 +1323,7 @@ fun SectionContentBlockItem(
                             }
                         }
                     } else {
-                        Box(
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(
@@ -1314,8 +1334,13 @@ fun SectionContentBlockItem(
                                     },
                                     shape = RoundedCornerShape(8.dp)
                                 )
-                                .testTag("content_block_${block.blockId}")
+                                .testTag("content_block_${block.blockId}"),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
+                            if (block.inlineSourceAssets.isNotEmpty()) {
+                                InlineSourceAssetsRow(placements = block.inlineSourceAssets)
+                            }
                             Text(
                                 text = resolvedText,
                                 fontSize = (17 * fontMultiplier).sp,
@@ -1503,13 +1528,46 @@ fun SectionContentBlockItem(
                             MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
                         }
                     ) {
-                        Text(
-                            text = resolvedText,
-                            fontSize = (12 * fontMultiplier).sp,
-                            lineHeight = (18 * fontMultiplier).sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(8.dp)
-                        )
+                        Column(
+                            modifier = Modifier.padding(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                text = resolvedText,
+                                fontSize = (12 * fontMultiplier).sp,
+                                lineHeight = (18 * fontMultiplier).sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            if (block.sourcePageReferences.isNotEmpty()) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .horizontalScroll(rememberScrollState()),
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    block.sourcePageReferences.forEach { refPage ->
+                                        val refPageFa = ReaderPaginator.toPersianDigits(refPage)
+                                        Surface(
+                                            shape = RoundedCornerShape(6.dp),
+                                            color = MaterialTheme.colorScheme.secondaryContainer,
+                                            border = BorderStroke(0.8.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)),
+                                            modifier = Modifier
+                                                .clickable { viewModel.navigateToSourcePdfPage(refPage) }
+                                                .testTag("footnote_page_ref_${block.blockId}_$refPage")
+                                        ) {
+                                            Text(
+                                                text = "ارجاع به صفحه PDF $refPageFa",
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 } else if (section?.translationSlot?.shouldShowPlaceholderForBlock(block.blockId) == true) {
                     PendingTranslationSlotCard(
@@ -1524,10 +1582,17 @@ fun SectionContentBlockItem(
 
             is SectionContentBlock.ExternalReferenceBlock -> {
                 val resolvedTitle = section?.translationSlot?.resolveBlockText(block) ?: block.titleFa
-                if (block.isAuthorizedAndEnabled && !resolvedTitle.isNullOrBlank()) {
+                val hasContent = !resolvedTitle.isNullOrBlank() || !block.url.isNullOrBlank()
+                if (hasContent) {
+                    val clickMod = if (block.isAuthorizedAndEnabled && !block.url.isNullOrBlank()) {
+                        Modifier.clickable { viewModel.openExternalUri(block.url) }
+                    } else {
+                        Modifier
+                    }
                     OutlinedCard(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .then(clickMod)
                             .testTag("content_block_${block.blockId}"),
                         shape = RoundedCornerShape(10.dp),
                         colors = CardDefaults.outlinedCardColors(
@@ -1538,13 +1603,89 @@ fun SectionContentBlockItem(
                             }
                         )
                     ) {
-                        Text(
-                            text = resolvedTitle,
-                            fontSize = (13 * fontMultiplier).sp,
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(10.dp)
-                        )
+                        Column(
+                            modifier = Modifier.padding(10.dp),
+                            verticalArrangement = Arrangement.spacedBy(3.dp)
+                        ) {
+                            if (!resolvedTitle.isNullOrBlank()) {
+                                Text(
+                                    text = resolvedTitle,
+                                    fontSize = (13 * fontMultiplier).sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                            if (!block.url.isNullOrBlank()) {
+                                Text(
+                                    text = block.url,
+                                    fontSize = (10.5f * fontMultiplier).sp,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.testTag("external_ref_url_${block.blockId}")
+                                )
+                            }
+                        }
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun InlineSourceAssetsRow(
+    placements: List<com.example.model.ChapterImagePlacement>,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        placements.forEach { placement ->
+            val bitmap = remember(placement.resolvedAssetPath) {
+                if (placement.resolvedAssetPath.isBlank()) {
+                    null
+                } else {
+                    runCatching {
+                        context.assets.open(placement.resolvedAssetPath).use { stream ->
+                            BitmapFactory.decodeStream(stream)?.asImageBitmap()
+                        }
+                    }.getOrNull()
+                }
+            }
+            val iconSizeDp = when (placement.visualRole) {
+                com.example.model.ChapterImageVisualRole.FUN_FACT_ICON -> 32.dp
+                com.example.model.ChapterImageVisualRole.PARAGRAPH_MARKER -> 18.dp
+                else -> 28.dp
+            }
+            Surface(
+                shape = RoundedCornerShape(6.dp),
+                color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.45f),
+                modifier = Modifier
+                    .testTag("inline_source_asset_${placement.assetId}")
+            ) {
+                if (bitmap != null) {
+                    Image(
+                        bitmap = bitmap,
+                        contentDescription = placement.assetId,
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .size(iconSizeDp)
+                            .padding(2.dp)
+                            .testTag("source_image_${placement.assetId}")
+                    )
+                } else {
+                    Text(
+                        text = placement.assetId,
+                        fontSize = 9.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 4.dp, vertical = 2.dp)
+                            .testTag("source_image_${placement.assetId}")
+                    )
                 }
             }
         }
@@ -1561,9 +1702,21 @@ private fun SourceImageCard(
 ) {
     val context = LocalContext.current
     val resolvedAsset = state.frontMatterPack?.sourceAssetsById?.get(block.assetId)
+        ?: state.chapterSourcePageIndex?.sourceAssetsById?.get(block.assetId)
     val effectiveAssetPath = block.resolvedAssetPath.ifBlank { resolvedAsset?.resolvedAssetPath.orEmpty() }
-    val imageBitmap = remember(effectiveAssetPath) {
-        if (effectiveAssetPath.isBlank()) {
+
+    // Mismatched source PDF movement boards on pages 15..17 replaced by rules-verified PieceMovementDiagram
+    val replacementMovementPieceType: PieceType? = when (block.assetId) {
+        "PDFOBJ_022" -> PieceType.ROOK   // PDF page 15 Rook movement (source image had 8 Queen arrows)
+        "PDFOBJ_025" -> PieceType.BISHOP // PDF page 16 Bishop movement (source image had 4 orthogonal Rook arrows)
+        "PDFOBJ_028" -> PieceType.KNIGHT // PDF page 17 Knight movement (source image had 4 diagonal Bishop arrows)
+        else -> null
+    }
+    val isInteractiveStartingSetupBoard = block.assetId == "PDFOBJ_018" && block.sourcePdfPage == 14
+    val companionQueenMovementDiagram = block.assetId == "PDFOBJ_017" && block.sourcePdfPage == 14
+
+    val imageBitmap = remember(effectiveAssetPath, replacementMovementPieceType, isInteractiveStartingSetupBoard) {
+        if (effectiveAssetPath.isBlank() || replacementMovementPieceType != null || isInteractiveStartingSetupBoard) {
             null
         } else {
             runCatching {
@@ -1576,7 +1729,7 @@ private fun SourceImageCard(
     val imgWidth = if (block.imageWidth > 0) block.imageWidth else (resolvedAsset?.width ?: 0)
     val imgHeight = if (block.imageHeight > 0) block.imageHeight else (resolvedAsset?.height ?: 0)
     val isSmallIcon = imgWidth in 1..320 && imgHeight in 1..320
-    val targetMaxHeight = if (isSmallIcon) 110.dp else maxImageHeight
+    val targetMaxHeight = if (isSmallIcon) 96.dp else maxImageHeight
 
     OutlinedCard(
         modifier = Modifier
@@ -1620,17 +1773,38 @@ private fun SourceImageCard(
                 }
             }
 
-            if (imageBitmap != null) {
-                Image(
-                    bitmap = imageBitmap,
-                    contentDescription = block.descriptionFa.ifBlank { block.assetId },
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = if (isSmallIcon) 56.dp else 120.dp, max = targetMaxHeight)
-                        .clip(RoundedCornerShape(8.dp))
-                        .testTag("source_image_${block.assetId}")
-                )
+            when {
+                isInteractiveStartingSetupBoard -> {
+                    StartingPositionIntroBoard(
+                        maxBoardHeight = (maxImageHeight - 54.dp).coerceIn(170.dp, 290.dp),
+                        modifier = Modifier.testTag("source_image_${block.assetId}")
+                    )
+                }
+                replacementMovementPieceType != null -> {
+                    PieceMovementDiagram(
+                        pieceType = replacementMovementPieceType,
+                        maxBoardHeight = (maxImageHeight - 36.dp).coerceIn(170.dp, 280.dp),
+                        modifier = Modifier.testTag("source_image_${block.assetId}")
+                    )
+                }
+                imageBitmap != null -> {
+                    Image(
+                        bitmap = imageBitmap,
+                        contentDescription = block.descriptionFa.ifBlank { block.assetId },
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = if (isSmallIcon) 48.dp else 120.dp, max = targetMaxHeight)
+                            .clip(RoundedCornerShape(8.dp))
+                            .testTag("source_image_${block.assetId}")
+                    )
+                    if (companionQueenMovementDiagram) {
+                        PieceMovementDiagram(
+                            pieceType = PieceType.QUEEN,
+                            maxBoardHeight = (maxImageHeight - 72.dp).coerceIn(160.dp, 240.dp)
+                        )
+                    }
+                }
             }
 
             if (block.descriptionFa.isNotBlank()) {
@@ -1765,6 +1939,10 @@ fun DiagramCard(
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.outline
                     )
+                    if (diagram.auditStatus == AuditStatus.VALID) {
+                        Spacer(modifier = Modifier.width(6.dp))
+                        CompactValidAuditCheckIcon()
+                    }
                 }
 
                 IconButton(
@@ -1779,11 +1957,13 @@ fun DiagramCard(
                 }
             }
 
-            // Audit Status Badge
-            AuditBadge(
-                status = diagram.auditStatus,
-                warningText = diagram.auditWarning
-            )
+            // Full-width Audit Warning Banner only when BLOCKED_NEEDS_HUMAN_REVIEW
+            if (diagram.auditStatus != AuditStatus.VALID) {
+                AuditBadge(
+                    status = diagram.auditStatus,
+                    warningText = diagram.auditWarning
+                )
+            }
 
             // Specific UI per Diagram Type (generalized ExerciseBlock / ExerciseDefinition dispatch)
             val exerciseUiState = resolvedExerciseId?.let { state.exerciseStateFor(it, diagram.diagramId) }

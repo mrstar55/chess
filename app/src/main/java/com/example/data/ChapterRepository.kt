@@ -7,7 +7,12 @@ import com.example.chess.PgnSequence
 import com.example.model.AuditStatus
 import com.example.model.BookCatalogEntry
 import com.example.model.ChapterCatalogEntry
+import com.example.model.ChapterImagePlacement
+import com.example.model.ChapterImageVisualRole
 import com.example.model.ChapterManifest
+import com.example.model.ChapterSourcePageDiagramRef
+import com.example.model.ChapterSourcePageEntry
+import com.example.model.ChapterSourcePageIndex
 import com.example.model.ContentBlockValidator
 import com.example.model.ContentValidationResult
 import com.example.model.DiagramItem
@@ -46,6 +51,7 @@ class ChapterRepository @JvmOverloads constructor(
     private val cachedPgnSequencesByChapter = mutableMapOf<String, Map<String, PgnSequence>>()
     private val cachedExercisesByChapter = mutableMapOf<String, List<ExerciseDefinition>>()
     private val cachedFrontMatterByBook = mutableMapOf<String, FrontMatterContentPack>()
+    private val cachedSourcePageIndexByChapter = mutableMapOf<String, ChapterSourcePageIndex?>()
 
     private fun readAssetText(assetPath: String): String {
         require(ContentBlockValidator.isSafeRelativeAssetPath(assetPath)) {
@@ -748,7 +754,7 @@ class ChapterRepository @JvmOverloads constructor(
             )
         }
         val sectionsArr = root.getJSONArray("sections")
-        val sections = mutableListOf<SectionManifestEntry>()
+        val rawSections = mutableListOf<SectionManifestEntry>()
         for (i in 0 until sectionsArr.length()) {
             val sObj = sectionsArr.getJSONObject(i)
             val pagesArr = sObj.getJSONArray("pdfPages")
@@ -763,7 +769,7 @@ class ChapterRepository @JvmOverloads constructor(
                 SectionKind.fromSectionMetadata(sectionId, titleEn, titleFa)
             }
             val rawSectionFile = sObj.optString("file", "").ifBlank { sObj.optString("contentFile", "") }
-            sections.add(
+            rawSections.add(
                 SectionManifestEntry(
                     sectionId = sectionId,
                     order = sObj.optInt("order", i + 1),
@@ -771,8 +777,23 @@ class ChapterRepository @JvmOverloads constructor(
                     titleEn = titleEn,
                     titleFa = titleFa,
                     pdfPages = pages,
-                    contentFile = resolveChapterRelativePath(effectiveBaseDir, rawSectionFile)
+                    contentFile = resolveChapterRelativePath(effectiveBaseDir, rawSectionFile),
+                    sharedStartPageWithPreviousSection = sObj.optBoolean("sharedStartPageWithPreviousSection", false),
+                    sharedEndPageWithNextSection = sObj.optBoolean("sharedEndPageWithNextSection", false)
                 )
+            )
+        }
+        val sortedRawSections = rawSections.sortedBy { it.order }
+        val sections = sortedRawSections.mapIndexed { idx, entry ->
+            val prevLastPage = sortedRawSections.getOrNull(idx - 1)?.pdfPages?.lastOrNull()
+            val nextFirstPage = sortedRawSections.getOrNull(idx + 1)?.pdfPages?.firstOrNull()
+            val firstPage = entry.pdfPages.firstOrNull()
+            val lastPage = entry.pdfPages.lastOrNull()
+            entry.copy(
+                sharedStartPageWithPreviousSection = entry.sharedStartPageWithPreviousSection ||
+                    (firstPage != null && prevLastPage != null && firstPage == prevLastPage),
+                sharedEndPageWithNextSection = entry.sharedEndPageWithNextSection ||
+                    (lastPage != null && nextFirstPage != null && lastPage == nextFirstPage)
             )
         }
 
@@ -781,6 +802,18 @@ class ChapterRepository @JvmOverloads constructor(
         val rawExercisesFile = root.optString("exercisesFile", "exercises.json")
         val rawNarrationFile = root.optString("narrationManifestFile", "").ifBlank {
             root.optString("narrationManifest", "")
+        }
+        val rawSourcePageIndexFile = root.optString("sourcePageIndexFile", "source_page_index.json")
+        val allPages = sections.flatMap { it.pdfPages }
+        val sourcePdfPageStart = if (root.has("sourcePdfPageStart") && !root.isNull("sourcePdfPageStart")) {
+            root.getInt("sourcePdfPageStart")
+        } else {
+            allPages.minOrNull()
+        }
+        val sourcePdfPageEnd = if (root.has("sourcePdfPageEnd") && !root.isNull("sourcePdfPageEnd")) {
+            root.getInt("sourcePdfPageEnd")
+        } else {
+            allPages.maxOrNull()
         }
 
         return ChapterManifest(
@@ -794,8 +827,312 @@ class ChapterRepository @JvmOverloads constructor(
             pgnFile = resolveChapterRelativePath(effectiveBaseDir, rawPgnFile),
             exercisesFile = resolveChapterRelativePath(effectiveBaseDir, rawExercisesFile),
             narrationManifest = resolveChapterRelativePath(effectiveBaseDir, rawNarrationFile),
-            sections = sections.sortedBy { it.order }
+            sections = sections,
+            sourcePdfPageStart = sourcePdfPageStart,
+            sourcePdfPageEnd = sourcePdfPageEnd,
+            sourcePageIndexFile = resolveChapterRelativePath(effectiveBaseDir, rawSourcePageIndexFile)
         )
+    }
+
+    @JvmOverloads
+    fun getChapterSourcePageIndex(
+        chapterId: String = resolveDefaultChapterId(),
+        bookId: String = resolveDefaultBookId()
+    ): ChapterSourcePageIndex? {
+        val cacheKey = "$bookId:$chapterId"
+        if (cachedSourcePageIndexByChapter.containsKey(cacheKey)) {
+            return cachedSourcePageIndexByChapter[cacheKey]
+        }
+        val manifest = runCatching { getChapterManifest(chapterId = chapterId, bookId = bookId) }.getOrNull()
+        val indexFile = manifest?.sourcePageIndexFile ?: "books/$bookId/$chapterId/source_page_index.json"
+        if (indexFile.isBlank() || !assetExists(indexFile)) {
+            cachedSourcePageIndexByChapter[cacheKey] = null
+            return null
+        }
+        val parsed = parseChapterSourcePageIndex(
+            indexJsonText = readAssetText(indexFile),
+            bookId = bookId,
+            defaultChapterId = chapterId,
+            defaultChapterNumber = manifest?.chapterNumber ?: 1
+        )
+        cachedSourcePageIndexByChapter[cacheKey] = parsed
+        return parsed
+    }
+
+    fun parseChapterSourcePageIndex(
+        indexJsonText: String,
+        bookId: String = DEFAULT_BOOK_ID,
+        defaultChapterId: String = DEFAULT_CHAPTER_ID,
+        defaultChapterNumber: Int = 1
+    ): ChapterSourcePageIndex {
+        val root = JSONObject(indexJsonText)
+        val parsedBookId = root.optString("bookId", bookId).trim()
+        val parsedChapterId = root.optString("chapterId", defaultChapterId).trim()
+        val bookBaseDir = "books/$parsedBookId"
+        val pagesArr = root.getJSONArray("pages")
+        val entries = mutableListOf<ChapterSourcePageEntry>()
+        val sourceAssetsById = mutableMapOf<String, FrontMatterSourceAsset>()
+        val placementsByPage = mutableMapOf<Int, List<ChapterImagePlacement>>()
+
+        for (i in 0 until pagesArr.length()) {
+            val pObj = pagesArr.getJSONObject(i)
+            val sourcePdfPage = pObj.getInt("sourcePdfPage")
+            val pageWidthPt = pObj.optDouble("pageWidthPt", 594.96)
+            val pageHeightPt = pObj.optDouble("pageHeightPt", 841.92)
+            val secArr = pObj.optJSONArray("sectionRefs") ?: pObj.optJSONArray("sectionIds") ?: JSONArray()
+            val sectionIds = (0 until secArr.length()).map { secArr.getString(it).trim() }
+            val blockIdsArr = pObj.getJSONArray("orderedBlockIds")
+            val orderedBlockIds = (0 until blockIdsArr.length()).map { blockIdsArr.getString(it).trim() }
+            val diagramId = if (pObj.isNull("diagramId")) null else pObj.optString("diagramId").takeIf { it.isNotBlank() }
+            val primaryDiagramAssetId = if (pObj.isNull("primaryDiagramSourceAssetId")) {
+                null
+            } else {
+                pObj.optString("primaryDiagramSourceAssetId").takeIf { it.isNotBlank() }
+            }
+            val translationCompleteness = pObj.optString("translationCompleteness", "")
+
+            val placementsArr = pObj.optJSONArray("imagePlacements") ?: JSONArray()
+            val placements = mutableListOf<ChapterImagePlacement>()
+            for (k in 0 until placementsArr.length()) {
+                val imgObj = placementsArr.getJSONObject(k)
+                val assetId = imgObj.getString("assetId").trim()
+                val rawFile = imgObj.getString("file").trim()
+                val resolvedPath = resolveBookRelativePath(bookBaseDir, rawFile)
+                val xref = imgObj.optInt("xref", 0)
+                val width = imgObj.optInt("width", 0)
+                val height = imgObj.optInt("height", 0)
+                val format = imgObj.optString("format", "jpeg")
+                val roleStr = imgObj.optString("visualRole", "ILLUSTRATION")
+                val visualRole = ChapterImageVisualRole.fromString(roleStr)
+                val bboxArr = imgObj.optJSONArray("bboxPdfPoints") ?: imgObj.optJSONArray("bboxPt") ?: JSONArray()
+                val bboxPt = (0 until bboxArr.length()).map { bboxArr.getDouble(it) }
+                val sha256 = imgObj.optString("sha256", "")
+                val mappedDiag = when {
+                    !imgObj.isNull("mappedDiagramId") && imgObj.has("mappedDiagramId") ->
+                        imgObj.optString("mappedDiagramId").takeIf { it.isNotBlank() }
+                    visualRole == ChapterImageVisualRole.CHESS_DIAGRAM -> diagramId
+                    else -> null
+                }
+                val placement = ChapterImagePlacement(
+                    assetId = assetId,
+                    sourcePdfPage = imgObj.optInt("sourcePdfPage", sourcePdfPage),
+                    file = rawFile,
+                    resolvedAssetPath = resolvedPath,
+                    xref = xref,
+                    width = width,
+                    height = height,
+                    bboxPt = bboxPt,
+                    visualRole = visualRole,
+                    mappedDiagramId = mappedDiag,
+                    sha256 = sha256
+                )
+                placements.add(placement)
+                sourceAssetsById[assetId] = FrontMatterSourceAsset(
+                    sourcePdfPage = placement.sourcePdfPage,
+                    pdfImageObjectIndex = k,
+                    pdfImageType = visualRole.name,
+                    pdfObjectId = xref.toString(),
+                    width = width,
+                    height = height,
+                    assetId = assetId,
+                    file = rawFile,
+                    resolvedAssetPath = resolvedPath,
+                    format = format,
+                    descriptionFa = when (visualRole) {
+                        ChapterImageVisualRole.FUN_FACT_ICON -> "آیکون نکته جالب (صفحه PDF $sourcePdfPage)"
+                        ChapterImageVisualRole.PARAGRAPH_MARKER -> "نشانگر گرافیکی بند در صفحه PDF $sourcePdfPage"
+                        ChapterImageVisualRole.CHESS_DIAGRAM -> "تصویر نمودار شطرنج در صفحه PDF $sourcePdfPage"
+                        ChapterImageVisualRole.ILLUSTRATION -> "تصویر منبع در صفحه PDF $sourcePdfPage"
+                    }
+                )
+            }
+            placementsByPage[sourcePdfPage] = placements
+
+            val diagramsArr = pObj.optJSONArray("diagrams")
+            val diagramRefs = if (diagramsArr != null) {
+                (0 until diagramsArr.length()).map { dIdx ->
+                    val dObj = diagramsArr.getJSONObject(dIdx)
+                    val dAssetFile = if (dObj.isNull("sourceImageFile")) null else dObj.optString("sourceImageFile").takeIf { it.isNotBlank() }
+                    ChapterSourcePageDiagramRef(
+                        diagramId = dObj.getString("diagramId").trim(),
+                        blockId = dObj.optString("blockId", "").trim(),
+                        fen = dObj.optString("fen", "").trim(),
+                        interaction = dObj.optString("interaction", ""),
+                        auditStatus = if (dObj.optString("auditStatus").equals("BLOCKED_NEEDS_HUMAN_REVIEW", ignoreCase = true)) {
+                            AuditStatus.BLOCKED_NEEDS_HUMAN_REVIEW
+                        } else {
+                            AuditStatus.VALID
+                        },
+                        sourceImageAssetId = if (dObj.isNull("sourceImageAssetId")) null else dObj.optString("sourceImageAssetId").takeIf { it.isNotBlank() },
+                        sourceImageFile = dAssetFile,
+                        resolvedSourceImagePath = dAssetFile?.let { resolveBookRelativePath(bookBaseDir, it) }
+                    )
+                }
+            } else if (diagramId != null) {
+                val diagPlacement = placements.find { it.assetId == primaryDiagramAssetId }
+                val diagBlockId = orderedBlockIds.firstOrNull {
+                    it.contains("_D0") || it.contains("_EX_")
+                } ?: ""
+                listOf(
+                    ChapterSourcePageDiagramRef(
+                        diagramId = diagramId,
+                        blockId = diagBlockId,
+                        fen = "",
+                        interaction = "",
+                        auditStatus = AuditStatus.VALID,
+                        sourceImageAssetId = primaryDiagramAssetId,
+                        sourceImageFile = diagPlacement?.file,
+                        resolvedSourceImagePath = diagPlacement?.resolvedAssetPath
+                    )
+                )
+            } else {
+                emptyList()
+            }
+
+            entries.add(
+                ChapterSourcePageEntry(
+                    sourcePdfPage = sourcePdfPage,
+                    sectionIds = sectionIds,
+                    orderedBlockIds = orderedBlockIds,
+                    diagrams = diagramRefs,
+                    imagePlacements = placements,
+                    diagramId = diagramId,
+                    primaryDiagramSourceAssetId = primaryDiagramAssetId,
+                    pageWidthPt = pageWidthPt,
+                    pageHeightPt = pageHeightPt,
+                    translationCompleteness = translationCompleteness
+                )
+            )
+        }
+
+        val sortedEntries = entries.sortedBy { it.sourcePdfPage }
+        val startPage = if (root.has("sourcePdfPageStart") && !root.isNull("sourcePdfPageStart")) {
+            root.getInt("sourcePdfPageStart")
+        } else {
+            sortedEntries.firstOrNull()?.sourcePdfPage ?: 40
+        }
+        val endPage = if (root.has("sourcePdfPageEnd") && !root.isNull("sourcePdfPageEnd")) {
+            root.getInt("sourcePdfPageEnd")
+        } else {
+            sortedEntries.lastOrNull()?.sourcePdfPage ?: 50
+        }
+
+        return ChapterSourcePageIndex(
+            schemaVersion = root.optInt("schemaVersion", 1),
+            bookId = parsedBookId,
+            chapterId = parsedChapterId,
+            chapterNumber = root.optInt("chapterNumber", defaultChapterNumber),
+            sourcePdfPageStart = startPage,
+            sourcePdfPageEnd = endPage,
+            pages = sortedEntries,
+            sourceAssetsById = sourceAssetsById,
+            imagePlacementsByPage = placementsByPage
+        )
+    }
+
+    @JvmOverloads
+    fun getChapterImagePlacements(
+        chapterId: String = resolveDefaultChapterId(),
+        bookId: String = resolveDefaultBookId()
+    ): List<ChapterImagePlacement> {
+        val bookBaseDir = "books/$bookId"
+        val csvPath = "$bookBaseDir/source_metadata/source_image_placements_pages_040_050.csv"
+        if (chapterId == "CH01" && assetExists(csvPath)) {
+            val csvText = readAssetText(csvPath)
+            val lines = csvText.lines().map { it.trim() }.filter { it.isNotEmpty() }
+            if (lines.size > 1) {
+                val list = mutableListOf<ChapterImagePlacement>()
+                for (i in 1 until lines.size) {
+                    val cols = parseCsvLine(lines[i])
+                    if (cols.size >= 11) {
+                        val rawFile = cols[4].trim()
+                        val bboxStr = cols[9].trim().removePrefix("[").removeSuffix("]")
+                        val bbox = if (bboxStr.isNotBlank()) {
+                            bboxStr.split(",").mapNotNull { it.trim().toDoubleOrNull() }
+                        } else {
+                            emptyList()
+                        }
+                        list.add(
+                            ChapterImagePlacement(
+                                sourcePdfPage = cols[0].trim().toInt(),
+                                assetId = cols[1].trim(),
+                                xref = cols[2].trim().toIntOrNull() ?: 0,
+                                file = rawFile,
+                                resolvedAssetPath = resolveBookRelativePath(bookBaseDir, rawFile),
+                                width = cols[6].trim().toIntOrNull() ?: 0,
+                                height = cols[7].trim().toIntOrNull() ?: 0,
+                                visualRole = ChapterImageVisualRole.fromString(cols[8].trim()),
+                                bboxPt = bbox,
+                                sha256 = cols[10].trim()
+                            )
+                        )
+                    }
+                }
+                return list
+            }
+        }
+        return getChapterSourcePageIndex(chapterId = chapterId, bookId = bookId)
+            ?.pages
+            ?.flatMap { it.imagePlacements }
+            ?: emptyList()
+    }
+
+    @JvmOverloads
+    fun getBookSourceAssetsById(
+        bookId: String = resolveDefaultBookId(),
+        chapterId: String? = null
+    ): Map<String, FrontMatterSourceAsset> {
+        val combined = mutableMapOf<String, FrontMatterSourceAsset>()
+        runCatching { getFrontMatterContentPack(bookId)?.sourceAssetsById }.getOrNull()?.let {
+            combined.putAll(it)
+        }
+        val chaptersToLoad = if (!chapterId.isNullOrBlank()) {
+            listOf(chapterId)
+        } else {
+            runCatching { getChapters(bookId).map { it.chapterId } }.getOrDefault(listOf(DEFAULT_CHAPTER_ID))
+        }
+        for (chId in chaptersToLoad) {
+            runCatching { getChapterSourcePageIndex(chapterId = chId, bookId = bookId)?.sourceAssetsById }
+                .getOrNull()
+                ?.let { combined.putAll(it) }
+        }
+        return combined
+    }
+
+    @JvmOverloads
+    fun resolveSourceAssetById(
+        assetId: String,
+        bookId: String = resolveDefaultBookId(),
+        chapterId: String? = null
+    ): FrontMatterSourceAsset? {
+        return getBookSourceAssetsById(bookId = bookId, chapterId = chapterId)[assetId]
+    }
+
+    /**
+     * Returns all [SectionContentBlock]s belonging to [sourcePdfPage] in [chapterId],
+     * ordered strictly by [ChapterSourcePageEntry.orderedBlockIds] when `source_page_index.json`
+     * is present, or by section appearance order otherwise.
+     */
+    @JvmOverloads
+    fun getBlocksForSourcePdfPage(
+        sourcePdfPage: Int,
+        chapterId: String = resolveDefaultChapterId(),
+        bookId: String = resolveDefaultBookId()
+    ): List<SectionContentBlock> {
+        val sections = getSections(chapterId = chapterId, bookId = bookId)
+        val allBlocksById = sections
+            .flatMap { it.translationSlot.orderedContentBlocks }
+            .associateBy { it.blockId }
+        val pageEntry = getChapterSourcePageIndex(chapterId = chapterId, bookId = bookId)
+            ?.entryForPage(sourcePdfPage)
+        if (pageEntry != null && pageEntry.orderedBlockIds.isNotEmpty()) {
+            return pageEntry.orderedBlockIds.mapNotNull { blockId ->
+                allBlocksById[blockId]?.takeIf { it.sourcePdfPage == sourcePdfPage }
+            }
+        }
+        return sections
+            .flatMap { it.translationSlot.orderedContentBlocks }
+            .filter { it.sourcePdfPage == sourcePdfPage }
     }
 
     @JvmOverloads
@@ -968,6 +1305,43 @@ class ChapterRepository @JvmOverloads constructor(
                 }
             }
 
+            // Validate source_page_index.json if present for this chapter
+            val sourcePageIndex = getChapterSourcePageIndex(chapterId = chapterId, bookId = bookId)
+            if (sourcePageIndex != null) {
+                val expectedPages = (sourcePageIndex.sourcePdfPageStart..sourcePageIndex.sourcePdfPageEnd).toList()
+                val actualPages = sourcePageIndex.pages.map { it.sourcePdfPage }
+                if (actualPages != expectedPages) {
+                    errors.add("Chapter $chapterId source_page_index pages must be $expectedPages, found $actualPages")
+                }
+                val allBlocksById = sections
+                    .flatMap { it.translationSlot.orderedContentBlocks }
+                    .associateBy { it.blockId }
+                for (pageEntry in sourcePageIndex.pages) {
+                    if (pageEntry.orderedBlockIds.isEmpty()) {
+                        errors.add("Chapter $chapterId sourcePdfPage ${pageEntry.sourcePdfPage} has empty orderedBlockIds")
+                    }
+                    for (blockId in pageEntry.orderedBlockIds) {
+                        val block = allBlocksById[blockId]
+                        if (block == null) {
+                            errors.add(
+                                "source_page_index page ${pageEntry.sourcePdfPage} references unknown blockId '$blockId'"
+                            )
+                        } else if (block.sourcePdfPage != pageEntry.sourcePdfPage) {
+                            errors.add(
+                                "Block '$blockId' has sourcePdfPage=${block.sourcePdfPage}, expected ${pageEntry.sourcePdfPage}"
+                            )
+                        }
+                    }
+                    for (placement in pageEntry.imagePlacements) {
+                        if (!assetExists(placement.resolvedAssetPath)) {
+                            errors.add(
+                                "Missing chapter source image asset '${placement.resolvedAssetPath}' (${placement.assetId}) on page ${pageEntry.sourcePdfPage}"
+                            )
+                        }
+                    }
+                }
+            }
+
             blockValidation.copy(
                 isValid = blockValidation.isValid &&
                     invalidRelativePaths.isEmpty() &&
@@ -1071,6 +1445,23 @@ class ChapterRepository @JvmOverloads constructor(
                 }
             }
 
+            val sourceImageAssetId = when {
+                !obj.isNull("source_image_asset_id") && obj.has("source_image_asset_id") ->
+                    obj.optString("source_image_asset_id").takeIf { it.isNotBlank() }
+                else -> null
+            }
+            val sourceImageFile = when {
+                !obj.isNull("source_image_asset_file") && obj.has("source_image_asset_file") ->
+                    obj.optString("source_image_asset_file").takeIf { it.isNotBlank() }
+                else -> null
+            }
+
+            val digitalReconstructionNoteFa = when {
+                !obj.isNull("digital_reconstruction_note_fa") && obj.has("digital_reconstruction_note_fa") ->
+                    obj.optString("digital_reconstruction_note_fa").takeIf { it.isNotBlank() }
+                else -> null
+            }
+
             result.add(
                 DiagramItem(
                     diagramId = id,
@@ -1090,7 +1481,10 @@ class ChapterRepository @JvmOverloads constructor(
                     visualConfidence = visualConf,
                     implementationNotes = notes,
                     auditStatus = auditStatus,
-                    auditWarning = auditWarning
+                    auditWarning = auditWarning,
+                    digitalReconstructionNoteFa = digitalReconstructionNoteFa,
+                    sourceImageAssetId = sourceImageAssetId,
+                    sourceImageFile = sourceImageFile
                 )
             )
         }
@@ -1103,7 +1497,13 @@ class ChapterRepository @JvmOverloads constructor(
         bookId: String
     ): List<SectionItem> {
         val manifest = getChapterManifest(chapterId = chapterId, bookId = bookId)
-        return manifest.sections.mapIndexed { idx, entry ->
+        val sourcePageIndex = runCatching {
+            getChapterSourcePageIndex(chapterId = chapterId, bookId = bookId)
+        }.getOrNull()
+        val assetsById = sourcePageIndex?.sourceAssetsById ?: emptyMap()
+
+        // First load raw blocks for all sections
+        val rawSectionBlocks = manifest.sections.map { entry ->
             val sectionJson = JSONObject(readAssetText(entry.contentFile))
             val fileSectionId = sectionJson.getString("sectionId").trim()
             require(fileSectionId == entry.sectionId) {
@@ -1122,8 +1522,63 @@ class ChapterRepository @JvmOverloads constructor(
             val blocks = parseContentBlocksArray(
                 blocksArr = blocksArr,
                 sectionId = entry.sectionId,
-                defaultSourcePdfPage = entry.pdfPages.firstOrNull()
+                defaultSourcePdfPage = entry.pdfPages.firstOrNull(),
+                assetsById = assetsById
             )
+            Triple(placeholderNoticeFa, translationStatus, blocks)
+        }
+
+        // Map non-diagram inline image placements (FUN_FACT_ICON, PARAGRAPH_MARKER) to their target blockId per page
+        val inlinePlacementsByBlockId = mutableMapOf<String, MutableList<ChapterImagePlacement>>()
+        if (sourcePageIndex != null) {
+            val allBlocksById = rawSectionBlocks.flatMap { it.third }.associateBy { it.blockId }
+            for (pageEntry in sourcePageIndex.pages) {
+                val pageBlocks = pageEntry.orderedBlockIds.mapNotNull { allBlocksById[it] }
+                val nonDiagramPlacements = pageEntry.imagePlacements.filter {
+                    it.visualRole != ChapterImageVisualRole.CHESS_DIAGRAM
+                }
+                for (placement in nonDiagramPlacements) {
+                    val targetBlockId = when (placement.visualRole) {
+                        ChapterImageVisualRole.FUN_FACT_ICON -> {
+                            pageBlocks.filterIsInstance<SectionContentBlock.HeadingBlock>()
+                                .firstOrNull {
+                                    it.sourceVisibleText.equals("FUN FACT", ignoreCase = true) ||
+                                        it.textFa?.contains("نکته جالب") == true
+                                }?.blockId
+                                ?: pageBlocks.firstOrNull()?.blockId
+                        }
+                        ChapterImageVisualRole.PARAGRAPH_MARKER -> {
+                            pageBlocks.filterIsInstance<SectionContentBlock.ParagraphBlock>()
+                                .lastOrNull()?.blockId
+                                ?: pageBlocks.firstOrNull()?.blockId
+                        }
+                        else -> pageBlocks.firstOrNull()?.blockId
+                    }
+                    if (targetBlockId != null) {
+                        inlinePlacementsByBlockId.getOrPut(targetBlockId) { mutableListOf() }.add(placement)
+                    }
+                }
+            }
+        }
+
+        return manifest.sections.mapIndexed { idx, entry ->
+            val (placeholderNoticeFa, translationStatus, initialBlocks) = rawSectionBlocks[idx]
+            val blocks = if (inlinePlacementsByBlockId.isEmpty()) {
+                initialBlocks
+            } else {
+                initialBlocks.map { block ->
+                    val inlineAssets = inlinePlacementsByBlockId[block.blockId]
+                    if (inlineAssets.isNullOrEmpty()) {
+                        block
+                    } else {
+                        when (block) {
+                            is SectionContentBlock.HeadingBlock -> block.copy(inlineSourceAssets = inlineAssets)
+                            is SectionContentBlock.ParagraphBlock -> block.copy(inlineSourceAssets = inlineAssets)
+                            else -> block
+                        }
+                    }
+                }
+            }
 
             val diagramIds = blocks.mapNotNull { block ->
                 when (block) {
@@ -1146,7 +1601,9 @@ class ChapterRepository @JvmOverloads constructor(
                     placeholderNotice = placeholderNoticeFa,
                     translationStatus = translationStatus
                 ),
-                sectionKind = entry.sectionKind
+                sectionKind = entry.sectionKind,
+                sharedStartPageWithPreviousSection = entry.sharedStartPageWithPreviousSection,
+                sharedEndPageWithNextSection = entry.sharedEndPageWithNextSection
             )
         }
     }
@@ -1248,7 +1705,8 @@ class ChapterRepository @JvmOverloads constructor(
                     blockId = blockId,
                     textFa = textFa,
                     showPlaceholderWhenEmpty = bObj.optBoolean("showPlaceholderWhenEmpty", false),
-                    sourcePdfPage = sourcePdfPage
+                    sourcePdfPage = sourcePdfPage,
+                    sourcePageReferences = sourcePageReferences
                 )
                 "externalreference", "external_reference" -> SectionContentBlock.ExternalReferenceBlock(
                     blockId = blockId,

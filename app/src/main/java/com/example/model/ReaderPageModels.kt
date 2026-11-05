@@ -145,8 +145,8 @@ object ReaderPaginator {
                     else null
                 }
                 is SectionContentBlock.ExternalReferenceBlock -> {
-                    val text = slot.resolveBlockText(b)
-                    if (b.isAuthorizedAndEnabled && !text.isNullOrEmpty()) text else null
+                    val text = slot.resolveBlockText(b) ?: b.url
+                    if (!text.isNullOrEmpty()) text else null
                 }
                 is SectionContentBlock.OrderedListBlock,
                 is SectionContentBlock.TableBlock -> {
@@ -158,6 +158,8 @@ object ReaderPaginator {
                 is SectionContentBlock.ExerciseBlock -> null
             }
         }
+
+        fun effectivePdfPageOf(b: SectionContentBlock): Int? = b.sourcePdfPage
 
         fun isVisibleTextBlock(b: SectionContentBlock): Boolean = visibleTextOf(b) != null
 
@@ -177,8 +179,16 @@ object ReaderPaginator {
         val expandedBlocks = mutableListOf<SectionContentBlock>()
         var pendingHeadingLines = 0
         var pendingHeadingChars = 0
+        var lastExpandedPdfPage: Int? = null
 
         for (block in slot.orderedContentBlocks) {
+            val blockPdfPage = effectivePdfPageOf(block)
+            if (lastExpandedPdfPage != null && blockPdfPage != lastExpandedPdfPage) {
+                pendingHeadingLines = 0
+                pendingHeadingChars = 0
+            }
+            lastExpandedPdfPage = blockPdfPage
+
             when (block) {
                 is SectionContentBlock.HeadingBlock -> {
                     val hLines = estimateBlockLines(block)
@@ -214,7 +224,8 @@ object ReaderPaginator {
                                     block.copy(
                                         blockId = chunkId,
                                         textFa = chunkText,
-                                        isPaginatedSlice = true
+                                        isPaginatedSlice = true,
+                                        sourcePdfPage = blockPdfPage
                                     )
                                 )
                             }
@@ -260,12 +271,13 @@ object ReaderPaginator {
             )
         }
 
-        // Step 2: Group expandedBlocks into raw page block lists
+        // Step 2: Group expandedBlocks into raw page block lists while strictly enforcing sourcePdfPage boundaries
         val rawPages = mutableListOf<MutableList<SectionContentBlock>>()
         var currentBlocks = mutableListOf<SectionContentBlock>()
         var currentLines = 0
         var currentChars = 0
         var currentHasDiagram = false
+        var currentPdfPage: Int? = null
 
         fun flushCurrentPage() {
             if (currentBlocks.isNotEmpty()) {
@@ -274,17 +286,28 @@ object ReaderPaginator {
                 currentLines = 0
                 currentChars = 0
                 currentHasDiagram = false
+                currentPdfPage = null
             }
         }
 
         var i = 0
         while (i < expandedBlocks.size) {
             val block = expandedBlocks[i]
+            val blockPdfPage = effectivePdfPageOf(block)
+
+            // Never mix blocks from two different sourcePdfPage values on the same ReaderPage
+            if (currentBlocks.isNotEmpty() && blockPdfPage != currentPdfPage) {
+                flushCurrentPage()
+            }
+            if (currentBlocks.isEmpty()) {
+                currentPdfPage = blockPdfPage
+            }
 
             if (isDiagramOrExercise(block)) {
                 if (currentHasDiagram) {
                     // Never allow 2 diagrams on the same page
                     flushCurrentPage()
+                    currentPdfPage = blockPdfPage
                 }
 
                 // Check what text blocks are currently accumulated on currentBlocks before this diagram
@@ -292,15 +315,19 @@ object ReaderPaginator {
                     isVisibleTextBlock(currentBlocks[idx])
                 }
 
-                if (visibleTextIndices.size >= 2) {
-                    // Keep the immediately preceding companion paragraph (and any trailing zero-height blocks after it)
-                    // with this diagram if it fits within companion char & line budgets; flush earlier paragraphs to previous page.
+                if (block is SectionContentBlock.ExerciseBlock) {
+                    // Interactive exercises render their own title, prompt, move bar, feedback, and action buttons,
+                    // so flush any preceding text blocks to keep the exercise board at full standard size.
+                    if (visibleTextIndices.isNotEmpty()) {
+                        flushCurrentPage()
+                        currentPdfPage = blockPdfPage
+                    }
+                } else if (visibleTextIndices.size >= 2) {
                     val lastVisibleIdx = visibleTextIndices.last()
                     val companionBlock = currentBlocks[lastVisibleIdx]
                     val companionLen = visibleTextOf(companionBlock)?.length ?: 0
                     val companionLines = estimateBlockLines(companionBlock)
 
-                    // Also include a HeadingBlock right before companionBlock if present
                     val splitStartIdx = if (
                         lastVisibleIdx > 0 &&
                         currentBlocks[lastVisibleIdx - 1] is SectionContentBlock.HeadingBlock &&
@@ -320,25 +347,29 @@ object ReaderPaginator {
                             rawPages.add(earlierBlocks)
                         }
                         currentBlocks = companionSlice
+                        currentPdfPage = blockPdfPage
                     } else {
                         flushCurrentPage()
+                        currentPdfPage = blockPdfPage
                     }
                 } else if (visibleTextIndices.size == 1) {
                     val onlyVisibleBlock = currentBlocks[visibleTextIndices.first()]
                     val len = visibleTextOf(onlyVisibleBlock)?.length ?: 0
                     val lines = estimateBlockLines(onlyVisibleBlock)
                     if (len > maxCompanionCharsOnDiagramPage || lines > maxCompanionLinesOnDiagramPage) {
-                        // Paragraph is too long to share the viewport with a chessboard; put it on its own page first
                         flushCurrentPage()
+                        currentPdfPage = blockPdfPage
                     }
                 }
 
                 // Add the diagram to currentBlocks
                 currentBlocks.add(block)
                 currentHasDiagram = true
+                currentPdfPage = blockPdfPage
 
-                // Attach any immediately following zero-height (empty non-placeholder) blocks so order is preserved
+                // Attach any immediately following zero-height (empty non-placeholder) blocks on the SAME sourcePdfPage
                 while (i + 1 < expandedBlocks.size &&
+                    effectivePdfPageOf(expandedBlocks[i + 1]) == blockPdfPage &&
                     !isDiagramOrExercise(expandedBlocks[i + 1]) &&
                     !isVisibleTextBlock(expandedBlocks[i + 1])
                 ) {
@@ -346,16 +377,17 @@ object ReaderPaginator {
                     currentBlocks.add(expandedBlocks[i])
                 }
 
-                // Check if there is a short trailing explanation right after the diagram
-                // when there was no visible text before the diagram AND the next block is not followed by another diagram
+                // Check if there is a short trailing explanation right after a non-exercise diagram on the SAME sourcePdfPage
                 val hadVisibleTextBeforeDiagram = currentBlocks.any { !isDiagramOrExercise(it) && isVisibleTextBlock(it) }
-                if (!hadVisibleTextBeforeDiagram && i + 1 < expandedBlocks.size) {
+                if (block !is SectionContentBlock.ExerciseBlock && !hadVisibleTextBeforeDiagram && i + 1 < expandedBlocks.size) {
                     val nextBlock = expandedBlocks[i + 1]
+                    val nextBlockPdfPage = effectivePdfPageOf(nextBlock)
                     val blockAfterNext = expandedBlocks.getOrNull(i + 2)
                     val nextLen = visibleTextOf(nextBlock)?.length ?: 0
                     val nextLines = estimateBlockLines(nextBlock)
                     val nextIsIntroToAnotherDiagram = blockAfterNext != null && isDiagramOrExercise(blockAfterNext)
-                    if (!isDiagramOrExercise(nextBlock) &&
+                    if (nextBlockPdfPage == blockPdfPage &&
+                        !isDiagramOrExercise(nextBlock) &&
                         isVisibleTextBlock(nextBlock) &&
                         nextLen <= maxCompanionCharsOnDiagramPage &&
                         nextLines <= maxCompanionLinesOnDiagramPage &&
@@ -375,13 +407,13 @@ object ReaderPaginator {
             // Textual block (Paragraph, Heading, Footnote, ExternalReference, OrderedList, Table)
             if (currentHasDiagram) {
                 flushCurrentPage()
+                currentPdfPage = blockPdfPage
             }
 
             val blockLines = estimateBlockLines(block)
             val blockChars = visibleTextOf(block)?.length ?: 0
 
             if (blockLines == 0 && block !is SectionContentBlock.SourceImageBlock) {
-                // Zero-height block (e.g. non-placeholder empty block); keep in sequence without consuming budget
                 currentBlocks.add(block)
                 i++
                 continue
@@ -393,6 +425,7 @@ object ReaderPaginator {
 
             if (visibleBlocksSoFar.isNotEmpty() && (wouldOverflowLines || wouldOverflowChars)) {
                 flushCurrentPage()
+                currentPdfPage = blockPdfPage
             }
 
             currentBlocks.add(block)
@@ -407,14 +440,17 @@ object ReaderPaginator {
             rawPages.add(expandedBlocks.toMutableList())
         }
 
-        // If any trailing page ended up with ONLY zero-height blocks and there is a previous page,
+        // If any trailing page ended up with ONLY zero-height blocks on the SAME sourcePdfPage as the previous page,
         // merge those zero-height blocks into the previous page so we don't create a blank page.
         if (rawPages.size > 1) {
             val lastPage = rawPages.last()
+            val prevPage = rawPages[rawPages.lastIndex - 1]
             val lastHasVisibleOrDiagram = lastPage.any {
                 isDiagramOrExercise(it) || it is SectionContentBlock.SourceImageBlock || isVisibleTextBlock(it)
             }
-            if (!lastHasVisibleOrDiagram) {
+            val lastPdf = lastPage.firstNotNullOfOrNull { effectivePdfPageOf(it) }
+            val prevPdf = prevPage.firstNotNullOfOrNull { effectivePdfPageOf(it) }
+            if (!lastHasVisibleOrDiagram && (lastPdf == null || lastPdf == prevPdf)) {
                 val removed = rawPages.removeAt(rawPages.lastIndex)
                 rawPages.last().addAll(removed)
             }
@@ -422,10 +458,12 @@ object ReaderPaginator {
 
         val totalPages = rawPages.size
         val resolvedPdfPages = rawPages.map { blocks ->
-            val diagId = blocks.filterIsInstance<SectionContentBlock.ExerciseBlock>().firstOrNull()?.diagramId
-                ?: blocks.filterIsInstance<SectionContentBlock.DiagramBlock>().firstOrNull()?.diagramId
-            diagId?.let { diagramsById[it]?.pdfPage }
-                ?: blocks.firstNotNullOfOrNull { it.sourcePdfPage }
+            blocks.firstNotNullOfOrNull { it.sourcePdfPage }
+                ?: run {
+                    val diagId = blocks.filterIsInstance<SectionContentBlock.ExerciseBlock>().firstOrNull()?.diagramId
+                        ?: blocks.filterIsInstance<SectionContentBlock.DiagramBlock>().firstOrNull()?.diagramId
+                    diagId?.let { diagramsById[it]?.pdfPage }
+                }
                 ?: section.pdfPages.firstOrNull()
         }
         val countsByPdfPage = resolvedPdfPages.groupingBy { it }.eachCount()
@@ -458,6 +496,95 @@ object ReaderPaginator {
                 sourcePdfPage = pdfPage,
                 sliceIndexInSourcePage = sliceIdx,
                 totalSlicesInSourcePage = totalSlices
+            )
+        }
+    }
+
+    /**
+     * Paginates all blocks belonging to a single physical PDF page ([pageEntry.sourcePdfPage])
+     * in exact [ChapterSourcePageEntry.orderedBlockIds] order across all sections participating
+     * in that page (`pageEntry.sectionIds`), guaranteeing that shared boundary pages (`40, 45, 46, 48`)
+     * present their complete PDF page content in order without mixing blocks from adjacent PDF pages.
+     */
+    fun paginateChapterSourcePdfPage(
+        pageEntry: ChapterSourcePageEntry,
+        sections: List<SectionItem>,
+        diagrams: List<DiagramItem>,
+        fontScale: FontSizeScale = FontSizeScale.NORMAL,
+        viewportWidthDp: Int = 380,
+        viewportHeightDp: Int = 640
+    ): List<ReaderPage> {
+        val pdfPage = pageEntry.sourcePdfPage
+        val allBlocksById = sections
+            .flatMap { it.translationSlot.orderedContentBlocks }
+            .associateBy { it.blockId }
+        val pageBlocks = pageEntry.orderedBlockIds.mapNotNull { blockId ->
+            allBlocksById[blockId]?.takeIf { it.sourcePdfPage == null || it.sourcePdfPage == pdfPage }
+        }.ifEmpty {
+            sections.flatMap { it.translationSlot.orderedContentBlocks }
+                .filter { it.sourcePdfPage == pdfPage }
+        }
+
+        val primarySectionId = pageEntry.sectionIds.firstOrNull()
+            ?: sections.firstOrNull { pdfPage in it.pdfPages }?.sectionId
+            ?: sections.firstOrNull()?.sectionId
+            ?: "CH01"
+        val participatingSections = pageEntry.sectionIds.mapNotNull { secId ->
+            sections.find { it.sectionId == secId }
+        }.ifEmpty {
+            sections.filter { pdfPage in it.pdfPages }
+        }
+        val primarySection = participatingSections.firstOrNull() ?: sections.first()
+        val combinedSubtitleFa = if (participatingSections.size > 1) {
+            participatingSections.joinToString(" • ") { it.titleFa }
+        } else {
+            primarySection.titleFa
+        }
+        val combinedTranslations = mutableMapOf<String, String>()
+        for (sec in participatingSections) {
+            combinedTranslations.putAll(sec.translationSlot.translationsByBlockId)
+        }
+        val diagramIds = pageBlocks.mapNotNull { block ->
+            when (block) {
+                is SectionContentBlock.DiagramBlock -> block.diagramId
+                is SectionContentBlock.ExerciseBlock -> block.diagramId
+                else -> null
+            }
+        }
+
+        val syntheticSection = SectionItem(
+            sectionId = primarySectionId,
+            index = primarySection.index,
+            titleEn = primarySection.titleEn,
+            titleFa = combinedSubtitleFa,
+            pdfPages = listOf(pdfPage),
+            diagramIds = diagramIds,
+            translationSlot = TranslationSlot(
+                sectionId = primarySectionId,
+                orderedContentBlocks = pageBlocks,
+                placeholderNotice = primarySection.translationSlot.placeholderNotice,
+                translationStatus = primarySection.translationSlot.translationStatus,
+                translationsByBlockId = combinedTranslations
+            ),
+            sectionKind = primarySection.sectionKind
+        )
+
+        val slices = paginateSection(
+            section = syntheticSection,
+            diagrams = diagrams,
+            fontScale = fontScale,
+            viewportWidthDp = viewportWidthDp,
+            viewportHeightDp = viewportHeightDp
+        )
+        val total = slices.size
+        return slices.mapIndexed { idx, slice ->
+            slice.copy(
+                pageId = "PDF_P${pdfPage.toString().padStart(3, '0')}_SLICE_${idx + 1}",
+                sectionId = primarySectionId,
+                lessonId = primarySectionId,
+                sourcePdfPage = pdfPage,
+                sliceIndexInSourcePage = idx + 1,
+                totalSlicesInSourcePage = total
             )
         }
     }
@@ -527,11 +654,11 @@ object ReaderPaginator {
 
         val isTocOrPartIntro = fmPage.pageKind == FrontMatterPageKind.TABLE_OF_CONTENTS ||
             fmPage.pageKind == FrontMatterPageKind.PART_INTRODUCTION
-        val maxCharsPerTextPage = ((if (isTocOrPartIntro) 680f else 560f) * effectiveScale).toInt().coerceIn(140, 1400)
-        val maxLinesPerTextPage = ((if (isTocOrPartIntro) 18f else 15f) * (heightFactor / fontScale.scale)).toInt().coerceIn(5, 30)
+        val maxCharsPerTextPage = ((if (isTocOrPartIntro) 840f else 820f) * effectiveScale).toInt().coerceIn(220, 1600)
+        val maxLinesPerTextPage = ((if (isTocOrPartIntro) 24f else 24f) * (heightFactor / fontScale.scale)).toInt().coerceIn(8, 36)
         val charsPerLine = (36f * (widthFactor / fontScale.scale)).toInt().coerceIn(15, 65)
-        val maxCompanionCharsWithSourceImage = (380f * effectiveScale).toInt().coerceIn(100, 620)
-        val maxCompanionLinesWithSourceImage = (9f * (heightFactor / fontScale.scale)).toInt().coerceIn(4, 13)
+        val maxCompanionCharsWithSourceImage = (760f * effectiveScale).toInt().coerceIn(200, 1100)
+        val maxCompanionLinesWithSourceImage = (22f * (heightFactor / fontScale.scale)).toInt().coerceIn(6, 28)
 
         fun blockTextOf(b: SectionContentBlock): String? {
             return when (b) {
@@ -652,19 +779,25 @@ object ReaderPaginator {
                     break
                 }
 
-                // Attach companion paragraph right after the image if it fits
-                if (idx + 1 < expandedBlocks.size) {
+                // Attach companion paragraph(s) right after the image if they fit
+                var companionCharsSoFar = 0
+                var companionLinesSoFar = 0
+                while (idx + 1 < expandedBlocks.size) {
                     val nextBlk = expandedBlocks[idx + 1]
-                    if (nextBlk !is SectionContentBlock.SourceImageBlock) {
+                    if (nextBlk !is SectionContentBlock.SourceImageBlock && nextBlk !is SectionContentBlock.HeadingBlock) {
                         val nextTxt = blockTextOf(nextBlk).orEmpty()
                         val nextLines = estimateRawTextLines(nextTxt, charsPerLine)
-                        if (nextTxt.length <= maxCompanionCharsWithSourceImage &&
-                            nextLines <= maxCompanionLinesWithSourceImage
+                        if (companionCharsSoFar + nextTxt.length <= maxCompanionCharsWithSourceImage &&
+                            companionLinesSoFar + nextLines <= maxCompanionLinesWithSourceImage
                         ) {
                             idx++
                             currentBlocks.add(nextBlk)
+                            companionCharsSoFar += nextTxt.length
+                            companionLinesSoFar += nextLines
+                            continue
                         }
                     }
+                    break
                 }
                 flushSlice()
                 idx++

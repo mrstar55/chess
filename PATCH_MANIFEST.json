@@ -1,0 +1,244 @@
+{
+  "patchVersion": 22,
+  "patchArchiveName": "CH01_CHESS_ANDROID_PATCH-22.zip",
+  "basePrototypeArchive": "CH01_CHESS_ANDROID_PROTOTYPE-21.zip",
+  "basePrototypeSha256": "987f9f4b06bf79c166b3e52329f5da40ff5f390559a2038adb78b86f96109985",
+  "modifiedFiles": [
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/sections/01_opening.json",
+      "sha256": "ccb542c0fc883d1ff6a73056a51e0521985f3f43f12df21f6bb72222386376c5",
+      "sizeBytes": 3918
+    },
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/sections/02_checkmate.json",
+      "sha256": "1ccdd535e2b83a5b8b75621c61ec377c139a15ae86be47d2bc6bd68970a66dc1",
+      "sizeBytes": 14635
+    },
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/sections/03_resignation.json",
+      "sha256": "c3f6f341528ad4a9d4fda415440a8313655b8ad759671f02d273fa1f5060f6a1",
+      "sizeBytes": 3741
+    },
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/sections/04_timing_out.json",
+      "sha256": "17692e8bbf9ded9c76782fc1a716dfddb150ae9e62287a48f27585b3bc8eb1c9",
+      "sizeBytes": 5690
+    },
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/sections/05_abandonment.json",
+      "sha256": "e0bda4b744cfba627d51d5dc086022a16f7592cccb0b9d9eb3211556b17b5bab",
+      "sizeBytes": 2737
+    },
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/sections/06_summary.json",
+      "sha256": "18b7d13e81b6027aa4249e68c5f3ab97b04d79c991d605f1953491af433544a6",
+      "sizeBytes": 4644
+    },
+    {
+      "path": "app/src/main/assets/books/how_to_win_at_chess/CH01/diagrams.json",
+      "sha256": "62f195e1d124caf54d7eb5a11b13ccecd972e9ed5dbb4528118f3539fd66d8ed",
+      "sizeBytes": 11153
+    },
+    {
+      "path": "app/src/main/java/com/example/MainActivity.kt",
+      "sha256": "46840090f5bb301d14af813fb23e4d54449c633851e24970877fc2f48d826280",
+      "sizeBytes": 3722
+    },
+    {
+      "path": "app/src/main/java/com/example/data/ChapterRepository.kt",
+      "sha256": "161b7114a815d44782ec2de11da01acd26aa20945424c358069ec1aca91dd829",
+      "sizeBytes": 88967
+    },
+    {
+      "path": "app/src/main/java/com/example/model/ChapterModels.kt",
+      "sha256": "b0b16138a22047375e9ca3183a8b9cf4ccf40083942c6ab7e601fb721a1fcdf5",
+      "sizeBytes": 28264
+    },
+    {
+      "path": "app/src/main/java/com/example/model/FrontMatterModels.kt",
+      "sha256": "8c3cf6726398c414d7762d3e130895f304db0b6c4a66ec6f363c056382425779",
+      "sizeBytes": 10011
+    },
+    {
+      "path": "app/src/main/java/com/example/model/ReaderPageModels.kt",
+      "sha256": "a64744430428015a724de79a760fe3bfdddfe72b82ab843b3446275ee15c3a5a",
+      "sizeBytes": 49986
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/ChapterViewModel.kt",
+      "sha256": "5e6ba67758d43a8dd61d1ef71621bb47adf3b1c86f73a660069d015fa7039dcb",
+      "sizeBytes": 71706
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/components/AuditBadge.kt",
+      "sha256": "e923a1d2bedb3127707901429e8bf5c1cabc810d572db470a1bfee4fa053f71f",
+      "sizeBytes": 4894
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/components/Bd032ExerciseView.kt",
+      "sha256": "b276569abbaffbe08b013f4bd6c115fadc1b55b565c9516af0b436c6acade380",
+      "sizeBytes": 14976
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/components/PgnControlsView.kt",
+      "sha256": "ad110eafd56f3a617f4d83c39593eccec922b9685b37db23f81a80fddc4b4501",
+      "sizeBytes": 9569
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/screens/AuditReportScreen.kt",
+      "sha256": "197b727acb83dcbe75d3a5653aa65c1818f5fe42452e5730215cd0fc6c0d60f3",
+      "sizeBytes": 12442
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/screens/ChaptersListScreen.kt",
+      "sha256": "58d2bf9b754b752266accc01d6206f98242295be604e98b348783050ed3bcf27",
+      "sizeBytes": 36162
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/screens/ReaderScreen.kt",
+      "sha256": "0c2e64fac8d965860e80e79c54e508b4d9e0593224f41833efc26888291dd84c",
+      "sizeBytes": 96839
+    },
+    {
+      "path": "app/src/main/java/com/example/ui/screens/SectionsListScreen.kt",
+      "sha256": "e9d1a34f1ea6601e8c62451063e461a338ea0c40060ef8f06c45c623aff9acbd",
+      "sizeBytes": 33682
+    },
+    {
+      "path": "app/src/test/java/com/example/Ch01Pages040To050Version21Test.kt",
+      "sha256": "f37c1a9b2d265427013bb32e659c9253f3aba2de520322769b20eb6dea38b2d9",
+      "sizeBytes": 27202
+    },
+    {
+      "path": "app/src/test/java/com/example/ChessChapterOneTest.kt",
+      "sha256": "faa39f2c6344952bd5974fcb539c19aa22a25a16c54674283ec30eda09c2f800",
+      "sizeBytes": 25425
+    },
+    {
+      "path": "app/src/test/java/com/example/ContentArchitectureVersion18Test.kt",
+      "sha256": "0b83ba942eab52150f0e325683ad65360f0ac3578fc8993b171cb0f312a94bd9",
+      "sizeBytes": 31479
+    },
+    {
+      "path": "app/src/test/java/com/example/ExampleRobolectricTest.kt",
+      "sha256": "a4f8758b8c98432f182468223b5d587c6876f9d8c56c5f42c38226f18989721a",
+      "sizeBytes": 205116
+    },
+    {
+      "path": "app/src/test/java/com/example/FrontMatterVersion20Test.kt",
+      "sha256": "56c1736740a71084f1d185cfb07502c13052c699ead82e5518d04ad3a8766ca4",
+      "sizeBytes": 27365
+    },
+    {
+      "path": "app/src/test/java/com/example/ReaderPaginationRobolectricTest.kt",
+      "sha256": "7941e06f4e6ee1ade41072fd331f6ddedbe89ff15eadc2486ca07a8064d4a045",
+      "sizeBytes": 95972
+    },
+    {
+      "path": "CHAPTER1_DATA_AUDIT.md",
+      "sha256": "b3c33e093541319b16b7f1f834413539d2d8c1d6c41a55c1ca9be9736f877d74",
+      "sizeBytes": 10470
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "app/src/main/java/com/example/ui/components/PieceMovementDiagram.kt",
+      "sha256": "6ebd53a8b95bc46012eb2e0772bd9f264c54767158ee27ee592dd4ac5f9ea653",
+      "sizeBytes": 32642
+    },
+    {
+      "path": "app/src/test/java/com/example/Version22EditorialAndVisualTest.kt",
+      "sha256": "ca634e240686f5faed450578f711cca2d9b4c55b770432077acbd4a5abd84817",
+      "sizeBytes": 21886
+    },
+    {
+      "path": "SOURCE_IMAGE_EDITORIAL_AUDIT_FA.csv",
+      "sha256": "3fc16c6520c5b3038d255e73323c80cc4f9b0fef7b4525642857b54d88c2bf46",
+      "sizeBytes": 22125
+    },
+    {
+      "path": "EDITORIAL_CONTENT_AUDIT_FA.md",
+      "sha256": "fc5806a04417fe68108bdcbc424c61a686576ef61e61bd39e747bfc05e0929ff",
+      "sizeBytes": 11192
+    },
+    {
+      "path": "PATCH_CHANGELOG_FA.md",
+      "sha256": "20427ad13f69f7134b1e2014f8b84ff01d1eacb090e95b13ef220aac6d0d7870",
+      "sizeBytes": 7419
+    }
+  ],
+  "deletedFiles": [],
+  "verificationReports": [
+    {
+      "path": "build_verification_logs/assembleDebug.log",
+      "sha256": "9e02f4bb630785eee42e94f78a8418d0a3f1334e742441b80c2750d68d0f2c32",
+      "sizeBytes": 2205
+    },
+    {
+      "path": "build_verification_logs/testDebugUnitTest.log",
+      "sha256": "8588528c7b06f37e3a807503cd44ea51fcc2f2efae3e3d4563af37f4b3d9665b",
+      "sizeBytes": 30165
+    },
+    {
+      "path": "build_verification_logs/validateContentPacks.log",
+      "sha256": "d7781040a4d0a427c94619ff88fdca5587a3293d7c73b7808fea314bd4a60a05",
+      "sizeBytes": 238
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.Ch01Pages040To050Version21Test.xml",
+      "sha256": "4eb9b61d7cb4df2a857f9ad3e3745ec359bfeef088dc2b9cfcd48d1a20b6fb3b",
+      "sizeBytes": 2626
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.ChessChapterOneTest.xml",
+      "sha256": "d68e85ad4258b5757ae6edf5818e13191610b05e1a1b41e5423f4e92aabfd2b7",
+      "sizeBytes": 3005
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.ContentArchitectureVersion18Test.xml",
+      "sha256": "60c471af055792c6076a05fc3ed1afba8194f77b7912860a709379872a5a6727",
+      "sizeBytes": 1318
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.ContentArchitectureVersion19Test.xml",
+      "sha256": "f781b59da0d32837794389e135d408769cf95b84af5ff8a712dd34fd002b20d2",
+      "sizeBytes": 1892
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.ExampleRobolectricTest.xml",
+      "sha256": "a158e494f7c8cdf8860801a08ae08c1e54c0e449cfe063a10beaed050b3f68c5",
+      "sizeBytes": 11318
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.ExampleUnitTest.xml",
+      "sha256": "0ba0e6a13fe1150300cfeb1dfbb1f8a56916fc4adcb8f4d91540d03d5d34ddf7",
+      "sizeBytes": 405
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.FrontMatterVersion20Test.xml",
+      "sha256": "d24f63733fe4d1f716cddd263ae8c4391f6e425418f50ba39c0c8e3e6c01b179",
+      "sizeBytes": 2759
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.ReaderPaginationRobolectricTest.xml",
+      "sha256": "344b0f95d3f4a46afc53c914f516d9cee3443fcb2306079623df57c19e7b1b61",
+      "sizeBytes": 6676
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.example.Version22EditorialAndVisualTest.xml",
+      "sha256": "8e17e46f3c0a862811372f70fd859363bae51a841343484e1d6019b76643ea7d",
+      "sizeBytes": 2391
+    }
+  ],
+  "verificationTasks": [
+    "gradle :app:validateContentPacks --console=plain",
+    "gradle :app:testDebugUnitTest --rerun-tasks --console=plain",
+    "gradle :app:assembleDebug --console=plain"
+  ],
+  "unitTestsSummary": {
+    "totalTests": 168,
+    "passedTests": 168,
+    "failedTests": 0,
+    "version22DedicatedTests": 14
+  }
+}

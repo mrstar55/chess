@@ -53,7 +53,7 @@
       "book_context": "Four-piece checkmate: White bishop g7, White king g6, White knight h6; Black king h8.",
       "diagram_kind": "checkmate_example_4_pieces",
       "recommended_interaction": "static_explanatory_position",
-      "fen": "7k/6B1/6K1/7N/8/8/8/8 b - - 0 1",
+      "fen": "7k/6B1/6KN/8/8/8/8/8 b - - 0 1",
       "fen_status": "reconstructed_from_board_image_and_caption",
       "side_to_move": "black",
       "move_history": "not provided in this chapter",
@@ -63,8 +63,9 @@
       ],
       "related_diagram_ids": [],
       "visual_confidence": "high",
-      "audit_status": "BLOCKED_NEEDS_HUMAN_REVIEW",
-      "audit_warning_fa": "⚠️ اخطار ممیزی شطرنج: این دیاگرام طبق ادعای کپشن مات نیست! فیل g7 به شاه h8 کیش می‌دهد، اما خانه g8 برای فرار قانونی باز است (1... Kg8). این مورد مسدود شده و تا زمان بازبینی انسانی به عنوان مات ارائه نمی‌شود.",
+      "audit_status": "VALID",
+      "audit_warning_fa": null,
+      "digital_reconstruction_note_fa": "در بازسازی اولیه اپلیکیشن، اسب سفید یک خانه پایین‌تر ثبت شده بود. جایگاه صحیح آن مطابق تصویر PDF صفحه ۴۲، خانه h6 است.",
       "implementation_notes": "Black king square h8 is highlighted in red in the source diagram. The caption explains the White bishop attack and king/knight coverage."
     },
     {
